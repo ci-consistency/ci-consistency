@@ -1,0 +1,317 @@
+{
+    "Clone repository": [
+        {
+            "command": "actions/checkout@v4",
+            "count": 22,
+            "repos": [
+                "twbs/bootstrap",
+                "twbs/blog",
+                "twbs/rfs",
+                "twbs/stylelint-config-twbs-bootstrap",
+                "twbs/icons",
+                "twbs/examples"
+            ]
+        },
+        {
+            "command": "actions/checkout@v3",
+            "count": 3,
+            "repos": [
+                "twbs/bootstrap-expo",
+                "twbs/bootstrap-npm-starter"
+            ]
+        },
+        {
+            "command": "actions/checkout@v2",
+            "count": 2,
+            "repos": [
+                "twbs/grunt-bootlint",
+                "twbs/bootlint-server"
+            ]
+        }
+    ],
+    "Set up Node.js": [
+        {
+            "command": "actions/setup-node@v4",
+            "count": 15,
+            "repos": [
+                "twbs/bootstrap",
+                "twbs/blog",
+                "twbs/rfs",
+                "twbs/stylelint-config-twbs-bootstrap",
+                "twbs/icons",
+                "twbs/examples"
+            ]
+        },
+        {
+            "command": "actions/setup-node@v1",
+            "count": 2,
+            "repos": [
+                "twbs/bootlint",
+                "twbs/grunt-bootlint"
+            ]
+        },
+        {
+            "command": "actions/setup-node@v2",
+            "count": 1,
+            "repos": [
+                "twbs/bootlint-server"
+            ]
+        },
+        {
+            "command": "actions/setup-node@v3",
+            "count": 1,
+            "repos": [
+                "twbs/bootstrap-npm-starter"
+            ]
+        }
+    ],
+    "Install npm dependencies": [
+        {
+            "command": "npm ci",
+            "count": 16,
+            "repos": [
+                "twbs/bootstrap",
+                "twbs/blog",
+                "twbs/rfs",
+                "twbs/stylelint-config-twbs-bootstrap",
+                "twbs/icons",
+                "twbs/bootlint-server",
+                "twbs/bootstrap-npm-starter",
+                "twbs/examples"
+            ]
+        },
+        {
+            "command": "npm install",
+            "count": 2,
+            "repos": [
+                "twbs/bootlint",
+                "twbs/grunt-bootlint"
+            ]
+        }
+    ],
+    "Run dist": [
+        {
+            "command": "npm run dist",
+            "count": 2,
+            "repos": [
+                "twbs/bootstrap"
+            ]
+        },
+        {
+            "command": "npm run js",
+            "count": 1,
+            "repos": [
+                "twbs/bootstrap"
+            ]
+        }
+    ],
+    "Checkout repository": [
+        {
+            "command": "actions/checkout@v4",
+            "count": 3,
+            "repos": [
+                "twbs/bootstrap",
+                "twbs/blog",
+                "twbs/examples"
+            ]
+        },
+        {
+            "command": "actions/checkout@v2",
+            "count": 2,
+            "repos": [
+                "twbs/bootlint",
+                "twbs/bootlint-server"
+            ]
+        }
+    ],
+    "Initialize CodeQL": [
+        {
+            "command": "github/codeql-action/init@v3",
+            "count": 6,
+            "repos": [
+                "twbs/bootstrap",
+                "twbs/blog",
+                "twbs/rfs",
+                "twbs/stylelint-config-twbs-bootstrap",
+                "twbs/icons",
+                "twbs/examples"
+            ]
+        },
+        {
+            "command": "github/codeql-action/init@v1",
+            "count": 2,
+            "repos": [
+                "twbs/bootlint",
+                "twbs/bootlint-server"
+            ]
+        }
+    ],
+    "Autobuild": [
+        {
+            "command": "github/codeql-action/autobuild@v3",
+            "count": 6,
+            "repos": [
+                "twbs/bootstrap",
+                "twbs/blog",
+                "twbs/rfs",
+                "twbs/stylelint-config-twbs-bootstrap",
+                "twbs/icons",
+                "twbs/examples"
+            ]
+        },
+        {
+            "command": "github/codeql-action/autobuild@v1",
+            "count": 2,
+            "repos": [
+                "twbs/bootlint",
+                "twbs/bootlint-server"
+            ]
+        }
+    ],
+    "Perform CodeQL Analysis": [
+        {
+            "command": "github/codeql-action/analyze@v3",
+            "count": 6,
+            "repos": [
+                "twbs/bootstrap",
+                "twbs/blog",
+                "twbs/rfs",
+                "twbs/stylelint-config-twbs-bootstrap",
+                "twbs/icons",
+                "twbs/examples"
+            ]
+        },
+        {
+            "command": "github/codeql-action/analyze@v1",
+            "count": 2,
+            "repos": [
+                "twbs/bootlint",
+                "twbs/bootlint-server"
+            ]
+        }
+    ],
+    "Step 3": [
+        {
+            "command": "java -version",
+            "count": 3,
+            "repos": [
+                "twbs/bootstrap",
+                "twbs/blog",
+                "twbs/icons"
+            ]
+        },
+        {
+            "command": "bundle exec jekyll build",
+            "count": 1,
+            "repos": [
+                "twbs/bootstrap-expo"
+            ]
+        }
+    ],
+    "Run Coveralls": [
+        {
+            "command": "coverallsapp/github-action@v2",
+            "count": 1,
+            "repos": [
+                "twbs/bootstrap"
+            ]
+        },
+        {
+            "command": "coverallsapp/github-action@master",
+            "count": 1,
+            "repos": [
+                "twbs/bootlint"
+            ]
+        }
+    ],
+    "Lint": [
+        {
+            "command": "npm run lint",
+            "count": 2,
+            "repos": [
+                "twbs/bootstrap",
+                "twbs/rfs"
+            ]
+        },
+        {
+            "command": "npm run test",
+            "count": 1,
+            "repos": [
+                "twbs/icons"
+            ]
+        }
+    ],
+    "Step 1": [
+        {
+            "command": "release-drafter/release-drafter@v6",
+            "count": 2,
+            "repos": [
+                "twbs/bootstrap",
+                "twbs/icons"
+            ]
+        },
+        {
+            "command": "actions/checkout@v2",
+            "count": 1,
+            "repos": [
+                "twbs/bootlint"
+            ]
+        },
+        {
+            "command": "actions/checkout@v3",
+            "count": 1,
+            "repos": [
+                "twbs/bootstrap-rubygem"
+            ]
+        }
+    ],
+    "Build and test docs": [
+        {
+            "command": "npm test",
+            "count": 1,
+            "repos": [
+                "twbs/blog"
+            ]
+        },
+        {
+            "command": "npm run docs-test",
+            "count": 1,
+            "repos": [
+                "twbs/icons"
+            ]
+        }
+    ],
+    "Upload docs": [
+        {
+            "command": "actions/upload-pages-artifact@v3",
+            "count": 1,
+            "repos": [
+                "twbs/blog"
+            ]
+        },
+        {
+            "command": "actions/upload-artifact@v3",
+            "count": 1,
+            "repos": [
+                "twbs/bootstrap-expo"
+            ]
+        }
+    ],
+    "Set up Ruby": [
+        {
+            "command": "ruby/setup-ruby@v1",
+            "count": 2,
+            "repos": [
+                "twbs/bootstrap-expo",
+                "twbs/bootstrap-rubygem"
+            ]
+        },
+        {
+            "command": "actions/setup-ruby@v1",
+            "count": 1,
+            "repos": [
+                "twbs/bootlint"
+            ]
+        }
+    ]
+}

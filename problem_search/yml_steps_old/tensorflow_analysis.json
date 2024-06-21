@@ -1,0 +1,2221 @@
+{
+    "Stop old running containers (if any)": [
+        {
+            "command": "running_containers=$(docker ps -q) && \\\nif [[ $running_containers == \"\" ]]; then\n  echo \"No running containers\";\nelse\n  echo \"Running container(s) found\" && \\\n  docker stop $running_containers;\nfi\ndocker container prune -f\n",
+            "count": 2,
+            "repos": [
+                "tensorflow/tensorflow"
+            ]
+        },
+        {
+            "command": "running_containers=$(docker ps -q) && \\\nif [[ $running_containers == \"\" ]]; then\n  echo \"No running containers\";\nelse\n  echo \"Running container(s) found\" && \\\n  docker stop $running_containers;\nfi\ndocker container prune -f\ndocker image prune -af\n",
+            "count": 2,
+            "repos": [
+                "tensorflow/tensorflow"
+            ]
+        }
+    ],
+    "Checkout repository": [
+        {
+            "command": "actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11",
+            "count": 3,
+            "repos": [
+                "tensorflow/tensorflow"
+            ]
+        },
+        {
+            "command": "actions/checkout@v1",
+            "count": 8,
+            "repos": [
+                "tensorflow/java",
+                "tensorflow/java-ndarray"
+            ]
+        }
+    ],
+    "Checkout code": [
+        {
+            "command": "actions/checkout@755da8c3cf115ac066823e79a1e1788f8940201b",
+            "count": 6,
+            "repos": [
+                "tensorflow/tensorflow",
+                "tensorflow/build"
+            ]
+        },
+        {
+            "command": "actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11",
+            "count": 1,
+            "repos": [
+                "tensorflow/tensorflow"
+            ]
+        },
+        {
+            "command": "actions/checkout@v2",
+            "count": 2,
+            "repos": [
+                "tensorflow/models",
+                "tensorflow/recommenders"
+            ]
+        },
+        {
+            "command": "actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29",
+            "count": 1,
+            "repos": [
+                "tensorflow/io"
+            ]
+        }
+    ],
+    "Get file changes": [
+        {
+            "command": "trilom/file-changes-action@a6ca26c14274c33b15e6499323aac178af06ad4b",
+            "count": 1,
+            "repos": [
+                "tensorflow/tensorflow"
+            ]
+        },
+        {
+            "command": "trilom/file-changes-action@v1.2.4",
+            "count": 1,
+            "repos": [
+                "tensorflow/recommenders"
+            ]
+        }
+    ],
+    "Set up Python 3.9": [
+        {
+            "command": "actions/setup-python@2c3dd9e7e29afd70cc0950079bde6c979d1f69f9",
+            "count": 1,
+            "repos": [
+                "tensorflow/tensorflow"
+            ]
+        },
+        {
+            "command": "actions/setup-python@v1",
+            "count": 1,
+            "repos": [
+                "tensorflow/tfx"
+            ]
+        },
+        {
+            "command": "actions/setup-python@v2",
+            "count": 1,
+            "repos": [
+                "tensorflow/recommenders"
+            ]
+        }
+    ],
+    "Install Python dependencies": [
+        {
+            "command": "python -m pip install --upgrade pip\npip install pylint==2.13.9 numpy wheel\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/tensorflow"
+            ]
+        },
+        {
+            "command": "python -m pip install -U pip\npip install \\\n  -r ./tensorboard/pip_package/requirements.txt \\\n  -r ./tensorboard/pip_package/requirements_dev.txt \\\n  ;\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/tensorboard"
+            ]
+        },
+        {
+            "command": "python -m pip install --upgrade pip\npip install pylint numpy wheel\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/recommenders"
+            ]
+        }
+    ],
+    "Run PyLint on changed files": [
+        {
+            "command": "echo \"${{ steps.get_file_changes.outputs.files}}\" | tr \" \" \"\\n\" | grep \".py$\" | xargs pylint --rcfile=tensorflow/tools/ci_build/pylintrc\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/tensorflow"
+            ]
+        },
+        {
+            "command": "echo \"${{ steps.get_file_changes.outputs.files}}\" | tr \" \" \"\\n\" | grep \".py$\" | xargs pylint --rcfile=.pylintrc\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/recommenders"
+            ]
+        }
+    ],
+    "Run analysis": [
+        {
+            "command": "ossf/scorecard-action@0864cf19026789058feabb7e87baa5f140aac736",
+            "count": 1,
+            "repos": [
+                "tensorflow/tensorflow"
+            ]
+        },
+        {
+            "command": "ossf/scorecard-action@dc50aa9510b46c811795eb24b2f1ba02a914e534",
+            "count": 1,
+            "repos": [
+                "tensorflow/io"
+            ]
+        },
+        {
+            "command": "ossf/scorecard-action@15c10fcf1cf912bd22260bfec67569a359ab87da",
+            "count": 1,
+            "repos": [
+                "tensorflow/build"
+            ]
+        }
+    ],
+    "Upload artifact": [
+        {
+            "command": "actions/upload-artifact@97a0fba1372883ab732affbe8f94b823f91727db",
+            "count": 1,
+            "repos": [
+                "tensorflow/tensorflow"
+            ]
+        },
+        {
+            "command": "actions/upload-artifact@65462800fd760344b1a7b4382951275a0abb4808",
+            "count": 1,
+            "repos": [
+                "tensorflow/io"
+            ]
+        },
+        {
+            "command": "actions/upload-artifact@83fd05a356d7e2593de66fc9913b3002723633cb",
+            "count": 1,
+            "repos": [
+                "tensorflow/build"
+            ]
+        }
+    ],
+    "Upload to code-scanning": [
+        {
+            "command": "github/codeql-action/upload-sarif@1b1aada464948af03b950897e5eb522f92603cc2",
+            "count": 1,
+            "repos": [
+                "tensorflow/tensorflow"
+            ]
+        },
+        {
+            "command": "github/codeql-action/upload-sarif@9fdb3e49720b44c48891d036bb502feb25684276",
+            "count": 1,
+            "repos": [
+                "tensorflow/io"
+            ]
+        },
+        {
+            "command": "github/codeql-action/upload-sarif@896079047b4bb059ba6f150a5d87d47dde99e6e5",
+            "count": 1,
+            "repos": [
+                "tensorflow/build"
+            ]
+        }
+    ],
+    "Delete unnecessary tools folder": [
+        {
+            "command": "rm -rf /opt/hostedtoolcache",
+            "count": 2,
+            "repos": [
+                "tensorflow/tensorflow"
+            ]
+        },
+        {
+            "command": "df -h\nrm -rf /opt/hostedtoolcache\ndf -h\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/tensorflow"
+            ]
+        }
+    ],
+    "Checkout": [
+        {
+            "command": "actions/checkout@755da8c3cf115ac066823e79a1e1788f8940201b",
+            "count": 3,
+            "repos": [
+                "tensorflow/tensorflow"
+            ]
+        },
+        {
+            "command": "actions/checkout@v1",
+            "count": 2,
+            "repos": [
+                "tensorflow/probability"
+            ]
+        }
+    ],
+    "Step 1": [
+        {
+            "command": "actions/checkout@v2",
+            "count": 59,
+            "repos": [
+                "tensorflow/rust",
+                "tensorflow/ecosystem",
+                "tensorflow/lucid",
+                "tensorflow/tfjs",
+                "tensorflow/mesh",
+                "tensorflow/addons",
+                "tensorflow/graphics",
+                "tensorflow/tfx",
+                "tensorflow/swift-apis",
+                "tensorflow/docs-l10n",
+                "tensorflow/cloud",
+                "tensorflow/similarity",
+                "tensorflow/recommenders-addons",
+                "tensorflow/tfx-addons",
+                "tensorflow/tflite-micro",
+                "tensorflow/tflite-micro-arduino-examples"
+            ]
+        },
+        {
+            "command": "actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c",
+            "count": 7,
+            "repos": [
+                "tensorflow/tensorboard"
+            ]
+        },
+        {
+            "command": "actions/checkout@v1",
+            "count": 3,
+            "repos": [
+                "tensorflow/lucid",
+                "tensorflow/tfhub.dev",
+                "tensorflow/tfx-addons"
+            ]
+        },
+        {
+            "command": "actions/checkout@v3",
+            "count": 13,
+            "repos": [
+                "tensorflow/datasets",
+                "tensorflow/tensorrt",
+                "tensorflow/tfx",
+                "tensorflow/model-card-toolkit",
+                "tensorflow/tflite-micro"
+            ]
+        },
+        {
+            "command": "actions/labeler@v2",
+            "count": 1,
+            "repos": [
+                "tensorflow/model-optimization"
+            ]
+        },
+        {
+            "command": "actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29",
+            "count": 30,
+            "repos": [
+                "tensorflow/io"
+            ]
+        },
+        {
+            "command": "actions/download-artifact@65a9edc5881444af0b9093a5e628f2fe47ea3b2e",
+            "count": 6,
+            "repos": [
+                "tensorflow/io"
+            ]
+        },
+        {
+            "command": "set -e -x\nBUILD_NUMBER=$(date \"+%Y%m%d%H%M%S\")\necho ${BUILD_NUMBER} > BUILD_NUMBER\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/io"
+            ]
+        },
+        {
+            "command": "actions/setup-python@v1",
+            "count": 8,
+            "repos": [
+                "tensorflow/addons",
+                "tensorflow/recommenders-addons"
+            ]
+        },
+        {
+            "command": "release-drafter/release-drafter@74e7c423dafbb406c9c18b1638334f67a7c891c3",
+            "count": 2,
+            "repos": [
+                "tensorflow/addons",
+                "tensorflow/recommenders-addons"
+            ]
+        },
+        {
+            "command": "actions/github-script@0.3.0",
+            "count": 1,
+            "repos": [
+                "tensorflow/addons"
+            ]
+        },
+        {
+            "command": "actions/download-artifact@v1",
+            "count": 1,
+            "repos": [
+                "tensorflow/addons"
+            ]
+        },
+        {
+            "command": "actions/stale@v7",
+            "count": 2,
+            "repos": [
+                "tensorflow/tfx",
+                "tensorflow/tflite-micro"
+            ]
+        },
+        {
+            "command": "haya14busa/action-cond@v1",
+            "count": 1,
+            "repos": [
+                "tensorflow/recommenders-addons"
+            ]
+        },
+        {
+            "command": "actions/setup-python@v4",
+            "count": 20,
+            "repos": [
+                "tensorflow/tflite-micro"
+            ]
+        },
+        {
+            "command": "actions/setup-python@v2",
+            "count": 1,
+            "repos": [
+                "tensorflow/tflite-micro-arduino-examples"
+            ]
+        }
+    ],
+    "Step 2": [
+        {
+            "command": "actions-rs/toolchain@v1",
+            "count": 1,
+            "repos": [
+                "tensorflow/rust"
+            ]
+        },
+        {
+            "command": "actions/setup-python@13ae5bb136fac2878aff31522b9efb785519f984",
+            "count": 4,
+            "repos": [
+                "tensorflow/tensorboard"
+            ]
+        },
+        {
+            "command": "actions/setup-node@64ed1c7eab4cce3362f8c340dee64e5eaeef8f7c",
+            "count": 1,
+            "repos": [
+                "tensorflow/tensorboard"
+            ]
+        },
+        {
+            "command": "FirebaseExtended/action-hosting-deploy@v0",
+            "count": 2,
+            "repos": [
+                "tensorflow/tfjs"
+            ]
+        },
+        {
+            "command": "./.github/actions/setup",
+            "count": 4,
+            "repos": [
+                "tensorflow/datasets"
+            ]
+        },
+        {
+            "command": "actions/setup-python@82c7e631bb3cdc910f68e0081d67478d79c6982d",
+            "count": 8,
+            "repos": [
+                "tensorflow/io"
+            ]
+        },
+        {
+            "command": "actions/download-artifact@65a9edc5881444af0b9093a5e628f2fe47ea3b2e",
+            "count": 11,
+            "repos": [
+                "tensorflow/io"
+            ]
+        },
+        {
+            "command": "egor-tensin/vs-shell@9a932a62d05192eae18ca370155cf877eecc2202",
+            "count": 1,
+            "repos": [
+                "tensorflow/io"
+            ]
+        },
+        {
+            "command": "actions/upload-artifact@65462800fd760344b1a7b4382951275a0abb4808",
+            "count": 1,
+            "repos": [
+                "tensorflow/io"
+            ]
+        },
+        {
+            "command": "einaregilsson/build-number@46decf22c413b48c8923e98b2b5836f8aaf7781e",
+            "count": 3,
+            "repos": [
+                "tensorflow/io"
+            ]
+        },
+        {
+            "command": "git tag",
+            "count": 1,
+            "repos": [
+                "tensorflow/io"
+            ]
+        },
+        {
+            "command": "set -x -e\nCOMMIT=$(git rev-parse --quiet --verify ${{ github.event.inputs.commit }})\nif [[ \"$(git tag -l ${{ github.event.inputs.version }})\" == \"${{ github.event.inputs.version }}\" ]]; then\n  echo \"${{ github.event.inputs.version }} already released\"\n  exit 1\nfi\nVERSION=${{ github.event.inputs.version }}\n\ndocker pull tfsigio/candidate:${VERSION:1}\ndocker create -it --name storage tfsigio/candidate:${VERSION:1} bash\ndocker cp storage:/wheelhouse .\ndocker cp storage:/wheelhouse.sha256 .\ndocker cp storage:/wheelhouse.commit .\ndocker cp storage:/wheelhouse.version .\n\nsha256sum wheelhouse/*.whl | sort -u | diff wheelhouse.sha256 -\nmv wheelhouse dist\n\nif [[ \"${COMMIT}\" != \"$(cat wheelhouse.commit)\" ]]; then\n  echo \"${COMMIT} != $(cat wheelhouse.commit)\"\n  exit 1\nfi\nif [[ \"${VERSION}\" != \"v$(cat wheelhouse.version)\" ]]; then\n  echo \"${VERSION} != v$(cat wheelhouse.version)\"\n  exit 1\nfi\n\npython3 tools/release/note_take.py ${VERSION}\n\necho \"::set-output name=tag::${VERSION}\"\necho \"::set-output name=name::TensorFlow I/O ${VERSION:1}\"\necho \"::set-output name=commit::${COMMIT}\"\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/io"
+            ]
+        },
+        {
+            "command": "sudo python3 -m pip install -U numpy pip black pyupgrade\nbazel run -s --verbose_failures --experimental_repo_remote_exec //tools/lint:lint -- bazel\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/io"
+            ]
+        },
+        {
+            "command": "sudo python3 -m pip install -U numpy pip black pyupgrade\nbazel run -s --verbose_failures --experimental_repo_remote_exec //tools/lint:lint -- black\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/io"
+            ]
+        },
+        {
+            "command": "sudo python3 -m pip install -U numpy pip black pyupgrade\nbazel run -s --verbose_failures --experimental_repo_remote_exec //tools/lint:lint -- clang\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/io"
+            ]
+        },
+        {
+            "command": "sudo python3 -m pip install -U numpy pip black pyupgrade\nbazel run -s --verbose_failures --experimental_repo_remote_exec //tools/lint:lint -- pyupgrade\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/io"
+            ]
+        },
+        {
+            "command": "actions/checkout@v2",
+            "count": 13,
+            "repos": [
+                "tensorflow/addons",
+                "tensorflow/recommenders-addons",
+                "tensorflow/tflite-micro",
+                "tensorflow/tflite-micro-arduino-examples"
+            ]
+        },
+        {
+            "command": "bash tools/run_cpu_tests.sh",
+            "count": 1,
+            "repos": [
+                "tensorflow/addons"
+            ]
+        },
+        {
+            "command": "actions/setup-python@v1",
+            "count": 5,
+            "repos": [
+                "tensorflow/addons",
+                "tensorflow/tfhub.dev",
+                "tensorflow/recommenders-addons"
+            ]
+        },
+        {
+            "command": "actions/setup-python@v2",
+            "count": 2,
+            "repos": [
+                "tensorflow/addons",
+                "tensorflow/recommenders-addons"
+            ]
+        },
+        {
+            "command": "echo \"SKIP_CUSTOM_OP_TESTS=--skip-custom-ops\" >> $GITHUB_ENV",
+            "count": 1,
+            "repos": [
+                "tensorflow/addons"
+            ]
+        },
+        {
+            "command": "set -e -x\nls -la dist/\nsha256sum dist/*.whl\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/addons"
+            ]
+        },
+        {
+            "command": "set -e -x\necho ${{ secrets.DOCKER_PW }} | docker login --username ${{ secrets.DOCKER_USER }} --password-stdin\nbash .github/workflows/github_build_dev_container.sh\ndocker push tfaddons/dev_container:latest-gpu\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/addons"
+            ]
+        },
+        {
+            "command": "actions/github-script@v6",
+            "count": 1,
+            "repos": [
+                "tensorflow/tfx"
+            ]
+        },
+        {
+            "command": "actions/checkout@v3",
+            "count": 17,
+            "repos": [
+                "tensorflow/tfx",
+                "tensorflow/tflite-micro"
+            ]
+        },
+        {
+            "command": "seanmiddleditch/gha-setup-vsdevenv@master",
+            "count": 1,
+            "repos": [
+                "tensorflow/swift-apis"
+            ]
+        },
+        {
+            "command": "actions/download-artifact@v3",
+            "count": 1,
+            "repos": [
+                "tensorflow/build"
+            ]
+        },
+        {
+            "command": "actions/github-script@0.3.0",
+            "count": 2,
+            "repos": [
+                "tensorflow/recommenders-addons"
+            ]
+        },
+        {
+            "command": "actions/download-artifact@v1",
+            "count": 1,
+            "repos": [
+                "tensorflow/recommenders-addons"
+            ]
+        },
+        {
+            "command": "set -e -x\necho ${{ secrets.DOCKER_PW }} | docker login --username ${{ secrets.DOCKER_USER }} --password-stdin\nexport PY_VERSION=${{ matrix.py-version }}\nbash .github/workflows/github_build_dev_container.sh\ndocker push tfra/dev_container:latest-python${{ matrix.py-version }}",
+            "count": 1,
+            "repos": [
+                "tensorflow/recommenders-addons"
+            ]
+        },
+        {
+            "command": "rm -rf .git\necho ${{ secrets.tflm-bot-token }} | docker login ghcr.io -u tflm-bot --password-stdin\ndocker run --rm -v `pwd`:/opt/tflite-micro ghcr.io/tflm-bot/hexagon:0.4 \\\n/bin/bash -c \\\n\"cd /opt && tflite-micro/tensorflow/lite/micro/tools/ci_build/test_hexagon.sh tflite-micro/\"\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/tflite-micro"
+            ]
+        },
+        {
+            "command": "rm -rf .git\necho ${{ secrets.tflm-bot-token }} | docker login ghcr.io -u tflm-bot --password-stdin\ndocker run --env XTENSA_TOOLS_VERSION=RI-2020.4-linux --rm -v `pwd`:/opt/tflite-micro ghcr.io/tflm-bot/xtensa_xplorer_13:0.3 \\\n/bin/bash -c \\\n\"cd /opt && tflite-micro/tensorflow/lite/micro/tools/ci_build/test_xtensa_fusion_f1.sh EXTERNAL tflite-micro/\"\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/tflite-micro"
+            ]
+        },
+        {
+            "command": "rm -rf .git\necho ${{ secrets.tflm-bot-token }} | docker login ghcr.io -u tflm-bot --password-stdin\ndocker run --env XTENSA_TOOLS_VERSION=RI-2020.4-linux --rm -v `pwd`:/opt/tflite-micro ghcr.io/tflm-bot/xtensa_xplorer_13:0.3 \\\n/bin/bash -c \\\n\"cd /opt && tflite-micro/tensorflow/lite/micro/tools/ci_build/test_xtensa_vision_p6.sh RUN_TESTS tflite-micro/\"\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/tflite-micro"
+            ]
+        },
+        {
+            "command": "rm -rf .git\necho ${{ secrets.tflm-bot-token }} | docker login ghcr.io -u tflm-bot --password-stdin\ndocker run --env XTENSA_TOOLS_VERSION=RI-2019.2-linux --rm -v `pwd`:/opt/tflite-micro ghcr.io/tflm-bot/xtensa_xplorer_11:0.2 \\\n/bin/bash -c \\\n\"cd /opt && tflite-micro/tensorflow/lite/micro/tools/ci_build/test_xtensa_hifimini.sh tflite-micro/\"\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/tflite-micro"
+            ]
+        },
+        {
+            "command": "rm -rf .git\necho ${{ secrets.tflm-bot-token }} | docker login ghcr.io -u tflm-bot --password-stdin\ndocker run --env XTENSA_TOOLS_VERSION=RI-2020.4-linux --rm -v `pwd`:/opt/tflite-micro ghcr.io/tflm-bot/xtensa_xplorer_13:0.3 \\\n/bin/bash -c \\\n\"cd /opt && tflite-micro/tensorflow/lite/micro/tools/ci_build/test_xtensa_vision_p6.sh RUN_NO_TESTS tflite-micro/\"\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/tflite-micro"
+            ]
+        },
+        {
+            "command": "rm -rf .git\necho ${{ secrets.tflm-bot-token }} | docker login ghcr.io -u tflm-bot --password-stdin\ndocker run --env XTENSA_TOOLS_VERSION=RI-2022.9-linux --rm -v `pwd`:/opt/tflite-micro ghcr.io/tflm-bot/xtensa_xplorer_hifi5:0.2 \\\n/bin/bash -c \\\n\"cd /opt && tflite-micro/tensorflow/lite/micro/tools/ci_build/test_xtensa_hifi5.sh tflite-micro/\"\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/tflite-micro"
+            ]
+        },
+        {
+            "command": "rm -rf .git\necho ${{ secrets.tflm-bot-token }} | docker login ghcr.io -u tflm-bot --password-stdin\ndocker run --env XTENSA_TOOLS_VERSION=RI-2020.4-linux --rm -v `pwd`:/opt/tflite-micro ghcr.io/tflm-bot/xtensa_xplorer_13:0.3 \\\n/bin/bash -c \\\n\"cd /opt && tflite-micro/tensorflow/lite/micro/tools/ci_build/test_xtensa_hifi3z.sh EXTERNAL tflite-micro/\"\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/tflite-micro"
+            ]
+        }
+    ],
+    "Setup Python": [
+        {
+            "command": "actions/setup-python@v4",
+            "count": 1,
+            "repos": [
+                "tensorflow/rust"
+            ]
+        },
+        {
+            "command": "actions/setup-python@v2",
+            "count": 2,
+            "repos": [
+                "tensorflow/probability"
+            ]
+        }
+    ],
+    "Install dependencies": [
+        {
+            "command": "python -m pip install --upgrade pip\npip install -r .github/workflows/requirements.txt\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/rust"
+            ]
+        },
+        {
+            "command": "python -m pip install --upgrade pip\npip install setuptools wheel twine\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/lucid"
+            ]
+        },
+        {
+            "command": "python -m pip install --upgrade pip\npip install tox\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/lucid"
+            ]
+        },
+        {
+            "command": "pip install tf-nightly mock pytest\npip install -e .[test,auto_mtf,transformer]\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/mesh"
+            ]
+        },
+        {
+            "command": "python -m pip install --upgrade pip\npython -m pip install -r requirements-test.txt\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/tensorrt"
+            ]
+        },
+        {
+            "command": "python -m pip install --upgrade pip wheel\n# TODO(b/232490018): Cython need to be installed separately to build pycocotools.\npython -m pip install Cython -c ./test_constraints.txt\nTFX_DEPENDENCY_SELECTOR=NIGHTLY pip install -c ./test_constraints.txt --extra-index-url https://pypi-nightly.tensorflow.org/simple --pre --editable .[all]\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/tfx"
+            ]
+        },
+        {
+            "command": "python -m pip install --upgrade pip\npip install flake8 pytest mock\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/cloud"
+            ]
+        },
+        {
+            "command": "python -m pip install --upgrade pip\n",
+            "count": 2,
+            "repos": [
+                "tensorflow/similarity"
+            ]
+        },
+        {
+            "command": "python -m pip install --upgrade pip\npip install coveralls\n",
+            "count": 2,
+            "repos": [
+                "tensorflow/similarity"
+            ]
+        },
+        {
+            "command": "python -m pip install --upgrade pip wheel\npython -m pip install -e \".[${{ matrix.dependencies }}]\"\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/model-card-toolkit"
+            ]
+        },
+        {
+            "command": "python -m pip install --upgrade pip wheel\npython -m pip install -e \".[${{ matrix.project }}, ${{ matrix.depconstraint }}, test]\"\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/tfx-addons"
+            ]
+        },
+        {
+            "command": "python -m pip install --upgrade pip wheel pytest\ncd examples/${{ matrix.project }}\npip install -r requirements.txt\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/tfx-addons"
+            ]
+        },
+        {
+            "command": "sudo ci/install_bazelisk.sh\npip3 install Pillow\npip3 install numpy\n",
+            "count": 4,
+            "repos": [
+                "tensorflow/tflite-micro"
+            ]
+        },
+        {
+            "command": "pip3 install Pillow\npip3 install numpy\n",
+            "count": 11,
+            "repos": [
+                "tensorflow/tflite-micro"
+            ]
+        }
+    ],
+    "Set up Python 3.8": [
+        {
+            "command": "actions/setup-python@v2",
+            "count": 1,
+            "repos": [
+                "tensorflow/models"
+            ]
+        },
+        {
+            "command": "actions/setup-python@v4",
+            "count": 1,
+            "repos": [
+                "tensorflow/model-card-toolkit"
+            ]
+        }
+    ],
+    "Set up Python ${{ matrix.python-version }}": [
+        {
+            "command": "actions/setup-python@v1",
+            "count": 2,
+            "repos": [
+                "tensorflow/ecosystem",
+                "tensorflow/lucid"
+            ]
+        },
+        {
+            "command": "actions/setup-python@v4",
+            "count": 1,
+            "repos": [
+                "tensorflow/tensorrt"
+            ]
+        },
+        {
+            "command": "actions/setup-python@v2",
+            "count": 2,
+            "repos": [
+                "tensorflow/cloud",
+                "tensorflow/similarity"
+            ]
+        }
+    ],
+    "Build": [
+        {
+            "command": "cd tensorboard/data/server/ && cargo build --release",
+            "count": 1,
+            "repos": [
+                "tensorflow/tensorboard"
+            ]
+        },
+        {
+            "command": "TOOLCHAINS=org.swift.50202012141a swift build -v -Xswiftc -DTENSORFLOW_USE_STANDARD_TOOLCHAIN -Xcc -I${HOME}/Library/tensorflow-2.4.0/usr/include -Xlinker -L${HOME}/Library/tensorflow-2.4.0/usr/lib\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/swift-apis"
+            ]
+        },
+        {
+            "command": "# We build twice as the first one currently fails for some unexplained\n# reason.  This should only build once.\nswift build -v -Xswiftc -DTENSORFLOW_USE_STANDARD_TOOLCHAIN -Xcc -IC:\\Library\\tensorflow-2.4.0\\usr\\include -Xlinker -LC:\\Library\\tensorflow-2.4.0\\usr\\lib\nswift build -v -Xswiftc -DTENSORFLOW_USE_STANDARD_TOOLCHAIN -Xcc -IC:\\Library\\tensorflow-2.4.0\\usr\\include -Xlinker -LC:\\Library\\tensorflow-2.4.0\\usr\\lib\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/swift-apis"
+            ]
+        }
+    ],
+    "Test": [
+        {
+            "command": "cd tensorboard/data/server/ && cargo test --release",
+            "count": 1,
+            "repos": [
+                "tensorflow/tensorboard"
+            ]
+        },
+        {
+            "command": "tensorflow/lite/micro/tools/ci_build/test_bazel.sh\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/tflite-micro"
+            ]
+        },
+        {
+            "command": "tensorflow/lite/micro/tools/ci_build/test_bazel_tflite_tools.sh\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/tflite-micro"
+            ]
+        },
+        {
+            "command": "tensorflow/lite/micro/tools/ci_build/test_bazel_msan.sh\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/tflite-micro"
+            ]
+        },
+        {
+            "command": "tensorflow/lite/micro/tools/ci_build/test_bazel_asan.sh\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/tflite-micro"
+            ]
+        },
+        {
+            "command": "cd ../\ntflite-micro/tensorflow/lite/micro/tools/ci_build/test_bluepill_release.sh tflite-micro/\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/tflite-micro"
+            ]
+        },
+        {
+            "command": "cd ../\ntflite-micro/tensorflow/lite/micro/tools/ci_build/test_bluepill_no_release.sh tflite-micro/\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/tflite-micro"
+            ]
+        },
+        {
+            "command": "cd ../\ntflite-micro/tensorflow/lite/micro/tools/ci_build/test_bluepill_renode.sh tflite-micro/\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/tflite-micro"
+            ]
+        },
+        {
+            "command": "docker://ghcr.io/tflm-bot/tflm-ci:latest",
+            "count": 3,
+            "repos": [
+                "tensorflow/tflite-micro"
+            ]
+        },
+        {
+            "command": "cd ../\ntflite-micro/tensorflow/lite/micro/tools/ci_build/test_project_generation.sh tflite-micro/\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/tflite-micro"
+            ]
+        },
+        {
+            "command": "tensorflow/lite/micro/tools/ci_build/test_makefile.sh\ncd ../\ntflite-micro/tensorflow/lite/micro/tools/ci_build/test_x86_release.sh tflite-micro/\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/tflite-micro"
+            ]
+        },
+        {
+            "command": "tensorflow/lite/micro/tools/ci_build/test_makefile.sh\ncd ../\ntflite-micro/tensorflow/lite/micro/tools/ci_build/test_x86_default.sh tflite-micro/\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/tflite-micro"
+            ]
+        },
+        {
+            "command": "tensorflow/lite/micro/tools/ci_build/test_makefile.sh\ncd ../\ntflite-micro/tensorflow/lite/micro/tools/ci_build/test_x86_out_of_tree.sh tflite-micro/\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/tflite-micro"
+            ]
+        },
+        {
+            "command": "tensorflow/lite/micro/tools/ci_build/test_makefile.sh\ncd ../\ntflite-micro/tensorflow/lite/micro/tools/ci_build/test_x86_no_tflite_static_memory.sh tflite-micro/\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/tflite-micro"
+            ]
+        },
+        {
+            "command": "tensorflow/lite/micro/tools/ci_build/test_cortex_m_generic.sh\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/tflite-micro"
+            ]
+        },
+        {
+            "command": "tensorflow/lite/micro/tools/ci_build/test_cortex_m_corstone_300.sh\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/tflite-micro"
+            ]
+        },
+        {
+            "command": "tensorflow/lite/micro/tools/ci_build/test_generate_integration_tests.sh\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/tflite-micro"
+            ]
+        },
+        {
+            "command": "./scripts/install_arduino_cli.sh\n./scripts/test_arduino_library.sh \"${PWD}\"\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/tflite-micro-arduino-examples"
+            ]
+        }
+    ],
+    "Step 4": [
+        {
+            "command": "pip freeze --all",
+            "count": 1,
+            "repos": [
+                "tensorflow/tensorboard"
+            ]
+        },
+        {
+            "command": "yarn lint",
+            "count": 1,
+            "repos": [
+                "tensorflow/tensorboard"
+            ]
+        },
+        {
+            "command": "set -x -e\necho \"Successfully completely macOS arm64 release\"\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/io"
+            ]
+        },
+        {
+            "command": "actions/upload-artifact@65462800fd760344b1a7b4382951275a0abb4808",
+            "count": 2,
+            "repos": [
+                "tensorflow/io"
+            ]
+        },
+        {
+            "command": "actions/download-artifact@65a9edc5881444af0b9093a5e628f2fe47ea3b2e",
+            "count": 3,
+            "repos": [
+                "tensorflow/io"
+            ]
+        },
+        {
+            "command": "cat <<EOF > Dockerfile\nFROM gcr.io/distroless/base-debian11\nCOPY wheelhouse /wheelhouse\nCOPY wheelhouse.sha256 /wheelhouse.sha256\nCOPY wheelhouse.commit /wheelhouse.commit\nCOPY wheelhouse.version /wheelhouse.version\nEOF",
+            "count": 2,
+            "repos": [
+                "tensorflow/io"
+            ]
+        },
+        {
+            "command": "set -x -e\npython -m pip install pip==21.3.1\npython -m pip install -U wheel setuptools\npython --version\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/io"
+            ]
+        },
+        {
+            "command": "actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8",
+            "count": 1,
+            "repos": [
+                "tensorflow/io"
+            ]
+        },
+        {
+            "command": "actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29",
+            "count": 3,
+            "repos": [
+                "tensorflow/io"
+            ]
+        },
+        {
+            "command": "git diff",
+            "count": 1,
+            "repos": [
+                "tensorflow/io"
+            ]
+        },
+        {
+            "command": "softprops/action-gh-release@69320dbe05506a9a39fc8ae11030b214ec2d1f87",
+            "count": 1,
+            "repos": [
+                "tensorflow/io"
+            ]
+        },
+        {
+            "command": "pip install -e ./",
+            "count": 1,
+            "repos": [
+                "tensorflow/addons"
+            ]
+        },
+        {
+            "command": "actions/checkout@v2",
+            "count": 1,
+            "repos": [
+                "tensorflow/addons"
+            ]
+        },
+        {
+            "command": "echo \"NIGHTLY_FLAG=--nightly\" >> $GITHUB_ENV",
+            "count": 2,
+            "repos": [
+                "tensorflow/recommenders-addons"
+            ]
+        },
+        {
+            "command": "pypa/gh-action-pypi-publish@v1.1.0",
+            "count": 1,
+            "repos": [
+                "tensorflow/recommenders-addons"
+            ]
+        }
+    ],
+    "Step 5": [
+        {
+            "command": "pip freeze --all",
+            "count": 1,
+            "repos": [
+                "tensorflow/tensorboard"
+            ]
+        },
+        {
+            "command": "! git grep -E 'f(it|describe)\\(' 'tensorboard/*_test.ts'\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/tensorboard"
+            ]
+        },
+        {
+            "command": "./tensorboard/tools/mirror_urls_test.sh",
+            "count": 1,
+            "repos": [
+                "tensorflow/tensorboard"
+            ]
+        },
+        {
+            "command": "set -e -x\nmkdir -p wheelhouse\ncp macOS-arm64-3.9-wheel/*.whl wheelhouse/\ncp macOS-arm64-3.10-wheel/*.whl wheelhouse/\ncp macOS-arm64-3.11-wheel/*.whl wheelhouse/\ncp macOS-arm64-3.12-wheel/*.whl wheelhouse/\nls -la wheelhouse/\nsha256sum wheelhouse/*.whl\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/io"
+            ]
+        },
+        {
+            "command": "docker/setup-buildx-action@d70bba72b1f3fd22344832f00baa16ece964efeb",
+            "count": 2,
+            "repos": [
+                "tensorflow/io"
+            ]
+        },
+        {
+            "command": "actions/upload-artifact@65462800fd760344b1a7b4382951275a0abb4808",
+            "count": 4,
+            "repos": [
+                "tensorflow/io"
+            ]
+        },
+        {
+            "command": "actions/download-artifact@65a9edc5881444af0b9093a5e628f2fe47ea3b2e",
+            "count": 5,
+            "repos": [
+                "tensorflow/io"
+            ]
+        },
+        {
+            "command": "python3 tools/release/note_update.py",
+            "count": 1,
+            "repos": [
+                "tensorflow/io"
+            ]
+        },
+        {
+            "command": "pypa/gh-action-pypi-publish@81e9d935c883d0b210363ab89cf05f3894778450",
+            "count": 1,
+            "repos": [
+                "tensorflow/io"
+            ]
+        },
+        {
+            "command": "pytest -v -n auto --skip-custom-ops ./tensorflow_addons",
+            "count": 1,
+            "repos": [
+                "tensorflow/addons"
+            ]
+        },
+        {
+            "command": "actions/setup-python@v2",
+            "count": 1,
+            "repos": [
+                "tensorflow/addons"
+            ]
+        },
+        {
+            "command": "actions/checkout@v2",
+            "count": 2,
+            "repos": [
+                "tensorflow/recommenders-addons"
+            ]
+        }
+    ],
+    "Step 3": [
+        {
+            "command": "yarn install --ignore-engines",
+            "count": 1,
+            "repos": [
+                "tensorflow/tensorboard"
+            ]
+        },
+        {
+            "command": "set -x -e\npython -m pip install -U wheel setuptools\npython --version\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/io"
+            ]
+        },
+        {
+            "command": "actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8",
+            "count": 1,
+            "repos": [
+                "tensorflow/io"
+            ]
+        },
+        {
+            "command": "actions/upload-artifact@65462800fd760344b1a7b4382951275a0abb4808",
+            "count": 1,
+            "repos": [
+                "tensorflow/io"
+            ]
+        },
+        {
+            "command": "actions/download-artifact@65a9edc5881444af0b9093a5e628f2fe47ea3b2e",
+            "count": 4,
+            "repos": [
+                "tensorflow/io"
+            ]
+        },
+        {
+            "command": "set -x -e\nsha256sum wheelhouse/*.whl | sort -u > wheelhouse.sha256\ngit rev-parse --verify HEAD > wheelhouse.commit\ngrep 'version = ' tensorflow_io/python/ops/version_ops.py  | sed -E 's@^.*version = \"@@g' | sed -E 's@\".*$@@g' > wheelhouse.version\ncat wheelhouse.sha256\ncat wheelhouse.commit\ncat wheelhouse.version\necho \"::set-output name=version::$(cat wheelhouse.version)\"\n",
+            "count": 2,
+            "repos": [
+                "tensorflow/io"
+            ]
+        },
+        {
+            "command": "actions/setup-python@82c7e631bb3cdc910f68e0081d67478d79c6982d",
+            "count": 6,
+            "repos": [
+                "tensorflow/io"
+            ]
+        },
+        {
+            "command": "set -e -x\ndocker login --username tfsigio --password ${{ secrets.DOCKER_PASSWORD }}\nbash -x -e tools/docker/tests/dockerfile_cpu_test.sh\ndocker push tfsigio/tfio:latest\npython --version\nTFIO_VERSION=$(python setup.py --version | tail -1)\ndocker tag tfsigio/tfio:latest tfsigio/tfio:${TFIO_VERSION}\ndocker push tfsigio/tfio:${TFIO_VERSION}\nbash -x -e tools/docker/tests/dockerfile_devel_test.sh\ndocker push tfsigio/tfio:latest-devel\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/io"
+            ]
+        },
+        {
+            "command": "echo \"Build number is $BUILD_NUMBER\"",
+            "count": 3,
+            "repos": [
+                "tensorflow/io"
+            ]
+        },
+        {
+            "command": "set -e -x\ndocker login --username tfsigio --password ${{ secrets.DOCKER_PASSWORD }}\npython --version\nbash -x -e tools/docker/tests/dockerfile_nightly_test.sh\ndocker push tfsigio/tfio:nightly\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/io"
+            ]
+        },
+        {
+            "command": "python3 tools/release/note_create.py",
+            "count": 1,
+            "repos": [
+                "tensorflow/io"
+            ]
+        },
+        {
+            "command": "set -x -e\necho ${{ steps.info.outputs.tag }}\necho ${{ steps.info.outputs.name }}\necho ${{ steps.info.outputs.commit }}\ncat CURRENT.md\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/io"
+            ]
+        },
+        {
+            "command": "reviewdog/action-suggester@185c9c06d0a28fbe43b50aca4b32777b649e7cbd",
+            "count": 4,
+            "repos": [
+                "tensorflow/io"
+            ]
+        },
+        {
+            "command": "pip install --default-timeout=1000 -r tools/install_deps/tensorflow-cpu.txt -r tools/install_deps/pytest.txt",
+            "count": 1,
+            "repos": [
+                "tensorflow/addons"
+            ]
+        },
+        {
+            "command": "pip install pygithub click",
+            "count": 4,
+            "repos": [
+                "tensorflow/addons",
+                "tensorflow/recommenders-addons"
+            ]
+        },
+        {
+            "command": "echo \"NIGHTLY_FLAG=--nightly\" >> $GITHUB_ENV",
+            "count": 1,
+            "repos": [
+                "tensorflow/addons"
+            ]
+        },
+        {
+            "command": "pypa/gh-action-pypi-publish@v1.1.0",
+            "count": 1,
+            "repos": [
+                "tensorflow/addons"
+            ]
+        },
+        {
+            "command": "actions/github-script@v6",
+            "count": 1,
+            "repos": [
+                "tensorflow/tfx"
+            ]
+        },
+        {
+            "command": "bash tools/run_cpu_tests.sh",
+            "count": 1,
+            "repos": [
+                "tensorflow/recommenders-addons"
+            ]
+        },
+        {
+            "command": "echo \"SKIP_CUSTOM_OP_TESTS=--skip-custom-ops\" >> $GITHUB_ENV",
+            "count": 2,
+            "repos": [
+                "tensorflow/recommenders-addons"
+            ]
+        },
+        {
+            "command": "set -e -x\nls -la dist/\nsha256sum dist/*.whl\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/recommenders-addons"
+            ]
+        }
+    ],
+    "Step 6": [
+        {
+            "command": "! git grep -E '\"@npm//@angular/material\"|\"@npm//@angular/cdk\"' 'tensorboard/*/BUILD' ':!tensorboard/webapp/BUILD' ':!tensorboard/webapp/angular/BUILD'\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/tensorboard"
+            ]
+        },
+        {
+            "command": "actions/upload-artifact@65462800fd760344b1a7b4382951275a0abb4808",
+            "count": 2,
+            "repos": [
+                "tensorflow/io"
+            ]
+        },
+        {
+            "command": "docker/login-action@e92390c5fb421da1463c202d546fed0ec5c39f20",
+            "count": 2,
+            "repos": [
+                "tensorflow/io"
+            ]
+        },
+        {
+            "command": "actions/download-artifact@65a9edc5881444af0b9093a5e628f2fe47ea3b2e",
+            "count": 2,
+            "repos": [
+                "tensorflow/io"
+            ]
+        },
+        {
+            "command": "actions/setup-python@82c7e631bb3cdc910f68e0081d67478d79c6982d",
+            "count": 2,
+            "repos": [
+                "tensorflow/io"
+            ]
+        },
+        {
+            "command": "git diff",
+            "count": 1,
+            "repos": [
+                "tensorflow/io"
+            ]
+        },
+        {
+            "command": "actions/setup-python@v2",
+            "count": 2,
+            "repos": [
+                "tensorflow/recommenders-addons"
+            ]
+        }
+    ],
+    "Step 7": [
+        {
+            "command": "! git grep -E '\"@npm//d3\"|\"@npm//@types/d3\"' 'tensorboard/webapp/**/*BUILD' ':!tensorboard/webapp/third_party/**'\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/tensorboard"
+            ]
+        },
+        {
+            "command": "docker/build-push-action@2cdde995de11925a030ce8070c3d77a52ffcf1c0",
+            "count": 2,
+            "repos": [
+                "tensorflow/io"
+            ]
+        },
+        {
+            "command": "actions/download-artifact@65a9edc5881444af0b9093a5e628f2fe47ea3b2e",
+            "count": 2,
+            "repos": [
+                "tensorflow/io"
+            ]
+        },
+        {
+            "command": "peter-evans/create-pull-request@6d6857d36972b65feb161a90e484f2984215f83e",
+            "count": 1,
+            "repos": [
+                "tensorflow/io"
+            ]
+        },
+        {
+            "command": "ncipollo/release-action@v1",
+            "count": 1,
+            "repos": [
+                "tensorflow/tfx-addons"
+            ]
+        }
+    ],
+    "Step 8": [
+        {
+            "command": "! git grep -E '\"@npm_angular_bazel//:index.bzl\"' 'tensorboard/**/BUILD'\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/tensorboard"
+            ]
+        },
+        {
+            "command": "actions/download-artifact@65a9edc5881444af0b9093a5e628f2fe47ea3b2e",
+            "count": 2,
+            "repos": [
+                "tensorflow/io"
+            ]
+        },
+        {
+            "command": "actions/upload-artifact@65462800fd760344b1a7b4382951275a0abb4808",
+            "count": 2,
+            "repos": [
+                "tensorflow/io"
+            ]
+        },
+        {
+            "command": "actions/upload-artifact@v1",
+            "count": 1,
+            "repos": [
+                "tensorflow/addons"
+            ]
+        }
+    ],
+    "Step 9": [
+        {
+            "command": "! git grep -E 'mat-color|$mat-' 'tensorboard/**/*.scss'\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/tensorboard"
+            ]
+        },
+        {
+            "command": "./tensorboard/tools/do_not_submit_test.sh",
+            "count": 1,
+            "repos": [
+                "tensorflow/tensorboard"
+            ]
+        },
+        {
+            "command": "set -e -x\nmkdir -p wheelhouse\ncp macOS-3.9-wheel/*.whl wheelhouse/\ncp macOS-3.10-wheel/*.whl wheelhouse/\ncp macOS-3.11-wheel/*.whl wheelhouse/\ncp macOS-3.12-wheel/*.whl wheelhouse/\ncp Linux-3.9-wheel/*.whl wheelhouse/\ncp Linux-3.10-wheel/*.whl wheelhouse/\ncp Linux-3.11-wheel/*.whl wheelhouse/\ncp Linux-3.12-wheel/*.whl wheelhouse/\n# cp Windows-3.9-wheel/*.whl wheelhouse/\n# cp Windows-3.10-wheel/*.whl wheelhouse/\n# cp Windows-3.11-wheel/*.whl wheelhouse/\n# cp Windows-3.12-wheel/*.whl wheelhouse/\nls -la wheelhouse/\nsha256sum wheelhouse/*.whl\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/io"
+            ]
+        },
+        {
+            "command": "actions/upload-artifact@65462800fd760344b1a7b4382951275a0abb4808",
+            "count": 1,
+            "repos": [
+                "tensorflow/io"
+            ]
+        },
+        {
+            "command": "actions/download-artifact@65a9edc5881444af0b9093a5e628f2fe47ea3b2e",
+            "count": 1,
+            "repos": [
+                "tensorflow/io"
+            ]
+        },
+        {
+            "command": "haya14busa/action-cond@v1",
+            "count": 2,
+            "repos": [
+                "tensorflow/recommenders-addons"
+            ]
+        }
+    ],
+    "Step 10": [
+        {
+            "command": "! git grep -E '@npm//numeric' 'tensorboard/*/BUILD' ':!tensorboard/webapp/third_party/**'\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/tensorboard"
+            ]
+        },
+        {
+            "command": "./tensorboard/tools/license_test.sh",
+            "count": 1,
+            "repos": [
+                "tensorflow/tensorboard"
+            ]
+        },
+        {
+            "command": "actions/upload-artifact@65462800fd760344b1a7b4382951275a0abb4808",
+            "count": 1,
+            "repos": [
+                "tensorflow/io"
+            ]
+        },
+        {
+            "command": "actions/download-artifact@65a9edc5881444af0b9093a5e628f2fe47ea3b2e",
+            "count": 1,
+            "repos": [
+                "tensorflow/io"
+            ]
+        },
+        {
+            "command": "actions/upload-artifact@v1",
+            "count": 2,
+            "repos": [
+                "tensorflow/recommenders-addons"
+            ]
+        }
+    ],
+    "Step 11": [
+        {
+            "command": "./tensorboard/tools/whitespace_hygiene_test.py",
+            "count": 1,
+            "repos": [
+                "tensorflow/tensorboard"
+            ]
+        },
+        {
+            "command": "actions/download-artifact@65a9edc5881444af0b9093a5e628f2fe47ea3b2e",
+            "count": 1,
+            "repos": [
+                "tensorflow/io"
+            ]
+        }
+    ],
+    "Install Twine": [
+        {
+            "command": "pip install twine",
+            "count": 1,
+            "repos": [
+                "tensorflow/tensorboard"
+            ]
+        },
+        {
+            "command": "python -m pip install --upgrade pip setuptools wheel\npip install twine\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/tflite-micro"
+            ]
+        }
+    ],
+    "Publish the package": [
+        {
+            "command": "twine check tb_nightly*.whl\ntwine upload tb_nightly*.whl\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/tensorboard"
+            ]
+        },
+        {
+            "command": "etils-actions/pypi-auto-publish@v1",
+            "count": 1,
+            "repos": [
+                "tensorflow/datasets"
+            ]
+        }
+    ],
+    "Check": [
+        {
+            "command": "echo \"status=${{ github.ref == 'refs/heads/master' || (\n  github.event.action != 'closed'\n  && github.event.pull_request.merged == false\n) }}\" >> $GITHUB_OUTPUT\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/datasets"
+            ]
+        },
+        {
+            "command": "docker://ghcr.io/tflm-bot/tflm-ci:latest",
+            "count": 1,
+            "repos": [
+                "tensorflow/tflite-micro"
+            ]
+        }
+    ],
+    "Test with pytest": [
+        {
+            "command": "pytest",
+            "count": 1,
+            "repos": [
+                "tensorflow/mesh"
+            ]
+        },
+        {
+            "command": "pytest\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/tensorrt"
+            ]
+        },
+        {
+            "command": "pytest src/python/tensorflow_cloud/core/tests/unit/\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/cloud"
+            ]
+        },
+        {
+            "command": "coverage run -m pytest tests/\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/similarity"
+            ]
+        }
+    ],
+    "Setup macOS": [
+        {
+            "command": "set -x -e\nbash -x -e tests/test_azure/start_azure.sh\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/io"
+            ]
+        },
+        {
+            "command": "set -x -e\npython -m pip install -U wheel setuptools\npython --version\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/io"
+            ]
+        }
+    ],
+    "Setup Linux": [
+        {
+            "command": "set -x -e\nbash -x -e .github/workflows/build.space.sh\nbash -x -e tests/test_aws/aws_test.sh\nbash -x -e tests/test_azure/start_azure.sh\nbash -x -e tests/test_gcloud/test_gcs.sh gcs-emulator\nbash -x -e tests/test_hdfs/hdfs_test.sh\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/io"
+            ]
+        },
+        {
+            "command": "set -x -e\nbash -x -e .github/workflows/build.space.sh\nbash -x -e tests/test_sql/sql_test.sh\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/io"
+            ]
+        },
+        {
+            "command": "set -x -e\nbash -x -e .github/workflows/build.space.sh\nbash -x -e tests/test_pulsar/pulsar_test.sh\nbash -x -e tests/test_kafka/kafka_test.sh\nbash -x -e tests/test_aws/aws_test.sh\necho bash -x -e tests/test_gcloud/test_pubsub_bigtable.sh\necho bash -x -e tests/test_prometheus/prometheus_test.sh start\nbash -x -e tests/test_elasticsearch/elasticsearch_test.sh start\nbash -x -e tests/test_mongodb/mongodb_test.sh start\nbash -x -e tests/test_azure/start_azure.sh\nbash -x -e tests/test_sql/sql_test.sh postgresql\nbash -x -e tests/test_gcloud/test_gcs.sh gcs-emulator\nbash -x -e tests/test_hdfs/hdfs_test.sh\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/io"
+            ]
+        }
+    ],
+    "Test Linux": [
+        {
+            "command": "set -x -e\npython --version\ndf -h\nrm -rf tensorflow_io\nrm -rf tensorflow_io_gcs_filesystem\nexport TF_USE_MODULAR_FILESYSTEM=1\necho ${{ matrix.version }} | awk -F: '{print $1}' | xargs python -m pip install -U\necho ${{ matrix.version }} | awk -F: '{print $2}' | xargs python -m pip install --no-deps -U\npython -m pip install tensorflow-io-gcs-filesystem-nightly\npython -m pip install pytest-benchmark boto3 google-cloud-storage==1.32.0 azure-storage-blob==12.7.1 pyarrow==3.0.0\npython -m pip freeze\n\nsudo apt-get -y -qq update\nsudo apt-get -y -qq install openjdk-8-jdk\nsudo update-alternatives --config java\nexport JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64\ncurl -OL https://archive.apache.org/dist/hadoop/common/hadoop-2.7.0/hadoop-2.7.0.tar.gz\nsudo tar -xzf hadoop-2.7.0.tar.gz -C /usr/local\nsudo chmod 755 -R /usr/local/hadoop-2.7.0\nexport HADOOP_HOME=/usr/local/hadoop-2.7.0\nexport LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${JAVA_HOME}/jre/lib/amd64/server:${HADOOP_HOME}/lib/native\nexport CLASSPATH=$(${HADOOP_HOME}/bin/hadoop classpath --glob)\n\npython -c 'import tensorflow as tf; print(tf.version.VERSION)'\npython -c 'import tensorflow_io as tfio; print(tfio.version.VERSION)'\npython -m pytest -s -v tests/test_http.py\npython -m pytest -s -v tests/test_s3.py\npython -m pytest -s -v tests/test_azure.py\npython -m pytest -s -v tests/test_gcs.py\npython -m pytest -s -v tests/test_standalone_filesystem.py\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/io"
+            ]
+        },
+        {
+            "command": "set -x -e\ndf -h\ndocker run -i --rm -v $PWD:/v -w /v --net=host \\\n  buildpack-deps:22.04 \\\n  bash -x -e .github/workflows/build.wheel.sh python${{ matrix.python }}\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/io"
+            ]
+        }
+    ],
+    "Bazel on macOS": [
+        {
+            "command": "set -x -e\nbash -e .github/workflows/build.bazel.sh python3\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/io"
+            ]
+        },
+        {
+            "command": "set -x -e\nexport BAZEL_OPTIMIZATION=\"--config=optimization --config=cache\"\nif [[ \"${EVENT_NAME}\" == \"push\" && \"${REPO_NAME}\" == \"tensorflow/io\" ]]; then\n  export BAZEL_OPTIMIZATION=\"$BAZEL_OPTIMIZATION --remote_upload_local_results=true --google_credentials=service_account_creds.json\"\nfi\nsudo -E -H bash -e .github/workflows/build.bazel.sh python3\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/io"
+            ]
+        }
+    ],
+    "Wheel ${{ matrix.python }} macOS": [
+        {
+            "command": "set -x -e\npython3 --version\npython --version\nbrew search python\nbrew install python@${{ matrix.python }}\npython${{ matrix.python }} --version\npython${{ matrix.python }} -m pip install --break-system-packages -U wheel setuptools\npython${{ matrix.python }} setup.py --data bazel-bin -q bdist_wheel --plat-name macosx_12_0_arm64\nrm -rf build\npython${{ matrix.python }} setup.py --project tensorflow-io-gcs-filesystem --data bazel-bin -q bdist_wheel --plat-name macosx_12_0_arm64\nls dist/*\nmkdir -p wheelhouse\nfor f in dist/*.whl; do\n  echo \"disable delocate due to build breaks: delocate-wheel -w wheelhouse  $f\"\n  cp $f wheelhouse\ndone\nls wheelhouse/*\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/io"
+            ]
+        },
+        {
+            "command": "set -x -e\npython -m pip install -U wheel setuptools\npython --version\npython setup.py --data bazel-bin -q bdist_wheel --plat-name macosx_10_14_x86_64\nrm -rf build\npython setup.py --project tensorflow-io-gcs-filesystem --data bazel-bin -q bdist_wheel --plat-name macosx_10_14_x86_64\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/io"
+            ]
+        },
+        {
+            "command": "set -x -e\npython -m pip install -U wheel setuptools\npython --version\npython setup.py --data bazel-bin -q bdist_wheel --plat-name macosx_10_14_x86_64 --nightly $BUILD_NUMBER\nrm -rf build\npython setup.py --project tensorflow-io-gcs-filesystem --data bazel-bin -q bdist_wheel --plat-name macosx_10_14_x86_64 --nightly $BUILD_NUMBER\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/io"
+            ]
+        }
+    ],
+    "Wheel ${{ matrix.python }} Linux": [
+        {
+            "command": "set -x -e\nmv bazel-bin/tensorflow_io/.bazelrc .\ndocker run -i --rm --user $(id -u):$(id -g) -v /etc/password:/etc/password -v $PWD:/v -w /v --net=host python:${{ matrix.python }}-slim python setup.py --data bazel-bin -q bdist_wheel\nrm -rf build\ndocker run -i --rm --user $(id -u):$(id -g) -v /etc/password:/etc/password -v $PWD:/v -w /v --net=host python:${{ matrix.python }}-slim python setup.py --project tensorflow-io-gcs-filesystem --data bazel-bin -q bdist_wheel\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/io"
+            ]
+        },
+        {
+            "command": "set -x -e\nmv bazel-bin/tensorflow_io/.bazelrc .\ndocker run -i --rm --user $(id -u):$(id -g) -v /etc/password:/etc/password -v $PWD:/v -w /v --net=host python:${{ matrix.python }}-slim python setup.py --data bazel-bin -q bdist_wheel --nightly $BUILD_NUMBER\nrm -rf build\ndocker run -i --rm --user $(id -u):$(id -g) -v /etc/password:/etc/password -v $PWD:/v -w /v --net=host python:${{ matrix.python }}-slim python setup.py --project tensorflow-io-gcs-filesystem --data bazel-bin -q bdist_wheel --nightly $BUILD_NUMBER\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/io"
+            ]
+        }
+    ],
+    "Wheel ${{ matrix.python }} Windows": [
+        {
+            "command": "@echo on\npython --version\npython -m pip install -U wheel setuptools\npython setup.py --data bazel-bin -q bdist_wheel\nrm -rf build\npython setup.py --project tensorflow-io-gcs-filesystem --data bazel-bin -q bdist_wheel\nls -la dist\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/io"
+            ]
+        },
+        {
+            "command": "@echo on\npython --version\npython -m pip install -U wheel setuptools\npython setup.py --data bazel-bin -q bdist_wheel --nightly %BUILD_NUMBER%\nrm -rf build\npython setup.py --project tensorflow-io-gcs-filesystem --data bazel-bin -q bdist_wheel --nightly %BUILD_NUMBER%\nls -la dist\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/io"
+            ]
+        }
+    ],
+    "Run type check": [
+        {
+            "command": "bash tools/run_build.sh source_code_test",
+            "count": 2,
+            "repos": [
+                "tensorflow/addons",
+                "tensorflow/recommenders-addons"
+            ]
+        },
+        {
+            "command": "bash tools/run_build.sh valid_build_files",
+            "count": 2,
+            "repos": [
+                "tensorflow/addons",
+                "tensorflow/recommenders-addons"
+            ]
+        },
+        {
+            "command": "bash tools/run_build.sh clang-format",
+            "count": 2,
+            "repos": [
+                "tensorflow/addons",
+                "tensorflow/recommenders-addons"
+            ]
+        },
+        {
+            "command": "bash tools/run_build.sh check-bazel-format",
+            "count": 2,
+            "repos": [
+                "tensorflow/addons",
+                "tensorflow/recommenders-addons"
+            ]
+        }
+    ],
+    "Check notebook formatting": [
+        {
+            "command": "# Run on all notebooks to prevent upstream change.\necho \"Check formatting with nbfmt:\"\npython3 -m tensorflow_docs.tools.nbfmt --test \\\n    $(find docs/tutorials/ -type f -name *.ipynb)\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/addons"
+            ]
+        },
+        {
+            "command": "# Run on all notebooks to prevent upstream change.\necho \"Check formatting with nbfmt:\"\npython3 -m pip install --upgrade protobuf==4.23.4\npython3 -m tensorflow_docs.tools.nbfmt --test \\\n    $(find docs/tutorials/ -type f -name *.ipynb)\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/recommenders-addons"
+            ]
+        }
+    ],
+    "Lint notebooks": [
+        {
+            "command": "# Run on all notebooks to prevent upstream change.\necho \"Lint check with nblint:\"\npython3 -m tensorflow_docs.tools.nblint \\\n    --arg=repo:tensorflow/addons \\\n    $(find docs/tutorials/ -type f -name *.ipynb ! -path \"docs/tutorials/_template.ipynb\")\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/addons"
+            ]
+        },
+        {
+            "command": "# Run on all notebooks to prevent upstream change.\necho \"Lint check with nblint:\"\npython3 -m pip install --upgrade protobuf==4.23.4\npython3 -m tensorflow_docs.tools.nblint \\\n    --arg=repo:tensorflow/recommenders-addons \\\n    --exclude_lint=tensorflow::button_colab \\\n    --exclude_lint=google::second_person \\\n    --exclude_lint=tensorflow::button_download \\\n    --exclude_lint=tensorflow::button_github \\\n    --exclude_lint=tensorflow::button_website \\\n    $(find docs/tutorials/ -type f -name *.ipynb ! -path \"docs/tutorials/_template.ipynb\")\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/recommenders-addons"
+            ]
+        }
+    ],
+    "Drop a message for codeowners": [
+        {
+            "command": "python .github/workflows/notify_codeowners.py \\\n    --pull-request-id=auto \\\n    --no-dry-run\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/addons"
+            ]
+        },
+        {
+            "command": "python .github/workflows/notify_codeowners.py \\\n    --pull-request-id=auto \\\n    --no-dry-run \\\n    .github/CODEOWNERS\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/recommenders-addons"
+            ]
+        }
+    ],
+    "Build wheels": [
+        {
+            "command": "pip install --default-timeout=1000 -r tools/install_deps/pytest.txt -r tools/install_deps/tensorflow-cpu.txt -r requirements.txt\nbash tools/install_deps/install_bazelisk.sh ./\npython configure.py\nbazel test -k --test_timeout 300,450,1200,3600 --test_output=errors //tensorflow_addons/...\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/addons"
+            ]
+        },
+        {
+            "command": "bash .github/workflows/make_wheel_${OS}_${CPU}.sh",
+            "count": 1,
+            "repos": [
+                "tensorflow/addons"
+            ]
+        },
+        {
+            "command": "pip install --default-timeout=1000 -r tools/install_deps/pytest.txt -r tools/install_deps/tensorflow.txt -r requirements.txt\nsudo apt install -y redis > /dev/null 2> /dev/null\nbash tools/install_deps/install_bazelisk.sh ./\npython -m pip install tensorflow-io\npython -m pip install --upgrade protobuf==4.23.4\npython configure.py\nbazel test --local_ram_resources=4096 -c opt -k --test_timeout 300,450,1200,3600 --test_output=errors //tensorflow_recommenders_addons/...\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/recommenders-addons"
+            ]
+        },
+        {
+            "command": "if [[ \"$TF_VERSION\" =~ ^2\\.(11|12|13|14|15)\\.[0-9]$ ]] ; then\n  export HOROVOD_VERSION=\"0.28.1\"\nfi\nbash .github/workflows/make_wheel_${OS}_${CPU}.sh\n",
+            "count": 2,
+            "repos": [
+                "tensorflow/recommenders-addons"
+            ]
+        }
+    ],
+    "Check that the CODEOWNERS is valid": [
+        {
+            "command": "python .github/workflows/notify_codeowners.py",
+            "count": 1,
+            "repos": [
+                "tensorflow/addons"
+            ]
+        },
+        {
+            "command": "python .github/workflows/notify_codeowners.py .github/CODEOWNERS",
+            "count": 1,
+            "repos": [
+                "tensorflow/recommenders-addons"
+            ]
+        }
+    ],
+    "Install pip requirements": [
+        {
+            "command": "python -m pip install --upgrade pip\npip install -U -r requirements.txt\npip install -U pytest coveralls\npip install -U flake8\npip install -U setuptools wheel\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/graphics"
+            ]
+        },
+        {
+            "command": "python -m pip install --upgrade pip\npip install -U -r requirements.txt\npip install -U pytest\npip install -U setuptools wheel\npip install -U twine\n",
+            "count": 3,
+            "repos": [
+                "tensorflow/graphics"
+            ]
+        }
+    ],
+    "Build pip package and install": [
+        {
+            "command": "python setup.py sdist bdist_wheel\npip install dist/*.whl\n",
+            "count": 2,
+            "repos": [
+                "tensorflow/graphics"
+            ]
+        },
+        {
+            "command": "python setup.py sdist bdist_wheel --nightly\npip install dist/*.whl\n",
+            "count": 2,
+            "repos": [
+                "tensorflow/graphics"
+            ]
+        }
+    ],
+    "Publish to PyPi": [
+        {
+            "command": "twine upload dist/*\n",
+            "count": 2,
+            "repos": [
+                "tensorflow/graphics"
+            ]
+        },
+        {
+            "command": "twine upload --repository testpypi dist/*\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/graphics"
+            ]
+        }
+    ],
+    "Install swift-DEVELOPMENT-SNAPSHOT-2020-12-14-a": [
+        {
+            "command": "curl -sOL https://swift.org/builds/development/xcode/swift-DEVELOPMENT-SNAPSHOT-2020-12-14-a/swift-DEVELOPMENT-SNAPSHOT-2020-12-14-a-osx.pkg\nxattr -dr com.apple.quarantine swift-DEVELOPMENT-SNAPSHOT-2020-12-14-a-osx.pkg\ninstaller -pkg swift-DEVELOPMENT-SNAPSHOT-2020-12-14-a-osx.pkg -target CurrentUserHomeDirectory\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/swift-apis"
+            ]
+        },
+        {
+            "command": "Install-Binary -Url \"https://swift.org/builds/development/windows10/swift-DEVELOPMENT-SNAPSHOT-2020-12-14-a/swift-DEVELOPMENT-SNAPSHOT-2020-12-14-a-windows10.exe\" -Name \"installer.exe\" -ArgumentList (\"-q\")\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/swift-apis"
+            ]
+        }
+    ],
+    "Set Environment Variables": [
+        {
+            "command": "echo \"TOOLCHAINS=...\" > $GITHUB_ENV\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/swift-apis"
+            ]
+        },
+        {
+            "command": "echo \"SDKROOT=C:\\Library\\Developer\\Platforms\\Windows.platform\\Developer\\SDKs\\Windows.sdk\" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append\necho \"DEVELOPER_DIR=C:\\Library\\Developer\" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/swift-apis"
+            ]
+        }
+    ],
+    "Install X10": [
+        {
+            "command": "curl -sL https://artprodeus21.artifacts.visualstudio.com/A8fd008a0-56bc-482c-ba46-67f9425510be/3133d6ab-80a8-4996-ac4f-03df25cd3224/_apis/artifact/cGlwZWxpbmVhcnRpZmFjdDovL2NvbXBuZXJkL3Byb2plY3RJZC8zMTMzZDZhYi04MGE4LTQ5OTYtYWM0Zi0wM2RmMjVjZDMyMjQvYnVpbGRJZC80NTU3NC9hcnRpZmFjdE5hbWUvdGVuc29yZmxvdy1kYXJ3aW4teDY00/content?format=zip -o tensorflow-darwin-x64.zip\nunzip tensorflow-darwin-x64.zip\nmv tensorflow-darwin-x64/Library/tensorflow-2.4.0 ~/Library/\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/swift-apis"
+            ]
+        },
+        {
+            "command": "Invoke-WebRequest -UseBasicParsing -Uri https://artprodeus21.artifacts.visualstudio.com/A8fd008a0-56bc-482c-ba46-67f9425510be/3133d6ab-80a8-4996-ac4f-03df25cd3224/_apis/artifact/cGlwZWxpbmVhcnRpZmFjdDovL2NvbXBuZXJkL3Byb2plY3RJZC8zMTMzZDZhYi04MGE4LTQ5OTYtYWM0Zi0wM2RmMjVjZDMyMjQvYnVpbGRJZC80NTU3NC9hcnRpZmFjdE5hbWUvdGVuc29yZmxvdy13aW5kb3dzLXg2NA2/content?format=zip -OutFile tensorflow-windows-x64.zip\nExpand-Archive -Force -Path tensorflow-windows-x64.zip -DestinationPath C:\\Library\\\nMove-Item C:\\Library\\tensorflow-windows-x64\\Library\\tensorflow-2.4.0 C:\\Library\necho \"C:\\Library\\tensorflow-2.4.0\\usr\\bin\" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/swift-apis"
+            ]
+        }
+    ],
+    "Build project": [
+        {
+            "command": "gcc --version\nmvn -version\nmvn clean install -Pjdk17 -B -U -e -Dlint.skip=true -Dmaven.test.skip=true\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/java"
+            ]
+        },
+        {
+            "command": "gcc --version\nmvn -version\necho \"<settings><servers><server><id>ossrh</id><username>${{ secrets.CI_DEPLOY_USERNAME }}</username><password>${{ secrets.CI_DEPLOY_PASSWORD }}</password></server></servers></settings>\" > $HOME/.m2/settings.xml\nmvn clean install -pl '!tensorflow-framework' -B -U -e -Djavacpp.platform=${{ github.job }} -Djavacpp.platform.extension=${{ matrix.ext }}\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/java"
+            ]
+        },
+        {
+            "command": "clang --version\nmvn -version\necho \"<settings><servers><server><id>ossrh</id><username>${{ secrets.CI_DEPLOY_USERNAME }}</username><password>${{ secrets.CI_DEPLOY_PASSWORD }}</password></server></servers></settings>\" > $HOME/.m2/settings.xml\nmvn clean install -pl '!tensorflow-framework' -B -U -e -Djavacpp.platform=${{ github.job }} -Djavacpp.platform.extension=${{ matrix.ext }}\n",
+            "count": 2,
+            "repos": [
+                "tensorflow/java"
+            ]
+        },
+        {
+            "command": "call \"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Enterprise\\VC\\Auxiliary\\Build\\vcvarsall.bat\" amd64\nset \"PATH=C:\\msys64\\usr\\bin;%PATH%\"\necho Shorten work paths to prevent Bazel from reaching MAX_PATH limit\nmkdir C:\\tmp\nset \"TEST_TMPDIR=C:\\tmp\"\nset \"TMPDIR=C:\\tmp\"\nset \"TEMP=C:\\tmp\"\nset \"TMP=C:\\tmp\"      \nbash --version\ngit --version\ncl\ncall mvn -version\necho ^<settings^>^<servers^>^<server^>^<id^>ossrh^</id^>^<username^>${{ secrets.CI_DEPLOY_USERNAME }}^</username^>^<password^>${{ secrets.CI_DEPLOY_PASSWORD }}^</password^>^</server^>^</servers^>^</settings^> > %USERPROFILE%\\.m2\\settings.xml\nset \"SKIP_EXPORT=true\"\ncall mvn clean install -pl \"!tensorflow-framework\" -B -U -e -Djavacpp.platform=${{ github.job }} -Djavacpp.platform.extension=${{ matrix.ext }}\nif ERRORLEVEL 1 exit /b\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/java"
+            ]
+        },
+        {
+            "command": "java -version\nmvn -version\nmvn clean install -B -U -e -Pdeploying\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/java"
+            ]
+        },
+        {
+            "command": "java -version\nmvn -version\nmvn clean install -B -U -e\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/java-ndarray"
+            ]
+        }
+    ],
+    "Deploy native artifact": [
+        {
+            "command": "mvn -f tensorflow-core/tensorflow-core-native/pom.xml deploy:deploy-file@native-only -B -e -Djavacpp.platform=${{ github.job }} -Djavacpp.platform.extension=${{ matrix.ext }} -Durl=${{ needs.prepare.outputs.repositoryUrl }}",
+            "count": 3,
+            "repos": [
+                "tensorflow/java"
+            ]
+        },
+        {
+            "command": "call mvn -f tensorflow-core/tensorflow-core-native/pom.xml deploy:deploy-file@native-only -B -e -Djavacpp.platform=${{ github.job }} -Djavacpp.platform.extension=${{ matrix.ext }} -Durl=${{ needs.prepare.outputs.repositoryUrl }}\nif ERRORLEVEL 1 exit /b\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/java"
+            ]
+        }
+    ],
+    "Deploy snapshot artifacts": [
+        {
+            "command": "echo \"<settings><servers><server><id>ossrh</id><username>${{ secrets.CI_DEPLOY_USERNAME }}</username><password>${{ secrets.CI_DEPLOY_PASSWORD }}</password></server></servers></settings>\" > $HOME/.m2/settings.xml\nmvn deploy -Pdeploying -B -e -Dmaven.test.skip=true\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/java"
+            ]
+        },
+        {
+            "command": "echo \"<settings><servers><server><id>ossrh</id><username>${{ secrets.CI_DEPLOY_USERNAME }}</username><password>${{ secrets.CI_DEPLOY_PASSWORD }}</password></server></servers></settings>\" > $HOME/.m2/settings.xml\nmvn deploy -B -U -e -Dmaven.test.skip=true\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/java-ndarray"
+            ]
+        }
+    ],
+    "Build package": [
+        {
+            "command": "python setup.py sdist bdist_wheel --project_name tfsim-nightly\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/similarity"
+            ]
+        },
+        {
+            "command": "python setup.py sdist bdist_wheel\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/similarity"
+            ]
+        }
+    ],
+    "Publish package": [
+        {
+            "command": "twine upload -u ${{ secrets.PYPI_NIGHTLY_USERNAME }} -p ${{ secrets.PYPI_NIGHTLY_TOKEN }} dist/* --verbose\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/similarity"
+            ]
+        },
+        {
+            "command": "twine upload -u ${{ secrets.PYPI_USERNAME }} -p ${{ secrets.PYPY_TOKEN }} dist/* --verbose\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/similarity"
+            ]
+        }
+    ],
+    "Comment on PR": [
+        {
+            "command": "curl \\\n  -X POST \\\n  $URL \\\n  -H \"Content-Type: application/json\" \\\n  -H \"Authorization: token $GITHUB_TOKEN\" \\\n  --data '{ \"body\": \"Thank you for your contribution. Your pull request has been accepted according to the TensorFlow Hub Terms of Service at www.tfhub.dev/terms and Google'\\''s Privacy Policy at https://www.google.com/policies/privacy. Your model should appear on tfhub.dev within a day.\" }'\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/tfhub.dev"
+            ]
+        },
+        {
+            "command": "curl \\\n  -X POST \\\n  $URL \\\n  -H \"Content-Type: application/json\" \\\n  -H \"Authorization: token $GITHUB_TOKEN\" \\\n  --data '{ \"body\": \"By opening this pull request, you are agreeing to the TensorFlow Hub Terms of Service at www.tfhub.dev/terms and Google'\\''s Privacy Policy at https://www.google.com/policies/privacy, and your pull request is being reviewed.\" }'\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/tfhub.dev"
+            ]
+        }
+    ],
+    "Checkout the latest code": [
+        {
+            "command": "actions/checkout@v3",
+            "count": 1,
+            "repos": [
+                "tensorflow/model-card-toolkit"
+            ]
+        },
+        {
+            "command": "actions/checkout@v2",
+            "count": 1,
+            "repos": [
+                "tensorflow/tfx-addons"
+            ]
+        }
+    ],
+    "Cache python environment": [
+        {
+            "command": "actions/cache@v3",
+            "count": 1,
+            "repos": [
+                "tensorflow/model-card-toolkit"
+            ]
+        },
+        {
+            "command": "actions/cache@v2",
+            "count": 2,
+            "repos": [
+                "tensorflow/tfx-addons"
+            ]
+        }
+    ],
+    "Run tests": [
+        {
+            "command": "pytest ${{ matrix.tests }}",
+            "count": 1,
+            "repos": [
+                "tensorflow/model-card-toolkit"
+            ]
+        },
+        {
+            "command": "pytest tfx_addons/${{ matrix.project }}",
+            "count": 1,
+            "repos": [
+                "tensorflow/tfx-addons"
+            ]
+        },
+        {
+            "command": "cd examples/${{ matrix.project }}\npython -m pytest .\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/tfx-addons"
+            ]
+        }
+    ],
+    "Run pre-commit checks (pylint/yapf/isort)": [
+        {
+            "command": "pre-commit/action@v3.0.0",
+            "count": 1,
+            "repos": [
+                "tensorflow/model-card-toolkit"
+            ]
+        },
+        {
+            "command": "pre-commit/action@v2.0.3",
+            "count": 1,
+            "repos": [
+                "tensorflow/tfx-addons"
+            ]
+        }
+    ],
+    "Upload files to a GitHub release": [
+        {
+            "command": "svenstaro/upload-release-action@2.6.1",
+            "count": 1,
+            "repos": [
+                "tensorflow/model-card-toolkit"
+            ]
+        },
+        {
+            "command": "svenstaro/upload-release-action@2.2.1",
+            "count": 1,
+            "repos": [
+                "tensorflow/tfx-addons"
+            ]
+        }
+    ],
+    "Install AVH Client for Python": [
+        {
+            "command": "pip install git+https://github.com/ARM-software/avhclient.git@v0.1\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/tflite-micro"
+            ]
+        },
+        {
+            "command": "pip install git+https://github.com/ARM-software/avhclient.git@v0.1.1\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/tflite-micro"
+            ]
+        }
+    ],
+    "Execute test suite on Arm Virtual Hardware at AWS": [
+        {
+            "command": "avhclient -b aws execute --specfile ./tensorflow/lite/micro/tools/github/arm_virtual_hardware/cortex_m_generic_avh.yml\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/tflite-micro"
+            ]
+        },
+        {
+            "command": "avhclient -b aws execute --specfile ./tensorflow/lite/micro/tools/github/arm_virtual_hardware/cortex_m_corstone_300_avh.yml\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/tflite-micro"
+            ]
+        }
+    ],
+    "Fetch results from Arm Virtual Hardware": [
+        {
+            "command": "cat ./tensorflow/lite/micro/tools/github/arm_virtual_hardware/cortex_m_generic.log\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/tflite-micro"
+            ]
+        },
+        {
+            "command": "cat ./tensorflow/lite/micro/tools/github/arm_virtual_hardware/corstone300.log\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/tflite-micro"
+            ]
+        }
+    ],
+    "Sync the code": [
+        {
+            "command": "./ci/sync_from_upstream_tf.sh\ngit config --local user.name \"TFLM-bot\"\ngit config --local user.email \"tflm-github-bot@google.com\"\ngit add *\n\nif [[ $(git status --porcelain | wc -l) == 0 ]]; then\n  echo \"no changes\"\nelse\n  git commit -m \"Sync from upstream TF.\"\nfi\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/tflite-micro"
+            ]
+        },
+        {
+            "command": "pip3 install six Pillow Wave\n./scripts/sync_from_tflite_micro.sh\ngit config --local user.name \"TFLM-bot\"\ngit config --local user.email \"tflm-github-bot@google.com\"\ngit add *\n\nif [[ $(git status --porcelain | wc -l) == 0 ]]; then\n  echo \"no changes\"\nelse\n  git commit -m \"Sync from tflite-micro.\"\nfi\n",
+            "count": 1,
+            "repos": [
+                "tensorflow/tflite-micro-arduino-examples"
+            ]
+        }
+    ]
+}

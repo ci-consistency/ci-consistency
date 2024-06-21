@@ -1,0 +1,739 @@
+{
+    "Step 1": [
+        {
+            "command": "actions/checkout@v3",
+            "count": 41,
+            "repos": [
+                "Stability-AI/gpt-neox",
+                "Stability-AI/api-interfaces",
+                "Stability-AI/diffusers",
+                "Stability-AI/stability-sdk",
+                "Stability-AI/rest-api-support",
+                "Stability-AI/lm-evaluation-harness",
+                "Stability-AI/truss",
+                "Stability-AI/generative-models",
+                "Stability-AI/devcontainer-features",
+                "Stability-AI/DeepSpeed"
+            ]
+        },
+        {
+            "command": "actions/checkout@v2",
+            "count": 6,
+            "repos": [
+                "Stability-AI/gpt-neox",
+                "Stability-AI/diffusers",
+                "Stability-AI/k-diffusion",
+                "Stability-AI/truss"
+            ]
+        },
+        {
+            "command": "actions/checkout@master",
+            "count": 1,
+            "repos": [
+                "Stability-AI/truss"
+            ]
+        }
+    ],
+    "Docker meta": [
+        {
+            "command": "crazy-max/ghaction-docker-meta@v1",
+            "count": 1,
+            "repos": [
+                "Stability-AI/gpt-neox"
+            ]
+        },
+        {
+            "command": "docker/metadata-action@v3",
+            "count": 2,
+            "repos": [
+                "Stability-AI/truss"
+            ]
+        }
+    ],
+    "Build and push": [
+        {
+            "command": "docker/build-push-action@v2",
+            "count": 1,
+            "repos": [
+                "Stability-AI/gpt-neox"
+            ]
+        },
+        {
+            "command": "docker/build-push-action@v3",
+            "count": 1,
+            "repos": [
+                "Stability-AI/diffusers"
+            ]
+        }
+    ],
+    "Step 2": [
+        {
+            "command": "actions/setup-python@v4",
+            "count": 2,
+            "repos": [
+                "Stability-AI/gpt-neox",
+                "Stability-AI/lm-evaluation-harness"
+            ]
+        },
+        {
+            "command": "rm megatron/__init__.py\npip install shortuuid\nrm megatron/neox_arguments/__init__.py\npython configs/gen_docs.py\ngit config user.name github-actions\ngit config user.email github-actions@github.com\ngit add configs/neox_arguments.md\ngit commit -m \"Update NeoXArgs docs automatically\"\ngit push\n",
+            "count": 1,
+            "repos": [
+                "Stability-AI/gpt-neox"
+            ]
+        },
+        {
+            "command": "bufbuild/buf-setup-action@v1",
+            "count": 1,
+            "repos": [
+                "Stability-AI/api-interfaces"
+            ]
+        },
+        {
+            "command": "actions/checkout@v3",
+            "count": 2,
+            "repos": [
+                "Stability-AI/api-interfaces",
+                "Stability-AI/rest-api-support"
+            ]
+        },
+        {
+            "command": "actions-ecosystem/action-regex-match@v2",
+            "count": 1,
+            "repos": [
+                "Stability-AI/k-diffusion"
+            ]
+        },
+        {
+            "command": "curl -sSL https://install.python-poetry.org | python3 -",
+            "count": 2,
+            "repos": [
+                "Stability-AI/truss"
+            ]
+        },
+        {
+            "command": "./.github/actions/setup-python/",
+            "count": 4,
+            "repos": [
+                "Stability-AI/truss"
+            ]
+        },
+        {
+            "command": "gaurav-nelson/github-action-markdown-link-check@v1",
+            "count": 1,
+            "repos": [
+                "Stability-AI/truss"
+            ]
+        },
+        {
+            "command": "NEW_VERSION=v${{ needs.detect-version-changed.outputs.new_version }}\ngit config --global user.name \"Github action\"\ngit config --global user.email \"github.action@baseten.co\"\n\ngit tag -a $NEW_VERSION -m \"Release $NEW_VERSION\"\ngit push origin $NEW_VERSION\n",
+            "count": 1,
+            "repos": [
+                "Stability-AI/truss"
+            ]
+        },
+        {
+            "command": "./.github/workflows/setup-venv",
+            "count": 16,
+            "repos": [
+                "Stability-AI/DeepSpeed"
+            ]
+        }
+    ],
+    "Step 3": [
+        {
+            "command": "pre-commit/action@v2.0.3",
+            "count": 2,
+            "repos": [
+                "Stability-AI/gpt-neox",
+                "Stability-AI/lm-evaluation-harness"
+            ]
+        },
+        {
+            "command": "bufbuild/buf-breaking-action@v1",
+            "count": 1,
+            "repos": [
+                "Stability-AI/api-interfaces"
+            ]
+        },
+        {
+            "command": "docker/setup-buildx-action@v2",
+            "count": 1,
+            "repos": [
+                "Stability-AI/api-interfaces"
+            ]
+        },
+        {
+            "command": "actions/setup-node@v3",
+            "count": 1,
+            "repos": [
+                "Stability-AI/rest-api-support"
+            ]
+        },
+        {
+            "command": "VERSION=$(poetry version | awk '{print $2}')\necho \"version=$VERSION\" >> $GITHUB_OUTPUT\n",
+            "count": 1,
+            "repos": [
+                "Stability-AI/truss"
+            ]
+        },
+        {
+            "command": "poetry install",
+            "count": 4,
+            "repos": [
+                "Stability-AI/truss"
+            ]
+        },
+        {
+            "command": "NEW_VERSION=$(poetry version | awk '{print $2}')\nNEW_BASE_IMAGE_VERSION=$(grep TRUSS_BASE_IMAGE_VERSION_TAG truss/contexts/image_builder/util.py | cut -d'=' -f2 | cut -d'\"' -f2)\n\ngit checkout HEAD^1 -- pyproject.toml truss/contexts/image_builder/util.py\nOLD_VERSION=$(poetry version | awk '{print $2}')\nOLD_BASE_IMAGE_VERSION=$(grep TRUSS_BASE_IMAGE_VERSION_TAG truss/contexts/image_builder/util.py | cut -d'=' -f2 | cut -d'\"' -f2)\n\n# Put back things into place\ngit checkout HEAD -- pyproject.toml truss/contexts/image_builder/util.py\n\necho \"new_version=$NEW_VERSION\" >> $GITHUB_OUTPUT\necho \"new_base_image_version=$NEW_BASE_IMAGE_VERSION\" >> $GITHUB_OUTPUT\n\nif [[ \"$NEW_VERSION\" != \"$OLD_VERSION\" ]]; then\n  echo \"version_changed=true\" >> $GITHUB_OUTPUT\n  if [[ \"$NEW_VERSION\" == *\"dev\"* ]]; then\n    echo \"release_version=false\" >> $GITHUB_OUTPUT\n  else\n    echo \"release_version=true\" >> $GITHUB_OUTPUT\n    if [[ \"$NEW_VERSION\" == *\"rc\"* ]]; then\n      echo \"is_prerelease_version=true\" >> $GITHUB_OUTPUT\n    else\n      echo \"is_prerelease_version=false\" >> $GITHUB_OUTPUT\n    fi\n  fi\nelse\n  echo \"version_changed=false\" >> $GITHUB_OUTPUT\nfi\n\nif [[ \"$NEW_BASE_IMAGE_VERSION\" != \"$OLD_BASE_IMAGE_VERSION\" ]]; then\n  echo \"build_base_images=true\" >> $GITHUB_OUTPUT\nelse\n  echo \"build_base_images=false\" >> $GITHUB_OUTPUT\nfi\n",
+            "count": 1,
+            "repos": [
+                "Stability-AI/truss"
+            ]
+        },
+        {
+            "command": "actions/checkout@v3",
+            "count": 1,
+            "repos": [
+                "Stability-AI/truss"
+            ]
+        },
+        {
+            "command": "./.github/actions/setup-python/",
+            "count": 1,
+            "repos": [
+                "Stability-AI/truss"
+            ]
+        },
+        {
+            "command": "psf/black@stable",
+            "count": 1,
+            "repos": [
+                "Stability-AI/generative-models"
+            ]
+        }
+    ],
+    "Step 4": [
+        {
+            "command": "docker/build-push-action@v3",
+            "count": 1,
+            "repos": [
+                "Stability-AI/api-interfaces"
+            ]
+        },
+        {
+            "command": "poetry run pytest truss/tests -m 'integration' --splits 5 --group ${{ matrix.split_group }}",
+            "count": 1,
+            "repos": [
+                "Stability-AI/truss"
+            ]
+        },
+        {
+            "command": "poetry run pre-commit run --all-files",
+            "count": 1,
+            "repos": [
+                "Stability-AI/truss"
+            ]
+        },
+        {
+            "command": "./.github/actions/setup-python/",
+            "count": 1,
+            "repos": [
+                "Stability-AI/truss"
+            ]
+        },
+        {
+            "command": "poetry run pytest truss/tests  -m 'integration' --splits 5 --group ${{ matrix.split_group }}",
+            "count": 1,
+            "repos": [
+                "Stability-AI/truss"
+            ]
+        }
+    ],
+    "Step 5": [
+        {
+            "command": "actions/upload-artifact@v3",
+            "count": 1,
+            "repos": [
+                "Stability-AI/api-interfaces"
+            ]
+        },
+        {
+            "command": "poetry run isort **/*.py --check-only",
+            "count": 1,
+            "repos": [
+                "Stability-AI/truss"
+            ]
+        },
+        {
+            "command": "poetry install",
+            "count": 1,
+            "repos": [
+                "Stability-AI/truss"
+            ]
+        }
+    ],
+    "Login to Docker Hub": [
+        {
+            "command": "docker/login-action@v2",
+            "count": 1,
+            "repos": [
+                "Stability-AI/diffusers"
+            ]
+        },
+        {
+            "command": "docker/login-action@v1",
+            "count": 3,
+            "repos": [
+                "Stability-AI/truss"
+            ]
+        }
+    ],
+    "Install dependencies": [
+        {
+            "command": "python -m pip install -e .[quality,test]\npython -m pip install -U git+https://github.com/huggingface/transformers\npython -m pip install git+https://github.com/huggingface/accelerate\n",
+            "count": 2,
+            "repos": [
+                "Stability-AI/diffusers"
+            ]
+        },
+        {
+            "command": "${CONDA_RUN} python -m pip install --upgrade pip\n${CONDA_RUN} python -m pip install -e .[quality,test]\n${CONDA_RUN} python -m pip install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cpu\n${CONDA_RUN} python -m pip install git+https://github.com/huggingface/accelerate\n",
+            "count": 1,
+            "repos": [
+                "Stability-AI/diffusers"
+            ]
+        },
+        {
+            "command": "python -m pip install --upgrade pip\npip install .[quality]\n",
+            "count": 2,
+            "repos": [
+                "Stability-AI/diffusers"
+            ]
+        },
+        {
+            "command": "apt-get update && apt-get install libsndfile1-dev -y\npython -m pip install -e .[quality,test]\npython -m pip install -U git+https://github.com/huggingface/transformers\npython -m pip install git+https://github.com/huggingface/accelerate\n",
+            "count": 2,
+            "repos": [
+                "Stability-AI/diffusers"
+            ]
+        },
+        {
+            "command": "${CONDA_RUN} python -m pip install --upgrade pip\n${CONDA_RUN} python -m pip install -e .[quality,test]\n${CONDA_RUN} python -m pip install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cpu\n${CONDA_RUN} python -m pip install git+https://github.com/huggingface/accelerate\n${CONDA_RUN} python -m pip install -U git+https://github.com/huggingface/transformers\n",
+            "count": 2,
+            "repos": [
+                "Stability-AI/diffusers"
+            ]
+        },
+        {
+            "command": "python -m pip install -e .[quality,test,training]\npython -m pip install git+https://github.com/huggingface/accelerate\npython -m pip install -U git+https://github.com/huggingface/transformers\n",
+            "count": 1,
+            "repos": [
+                "Stability-AI/diffusers"
+            ]
+        },
+        {
+            "command": "python -m pip install --upgrade pip\npip install setuptools wheel twine\n",
+            "count": 1,
+            "repos": [
+                "Stability-AI/k-diffusion"
+            ]
+        },
+        {
+            "command": "python -m pip install --upgrade pip\npip install flake8 pytest pytest-cov\npip install -e .[dev,multilingual]\n# Install optional git dependencies\npip install bleurt@https://github.com/google-research/bleurt/archive/b610120347ef22b494b6d69b4316e303f5932516.zip#egg=bleurt\nif [ -f requirements.txt ]; then pip install -r requirements.txt; fi\n",
+            "count": 1,
+            "repos": [
+                "Stability-AI/lm-evaluation-harness"
+            ]
+        }
+    ],
+    "Environment": [
+        {
+            "command": "python utils/print_env.py\n",
+            "count": 5,
+            "repos": [
+                "Stability-AI/diffusers"
+            ]
+        },
+        {
+            "command": "${CONDA_RUN} python utils/print_env.py\n",
+            "count": 3,
+            "repos": [
+                "Stability-AI/diffusers"
+            ]
+        }
+    ],
+    "Failure short reports": [
+        {
+            "command": "cat reports/tests_${{ matrix.config.report }}_failures_short.txt",
+            "count": 4,
+            "repos": [
+                "Stability-AI/diffusers"
+            ]
+        },
+        {
+            "command": "cat reports/tests_torch_mps_failures_short.txt",
+            "count": 3,
+            "repos": [
+                "Stability-AI/diffusers"
+            ]
+        },
+        {
+            "command": "cat reports/examples_torch_cuda_failures_short.txt",
+            "count": 1,
+            "repos": [
+                "Stability-AI/diffusers"
+            ]
+        }
+    ],
+    "Set up Python": [
+        {
+            "command": "actions/setup-python@v4",
+            "count": 2,
+            "repos": [
+                "Stability-AI/diffusers"
+            ]
+        },
+        {
+            "command": "actions/setup-python@v2",
+            "count": 2,
+            "repos": [
+                "Stability-AI/stability-sdk",
+                "Stability-AI/k-diffusion"
+            ]
+        }
+    ],
+    "Check quality": [
+        {
+            "command": "black --check examples tests src utils scripts\nruff examples tests src utils scripts\ndoc-builder style src/diffusers docs/source --max_len 119 --check_only --path_to_docs docs/source\n",
+            "count": 1,
+            "repos": [
+                "Stability-AI/diffusers"
+            ]
+        },
+        {
+            "command": "python utils/check_copies.py\npython utils/check_dummies.py\n",
+            "count": 1,
+            "repos": [
+                "Stability-AI/diffusers"
+            ]
+        }
+    ],
+    "Publish to PyPI": [
+        {
+            "command": "pypa/gh-action-pypi-publish@release/v1",
+            "count": 1,
+            "repos": [
+                "Stability-AI/stability-sdk"
+            ]
+        },
+        {
+            "command": "poetry publish -u \"${{ secrets.PYPI_USERNAME }}\" -p \"${{ secrets.PYPI_PASSWORD }}\"",
+            "count": 1,
+            "repos": [
+                "Stability-AI/truss"
+            ]
+        }
+    ],
+    "Step 6": [
+        {
+            "command": "poetry run flake8 truss",
+            "count": 1,
+            "repos": [
+                "Stability-AI/truss"
+            ]
+        },
+        {
+            "command": "poetry run bin/generate_base_images.py \\\n  --use-gpu ${{ matrix.use_gpu }}  \\\n  --python-version ${{ matrix.python_version }} \\\n  --job-type ${{ matrix.job_type }} \\\n  --version-tag ${{ needs.detect-version-changed.outputs.new_base_image_version }} \\\n  --skip-login --push\n",
+            "count": 1,
+            "repos": [
+                "Stability-AI/truss"
+            ]
+        }
+    ],
+    "Install pytorch": [
+        {
+            "command": "pip install --cache-dir $TORCH_CACHE torch==1.13.1 torchvision --extra-index-url https://download.pytorch.org/whl/rocm5.1.1\npython -c \"import torch; print('torch:', torch.__version__, torch)\"\npython -c \"import torch; print('CUDA available:', torch.cuda.is_available())\"\n",
+            "count": 1,
+            "repos": [
+                "Stability-AI/DeepSpeed"
+            ]
+        },
+        {
+            "command": "pip install -U --cache-dir $TORCH_CACHE torch torchvision --extra-index-url https://download.pytorch.org/whl/rocm5.4.2\npython -c \"import torch; print('torch:', torch.__version__, torch)\"\npython -c \"import torch; print('CUDA available:', torch.cuda.is_available())\"\n",
+            "count": 1,
+            "repos": [
+                "Stability-AI/DeepSpeed"
+            ]
+        },
+        {
+            "command": "pip install -U --cache-dir $TORCH_CACHE torch torchvision --extra-index-url https://download.pytorch.org/whl/cu111\npython -c \"import torch; print('torch:', torch.__version__, torch)\"\npython -c \"import torch; print('CUDA available:', torch.cuda.is_available())\"\n",
+            "count": 1,
+            "repos": [
+                "Stability-AI/DeepSpeed"
+            ]
+        },
+        {
+            "command": "pip3 install -U --cache-dir $TORCH_CACHE torch\npython -c \"import torch; print('torch:', torch.__version__, torch)\"\npython -c \"import torch; print('CUDA available:', torch.cuda.is_available())\"\n",
+            "count": 2,
+            "repos": [
+                "Stability-AI/DeepSpeed"
+            ]
+        },
+        {
+            "command": "pip install -U --cache-dir $TORCH_CACHE torch==1.13.1 torchvision --extra-index-url https://download.pytorch.org/whl/cu116\npython -c \"import torch; print('torch:', torch.__version__, torch)\"\npython -c \"import torch; print('CUDA available:', torch.cuda.is_available())\"\n",
+            "count": 3,
+            "repos": [
+                "Stability-AI/DeepSpeed"
+            ]
+        },
+        {
+            "command": "pip install -U --cache-dir $TORCH_CACHE torch torchvision --extra-index-url https://download.pytorch.org/whl/cu116\npython -c \"import torch; print('torch:', torch.__version__, torch)\"\npython -c \"import torch; print('CUDA available:', torch.cuda.is_available())\"\n",
+            "count": 2,
+            "repos": [
+                "Stability-AI/DeepSpeed"
+            ]
+        },
+        {
+            "command": "pip install torch==1.12.0+cpu torchvision==0.13.0+cpu torchaudio==0.12.0 --extra-index-url https://download.pytorch.org/whl/cpu\npython -c \"import torch; print('torch:', torch.__version__, torch)\"\npython -c \"import torch; print('CUDA available:', torch.cuda.is_available())\"\n",
+            "count": 1,
+            "repos": [
+                "Stability-AI/DeepSpeed"
+            ]
+        },
+        {
+            "command": "pip install --pre torch torchvision --extra-index-url https://download.pytorch.org/whl/nightly/cu116\npython -c \"import torch; print('torch:', torch.__version__, torch)\"\npython -c \"import torch; print('CUDA available:', torch.cuda.is_available())\"\n",
+            "count": 1,
+            "repos": [
+                "Stability-AI/DeepSpeed"
+            ]
+        },
+        {
+            "command": "pip install -U --cache-dir $TORCH_CACHE torch==1.10.0+cu111 torchvision==0.11.0+cu111 -f https://download.pytorch.org/whl/torch_stable.html\npython -c \"import torch; print('torch:', torch.__version__, torch)\"\npython -c \"import torch; print('CUDA available:', torch.cuda.is_available())\"\n",
+            "count": 2,
+            "repos": [
+                "Stability-AI/DeepSpeed"
+            ]
+        },
+        {
+            "command": "# use the same pytorch version as transformers CI\n  pip install -U --cache-dir $TORCH_CACHE torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu116\npython -c \"import torch; print('torch:', torch.__version__, torch)\"\npython -c \"import torch; print('CUDA available:', torch.cuda.is_available())\"\n",
+            "count": 1,
+            "repos": [
+                "Stability-AI/DeepSpeed"
+            ]
+        }
+    ],
+    "Install transformers": [
+        {
+            "command": "git clone https://github.com/huggingface/transformers\ncd transformers\n# if needed switch to the last known good SHA until transformers@master is fixed\n# git checkout 1cc453d33\ngit rev-parse --short HEAD\npip install .\n",
+            "count": 8,
+            "repos": [
+                "Stability-AI/DeepSpeed"
+            ]
+        },
+        {
+            "command": "git clone https://github.com/huggingface/transformers\ncd transformers\ngit rev-parse --short HEAD\npip install .\n",
+            "count": 2,
+            "repos": [
+                "Stability-AI/DeepSpeed"
+            ]
+        },
+        {
+            "command": "git clone https://github.com/huggingface/transformers\ncd transformers\ngit rev-parse --short HEAD\npython -m pip install .\n",
+            "count": 1,
+            "repos": [
+                "Stability-AI/DeepSpeed"
+            ]
+        },
+        {
+            "command": "git clone https://github.com/huggingface/transformers\ncd transformers\n# if needed switch to the last known good SHA until transformers@master is fixed\ngit checkout e7e9261a2\ngit rev-parse --short HEAD\npip install .\n",
+            "count": 1,
+            "repos": [
+                "Stability-AI/DeepSpeed"
+            ]
+        }
+    ],
+    "Install deepspeed": [
+        {
+            "command": "pip install .[dev,1bit,autotuning]\n#python -c \"from deepspeed.env_report import cli_main; cli_main()\"\nds_report\n",
+            "count": 2,
+            "repos": [
+                "Stability-AI/DeepSpeed"
+            ]
+        },
+        {
+            "command": "# check why the host does not have AVX2 support\npip install .[dev,1bit,autotuning,inf]\nds_report\n",
+            "count": 1,
+            "repos": [
+                "Stability-AI/DeepSpeed"
+            ]
+        },
+        {
+            "command": "pip install .[dev,autotuning,triton]\nds_report\n",
+            "count": 1,
+            "repos": [
+                "Stability-AI/DeepSpeed"
+            ]
+        },
+        {
+            "command": "pip install .[dev,autotuning]\nds_report\n",
+            "count": 4,
+            "repos": [
+                "Stability-AI/DeepSpeed"
+            ]
+        },
+        {
+            "command": "pip install .[dev]\nds_report\n",
+            "count": 3,
+            "repos": [
+                "Stability-AI/DeepSpeed"
+            ]
+        },
+        {
+            "command": "python -m pip install docutils==0.18.1 jinja2==3.0 urllib3==1.26.11 ninja\npython -m pip install .[dev,1bit,autotuning]\nds_report\n",
+            "count": 1,
+            "repos": [
+                "Stability-AI/DeepSpeed"
+            ]
+        },
+        {
+            "command": "pip install .[dev,1bit,autotuning,inf,triton]\nds_report\n",
+            "count": 1,
+            "repos": [
+                "Stability-AI/DeepSpeed"
+            ]
+        },
+        {
+            "command": "pip install .[dev,1bit,autotuning,inf]\nds_report\n",
+            "count": 1,
+            "repos": [
+                "Stability-AI/DeepSpeed"
+            ]
+        },
+        {
+            "command": "pip install .[dev,1bit,autotuning]\nds_report\n",
+            "count": 2,
+            "repos": [
+                "Stability-AI/DeepSpeed"
+            ]
+        },
+        {
+            "command": "pip install .[dev,1bit,autotuning] --no-build-isolation\nds_report\n",
+            "count": 2,
+            "repos": [
+                "Stability-AI/DeepSpeed"
+            ]
+        },
+        {
+            "command": "pip3 install .\n",
+            "count": 1,
+            "repos": [
+                "Stability-AI/DeepSpeed"
+            ]
+        }
+    ],
+    "Python environment": [
+        {
+            "command": "pip list\n",
+            "count": 16,
+            "repos": [
+                "Stability-AI/DeepSpeed"
+            ]
+        },
+        {
+            "command": "python -m pip list\n",
+            "count": 1,
+            "repos": [
+                "Stability-AI/DeepSpeed"
+            ]
+        }
+    ],
+    "Unit tests": [
+        {
+            "command": "unset TORCH_CUDA_ARCH_LIST # only jit compile for current arch\ncd tests\npytest $PYTEST_OPTS -n 4 --verbose unit/\npytest $PYTEST_OPTS -m 'sequential' unit/\n",
+            "count": 2,
+            "repos": [
+                "Stability-AI/DeepSpeed"
+            ]
+        },
+        {
+            "command": "source oneCCL/build/_install/env/setvars.sh\nunset TORCH_CUDA_ARCH_LIST # only jit compile for current arch\ncd tests\nTRANSFORMERS_CACHE=~/tmp/transformers_cache/ TORCH_EXTENSIONS_DIR=./torch-extensions pytest -m 'seq_inference' unit/\nTRANSFORMERS_CACHE=~/tmp/transformers_cache/ TORCH_EXTENSIONS_DIR=./torch-extensions pytest -m 'inference_ops' -m 'inference' unit/\n",
+            "count": 1,
+            "repos": [
+                "Stability-AI/DeepSpeed"
+            ]
+        },
+        {
+            "command": "unset TORCH_CUDA_ARCH_LIST # only jit compile for current arch\ncd tests\npython -m pytest $PYTEST_OPTS -n 4  unit/ --torch_ver=\"2.0\" --cuda_ver=\"12\"\npython -m pytest $PYTEST_OPTS -m 'sequential' unit/ --torch_ver=\"2.0\" --cuda_ver=\"12\"\n",
+            "count": 1,
+            "repos": [
+                "Stability-AI/DeepSpeed"
+            ]
+        },
+        {
+            "command": "unset TORCH_CUDA_ARCH_LIST # only jit compile for current arch\ncd tests\ncoverage run --concurrency=multiprocessing -m pytest $PYTEST_OPTS -m 'seq_inference' unit/ --torch_ver=\"1.13\" --cuda_ver=\"11.6\"\ncoverage run --concurrency=multiprocessing -m pytest $PYTEST_OPTS -m 'inference_ops' unit/ --torch_ver=\"1.13\" --cuda_ver=\"11.6\"\ncoverage run --concurrency=multiprocessing -m pytest $PYTEST_OPTS --forked -n 4 -m 'inference' unit/ --torch_ver=\"1.13\" --cuda_ver=\"11.6\"\n",
+            "count": 1,
+            "repos": [
+                "Stability-AI/DeepSpeed"
+            ]
+        },
+        {
+            "command": "unset TORCH_CUDA_ARCH_LIST # only jit compile for current arch\ncd tests\npytest $PYTEST_OPTS --forked -m 'nightly' unit/ --torch_ver=\"1.13\" --cuda_ver=\"11.6\"\n",
+            "count": 1,
+            "repos": [
+                "Stability-AI/DeepSpeed"
+            ]
+        },
+        {
+            "command": "unset TORCH_CUDA_ARCH_LIST # only jit compile for current arch\ncd tests\nTRANSFORMERS_CACHE=/tmp/transformers_cache/ pytest $PYTEST_OPTS -n 4 unit/ --torch_ver=\"1.12\"\nTRANSFORMERS_CACHE=/tmp/transformers_cache/ pytest $PYTEST_OPTS -m 'sequential' unit/ --torch_ver=\"1.12\"\n",
+            "count": 1,
+            "repos": [
+                "Stability-AI/DeepSpeed"
+            ]
+        },
+        {
+            "command": "unset TORCH_CUDA_ARCH_LIST # only jit compile for current arch\ncd tests\ncoverage run --concurrency=multiprocessing -m pytest $PYTEST_OPTS --forked -n 4 unit/ --torch_ver=\"2.0\" --cuda_ver=\"11.7\"\ncoverage run --concurrency=multiprocessing -m pytest $PYTEST_OPTS --forked -m 'sequential' unit/ --torch_ver=\"2.0\" --cuda_ver=\"11.7\"\n",
+            "count": 1,
+            "repos": [
+                "Stability-AI/DeepSpeed"
+            ]
+        },
+        {
+            "command": "unset TORCH_CUDA_ARCH_LIST # only jit compile for current arch\ncd tests\npytest $PYTEST_OPTS --forked -n 4 unit/\npytest $PYTEST_OPTS --forked -m 'sequential' unit/\n",
+            "count": 1,
+            "repos": [
+                "Stability-AI/DeepSpeed"
+            ]
+        },
+        {
+            "command": "unset TORCH_CUDA_ARCH_LIST # only jit compile for current arch\ncd tests\npytest $PYTEST_OPTS --forked -n 4 unit/ --torch_ver=\"1.10\" --cuda_ver=\"11.1\"\n",
+            "count": 1,
+            "repos": [
+                "Stability-AI/DeepSpeed"
+            ]
+        },
+        {
+            "command": "unset TORCH_CUDA_ARCH_LIST # only jit compile for current arch\ncd tests\npytest $PYTEST_OPTS --forked -n 4  unit/ --torch_ver=\"1.10\" --cuda_ver=\"11\"\npytest $PYTEST_OPTS --forked -m 'sequential' unit/ --torch_ver=\"1.10\" --cuda_ver=\"11\"\n",
+            "count": 1,
+            "repos": [
+                "Stability-AI/DeepSpeed"
+            ]
+        }
+    ],
+    "environment": [
+        {
+            "command": "which python\npython --version\n",
+            "count": 2,
+            "repos": [
+                "Stability-AI/DeepSpeed"
+            ]
+        },
+        {
+            "command": "which python\npython --version\npython -c \"import torch; print('torch:', torch.__version__, torch)\"\n#python -c \"import torch; print('CUDA available:', torch.cuda.is_available())\"\n",
+            "count": 1,
+            "repos": [
+                "Stability-AI/DeepSpeed"
+            ]
+        }
+    ]
+}

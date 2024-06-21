@@ -1,0 +1,501 @@
+{
+    "Step 1": [
+        {
+            "command": "actions/checkout@v3",
+            "count": 7,
+            "repos": [
+                "android/testing-samples",
+                "android/performance-samples",
+                "android/sunflower",
+                "android/snippets",
+                "android/android-dev-challenge-compose"
+            ]
+        },
+        {
+            "command": "actions/checkout@v2",
+            "count": 39,
+            "repos": [
+                "android/testing-samples",
+                "android/location-samples",
+                "android/uamp",
+                "android/ndk-samples",
+                "android/play-billing-samples",
+                "android/architecture-samples",
+                "android/codelab-constraint-layout",
+                "android/architecture-components-samples",
+                "android/codelab-android-lifecycles",
+                "android/android-studio-poet",
+                "android/codelab-android-room-with-a-view",
+                "android/databinding-samples",
+                "android/sunflower",
+                "android/codelab-kotlin-coroutines",
+                "android/storage-samples",
+                "android/codelab-android-direct-share",
+                "android/camera-samples",
+                "android/security-samples",
+                "android/renderscript-samples",
+                "android/animation-samples",
+                "android/graphics-samples",
+                "android/enterprise-samples",
+                "android/fit-samples",
+                "android/identity-samples",
+                "android/user-interface-samples",
+                "android/input-samples",
+                "android/connectivity-samples",
+                "android/views-widgets-samples",
+                "android/app-bundle-samples",
+                "android/media-samples",
+                "android/permissions-samples",
+                "android/project-replicator",
+                "android/codelab-android-datastore",
+                "android/car-samples",
+                "android/codelab-handling-back-navigation"
+            ]
+        },
+        {
+            "command": "actions/checkout@v1",
+            "count": 9,
+            "repos": [
+                "android/uamp",
+                "android/codelab-android-room-with-a-view",
+                "android/storage-samples",
+                "android/animation-samples",
+                "android/connectivity-samples",
+                "android/media-samples",
+                "android/permissions-samples",
+                "android/trackr",
+                "android/codelab-handling-back-navigation"
+            ]
+        },
+        {
+            "command": "actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332",
+            "count": 1,
+            "repos": [
+                "android/wear-os-samples"
+            ]
+        },
+        {
+            "command": "actions/checkout@v4",
+            "count": 3,
+            "repos": [
+                "android/compose-samples"
+            ]
+        }
+    ],
+    "Step 2": [
+        {
+            "command": "git config user.name github-actions\ngit config user.email github-actions@github.com\ngit merge origin/main\ngit push\n",
+            "count": 29,
+            "repos": [
+                "android/testing-samples",
+                "android/location-samples",
+                "android/performance-samples",
+                "android/uamp",
+                "android/play-billing-samples",
+                "android/architecture-samples",
+                "android/architecture-components-samples",
+                "android/databinding-samples",
+                "android/sunflower",
+                "android/storage-samples",
+                "android/camera-samples",
+                "android/wear-os-samples",
+                "android/security-samples",
+                "android/renderscript-samples",
+                "android/animation-samples",
+                "android/graphics-samples",
+                "android/enterprise-samples",
+                "android/fit-samples",
+                "android/identity-samples",
+                "android/user-interface-samples",
+                "android/input-samples",
+                "android/connectivity-samples",
+                "android/views-widgets-samples",
+                "android/app-bundle-samples",
+                "android/media-samples",
+                "android/permissions-samples",
+                "android/compose-samples",
+                "android/car-samples",
+                "android/codelab-handling-back-navigation"
+            ]
+        },
+        {
+            "command": "gradle/wrapper-validation-action@v1",
+            "count": 1,
+            "repos": [
+                "android/testing-samples"
+            ]
+        },
+        {
+            "command": "dorny/paths-filter@v2",
+            "count": 3,
+            "repos": [
+                "android/performance-samples"
+            ]
+        },
+        {
+            "command": "actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b",
+            "count": 1,
+            "repos": [
+                "android/cose-lib"
+            ]
+        }
+    ],
+    "Checkout": [
+        {
+            "command": "actions/checkout@v3",
+            "count": 6,
+            "repos": [
+                "android/performance-samples"
+            ]
+        },
+        {
+            "command": "actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332",
+            "count": 10,
+            "repos": [
+                "android/wear-os-samples"
+            ]
+        },
+        {
+            "command": "actions/checkout@v4",
+            "count": 15,
+            "repos": [
+                "android/tv-samples",
+                "android/compose-samples",
+                "android/health-samples"
+            ]
+        }
+    ],
+    "Build Macrobenchmark Sample": [
+        {
+            "command": "eskatos/gradle-command-action@v1",
+            "count": 1,
+            "repos": [
+                "android/performance-samples"
+            ]
+        },
+        {
+            "command": "./gradlew assemble \\\n  -x :macrobenchmark:pixel6Api31NonMinifiedReleaseAndroidTest \\\n  -x :macrobenchmark:collectNonMinifiedReleaseBaselineProfile \\\n  -Pandroidx.benchmark.enabledRules=BaselineProfile \\\n  -Pandroid.testoptions.manageddevices.emulator.gpu=\"swiftshader_indirect\" \\\n  -Pandroid.experimental.testOptions.managedDevices.setupTimeoutMinutes=180 \\\n  -Pandroid.experimental.androidTest.numManagedDeviceShards=1 \\\n  -Pandroid.experimental.testOptions.managedDevices.maxConcurrentDevices=1\n",
+            "count": 1,
+            "repos": [
+                "android/performance-samples"
+            ]
+        }
+    ],
+    "Setup Gradle": [
+        {
+            "command": "gradle/gradle-build-action@v2",
+            "count": 2,
+            "repos": [
+                "android/performance-samples"
+            ]
+        },
+        {
+            "command": "gradle/gradle-build-action@v3",
+            "count": 1,
+            "repos": [
+                "android/wear-os-samples"
+            ]
+        }
+    ],
+    "Build project": [
+        {
+            "command": ".github/scripts/gradlew_recursive.sh assembleDebug",
+            "count": 13,
+            "repos": [
+                "android/uamp",
+                "android/sunflower",
+                "android/storage-samples",
+                "android/camera-samples",
+                "android/animation-samples",
+                "android/graphics-samples",
+                "android/enterprise-samples",
+                "android/user-interface-samples",
+                "android/connectivity-samples",
+                "android/media-samples",
+                "android/permissions-samples",
+                "android/trackr",
+                "android/codelab-handling-back-navigation"
+            ]
+        },
+        {
+            "command": "./gradlew check --stacktrace",
+            "count": 6,
+            "repos": [
+                "android/wear-os-samples"
+            ]
+        },
+        {
+            "command": "./gradlew app:assembleRelease",
+            "count": 2,
+            "repos": [
+                "android/wear-os-samples"
+            ]
+        },
+        {
+            "command": "./gradlew wear:assembleRelease",
+            "count": 1,
+            "repos": [
+                "android/wear-os-samples"
+            ]
+        },
+        {
+            "command": "gradle/gradle-build-action@v3",
+            "count": 1,
+            "repos": [
+                "android/wear-os-samples"
+            ]
+        }
+    ],
+    "set up JDK 11": [
+        {
+            "command": "actions/setup-java@v1",
+            "count": 8,
+            "repos": [
+                "android/codelab-constraint-layout",
+                "android/codelab-kotlin-coroutines",
+                "android/storage-samples",
+                "android/animation-samples",
+                "android/graphics-samples",
+                "android/enterprise-samples",
+                "android/trackr",
+                "android/codelab-handling-back-navigation"
+            ]
+        },
+        {
+            "command": "actions/setup-java@v2",
+            "count": 2,
+            "repos": [
+                "android/camera-samples",
+                "android/codelab-android-datastore"
+            ]
+        },
+        {
+            "command": "actions/setup-java@v3",
+            "count": 1,
+            "repos": [
+                "android/android-dev-challenge-compose"
+            ]
+        },
+        {
+            "command": "actions/setup-java@860f60056505705214d223b91ed7a30f173f6142",
+            "count": 1,
+            "repos": [
+                "android/cose-lib"
+            ]
+        }
+    ],
+    "Build and check": [
+        {
+            "command": "./gradlew assembleDebug assembleDebugAndroidTest testDebug",
+            "count": 1,
+            "repos": [
+                "android/codelab-constraint-layout"
+            ]
+        },
+        {
+            "command": "./gradlew assembleDebug assembleDebugAndroidTest app:lintDebug testDebug",
+            "count": 1,
+            "repos": [
+                "android/codelab-android-room-with-a-view"
+            ]
+        }
+    ],
+    "Upload build reports": [
+        {
+            "command": "actions/upload-artifact@v1",
+            "count": 2,
+            "repos": [
+                "android/codelab-constraint-layout",
+                "android/codelab-android-room-with-a-view"
+            ]
+        },
+        {
+            "command": "actions/upload-artifact@v4",
+            "count": 11,
+            "repos": [
+                "android/wear-os-samples",
+                "android/tv-samples",
+                "android/compose-samples"
+            ]
+        },
+        {
+            "command": "actions/upload-artifact@v3",
+            "count": 1,
+            "repos": [
+                "android/android-dev-challenge-compose"
+            ]
+        }
+    ],
+    "Build with Gradle": [
+        {
+            "command": "./gradlew build",
+            "count": 2,
+            "repos": [
+                "android/codelab-android-lifecycles",
+                "android/codelab-android-datastore"
+            ]
+        },
+        {
+            "command": "eskatos/gradle-command-action@v1",
+            "count": 1,
+            "repos": [
+                "android/android-studio-poet"
+            ]
+        }
+    ],
+    "set up JDK 17": [
+        {
+            "command": "actions/setup-java@v3",
+            "count": 2,
+            "repos": [
+                "android/sunflower"
+            ]
+        },
+        {
+            "command": "actions/setup-java@v1",
+            "count": 1,
+            "repos": [
+                "android/user-interface-samples"
+            ]
+        },
+        {
+            "command": "actions/setup-java@v4",
+            "count": 1,
+            "repos": [
+                "android/compose-samples"
+            ]
+        }
+    ],
+    "Update dependencies": [
+        {
+            "command": "./gradlew versionCatalogUpdate",
+            "count": 1,
+            "repos": [
+                "android/sunflower"
+            ]
+        },
+        {
+            "command": "./scripts/updateDeps.sh",
+            "count": 1,
+            "repos": [
+                "android/compose-samples"
+            ]
+        }
+    ],
+    "Create pull request": [
+        {
+            "command": "peter-evans/create-pull-request@v4",
+            "count": 1,
+            "repos": [
+                "android/sunflower"
+            ]
+        },
+        {
+            "command": "peter-evans/create-pull-request@v6",
+            "count": 1,
+            "repos": [
+                "android/compose-samples"
+            ]
+        }
+    ],
+    "Build and check all modules": [
+        {
+            "command": "./gradlew assembleDebug assembleDebugAndroidTest start:lintDebug finished_code:lintDebug testDebug",
+            "count": 1,
+            "repos": [
+                "android/codelab-kotlin-coroutines"
+            ]
+        },
+        {
+            "command": "./gradlew assembleDebug assembleDebugAndroidTest lintDebug testDebug",
+            "count": 1,
+            "repos": [
+                "android/codelab-android-direct-share"
+            ]
+        }
+    ],
+    "set up JDK": [
+        {
+            "command": "actions/setup-java@v1",
+            "count": 1,
+            "repos": [
+                "android/codelab-android-direct-share"
+            ]
+        },
+        {
+            "command": "actions/setup-java@v4",
+            "count": 10,
+            "repos": [
+                "android/health-samples"
+            ]
+        }
+    ],
+    "Generate cache key": [
+        {
+            "command": "./scripts/checksum.sh $SAMPLE_PATH checksum.txt",
+            "count": 9,
+            "repos": [
+                "android/wear-os-samples"
+            ]
+        },
+        {
+            "command": "./scripts/checksum.sh ${{ inputs.path }} checksum.txt",
+            "count": 3,
+            "repos": [
+                "android/tv-samples",
+                "android/compose-samples"
+            ]
+        },
+        {
+            "command": ".github/scripts/checksum.sh checksum.txt",
+            "count": 2,
+            "repos": [
+                "android/graphics-samples",
+                "android/user-interface-samples"
+            ]
+        }
+    ],
+    "Step 4": [
+        {
+            "command": "actions/cache@v4",
+            "count": 11,
+            "repos": [
+                "android/wear-os-samples",
+                "android/tv-samples"
+            ]
+        },
+        {
+            "command": "actions/cache@v2",
+            "count": 2,
+            "repos": [
+                "android/graphics-samples",
+                "android/user-interface-samples"
+            ]
+        },
+        {
+            "command": "stefanzweifel/git-auto-commit-action@v5",
+            "count": 1,
+            "repos": [
+                "android/compose-samples"
+            ]
+        }
+    ],
+    "Upload build outputs (APKs)": [
+        {
+            "command": "actions/upload-artifact@v4",
+            "count": 10,
+            "repos": [
+                "android/wear-os-samples",
+                "android/tv-samples",
+                "android/compose-samples"
+            ]
+        },
+        {
+            "command": "actions/upload-artifact@v3",
+            "count": 1,
+            "repos": [
+                "android/android-dev-challenge-compose"
+            ]
+        }
+    ]
+}

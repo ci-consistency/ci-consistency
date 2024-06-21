@@ -1,0 +1,612 @@
+{
+    "Checkout": [
+        {
+            "command": "actions/checkout@v4",
+            "count": 26,
+            "repos": [
+                "ReVanced/revanced-integrations",
+                "ReVanced/revanced-patcher",
+                "ReVanced/revanced-manager",
+                "ReVanced/revanced-patches-template",
+                "ReVanced/revanced-cli",
+                "ReVanced/revanced-discord-bot",
+                "ReVanced/revanced-website",
+                "ReVanced/revanced-library",
+                "ReVanced/revanced-patches"
+            ]
+        },
+        {
+            "command": "actions/checkout@v3",
+            "count": 3,
+            "repos": [
+                "ReVanced/aapt2",
+                "ReVanced/revanced-discord-bot",
+                "ReVanced/revanced-releases-api"
+            ]
+        }
+    ],
+    "Setup Java": [
+        {
+            "command": "echo \"JAVA_HOME=$JAVA_HOME_17_X64\" >> $GITHUB_ENV",
+            "count": 4,
+            "repos": [
+                "ReVanced/revanced-integrations",
+                "ReVanced/revanced-manager"
+            ]
+        },
+        {
+            "command": "actions/setup-java@v4",
+            "count": 2,
+            "repos": [
+                "ReVanced/GmsCore"
+            ]
+        }
+    ],
+    "Build": [
+        {
+            "command": "./gradlew build --no-daemon",
+            "count": 5,
+            "repos": [
+                "ReVanced/revanced-integrations",
+                "ReVanced/revanced-patcher",
+                "ReVanced/revanced-cli",
+                "ReVanced/revanced-library",
+                "ReVanced/revanced-patches"
+            ]
+        },
+        {
+            "command": "./gradlew build clean",
+            "count": 5,
+            "repos": [
+                "ReVanced/revanced-integrations",
+                "ReVanced/revanced-patcher",
+                "ReVanced/revanced-patches-template",
+                "ReVanced/revanced-cli",
+                "ReVanced/revanced-library"
+            ]
+        },
+        {
+            "command": "flutter build apk --\"${{ inputs.app-flavour }}\";\n",
+            "count": 1,
+            "repos": [
+                "ReVanced/revanced-manager"
+            ]
+        },
+        {
+            "command": "actions-rs/cargo@v1",
+            "count": 1,
+            "repos": [
+                "ReVanced/revanced-discord-bot"
+            ]
+        },
+        {
+            "command": "npm i\nnpm run build\n",
+            "count": 1,
+            "repos": [
+                "ReVanced/revanced-website"
+            ]
+        },
+        {
+            "command": "gradle/gradle-build-action@v2.10.0",
+            "count": 1,
+            "repos": [
+                "ReVanced/Apktool"
+            ]
+        },
+        {
+            "command": "./gradlew --no-daemon :play-services-core:assembleMapboxDefault :play-services-core:assembleMapboxHuawei",
+            "count": 1,
+            "repos": [
+                "ReVanced/GmsCore"
+            ]
+        },
+        {
+            "command": "./gradlew generateMeta clean",
+            "count": 1,
+            "repos": [
+                "ReVanced/revanced-patches"
+            ]
+        }
+    ],
+    "Setup Node.js": [
+        {
+            "command": "actions/setup-node@v4",
+            "count": 7,
+            "repos": [
+                "ReVanced/revanced-integrations",
+                "ReVanced/revanced-patcher",
+                "ReVanced/revanced-manager",
+                "ReVanced/revanced-patches-template",
+                "ReVanced/revanced-cli",
+                "ReVanced/revanced-library",
+                "ReVanced/revanced-patches"
+            ]
+        },
+        {
+            "command": "actions/setup-node@v3",
+            "count": 1,
+            "repos": [
+                "ReVanced/revanced-discord-bot"
+            ]
+        }
+    ],
+    "Install dependencies": [
+        {
+            "command": "npm install",
+            "count": 7,
+            "repos": [
+                "ReVanced/revanced-integrations",
+                "ReVanced/revanced-patcher",
+                "ReVanced/revanced-manager",
+                "ReVanced/revanced-patches-template",
+                "ReVanced/revanced-cli",
+                "ReVanced/revanced-library",
+                "ReVanced/revanced-patches"
+            ]
+        },
+        {
+            "command": "python -m pip install --upgrade pip\nif [ -f requirements.txt ];\nthen pip install -r requirements.txt;\nfi\necho \"CODEQL_PYTHON=$(which python)\" >> $GITHUB_ENV\n",
+            "count": 1,
+            "repos": [
+                "ReVanced/revanced-releases-api"
+            ]
+        }
+    ],
+    "Release": [
+        {
+            "command": "npm exec semantic-release",
+            "count": 6,
+            "repos": [
+                "ReVanced/revanced-integrations",
+                "ReVanced/revanced-patcher",
+                "ReVanced/revanced-patches-template",
+                "ReVanced/revanced-cli",
+                "ReVanced/revanced-library",
+                "ReVanced/revanced-patches"
+            ]
+        },
+        {
+            "command": "echo \"${{ secrets.SIGNING_KEYSTORE }}\" | base64 --decode > android/app/keystore.jks\nnpx semantic-release\n",
+            "count": 1,
+            "repos": [
+                "ReVanced/revanced-manager"
+            ]
+        },
+        {
+            "command": "npx semantic-release",
+            "count": 1,
+            "repos": [
+                "ReVanced/revanced-discord-bot"
+            ]
+        },
+        {
+            "command": "ncipollo/release-action@v1",
+            "count": 1,
+            "repos": [
+                "ReVanced/GmsCore"
+            ]
+        }
+    ],
+    "Step 1": [
+        {
+            "command": "peter-evans/repository-dispatch@v2",
+            "count": 1,
+            "repos": [
+                "ReVanced/revanced-patcher"
+            ]
+        },
+        {
+            "command": "peter-evans/repository-dispatch@v3",
+            "count": 3,
+            "repos": [
+                "ReVanced/revanced-manager",
+                "ReVanced/revanced-cli",
+                "ReVanced/revanced-library"
+            ]
+        },
+        {
+            "command": "actions/checkout@v3",
+            "count": 8,
+            "repos": [
+                "ReVanced/revanced-manager-compose-old",
+                "ReVanced/revanced-releases-api",
+                "ReVanced/smali",
+                "ReVanced/revanced-manager-compose",
+                "ReVanced/revanced-polling-api"
+            ]
+        },
+        {
+            "command": "actions/checkout@v4",
+            "count": 8,
+            "repos": [
+                "ReVanced/Apktool",
+                "ReVanced/revanced-api",
+                "ReVanced/revanced-app-metadata-api"
+            ]
+        },
+        {
+            "command": "actions/checkout@v2",
+            "count": 1,
+            "repos": [
+                "ReVanced/GmsCore"
+            ]
+        }
+    ],
+    "Upload": [
+        {
+            "command": "actions/upload-artifact@v4",
+            "count": 1,
+            "repos": [
+                "ReVanced/revanced-manager"
+            ]
+        },
+        {
+            "command": "actions/upload-artifact@v3",
+            "count": 1,
+            "repos": [
+                "ReVanced/Apktool"
+            ]
+        }
+    ],
+    "Step 2": [
+        {
+            "command": "nttld/setup-ndk@v1",
+            "count": 1,
+            "repos": [
+                "ReVanced/aapt2"
+            ]
+        },
+        {
+            "command": "gradle/gradle-build-action@v2",
+            "count": 1,
+            "repos": [
+                "ReVanced/smali"
+            ]
+        },
+        {
+            "command": "actions/setup-java@v4",
+            "count": 3,
+            "repos": [
+                "ReVanced/Apktool"
+            ]
+        }
+    ],
+    "Step 3": [
+        {
+            "command": "./build.sh ${{ matrix.target_arch }}",
+            "count": 1,
+            "repos": [
+                "ReVanced/aapt2"
+            ]
+        },
+        {
+            "command": "gradle/wrapper-validation-action@v1.1.0",
+            "count": 1,
+            "repos": [
+                "ReVanced/Apktool"
+            ]
+        }
+    ],
+    "Setup QEMU": [
+        {
+            "command": "docker/setup-qemu-action@v3",
+            "count": 6,
+            "repos": [
+                "ReVanced/revanced-discord-bot",
+                "ReVanced/revanced-helper",
+                "ReVanced/revanced-api",
+                "ReVanced/revanced-app-metadata-api"
+            ]
+        },
+        {
+            "command": "docker/setup-qemu-action@v2",
+            "count": 6,
+            "repos": [
+                "ReVanced/revanced-releases-api",
+                "ReVanced/revanced-polling-api"
+            ]
+        }
+    ],
+    "Setup Docker Buildx": [
+        {
+            "command": "docker/setup-buildx-action@v3",
+            "count": 6,
+            "repos": [
+                "ReVanced/revanced-discord-bot",
+                "ReVanced/revanced-helper",
+                "ReVanced/revanced-api",
+                "ReVanced/revanced-app-metadata-api"
+            ]
+        },
+        {
+            "command": "docker/setup-buildx-action@v2",
+            "count": 10,
+            "repos": [
+                "ReVanced/revanced-releases-api",
+                "ReVanced/revanced-polling-api"
+            ]
+        }
+    ],
+    "Login to DockerHub": [
+        {
+            "command": "docker/login-action@v3",
+            "count": 1,
+            "repos": [
+                "ReVanced/revanced-discord-bot"
+            ]
+        },
+        {
+            "command": "docker/login-action@v2",
+            "count": 4,
+            "repos": [
+                "ReVanced/revanced-releases-api"
+            ]
+        }
+    ],
+    "Build with Gradle": [
+        {
+            "command": "./gradlew assembleDebug",
+            "count": 1,
+            "repos": [
+                "ReVanced/revanced-manager-compose-old"
+            ]
+        },
+        {
+            "command": "./gradlew assembleRelease",
+            "count": 1,
+            "repos": [
+                "ReVanced/revanced-manager-compose-old"
+            ]
+        },
+        {
+            "command": "./gradlew assembleRelease --no-daemon",
+            "count": 1,
+            "repos": [
+                "ReVanced/revanced-manager-compose"
+            ]
+        }
+    ],
+    "Upload APK": [
+        {
+            "command": "actions/upload-artifact@v2",
+            "count": 1,
+            "repos": [
+                "ReVanced/revanced-manager-compose-old"
+            ]
+        },
+        {
+            "command": "actions/upload-artifact@v3",
+            "count": 1,
+            "repos": [
+                "ReVanced/revanced-manager-compose"
+            ]
+        }
+    ],
+    "Checkout repository": [
+        {
+            "command": "actions/checkout@v3",
+            "count": 2,
+            "repos": [
+                "ReVanced/revanced-releases-api",
+                "ReVanced/revanced-cdn-action"
+            ]
+        },
+        {
+            "command": "actions/checkout@v4",
+            "count": 2,
+            "repos": [
+                "ReVanced/Apktool",
+                "ReVanced/revanced-api"
+            ]
+        }
+    ],
+    "Set up Python": [
+        {
+            "command": "actions/setup-python@v4",
+            "count": 1,
+            "repos": [
+                "ReVanced/revanced-releases-api"
+            ]
+        },
+        {
+            "command": "actions/setup-python@v5",
+            "count": 1,
+            "repos": [
+                "ReVanced/revanced-api"
+            ]
+        }
+    ],
+    "Initialize CodeQL": [
+        {
+            "command": "github/codeql-action/init@v2",
+            "count": 3,
+            "repos": [
+                "ReVanced/revanced-releases-api",
+                "ReVanced/revanced-cdn-action",
+                "ReVanced/Apktool"
+            ]
+        },
+        {
+            "command": "github/codeql-action/init@v3",
+            "count": 1,
+            "repos": [
+                "ReVanced/revanced-api"
+            ]
+        }
+    ],
+    "Autobuild": [
+        {
+            "command": "github/codeql-action/autobuild@v2",
+            "count": 3,
+            "repos": [
+                "ReVanced/revanced-releases-api",
+                "ReVanced/revanced-cdn-action",
+                "ReVanced/Apktool"
+            ]
+        },
+        {
+            "command": "github/codeql-action/autobuild@v3",
+            "count": 1,
+            "repos": [
+                "ReVanced/revanced-api"
+            ]
+        }
+    ],
+    "Perform CodeQL Analysis": [
+        {
+            "command": "github/codeql-action/analyze@v2",
+            "count": 3,
+            "repos": [
+                "ReVanced/revanced-releases-api",
+                "ReVanced/revanced-cdn-action",
+                "ReVanced/Apktool"
+            ]
+        },
+        {
+            "command": "github/codeql-action/analyze@v3",
+            "count": 1,
+            "repos": [
+                "ReVanced/revanced-api"
+            ]
+        }
+    ],
+    "Checkout Dockerfile": [
+        {
+            "command": "actions/checkout@v3",
+            "count": 10,
+            "repos": [
+                "ReVanced/revanced-releases-api",
+                "ReVanced/revanced-polling-api"
+            ]
+        },
+        {
+            "command": "actions/checkout@v4",
+            "count": 5,
+            "repos": [
+                "ReVanced/revanced-helper",
+                "ReVanced/revanced-api",
+                "ReVanced/revanced-app-metadata-api"
+            ]
+        }
+    ],
+    "Extract metadata (tags, labels) for Docker": [
+        {
+            "command": "docker/metadata-action@v4",
+            "count": 6,
+            "repos": [
+                "ReVanced/revanced-releases-api",
+                "ReVanced/revanced-polling-api"
+            ]
+        },
+        {
+            "command": "docker/metadata-action@v5",
+            "count": 5,
+            "repos": [
+                "ReVanced/revanced-helper",
+                "ReVanced/revanced-api",
+                "ReVanced/revanced-app-metadata-api"
+            ]
+        }
+    ],
+    "Build Docker image": [
+        {
+            "command": "docker/build-push-action@v3",
+            "count": 4,
+            "repos": [
+                "ReVanced/revanced-releases-api",
+                "ReVanced/revanced-polling-api"
+            ]
+        },
+        {
+            "command": "docker/build-push-action@v5",
+            "count": 2,
+            "repos": [
+                "ReVanced/revanced-api",
+                "ReVanced/revanced-app-metadata-api"
+            ]
+        }
+    ],
+    "Login to GitHub Container Registry": [
+        {
+            "command": "docker/login-action@v2",
+            "count": 2,
+            "repos": [
+                "ReVanced/revanced-releases-api",
+                "ReVanced/revanced-polling-api"
+            ]
+        },
+        {
+            "command": "docker/login-action@v3",
+            "count": 3,
+            "repos": [
+                "ReVanced/revanced-helper",
+                "ReVanced/revanced-api",
+                "ReVanced/revanced-app-metadata-api"
+            ]
+        }
+    ],
+    "Build and push main Docker image": [
+        {
+            "command": "docker/build-push-action@v3",
+            "count": 1,
+            "repos": [
+                "ReVanced/revanced-releases-api"
+            ]
+        },
+        {
+            "command": "docker/build-push-action@v5",
+            "count": 3,
+            "repos": [
+                "ReVanced/revanced-helper",
+                "ReVanced/revanced-api",
+                "ReVanced/revanced-app-metadata-api"
+            ]
+        }
+    ],
+    "Verify Executable": [
+        {
+            "command": "${{ env.BINARY_PATH }}/macosx/${{ matrix.file }} version",
+            "count": 1,
+            "repos": [
+                "ReVanced/Apktool"
+            ]
+        },
+        {
+            "command": "${{ env.BINARY_PATH }}/linux/${{ matrix.file }} version",
+            "count": 1,
+            "repos": [
+                "ReVanced/Apktool"
+            ]
+        },
+        {
+            "command": "${{ env.BINARY_PATH }}/windows/${{ matrix.file }} version",
+            "count": 1,
+            "repos": [
+                "ReVanced/Apktool"
+            ]
+        }
+    ],
+    "Output Static": [
+        {
+            "command": "otool -L ${{ env.BINARY_PATH }}/macosx/${{ matrix.file }} || true",
+            "count": 1,
+            "repos": [
+                "ReVanced/Apktool"
+            ]
+        },
+        {
+            "command": "ldd ${{ env.BINARY_PATH }}/linux/${{ matrix.file }} || true",
+            "count": 1,
+            "repos": [
+                "ReVanced/Apktool"
+            ]
+        },
+        {
+            "command": "ldd ${{ env.BINARY_PATH }}/windows/${{ matrix.file }} || true",
+            "count": 1,
+            "repos": [
+                "ReVanced/Apktool"
+            ]
+        }
+    ]
+}

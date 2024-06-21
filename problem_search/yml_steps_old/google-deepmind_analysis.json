@@ -1,0 +1,376 @@
+{
+    "Step 1": [
+        {
+            "command": "actions/checkout@v2",
+            "count": 21,
+            "repos": [
+                "google-deepmind/lab",
+                "google-deepmind/bsuite",
+                "google-deepmind/tree",
+                "google-deepmind/dm_env_rpc",
+                "google-deepmind/dm-haiku",
+                "google-deepmind/rlax",
+                "google-deepmind/acme",
+                "google-deepmind/optax",
+                "google-deepmind/chex",
+                "google-deepmind/jaxline",
+                "google-deepmind/jraph",
+                "google-deepmind/tensor_annotations",
+                "google-deepmind/distrax"
+            ]
+        },
+        {
+            "command": "actions/checkout@v4",
+            "count": 5,
+            "repos": [
+                "google-deepmind/open_spiel",
+                "google-deepmind/rlax",
+                "google-deepmind/optax",
+                "google-deepmind/chex"
+            ]
+        },
+        {
+            "command": "actions/checkout@v3",
+            "count": 2,
+            "repos": [
+                "google-deepmind/lab2d"
+            ]
+        }
+    ],
+    "Step 2": [
+        {
+            "command": "julia-actions/setup-julia@v2",
+            "count": 1,
+            "repos": [
+                "google-deepmind/open_spiel"
+            ]
+        },
+        {
+            "command": "actions/setup-python@v2",
+            "count": 4,
+            "repos": [
+                "google-deepmind/tree"
+            ]
+        },
+        {
+            "command": "actions/setup-python@v1",
+            "count": 3,
+            "repos": [
+                "google-deepmind/rlax",
+                "google-deepmind/jaxline",
+                "google-deepmind/distrax"
+            ]
+        },
+        {
+            "command": "actions/setup-python@v4",
+            "count": 2,
+            "repos": [
+                "google-deepmind/optax",
+                "google-deepmind/chex"
+            ]
+        },
+        {
+            "command": "actions/setup-python@v3",
+            "count": 1,
+            "repos": [
+                "google-deepmind/lab2d"
+            ]
+        },
+        {
+            "command": "pip3 install tensorflow jax[cpu] pytype",
+            "count": 1,
+            "repos": [
+                "google-deepmind/tensor_annotations"
+            ]
+        }
+    ],
+    "Install": [
+        {
+            "command": "pwd\nchmod +x install.sh\n./install.sh\n",
+            "count": 1,
+            "repos": [
+                "google-deepmind/open_spiel"
+            ]
+        },
+        {
+            "command": "pwd\nuname -a\n[[ \"${OS_TYPE}\" = \"Darwin\" ]] && brew install python@${OS_PYTHON_VERSION}\n[[ \"${OS_TYPE}\" = \"Darwin\" ]] && brew link --force python@${OS_PYTHON_VERSION}\nwhich g++\ng++ --version\nchmod +x install.sh\n# This is needed to grab OpenSpiel dependencies.\n[[ \"${OS_TYPE}\" = \"Darwin\" ]] && ./install.sh `which python${OS_PYTHON_VERSION}`\n[[ \"${OS_TYPE}\" = \"Linux\" ]] && ./install.sh `which python3`\n# These are necessary to install what is necessary for the build and for the full tests below.\n${CI_PYBIN} -m pip install --upgrade pip\n${CI_PYBIN} -m pip --version\n[[ \"${OS_TYPE}\" = \"Darwin\" ]] && ${CI_PYBIN} -m pip install pipx\n${CI_PYBIN} -m pip install --upgrade setuptools\n${CI_PYBIN} -m pip install --upgrade -r requirements.txt -q\nsource ./open_spiel/scripts/python_extra_deps.sh ${CI_PYBIN}\n${CI_PYBIN} -m pip install --no-cache-dir --upgrade $OPEN_SPIEL_PYTHON_JAX_DEPS\n${CI_PYBIN} -m pip install --no-cache-dir --upgrade $OPEN_SPIEL_PYTHON_PYTORCH_DEPS\n${CI_PYBIN} -m pip install --no-cache-dir --upgrade $OPEN_SPIEL_PYTHON_TENSORFLOW_DEPS\n${CI_PYBIN} -m pip install --no-cache-dir --upgrade $OPEN_SPIEL_PYTHON_MISC_DEPS\n${CI_PYBIN} -m pip install twine\n${CI_PYBIN} -m pip install cibuildwheel==2.16.2\n",
+            "count": 1,
+            "repos": [
+                "google-deepmind/open_spiel"
+            ]
+        }
+    ],
+    "Build and test": [
+        {
+            "command": "python3 --version\n./open_spiel/scripts/ci_script.sh\n",
+            "count": 1,
+            "repos": [
+                "google-deepmind/open_spiel"
+            ]
+        },
+        {
+            "command": "set -xe && python -m cibuildwheel --output-dir wheelhouse",
+            "count": 3,
+            "repos": [
+                "google-deepmind/tree"
+            ]
+        }
+    ],
+    "Step 6": [
+        {
+            "command": "actions/upload-artifact@v4",
+            "count": 1,
+            "repos": [
+                "google-deepmind/open_spiel"
+            ]
+        },
+        {
+            "command": "actions/upload-artifact@v2",
+            "count": 3,
+            "repos": [
+                "google-deepmind/tree",
+                "google-deepmind/jaxline"
+            ]
+        },
+        {
+            "command": "python -m tensor_annotations.tests.pytype",
+            "count": 1,
+            "repos": [
+                "google-deepmind/tensor_annotations"
+            ]
+        }
+    ],
+    "Set up Python ${{ matrix.python-version }}": [
+        {
+            "command": "actions/setup-python@v1",
+            "count": 1,
+            "repos": [
+                "google-deepmind/bsuite"
+            ]
+        },
+        {
+            "command": "actions/setup-python@v4",
+            "count": 3,
+            "repos": [
+                "google-deepmind/dm-haiku"
+            ]
+        }
+    ],
+    "Install dependencies": [
+        {
+            "command": "pip install --upgrade pip setuptools\npip install .\npip install .[baselines_jax]\npip install .[baselines]\npip install .[testing]\n",
+            "count": 1,
+            "repos": [
+                "google-deepmind/bsuite"
+            ]
+        },
+        {
+            "command": "pip install --upgrade pip setuptools twine\n",
+            "count": 2,
+            "repos": [
+                "google-deepmind/bsuite",
+                "google-deepmind/acme"
+            ]
+        },
+        {
+            "command": "python -m pip install --upgrade pip\npip install setuptools wheel twine\n",
+            "count": 6,
+            "repos": [
+                "google-deepmind/dm_env_rpc",
+                "google-deepmind/dm-haiku",
+                "google-deepmind/rlax",
+                "google-deepmind/chex",
+                "google-deepmind/jraph",
+                "google-deepmind/distrax"
+            ]
+        },
+        {
+            "command": "python -m pip install --upgrade pip\npip install -r requirements.txt -r requirements-jax.txt -r requirements-flax.txt -r requirements-test.txt\npip install .\npip install pytest pytest-xdist\n",
+            "count": 2,
+            "repos": [
+                "google-deepmind/dm-haiku"
+            ]
+        },
+        {
+            "command": "sudo apt install -y pandoc\npython -m pip install --upgrade pip\npip install -r requirements.txt -r requirements-jax.txt -r requirements-flax.txt -r docs/requirements.txt\npip install .\n",
+            "count": 1,
+            "repos": [
+                "google-deepmind/dm-haiku"
+            ]
+        },
+        {
+            "command": "python -m pip install --upgrade pip\npip install setuptools wheel twine build\n",
+            "count": 1,
+            "repos": [
+                "google-deepmind/optax"
+            ]
+        },
+        {
+            "command": "set -xe\npython -m pip install --upgrade pip setuptools wheel\npython -m pip install pytest\n",
+            "count": 1,
+            "repos": [
+                "google-deepmind/jaxline"
+            ]
+        }
+    ],
+    "Test with pytest": [
+        {
+            "command": "pytest -n \"$(grep -c ^processor /proc/cpuinfo)\" bsuite\n",
+            "count": 1,
+            "repos": [
+                "google-deepmind/bsuite"
+            ]
+        },
+        {
+            "command": "pytest -n auto haiku --ignore=haiku/_src/integration/\n",
+            "count": 1,
+            "repos": [
+                "google-deepmind/dm-haiku"
+            ]
+        }
+    ],
+    "Set up Python": [
+        {
+            "command": "actions/setup-python@v1",
+            "count": 5,
+            "repos": [
+                "google-deepmind/bsuite",
+                "google-deepmind/dm-haiku",
+                "google-deepmind/acme",
+                "google-deepmind/jraph",
+                "google-deepmind/distrax"
+            ]
+        },
+        {
+            "command": "actions/setup-python@v2",
+            "count": 1,
+            "repos": [
+                "google-deepmind/dm_env_rpc"
+            ]
+        },
+        {
+            "command": "actions/setup-python@v4",
+            "count": 3,
+            "repos": [
+                "google-deepmind/rlax",
+                "google-deepmind/optax",
+                "google-deepmind/chex"
+            ]
+        }
+    ],
+    "Build and publish": [
+        {
+            "command": "python setup.py sdist\ntwine upload dist/*\n",
+            "count": 2,
+            "repos": [
+                "google-deepmind/bsuite",
+                "google-deepmind/acme"
+            ]
+        },
+        {
+            "command": "python setup.py sdist bdist_wheel\ntwine upload dist/*\n",
+            "count": 6,
+            "repos": [
+                "google-deepmind/dm_env_rpc",
+                "google-deepmind/dm-haiku",
+                "google-deepmind/rlax",
+                "google-deepmind/chex",
+                "google-deepmind/jraph",
+                "google-deepmind/distrax"
+            ]
+        },
+        {
+            "command": "python -m build\ntwine upload dist/*\n",
+            "count": 1,
+            "repos": [
+                "google-deepmind/optax"
+            ]
+        }
+    ],
+    "Directory listing": [
+        {
+            "command": "ls -lh dist/dm-tree*.tar.gz",
+            "count": 1,
+            "repos": [
+                "google-deepmind/tree"
+            ]
+        },
+        {
+            "command": "ls -lh wheelhouse/dm_tree*.whl",
+            "count": 3,
+            "repos": [
+                "google-deepmind/tree"
+            ]
+        }
+    ],
+    "Step 5": [
+        {
+            "command": "actions/upload-artifact@v2",
+            "count": 1,
+            "repos": [
+                "google-deepmind/tree"
+            ]
+        },
+        {
+            "command": "cd jax-stubs && pip3 install .",
+            "count": 1,
+            "repos": [
+                "google-deepmind/tensor_annotations"
+            ]
+        }
+    ],
+    "Step 7": [
+        {
+            "command": "actions/upload-artifact@v2",
+            "count": 2,
+            "repos": [
+                "google-deepmind/tree",
+                "google-deepmind/jaxline"
+            ]
+        },
+        {
+            "command": "python -m tensor_annotations.tests.templates",
+            "count": 1,
+            "repos": [
+                "google-deepmind/tensor_annotations"
+            ]
+        }
+    ],
+    "Run CI tests": [
+        {
+            "command": "bash test.sh",
+            "count": 3,
+            "repos": [
+                "google-deepmind/rlax",
+                "google-deepmind/chex",
+                "google-deepmind/distrax"
+            ]
+        },
+        {
+            "command": "JAX_VERSION=\"${{ matrix.jax-version }}\" bash test.sh",
+            "count": 1,
+            "repos": [
+                "google-deepmind/optax"
+            ]
+        }
+    ],
+    "Check consistency between the package version and release tag": [
+        {
+            "command": "RELEASE_VER=${GITHUB_REF#refs/*/}\nPACKAGE_VER=\"v`python setup.py --version`\"\nif [ $RELEASE_VER != $PACKAGE_VER ]\nthen\n  echo \"package ver. ($PACKAGE_VER) != release ver. ($RELEASE_VER)\"; exit 1\nfi\n",
+            "count": 4,
+            "repos": [
+                "google-deepmind/rlax",
+                "google-deepmind/chex",
+                "google-deepmind/jraph",
+                "google-deepmind/distrax"
+            ]
+        },
+        {
+            "command": "pip install .\nRELEASE_VER=${GITHUB_REF#refs/*/}\nPACKAGE_VER=\"v`python -c 'import optax; print(optax.__version__)'`\"\nif [ $RELEASE_VER != $PACKAGE_VER ]\nthen\n  echo \"package ver. ($PACKAGE_VER) != release ver. ($RELEASE_VER)\"; exit 1\nfi\n",
+            "count": 1,
+            "repos": [
+                "google-deepmind/optax"
+            ]
+        }
+    ]
+}

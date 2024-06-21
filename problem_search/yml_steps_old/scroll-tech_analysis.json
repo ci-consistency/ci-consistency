@@ -1,0 +1,1504 @@
+{
+    "Step 1": [
+        {
+            "command": "echo \"halo2 PR ${{ env.HALO2PR }} submitted by ${{ env.GH_USER }}\"",
+            "count": 1,
+            "repos": [
+                "scroll-tech/zkevm-circuits"
+            ]
+        },
+        {
+            "command": "fkirc/skip-duplicate-actions@v5",
+            "count": 6,
+            "repos": [
+                "scroll-tech/zkevm-circuits",
+                "scroll-tech/scroll-prover",
+                "scroll-tech/scroll"
+            ]
+        },
+        {
+            "command": "actions/checkout@v4",
+            "count": 21,
+            "repos": [
+                "scroll-tech/zkevm-circuits",
+                "scroll-tech/scroll-prover",
+                "scroll-tech/scroll",
+                "scroll-tech/token-list",
+                "scroll-tech/Casper",
+                "scroll-tech/canvas-contracts"
+            ]
+        },
+        {
+            "command": "release-drafter/release-drafter@v5",
+            "count": 1,
+            "repos": [
+                "scroll-tech/zkevm-circuits"
+            ]
+        },
+        {
+            "command": "actions/labeler@v4",
+            "count": 1,
+            "repos": [
+                "scroll-tech/zkevm-circuits"
+            ]
+        },
+        {
+            "command": true,
+            "count": 1,
+            "repos": [
+                "scroll-tech/zkevm-circuits"
+            ]
+        },
+        {
+            "command": "actions/checkout@v3",
+            "count": 38,
+            "repos": [
+                "scroll-tech/zkevm-circuits",
+                "scroll-tech/halo2",
+                "scroll-tech/go-ethereum",
+                "scroll-tech/mpt-circuit",
+                "scroll-tech/web3go",
+                "scroll-tech/uniswap-v3-interface",
+                "scroll-tech/nft-token-list",
+                "scroll-tech/ethers-rs",
+                "scroll-tech/revm",
+                "scroll-tech/canvas-contracts"
+            ]
+        },
+        {
+            "command": "echo dummy",
+            "count": 1,
+            "repos": [
+                "scroll-tech/zkevm-circuits"
+            ]
+        },
+        {
+            "command": "actions/checkout@v2",
+            "count": 26,
+            "repos": [
+                "scroll-tech/zkevm-specs",
+                "scroll-tech/rollup-explorer-backend",
+                "scroll-tech/halo2wrong",
+                "scroll-tech/halo2curves",
+                "scroll-tech/blockscout"
+            ]
+        },
+        {
+            "command": "actions-rs/toolchain@v1",
+            "count": 2,
+            "repos": [
+                "scroll-tech/scroll"
+            ]
+        },
+        {
+            "command": "hmarr/auto-approve-action@de8ae18c173c131e182d4adf2c874d8d2308a85b",
+            "count": 1,
+            "repos": [
+                "scroll-tech/frontends"
+            ]
+        },
+        {
+            "command": "echo 'Finished cypress tests https\\://dashboard.cypress.io/projects/yp82ef'",
+            "count": 1,
+            "repos": [
+                "scroll-tech/uniswap-v3-interface"
+            ]
+        },
+        {
+            "command": "actions/github-script@v6",
+            "count": 1,
+            "repos": [
+                "scroll-tech/contribute-to-scroll"
+            ]
+        },
+        {
+            "command": "actions/checkout@8f4b7f84864484a7bf31766abe9204da3cbe65b3",
+            "count": 61,
+            "repos": [
+                "scroll-tech/zstd"
+            ]
+        },
+        {
+            "command": "git config --global core.autocrlf input",
+            "count": 1,
+            "repos": [
+                "scroll-tech/zstd"
+            ]
+        }
+    ],
+    "Step 2": [
+        {
+            "command": "echo \"Running prover benchmarking due to ${{ github.event.inputs.event-type }}.\"",
+            "count": 1,
+            "repos": [
+                "scroll-tech/zkevm-circuits"
+            ]
+        },
+        {
+            "command": "dtolnay/rust-toolchain@master",
+            "count": 12,
+            "repos": [
+                "scroll-tech/zkevm-circuits",
+                "scroll-tech/scroll-prover",
+                "scroll-tech/scroll"
+            ]
+        },
+        {
+            "command": "crate-ci/typos@v1.22.7",
+            "count": 1,
+            "repos": [
+                "scroll-tech/zkevm-circuits"
+            ]
+        },
+        {
+            "command": ".github/proverCiScripts/wakeUpProver.sh",
+            "count": 1,
+            "repos": [
+                "scroll-tech/zkevm-circuits"
+            ]
+        },
+        {
+            "command": ".github/ciChecksScripts/wakeUpRunner.sh",
+            "count": 1,
+            "repos": [
+                "scroll-tech/zkevm-circuits"
+            ]
+        },
+        {
+            "command": "semgrep ci",
+            "count": 2,
+            "repos": [
+                "scroll-tech/zkevm-circuits",
+                "scroll-tech/go-ethereum"
+            ]
+        },
+        {
+            "command": "actions-rs/toolchain@v1",
+            "count": 24,
+            "repos": [
+                "scroll-tech/halo2",
+                "scroll-tech/mpt-circuit",
+                "scroll-tech/rollup-explorer-backend",
+                "scroll-tech/halo2wrong",
+                "scroll-tech/halo2curves"
+            ]
+        },
+        {
+            "command": "git config --system --add safe.directory /__w/scroll-prover/scroll-prover",
+            "count": 1,
+            "repos": [
+                "scroll-tech/scroll-prover"
+            ]
+        },
+        {
+            "command": "git config --local user.email \"actions@github.com\"\ngit config --local user.name \"github-actions\"\n",
+            "count": 1,
+            "repos": [
+                "scroll-tech/frontends"
+            ]
+        },
+        {
+            "command": "erlef/setup-beam@v1",
+            "count": 13,
+            "repos": [
+                "scroll-tech/blockscout"
+            ]
+        },
+        {
+            "command": "./.github/actions/setup",
+            "count": 5,
+            "repos": [
+                "scroll-tech/uniswap-v3-interface"
+            ]
+        },
+        {
+            "command": "dtolnay/rust-toolchain@stable",
+            "count": 5,
+            "repos": [
+                "scroll-tech/ethers-rs"
+            ]
+        },
+        {
+            "command": "dtolnay/rust-toolchain@clippy",
+            "count": 1,
+            "repos": [
+                "scroll-tech/ethers-rs"
+            ]
+        },
+        {
+            "command": "dtolnay/rust-toolchain@nightly",
+            "count": 2,
+            "repos": [
+                "scroll-tech/ethers-rs"
+            ]
+        },
+        {
+            "command": "EmbarkStudios/cargo-deny-action@v1",
+            "count": 1,
+            "repos": [
+                "scroll-tech/ethers-rs"
+            ]
+        },
+        {
+            "command": "actions/setup-node@v4",
+            "count": 1,
+            "repos": [
+                "scroll-tech/Casper"
+            ]
+        },
+        {
+            "command": "msys2/setup-msys2@5beef6d11f48bba68b9eb503e3adc60b23c0cc36",
+            "count": 3,
+            "repos": [
+                "scroll-tech/zstd"
+            ]
+        },
+        {
+            "command": "actions/checkout@8f4b7f84864484a7bf31766abe9204da3cbe65b3",
+            "count": 1,
+            "repos": [
+                "scroll-tech/zstd"
+            ]
+        }
+    ],
+    "Step 3": [
+        {
+            "command": "actions/checkout@v4",
+            "count": 1,
+            "repos": [
+                "scroll-tech/zkevm-circuits"
+            ]
+        },
+        {
+            "command": "dtolnay/rust-toolchain@master",
+            "count": 3,
+            "repos": [
+                "scroll-tech/zkevm-circuits",
+                "scroll-tech/scroll-prover"
+            ]
+        },
+        {
+            "command": "ssh prover \"bash -s\" -- < .github/proverCiScripts/rsSysstat.sh \"${{ env.PR_NUMBER }}\"\n",
+            "count": 1,
+            "repos": [
+                "scroll-tech/zkevm-circuits"
+            ]
+        },
+        {
+            "command": "rustup component add rustfmt",
+            "count": 2,
+            "repos": [
+                "scroll-tech/halo2",
+                "scroll-tech/halo2curves"
+            ]
+        },
+        {
+            "command": "go mod tidy",
+            "count": 1,
+            "repos": [
+                "scroll-tech/go-ethereum"
+            ]
+        },
+        {
+            "command": "make fmt",
+            "count": 1,
+            "repos": [
+                "scroll-tech/mpt-circuit"
+            ]
+        },
+        {
+            "command": "make clippy",
+            "count": 1,
+            "repos": [
+                "scroll-tech/mpt-circuit"
+            ]
+        },
+        {
+            "command": "make test",
+            "count": 1,
+            "repos": [
+                "scroll-tech/mpt-circuit"
+            ]
+        },
+        {
+            "command": "make test_par",
+            "count": 1,
+            "repos": [
+                "scroll-tech/mpt-circuit"
+            ]
+        },
+        {
+            "command": "make bench",
+            "count": 1,
+            "repos": [
+                "scroll-tech/mpt-circuit"
+            ]
+        },
+        {
+            "command": "Swatinem/rust-cache@v1",
+            "count": 4,
+            "repos": [
+                "scroll-tech/rollup-explorer-backend"
+            ]
+        },
+        {
+            "command": "git fetch --unshallow\ngit checkout sepolia\ngit merge --no-ff origin/mainnet -m \"Auto-merge prod back to dev\u2009[bot]\"\n",
+            "count": 1,
+            "repos": [
+                "scroll-tech/frontends"
+            ]
+        },
+        {
+            "command": "yarn lint",
+            "count": 1,
+            "repos": [
+                "scroll-tech/uniswap-v3-interface"
+            ]
+        },
+        {
+            "command": "yarn yarn-deduplicate --strategy=highest --list --fail",
+            "count": 1,
+            "repos": [
+                "scroll-tech/uniswap-v3-interface"
+            ]
+        },
+        {
+            "command": "yarn prepare",
+            "count": 2,
+            "repos": [
+                "scroll-tech/uniswap-v3-interface"
+            ]
+        },
+        {
+            "command": "actions/download-artifact@v2",
+            "count": 1,
+            "repos": [
+                "scroll-tech/uniswap-v3-interface"
+            ]
+        },
+        {
+            "command": "Swatinem/rust-cache@v2",
+            "count": 6,
+            "repos": [
+                "scroll-tech/ethers-rs",
+                "scroll-tech/revm"
+            ]
+        },
+        {
+            "command": "taiki-e/install-action@cargo-hack",
+            "count": 1,
+            "repos": [
+                "scroll-tech/ethers-rs"
+            ]
+        },
+        {
+            "command": "yarn",
+            "count": 1,
+            "repos": [
+                "scroll-tech/Casper"
+            ]
+        },
+        {
+            "command": "cygwin/cygwin-install-action@f5e0f048310c425e84bc789f493a828c6dc80a25",
+            "count": 1,
+            "repos": [
+                "scroll-tech/zstd"
+            ]
+        }
+    ],
+    "Step 4": [
+        {
+            "command": ".github/proverCiScripts/wakeUpProver.sh",
+            "count": 1,
+            "repos": [
+                "scroll-tech/zkevm-circuits"
+            ]
+        },
+        {
+            "command": "ssh prover \"bash -s\" -- < .github/proverCiScripts/prepareProver.sh \"${{ env.PR_NUMBER }}\" \"${{ github.workspace }}\"\n",
+            "count": 1,
+            "repos": [
+                "scroll-tech/zkevm-circuits"
+            ]
+        },
+        {
+            "command": "actions-rs/cargo@v1",
+            "count": 2,
+            "repos": [
+                "scroll-tech/halo2",
+                "scroll-tech/halo2curves"
+            ]
+        },
+        {
+            "command": "goimports -local github.com/scroll-tech/go-ethereum/ -w .",
+            "count": 1,
+            "repos": [
+                "scroll-tech/go-ethereum"
+            ]
+        },
+        {
+            "command": "cargo build --release\ncargo fmt --all -- --check\n",
+            "count": 1,
+            "repos": [
+                "scroll-tech/rollup-explorer-backend"
+            ]
+        },
+        {
+            "command": "cargo clippy -- -D warnings",
+            "count": 1,
+            "repos": [
+                "scroll-tech/rollup-explorer-backend"
+            ]
+        },
+        {
+            "command": "taiki-e/install-action@nextest",
+            "count": 1,
+            "repos": [
+                "scroll-tech/rollup-explorer-backend"
+            ]
+        },
+        {
+            "command": "goimports -local scroll-tech/bridge-history-api/ -w .",
+            "count": 1,
+            "repos": [
+                "scroll-tech/scroll"
+            ]
+        },
+        {
+            "command": "mix credo",
+            "count": 1,
+            "repos": [
+                "scroll-tech/blockscout"
+            ]
+        },
+        {
+            "command": "mix format --check-formatted",
+            "count": 1,
+            "repos": [
+                "scroll-tech/blockscout"
+            ]
+        },
+        {
+            "command": "mix gettext.extract --merge | tee stdout.txt\n! grep \"Wrote \" stdout.txt\n",
+            "count": 1,
+            "repos": [
+                "scroll-tech/blockscout"
+            ]
+        },
+        {
+            "command": "./bin/install_chrome_headless.sh",
+            "count": 2,
+            "repos": [
+                "scroll-tech/blockscout"
+            ]
+        },
+        {
+            "command": "yarn test",
+            "count": 1,
+            "repos": [
+                "scroll-tech/uniswap-v3-interface"
+            ]
+        },
+        {
+            "command": "yarn build",
+            "count": 1,
+            "repos": [
+                "scroll-tech/uniswap-v3-interface"
+            ]
+        },
+        {
+            "command": "actions/cache@v3",
+            "count": 1,
+            "repos": [
+                "scroll-tech/uniswap-v3-interface"
+            ]
+        },
+        {
+            "command": "Swatinem/rust-cache@v2",
+            "count": 3,
+            "repos": [
+                "scroll-tech/ethers-rs",
+                "scroll-tech/revm"
+            ]
+        },
+        {
+            "command": "goimports -local scroll-tech/chain-monitor -w .",
+            "count": 1,
+            "repos": [
+                "scroll-tech/chain-monitor"
+            ]
+        },
+        {
+            "command": "goimports -local github.com/scroll-tech/da-codec/encoding/ -w .",
+            "count": 1,
+            "repos": [
+                "scroll-tech/da-codec"
+            ]
+        }
+    ],
+    "Step 5": [
+        {
+            "command": "ssh prover \"bash -s\" -- < .github/proverCiScripts/rsSysstat.sh\n",
+            "count": 1,
+            "repos": [
+                "scroll-tech/zkevm-circuits"
+            ]
+        },
+        {
+            "command": ".github/proverCiScripts/deployToProver.sh \"${{ env.PR_NUMBER }}\" \"${{ github.workspace }}\"",
+            "count": 1,
+            "repos": [
+                "scroll-tech/zkevm-circuits"
+            ]
+        },
+        {
+            "command": "stefanzweifel/git-auto-commit-action@3ea6ae190baf489ba007f7c92608f33ce20ef04a",
+            "count": 2,
+            "repos": [
+                "scroll-tech/go-ethereum",
+                "scroll-tech/scroll"
+            ]
+        },
+        {
+            "command": "cargo nextest run --all",
+            "count": 1,
+            "repos": [
+                "scroll-tech/rollup-explorer-backend"
+            ]
+        },
+        {
+            "command": "go mod tidy",
+            "count": 3,
+            "repos": [
+                "scroll-tech/scroll",
+                "scroll-tech/chain-monitor",
+                "scroll-tech/da-codec"
+            ]
+        },
+        {
+            "command": "./bin/install_chrome_headless.sh",
+            "count": 1,
+            "repos": [
+                "scroll-tech/blockscout"
+            ]
+        },
+        {
+            "command": "actions/upload-artifact@v2",
+            "count": 1,
+            "repos": [
+                "scroll-tech/uniswap-v3-interface"
+            ]
+        },
+        {
+            "command": "yarn cypress install",
+            "count": 1,
+            "repos": [
+                "scroll-tech/uniswap-v3-interface"
+            ]
+        },
+        {
+            "command": "Swatinem/rust-cache@v2",
+            "count": 1,
+            "repos": [
+                "scroll-tech/ethers-rs"
+            ]
+        }
+    ],
+    "Step 6": [
+        {
+            "command": "ssh prover \"bash -s\" -- < .github/proverCiScripts/prepareProver.sh \"${{ github.event.inputs.halo2pr }}[halo2]\" \"${{ github.workspace }}\"\n",
+            "count": 1,
+            "repos": [
+                "scroll-tech/zkevm-circuits"
+            ]
+        },
+        {
+            "command": "ssh prover \"bash -s\" -- < .github/proverCiScripts/execBench.sh \"${{ env.PR_NUMBER }}\" 19 '\"${{ github.event.label.name }}\"'\n",
+            "count": 1,
+            "repos": [
+                "scroll-tech/zkevm-circuits"
+            ]
+        },
+        {
+            "command": "./node_modules/.bin/jest",
+            "count": 1,
+            "repos": [
+                "scroll-tech/blockscout"
+            ]
+        },
+        {
+            "command": "actions/cache@v3",
+            "count": 1,
+            "repos": [
+                "scroll-tech/uniswap-v3-interface"
+            ]
+        },
+        {
+            "command": "cypress-io/github-action@v4",
+            "count": 1,
+            "repos": [
+                "scroll-tech/uniswap-v3-interface"
+            ]
+        },
+        {
+            "command": "actions/checkout@v3",
+            "count": 1,
+            "repos": [
+                "scroll-tech/nft-token-list"
+            ]
+        },
+        {
+            "command": "Swatinem/rust-cache@v2",
+            "count": 1,
+            "repos": [
+                "scroll-tech/ethers-rs"
+            ]
+        }
+    ],
+    "Step 7": [
+        {
+            "command": ".github/proverCiScripts/deployToProver.sh \"${{ github.event.inputs.halo2pr }}[halo2]\" \"${{ github.workspace }}\"",
+            "count": 1,
+            "repos": [
+                "scroll-tech/zkevm-circuits"
+            ]
+        },
+        {
+            "command": "ssh prover \"bash -s\" -- < .github/proverCiScripts/getSysstat.sh \"${{ env.PR_NUMBER }}\"\n",
+            "count": 1,
+            "repos": [
+                "scroll-tech/zkevm-circuits"
+            ]
+        },
+        {
+            "command": "./node_modules/.bin/eslint --format=junit --output-file=\"test/eslint/junit.xml\" js/**",
+            "count": 1,
+            "repos": [
+                "scroll-tech/blockscout"
+            ]
+        },
+        {
+            "command": "./bin/install_chrome_headless.sh",
+            "count": 1,
+            "repos": [
+                "scroll-tech/blockscout"
+            ]
+        },
+        {
+            "command": "yarn cypress install",
+            "count": 1,
+            "repos": [
+                "scroll-tech/uniswap-v3-interface"
+            ]
+        },
+        {
+            "command": "actions/setup-node@v3",
+            "count": 1,
+            "repos": [
+                "scroll-tech/ethers-rs"
+            ]
+        }
+    ],
+    "Step 8": [
+        {
+            "command": "ssh prover \"bash -s\" -- < .github/proverCiScripts/injectHalo2Revision.sh \"${{ github.event.inputs.halo2pr }}[halo2]\" \"${{ github.event.inputs.revision }}\"\n",
+            "count": 1,
+            "repos": [
+                "scroll-tech/zkevm-circuits"
+            ]
+        },
+        {
+            "command": "./run.sh --steps \"setup\"",
+            "count": 1,
+            "repos": [
+                "scroll-tech/zkevm-circuits"
+            ]
+        }
+    ],
+    "Step 9": [
+        {
+            "command": "ssh prover \"bash -s\" -- < .github/proverCiScripts/execBench.sh \"${{ github.event.inputs.halo2pr }}[halo2]\" 19\n",
+            "count": 1,
+            "repos": [
+                "scroll-tech/zkevm-circuits"
+            ]
+        },
+        {
+            "command": "./run.sh --steps \"gendata\"",
+            "count": 1,
+            "repos": [
+                "scroll-tech/zkevm-circuits"
+            ]
+        }
+    ],
+    "Step 10": [
+        {
+            "command": "ssh prover \"bash -s\" -- < .github/proverCiScripts/getSysstat.sh \"${{ github.event.inputs.halo2pr }}[halo2]\"\n",
+            "count": 1,
+            "repos": [
+                "scroll-tech/zkevm-circuits"
+            ]
+        },
+        {
+            "command": "./run.sh --steps \"tests\" --tests \"rpc\"",
+            "count": 1,
+            "repos": [
+                "scroll-tech/zkevm-circuits"
+            ]
+        }
+    ],
+    "Step 11": [
+        {
+            "command": ".github/proverCiScripts/shutdownProver.sh",
+            "count": 1,
+            "repos": [
+                "scroll-tech/zkevm-circuits"
+            ]
+        },
+        {
+            "command": "./run.sh --steps \"tests\" --tests \"circuit_input_builder\"",
+            "count": 1,
+            "repos": [
+                "scroll-tech/zkevm-circuits"
+            ]
+        }
+    ],
+    "Cargo cache": [
+        {
+            "command": "Swatinem/rust-cache@v2",
+            "count": 13,
+            "repos": [
+                "scroll-tech/zkevm-circuits",
+                "scroll-tech/scroll-prover",
+                "scroll-tech/scroll"
+            ]
+        },
+        {
+            "command": "actions/cache@v3",
+            "count": 1,
+            "repos": [
+                "scroll-tech/zkevm-circuits"
+            ]
+        }
+    ],
+    "Run light tests": [
+        {
+            "command": "cargo test --verbose --release --all --exclude prover --exclude integration-tests --exclude circuit-benchmarks -- -Zunstable-options --report-time",
+            "count": 1,
+            "repos": [
+                "scroll-tech/zkevm-circuits"
+            ]
+        },
+        {
+            "command": "cargo test --verbose --release --all --features scroll --exclude integration-tests --exclude circuit-benchmarks --exclude testool -- -Zunstable-options --report-time",
+            "count": 1,
+            "repos": [
+                "scroll-tech/zkevm-circuits"
+            ]
+        }
+    ],
+    "Run heavy tests": [
+        {
+            "command": "cargo test --verbose --release --all --all-features --exclude integration-tests --exclude circuit-benchmarks serial_ -- --ignored --test-threads 1",
+            "count": 1,
+            "repos": [
+                "scroll-tech/zkevm-circuits"
+            ]
+        },
+        {
+            "command": "cargo test --verbose --release --features scroll --all --exclude integration-tests --exclude circuit-benchmarks serial_  -- --ignored --skip max_tx -Zunstable-options --report-time",
+            "count": 1,
+            "repos": [
+                "scroll-tech/zkevm-circuits"
+            ]
+        }
+    ],
+    "cargo build": [
+        {
+            "command": "cargo build --all-features",
+            "count": 1,
+            "repos": [
+                "scroll-tech/zkevm-circuits"
+            ]
+        },
+        {
+            "command": "actions-rs/cargo@v1",
+            "count": 1,
+            "repos": [
+                "scroll-tech/halo2"
+            ]
+        }
+    ],
+    "Build benchmarks": [
+        {
+            "command": "cargo build --benches --examples --all-features",
+            "count": 1,
+            "repos": [
+                "scroll-tech/zkevm-circuits"
+            ]
+        },
+        {
+            "command": "actions-rs/cargo@v1",
+            "count": 1,
+            "repos": [
+                "scroll-tech/halo2"
+            ]
+        }
+    ],
+    "cargo fetch": [
+        {
+            "command": "cargo fetch",
+            "count": 1,
+            "repos": [
+                "scroll-tech/zkevm-circuits"
+            ]
+        },
+        {
+            "command": "actions-rs/cargo@v1",
+            "count": 1,
+            "repos": [
+                "scroll-tech/halo2"
+            ]
+        }
+    ],
+    "Check intra-doc links": [
+        {
+            "command": "cargo doc --no-deps --all --document-private-items",
+            "count": 1,
+            "repos": [
+                "scroll-tech/zkevm-circuits"
+            ]
+        },
+        {
+            "command": "actions-rs/cargo@v1",
+            "count": 1,
+            "repos": [
+                "scroll-tech/halo2"
+            ]
+        }
+    ],
+    "Run clippy": [
+        {
+            "command": "cargo clippy --all-features --all-targets -- -D warnings",
+            "count": 3,
+            "repos": [
+                "scroll-tech/zkevm-circuits",
+                "scroll-tech/scroll-prover",
+                "scroll-tech/scroll"
+            ]
+        },
+        {
+            "command": "actions-rs/clippy-check@v1",
+            "count": 1,
+            "repos": [
+                "scroll-tech/halo2"
+            ]
+        },
+        {
+            "command": "actions-rs/cargo@v1",
+            "count": 1,
+            "repos": [
+                "scroll-tech/halo2curves"
+            ]
+        }
+    ],
+    "Install dependencies": [
+        {
+            "command": "python -m pip install --upgrade pip\nmake install\n",
+            "count": 1,
+            "repos": [
+                "scroll-tech/zkevm-specs"
+            ]
+        },
+        {
+            "command": "yarn install --frozen-lockfile",
+            "count": 1,
+            "repos": [
+                "scroll-tech/token-list"
+            ]
+        },
+        {
+            "command": "yarn",
+            "count": 3,
+            "repos": [
+                "scroll-tech/nft-token-list"
+            ]
+        },
+        {
+            "command": "apt -y update\napt -y install --no-install-recommends gcc libc6-dev make pkg-config\n",
+            "count": 1,
+            "repos": [
+                "scroll-tech/zstd"
+            ]
+        }
+    ],
+    "Lint": [
+        {
+            "command": "make lint",
+            "count": 1,
+            "repos": [
+                "scroll-tech/zkevm-specs"
+            ]
+        },
+        {
+            "command": "rm -rf $HOME/.cache/golangci-lint\nmake lint\n",
+            "count": 7,
+            "repos": [
+                "scroll-tech/go-ethereum",
+                "scroll-tech/scroll",
+                "scroll-tech/chain-monitor",
+                "scroll-tech/da-codec"
+            ]
+        },
+        {
+            "command": "curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.30.0\n$(go env GOPATH)/bin/golangci-lint run --timeout=5m -c .golangci.yml\n",
+            "count": 1,
+            "repos": [
+                "scroll-tech/go-merkletree"
+            ]
+        },
+        {
+            "command": "rm -rf $HOME/.cache/golangci-lint\nmake mock_abi\nmake lint\n",
+            "count": 1,
+            "repos": [
+                "scroll-tech/scroll"
+            ]
+        }
+    ],
+    "Run tests": [
+        {
+            "command": "actions-rs/cargo@v1",
+            "count": 2,
+            "repos": [
+                "scroll-tech/halo2"
+            ]
+        },
+        {
+            "command": "go test ./...",
+            "count": 1,
+            "repos": [
+                "scroll-tech/go-merkletree"
+            ]
+        },
+        {
+            "command": "make test",
+            "count": 1,
+            "repos": [
+                "scroll-tech/scroll-prover"
+            ]
+        },
+        {
+            "command": "cargo test --verbose --release",
+            "count": 1,
+            "repos": [
+                "scroll-tech/halo2wrong"
+            ]
+        },
+        {
+            "command": "mdbook test",
+            "count": 1,
+            "repos": [
+                "scroll-tech/revm"
+            ]
+        }
+    ],
+    "Checkout code": [
+        {
+            "command": "actions/checkout@v3",
+            "count": 1,
+            "repos": [
+                "scroll-tech/go-ethereum"
+            ]
+        },
+        {
+            "command": "actions/checkout@v2",
+            "count": 15,
+            "repos": [
+                "scroll-tech/go-ethereum",
+                "scroll-tech/go-merkletree",
+                "scroll-tech/chain-monitor",
+                "scroll-tech/da-codec"
+            ]
+        },
+        {
+            "command": "actions/checkout@v4",
+            "count": 27,
+            "repos": [
+                "scroll-tech/scroll"
+            ]
+        },
+        {
+            "command": "actions/checkout@8f4b7f84864484a7bf31766abe9204da3cbe65b3",
+            "count": 1,
+            "repos": [
+                "scroll-tech/zstd"
+            ]
+        }
+    ],
+    "check diff": [
+        {
+            "command": "set -euo pipefail\n\n# fetch develop branch so that we can diff against later\ngit fetch origin develop\n\necho 'checking verion changes in diff...'\n\n# check if version changed in version.go\n# note: the grep will fail if use \\d instead of [0-9]\ngit diff HEAD..origin/develop --text --no-ext-diff --unified=0 --no-prefix params/version.go | grep -E '^\\+\\s*VersionPatch' && true\n\nexit_code=$?\n\n# auto bump if version is not bumped manually\necho '> require auto version bump?'\n\nif [ $exit_code -eq 0 ]; then\n  echo '> no, already bumped'\n  echo \"result=no-bump\" >> \"$GITHUB_OUTPUT\"\nelse\n  echo '> yes'\n  echo \"result=bump\" >> \"$GITHUB_OUTPUT\"\nfi\n",
+            "count": 1,
+            "repos": [
+                "scroll-tech/go-ethereum"
+            ]
+        },
+        {
+            "command": "set -euo pipefail\n\n# fetch develop branch so that we can diff against later\ngit fetch origin develop\n\necho 'checking verion changes in diff...'\n\n# check if version changed in version.go\n# note: the grep will fail if use \\d instead of [0-9]\ngit diff HEAD..origin/develop --text --no-ext-diff --unified=0 --no-prefix common/version/version.go | grep -E '^\\+var tag = \"v[0-9]+\\.[0-9]+\\.[0-9]+\"$' && true\n\nexit_code=$?\n\n# auto bump if version is not bumped manually\necho '> require auto version bump?'\n\nif [ $exit_code -eq 0 ]; then\n  echo '> no, already bumped'\n  echo \"result=no-bump\" >> \"$GITHUB_OUTPUT\"\nelse\n  echo '> yes'\n  echo \"result=bump\" >> \"$GITHUB_OUTPUT\"\nfi\n",
+            "count": 1,
+            "repos": [
+                "scroll-tech/scroll"
+            ]
+        }
+    ],
+    "Install Go": [
+        {
+            "command": "actions/setup-go@v2",
+            "count": 28,
+            "repos": [
+                "scroll-tech/go-ethereum",
+                "scroll-tech/scroll",
+                "scroll-tech/chain-monitor",
+                "scroll-tech/da-codec"
+            ]
+        },
+        {
+            "command": "actions/setup-go@v1",
+            "count": 2,
+            "repos": [
+                "scroll-tech/go-merkletree"
+            ]
+        }
+    ],
+    "Build": [
+        {
+            "command": "make nccc_geth\n",
+            "count": 1,
+            "repos": [
+                "scroll-tech/go-ethereum"
+            ]
+        },
+        {
+            "command": "make libzkp\nsudo cp ./rollup/circuitcapacitychecker/libzkp/libzkp.so /usr/local/lib/\nsudo cp ./rollup/circuitcapacitychecker/libzkp/libzktrie.so /usr/local/lib/\nmake geth\n",
+            "count": 1,
+            "repos": [
+                "scroll-tech/go-ethereum"
+            ]
+        },
+        {
+            "command": "cargo build --verbose --release",
+            "count": 1,
+            "repos": [
+                "scroll-tech/halo2wrong"
+            ]
+        },
+        {
+            "command": "actions-rs/cargo@v1",
+            "count": 1,
+            "repos": [
+                "scroll-tech/halo2curves"
+            ]
+        },
+        {
+            "command": "go build -v ./...",
+            "count": 1,
+            "repos": [
+                "scroll-tech/web3go"
+            ]
+        },
+        {
+            "command": "npm run build",
+            "count": 2,
+            "repos": [
+                "scroll-tech/scroll-documentation"
+            ]
+        },
+        {
+            "command": "mdbook-admonish install \nmdbook-mermaid install\nmdbook build\n",
+            "count": 1,
+            "repos": [
+                "scroll-tech/ethers-rs"
+            ]
+        },
+        {
+            "command": "cd build\\cmake\nmkdir build\ncd build\ncmake.exe -G \"${{matrix.generator}}\" ${{matrix.flags}} ..\ncmake.exe --build .\n",
+            "count": 1,
+            "repos": [
+                "scroll-tech/zstd"
+            ]
+        }
+    ],
+    "Install goimports": [
+        {
+            "command": "go install golang.org/x/tools/cmd/goimports@latest",
+            "count": 3,
+            "repos": [
+                "scroll-tech/go-ethereum",
+                "scroll-tech/chain-monitor",
+                "scroll-tech/da-codec"
+            ]
+        },
+        {
+            "command": "go install golang.org/x/tools/cmd/goimports",
+            "count": 5,
+            "repos": [
+                "scroll-tech/scroll"
+            ]
+        }
+    ],
+    "Test": [
+        {
+            "command": "make test\n",
+            "count": 2,
+            "repos": [
+                "scroll-tech/go-ethereum",
+                "scroll-tech/scroll"
+            ]
+        },
+        {
+            "command": "make prover",
+            "count": 1,
+            "repos": [
+                "scroll-tech/scroll"
+            ]
+        },
+        {
+            "command": "actions-rs/cargo@v1",
+            "count": 1,
+            "repos": [
+                "scroll-tech/halo2curves"
+            ]
+        },
+        {
+            "command": "go test -v ./...",
+            "count": 1,
+            "repos": [
+                "scroll-tech/web3go"
+            ]
+        }
+    ],
+    "Build image": [
+        {
+            "command": "docker/build-push-action@v3",
+            "count": 1,
+            "repos": [
+                "scroll-tech/rollup-explorer-backend"
+            ]
+        },
+        {
+            "command": "docker/build-push-action@v5",
+            "count": 1,
+            "repos": [
+                "scroll-tech/scroll"
+            ]
+        }
+    ],
+    "Run goimports lint": [
+        {
+            "command": "goimports -local scroll-tech/common/ -w .",
+            "count": 1,
+            "repos": [
+                "scroll-tech/scroll"
+            ]
+        },
+        {
+            "command": "goimports -local scroll-tech/coordinator/ -w .",
+            "count": 1,
+            "repos": [
+                "scroll-tech/scroll"
+            ]
+        },
+        {
+            "command": "goimports -local scroll-tech/database/ -w .",
+            "count": 1,
+            "repos": [
+                "scroll-tech/scroll"
+            ]
+        },
+        {
+            "command": "goimports -local scroll-tech/rollup/ -w .",
+            "count": 1,
+            "repos": [
+                "scroll-tech/scroll"
+            ]
+        }
+    ],
+    "Build prerequisites": [
+        {
+            "command": "make dev_docker\n",
+            "count": 3,
+            "repos": [
+                "scroll-tech/scroll"
+            ]
+        },
+        {
+            "command": "make dev_docker\nmake -C rollup mock_abi\nmake -C common/bytecode all\n",
+            "count": 1,
+            "repos": [
+                "scroll-tech/scroll"
+            ]
+        },
+        {
+            "command": "make dev_docker\nmake -C rollup mock_abi\n",
+            "count": 1,
+            "repos": [
+                "scroll-tech/scroll"
+            ]
+        }
+    ],
+    "Checkout sources": [
+        {
+            "command": "actions/checkout@v4",
+            "count": 2,
+            "repos": [
+                "scroll-tech/scroll"
+            ]
+        },
+        {
+            "command": "actions/checkout@v3",
+            "count": 3,
+            "repos": [
+                "scroll-tech/revm"
+            ]
+        }
+    ],
+    "yarn install": [
+        {
+            "command": "yarn install",
+            "count": 3,
+            "repos": [
+                "scroll-tech/scroll",
+                "scroll-tech/canvas-contracts"
+            ]
+        },
+        {
+            "command": "yarn install --frozen-lockfile\n",
+            "count": 1,
+            "repos": [
+                "scroll-tech/token-list"
+            ]
+        }
+    ],
+    "Compile with foundry": [
+        {
+            "command": "forge build --evm-version cancun",
+            "count": 1,
+            "repos": [
+                "scroll-tech/scroll"
+            ]
+        },
+        {
+            "command": "forge build",
+            "count": 1,
+            "repos": [
+                "scroll-tech/canvas-contracts"
+            ]
+        }
+    ],
+    "Run foundry tests": [
+        {
+            "command": "forge test --evm-version cancun -vvv",
+            "count": 1,
+            "repos": [
+                "scroll-tech/scroll"
+            ]
+        },
+        {
+            "command": "forge test -vvv",
+            "count": 1,
+            "repos": [
+                "scroll-tech/canvas-contracts"
+            ]
+        }
+    ],
+    "mix test --exclude no_nethermind": [
+        {
+            "command": "cd apps/ethereum_jsonrpc\nmix compile\nmix test --no-start --exclude no_nethermind\n",
+            "count": 1,
+            "repos": [
+                "scroll-tech/blockscout"
+            ]
+        },
+        {
+            "command": "mix ecto.create --quiet\nmix ecto.migrate\ncd apps/explorer\nmix compile\nmix test --no-start --exclude no_nethermind\n",
+            "count": 1,
+            "repos": [
+                "scroll-tech/blockscout"
+            ]
+        },
+        {
+            "command": "mix ecto.create --quiet\nmix ecto.migrate\ncd apps/indexer\nmix compile\nmix test --no-start --exclude no_nethermind\n",
+            "count": 1,
+            "repos": [
+                "scroll-tech/blockscout"
+            ]
+        },
+        {
+            "command": "mix ecto.create --quiet\nmix ecto.migrate\ncd apps/block_scout_web\nmix compile\nmix test --no-start --exclude no_nethermind\n",
+            "count": 1,
+            "repos": [
+                "scroll-tech/blockscout"
+            ]
+        }
+    ],
+    "Build and push Docker image": [
+        {
+            "command": "docker/build-push-action@v3",
+            "count": 8,
+            "repos": [
+                "scroll-tech/blockscout"
+            ]
+        },
+        {
+            "command": "docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc",
+            "count": 1,
+            "repos": [
+                "scroll-tech/blockscout"
+            ]
+        }
+    ],
+    "Install mdbook": [
+        {
+            "command": "mkdir mdbook\ncurl -sSL https://github.com/rust-lang/mdBook/releases/download/v0.4.21/mdbook-v0.4.21-x86_64-unknown-linux-gnu.tar.gz | tar -xz --directory=./mdbook\ncurl -sSL https://github.com/tommilligan/mdbook-admonish/releases/download/v1.8.0/mdbook-admonish-v1.8.0-x86_64-unknown-linux-gnu.tar.gz| tar -xz --directory=./mdbook\ncurl -sSL https://github.com/badboy/mdbook-mermaid/releases/download/v0.12.6/mdbook-mermaid-v0.12.6-x86_64-unknown-linux-gnu.tar.gz | tar -xz --directory=./mdbook\necho `pwd`/mdbook >> $GITHUB_PATH\n",
+            "count": 1,
+            "repos": [
+                "scroll-tech/ethers-rs"
+            ]
+        },
+        {
+            "command": "mkdir mdbook\ncurl -sSL https://github.com/rust-lang/mdBook/releases/download/v0.4.14/mdbook-v0.4.14-x86_64-unknown-linux-gnu.tar.gz | tar -xz --directory=./mdbook\necho `pwd`/mdbook >> $GITHUB_PATH\n",
+            "count": 2,
+            "repos": [
+                "scroll-tech/revm"
+            ]
+        }
+    ],
+    "Deploy to GitHub Pages": [
+        {
+            "command": "actions/deploy-pages@v1",
+            "count": 1,
+            "repos": [
+                "scroll-tech/ethers-rs"
+            ]
+        },
+        {
+            "command": "actions/deploy-pages@v2",
+            "count": 1,
+            "repos": [
+                "scroll-tech/revm"
+            ]
+        }
+    ],
+    "Install toolchain": [
+        {
+            "command": "dtolnay/rust-toolchain@nightly",
+            "count": 2,
+            "repos": [
+                "scroll-tech/revm"
+            ]
+        },
+        {
+            "command": "dtolnay/rust-toolchain@stable",
+            "count": 2,
+            "repos": [
+                "scroll-tech/revm"
+            ]
+        }
+    ],
+    "Upload artifact": [
+        {
+            "command": "actions/upload-artifact@v3",
+            "count": 1,
+            "repos": [
+                "scroll-tech/revm"
+            ]
+        },
+        {
+            "command": "actions/upload-artifact@0b7f8abb1508181956e8e162db84b466c27e18ce",
+            "count": 1,
+            "repos": [
+                "scroll-tech/zstd"
+            ]
+        }
+    ],
+    "make test": [
+        {
+            "command": "make test",
+            "count": 1,
+            "repos": [
+                "scroll-tech/zstd"
+            ]
+        },
+        {
+            "command": "sudo apt-get -qqq update\nmake libc6install\nCFLAGS=\"-m32\" make test\n",
+            "count": 1,
+            "repos": [
+                "scroll-tech/zstd"
+            ]
+        }
+    ],
+    "clang + MSan + Fuzz Test": [
+        {
+            "command": "sudo apt-get -qqq update\nsudo apt-get install clang\nCC=clang MOREFLAGS=\"-O0\" make clean msan-fuzztest\n",
+            "count": 1,
+            "repos": [
+                "scroll-tech/zstd"
+            ]
+        },
+        {
+            "command": "sudo apt-get -qqq update\nsudo apt-get install clang\nCC=clang FUZZER_FLAGS=\"--long-tests\" make clean msan-fuzztest\n",
+            "count": 1,
+            "repos": [
+                "scroll-tech/zstd"
+            ]
+        }
+    ],
+    "Install packages": [
+        {
+            "command": "sudo apt-get update\nsudo apt-get -y install build-essential python3-pip ninja-build liblz4-dev\npip install --pre meson\n",
+            "count": 1,
+            "repos": [
+                "scroll-tech/zstd"
+            ]
+        },
+        {
+            "command": "pip install --pre meson",
+            "count": 1,
+            "repos": [
+                "scroll-tech/zstd"
+            ]
+        }
+    ],
+    "Build with Meson": [
+        {
+            "command": "meson setup \\\n  --buildtype=debugoptimized \\\n  -Db_lundef=false \\\n  -Dauto_features=enabled \\\n  -Dbin_programs=true \\\n  -Dbin_tests=true \\\n  -Dbin_contrib=true \\\n  -Ddefault_library=both \\\n  build/meson builddir\nninja -C builddir/\nmeson test -C builddir/ --print-errorlogs\nmeson install -C builddir --destdir staging/\n",
+            "count": 1,
+            "repos": [
+                "scroll-tech/zstd"
+            ]
+        },
+        {
+            "command": "ninja -C builddir/\n",
+            "count": 1,
+            "repos": [
+                "scroll-tech/zstd"
+            ]
+        }
+    ],
+    "Build ${{matrix.name}}": [
+        {
+            "command": "msbuild \"build\\VS2010\\zstd.sln\" /m /verbosity:minimal /property:PlatformToolset=${{matrix.toolset}} /t:Clean,Build /p:Platform=${{matrix.platform}} /p:Configuration=${{matrix.configuration}} /warnaserror\n",
+            "count": 1,
+            "repos": [
+                "scroll-tech/zstd"
+            ]
+        },
+        {
+            "command": "msbuild \"build\\VS2010\\zstd.sln\" /m /verbosity:minimal /property:PlatformToolset=${{matrix.toolset}} /t:Clean,Build /p:Platform=${{matrix.platform}} /p:Configuration=${{matrix.configuration}} /warnaserror /p:InstructionSet=${{matrix.arch}}\n",
+            "count": 1,
+            "repos": [
+                "scroll-tech/zstd"
+            ]
+        }
+    ]
+}

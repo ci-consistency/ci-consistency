@@ -1,0 +1,2052 @@
+{
+    "Step 4": [
+        {
+            "command": "actions/setup-python@v5",
+            "count": 1,
+            "repos": [
+                "python/pythondotorg"
+            ]
+        },
+        {
+            "command": "uv pip install -r requirements-tests.txt --system",
+            "count": 7,
+            "repos": [
+                "python/typeshed"
+            ]
+        },
+        {
+            "command": "actions/upload-artifact@v3",
+            "count": 1,
+            "repos": [
+                "python/typed_ast"
+            ]
+        },
+        {
+            "command": "pip freeze --all",
+            "count": 1,
+            "repos": [
+                "python/pyperformance"
+            ]
+        },
+        {
+            "command": "tox -e py\n",
+            "count": 1,
+            "repos": [
+                "python/release-tools"
+            ]
+        },
+        {
+            "command": "mypy --config-file ${{ matrix.target }}/mypy.ini",
+            "count": 1,
+            "repos": [
+                "python/cpython"
+            ]
+        },
+        {
+            "command": "python update_switcher_chart.py",
+            "count": 1,
+            "repos": [
+                "python/python-docs-pl"
+            ]
+        },
+        {
+            "command": "pip install requests cogapp polib transifex-python sphinx-intl blurb",
+            "count": 1,
+            "repos": [
+                "python/python-docs-pl"
+            ]
+        },
+        {
+            "command": "sphinx-lint",
+            "count": 1,
+            "repos": [
+                "python/python-docs-pl"
+            ]
+        },
+        {
+            "command": "actions/checkout@master",
+            "count": 2,
+            "repos": [
+                "python/python-docs-pl",
+                "python/python-docs-uk"
+            ]
+        },
+        {
+            "command": "make",
+            "count": 1,
+            "repos": [
+                "python/python-docs-pl"
+            ]
+        },
+        {
+            "command": "pip install transifex-python",
+            "count": 1,
+            "repos": [
+                "python/python-docs-uk"
+            ]
+        },
+        {
+            "command": "make -i",
+            "count": 1,
+            "repos": [
+                "python/python-docs-uk"
+            ]
+        }
+    ],
+    "Run Tests": [
+        {
+            "command": "python -Wd -m coverage run manage.py test -v2\n",
+            "count": 1,
+            "repos": [
+                "python/pythondotorg"
+            ]
+        },
+        {
+            "command": "python -u -m pyperformance.tests",
+            "count": 1,
+            "repos": [
+                "python/pyperformance"
+            ]
+        },
+        {
+            "command": "tox -e py",
+            "count": 1,
+            "repos": [
+                "python/bedevere"
+            ]
+        },
+        {
+            "command": "tox",
+            "count": 1,
+            "repos": [
+                "python/miss-islington"
+            ]
+        }
+    ],
+    "Step 1": [
+        {
+            "command": "actions/checkout@v4",
+            "count": 90,
+            "repos": [
+                "python/mypy",
+                "python/peps",
+                "python/typing",
+                "python/typeshed",
+                "python/devguide",
+                "python/pyperformance",
+                "python/release-tools",
+                "python/core-workflow",
+                "python/cpython",
+                "python/bedevere",
+                "python/python-docs-theme",
+                "python/miss-islington",
+                "python/blurb_it",
+                "python/python-docs-zh-cn",
+                "python/mypy_extensions",
+                "python/python-docs-es",
+                "python/cherry-picker",
+                "python/pythoncapi-compat",
+                "python/importlib_resources",
+                "python/importlib_metadata",
+                "python/python-docs-tr",
+                "python/typing_extensions",
+                "python/blurb"
+            ]
+        },
+        {
+            "command": "readthedocs/actions/preview@v1",
+            "count": 5,
+            "repos": [
+                "python/peps",
+                "python/devguide",
+                "python/cpython",
+                "python/python-docs-theme",
+                "python/docs-community"
+            ]
+        },
+        {
+            "command": "actions/github-script@v7",
+            "count": 5,
+            "repos": [
+                "python/typeshed",
+                "python/cpython",
+                "python/typing_extensions"
+            ]
+        },
+        {
+            "command": "actions/checkout@v3",
+            "count": 7,
+            "repos": [
+                "python/typed_ast",
+                "python/pyperformance",
+                "python/tzdata"
+            ]
+        },
+        {
+            "command": "actions/checkout@v2",
+            "count": 8,
+            "repos": [
+                "python/the-knights-who-say-ni",
+                "python/buildmaster-config",
+                "python/python-docs-zh-tw",
+                "python/steering-council",
+                "python/tzdata"
+            ]
+        },
+        {
+            "command": "actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11",
+            "count": 1,
+            "repos": [
+                "python/release-tools"
+            ]
+        },
+        {
+            "command": "actions/setup-node@v4",
+            "count": 1,
+            "repos": [
+                "python/cpython"
+            ]
+        },
+        {
+            "command": "actions/add-to-project@v1.0.0",
+            "count": 1,
+            "repos": [
+                "python/cpython"
+            ]
+        },
+        {
+            "command": "mheap/github-action-required-labels@v5",
+            "count": 1,
+            "repos": [
+                "python/cpython"
+            ]
+        },
+        {
+            "command": "actions/checkout@v4.1.7",
+            "count": 3,
+            "repos": [
+                "python/python-docs-pt-br"
+            ]
+        },
+        {
+            "command": "actions/setup-python@master",
+            "count": 4,
+            "repos": [
+                "python/python-docs-pl",
+                "python/python-docs-uk"
+            ]
+        },
+        {
+            "command": "styfle/cancel-workflow-action@main",
+            "count": 2,
+            "repos": [
+                "python/python-docs-pl",
+                "python/python-docs-uk"
+            ]
+        },
+        {
+            "command": "actions/download-artifact@master",
+            "count": 2,
+            "repos": [
+                "python/python-docs-pl",
+                "python/python-docs-uk"
+            ]
+        }
+    ],
+    "Step 2": [
+        {
+            "command": "actions/setup-python@v5",
+            "count": 34,
+            "repos": [
+                "python/mypy",
+                "python/typeshed",
+                "python/release-tools",
+                "python/core-workflow",
+                "python/cpython",
+                "python/python-docs-theme",
+                "python/miss-islington",
+                "python/blurb_it",
+                "python/cherry-picker",
+                "python/python-docs-tr",
+                "python/blurb"
+            ]
+        },
+        {
+            "command": "unzip diff.zip",
+            "count": 1,
+            "repos": [
+                "python/mypy"
+            ]
+        },
+        {
+            "command": "for file in *.zip; do unzip $file; done",
+            "count": 1,
+            "repos": [
+                "python/typeshed"
+            ]
+        },
+        {
+            "command": "actions/setup-python@v4",
+            "count": 5,
+            "repos": [
+                "python/devguide",
+                "python/pyperformance",
+                "python/mypy_extensions"
+            ]
+        },
+        {
+            "command": "actions/setup-python@82c7e631bb3cdc910f68e0081d67478d79c6982d",
+            "count": 1,
+            "repos": [
+                "python/release-tools"
+            ]
+        },
+        {
+            "command": "npm install mailgun.js form-data",
+            "count": 1,
+            "repos": [
+                "python/cpython"
+            ]
+        },
+        {
+            "command": "actions/cache@v4",
+            "count": 1,
+            "repos": [
+                "python/cpython"
+            ]
+        },
+        {
+            "command": "hynek/build-and-inspect-python-package@v2",
+            "count": 3,
+            "repos": [
+                "python/python-docs-theme",
+                "python/cherry-picker",
+                "python/blurb"
+            ]
+        },
+        {
+            "command": "pip install gitpython matplotlib",
+            "count": 1,
+            "repos": [
+                "python/python-docs-pl"
+            ]
+        },
+        {
+            "command": "actions/setup-python@master",
+            "count": 2,
+            "repos": [
+                "python/python-docs-pl",
+                "python/python-docs-uk"
+            ]
+        },
+        {
+            "command": "pip install sphinx-lint",
+            "count": 1,
+            "repos": [
+                "python/python-docs-pl"
+            ]
+        },
+        {
+            "command": "actions/checkout@master",
+            "count": 2,
+            "repos": [
+                "python/python-docs-pl",
+                "python/python-docs-uk"
+            ]
+        },
+        {
+            "command": "sudo apt-get update",
+            "count": 2,
+            "repos": [
+                "python/python-docs-pl",
+                "python/python-docs-uk"
+            ]
+        },
+        {
+            "command": "sudo apt-get install python-is-python2\ncurl -sSL https://bootstrap.pypa.io/pip/2.7/get-pip.py -o get-pip.py\npython get-pip.py\n",
+            "count": 1,
+            "repos": [
+                "python/tzdata"
+            ]
+        },
+        {
+            "command": "lots0logs/gh-action-get-changed-files@2.2.2",
+            "count": 1,
+            "repos": [
+                "python/python-docs-tr"
+            ]
+        }
+    ],
+    "Install tox": [
+        {
+            "command": "pip install --upgrade 'setuptools!=50' tox==4.11.0",
+            "count": 1,
+            "repos": [
+                "python/mypy"
+            ]
+        },
+        {
+            "command": "pip install setuptools==68.2.2 tox==4.11.0",
+            "count": 2,
+            "repos": [
+                "python/mypy"
+            ]
+        },
+        {
+            "command": "python -m pip install tox\n",
+            "count": 3,
+            "repos": [
+                "python/bedevere",
+                "python/miss-islington",
+                "python/cherry-picker"
+            ]
+        },
+        {
+            "command": "python -m pip install --upgrade pip\npython -m pip install --upgrade tox\n",
+            "count": 1,
+            "repos": [
+                "python/tzdata"
+            ]
+        },
+        {
+            "command": "python -m pip install tox",
+            "count": 6,
+            "repos": [
+                "python/importlib_resources",
+                "python/importlib_metadata"
+            ]
+        }
+    ],
+    "Setup tox environment": [
+        {
+            "command": "tox run -e ${{ env.TOXENV }} --notest",
+            "count": 1,
+            "repos": [
+                "python/mypy"
+            ]
+        },
+        {
+            "command": "tox run -e ${{ matrix.toxenv }} --notest\npython -c 'import os; print(\"os.cpu_count\", os.cpu_count(), \"os.sched_getaffinity\", len(getattr(os, \"sched_getaffinity\", lambda *args: [])(0)))'\n",
+            "count": 1,
+            "repos": [
+                "python/mypy"
+            ]
+        },
+        {
+            "command": "tox run -e py --notest",
+            "count": 1,
+            "repos": [
+                "python/mypy"
+            ]
+        }
+    ],
+    "Test": [
+        {
+            "command": "tox run -e ${{ env.TOXENV }} --skip-pkg-install",
+            "count": 1,
+            "repos": [
+                "python/mypy"
+            ]
+        },
+        {
+            "command": "tox run -e ${{ matrix.toxenv }} --skip-pkg-install -- ${{ matrix.tox_extra_args }}",
+            "count": 1,
+            "repos": [
+                "python/mypy"
+            ]
+        },
+        {
+            "command": "tox run -e py --skip-pkg-install -- -n 4 mypyc/test/",
+            "count": 1,
+            "repos": [
+                "python/mypy"
+            ]
+        },
+        {
+            "command": "make --directory ${{ env.CROSS_BUILD_WASI }} test",
+            "count": 1,
+            "repos": [
+                "python/cpython"
+            ]
+        },
+        {
+            "command": "tox -e py",
+            "count": 1,
+            "repos": [
+                "python/mypy_extensions"
+            ]
+        }
+    ],
+    "Install dependencies": [
+        {
+            "command": "python -m pip install -U pip\npip install git+https://github.com/hauntsaninja/mypy_primer.git\n",
+            "count": 1,
+            "repos": [
+                "python/mypy"
+            ]
+        },
+        {
+            "command": "python -m pip install -U pip\npython -m pip install -U wheel\npython -m pip install -U tox\n",
+            "count": 1,
+            "repos": [
+                "python/peps"
+            ]
+        },
+        {
+            "command": "pip install --upgrade pip\npip install -r docs/requirements.txt\n",
+            "count": 1,
+            "repos": [
+                "python/typing"
+            ]
+        },
+        {
+            "command": "pip install --upgrade pip\npip install -r test-requirements.txt\n",
+            "count": 1,
+            "repos": [
+                "python/typing"
+            ]
+        },
+        {
+            "command": "pip install -r requirements-tests.txt",
+            "count": 4,
+            "repos": [
+                "python/typeshed"
+            ]
+        },
+        {
+            "command": "pip install git+https://github.com/hauntsaninja/mypy_primer.git",
+            "count": 1,
+            "repos": [
+                "python/typeshed"
+            ]
+        },
+        {
+            "command": "uv pip install -r requirements-tests.txt --system",
+            "count": 1,
+            "repos": [
+                "python/typeshed"
+            ]
+        },
+        {
+            "command": "python -m pip install --upgrade build\n",
+            "count": 1,
+            "repos": [
+                "python/pyperformance"
+            ]
+        },
+        {
+            "command": "python3 -m pip install -U pip\npython3 -m pip install -U tox\n",
+            "count": 1,
+            "repos": [
+                "python/release-tools"
+            ]
+        },
+        {
+            "command": "sudo ./.github/workflows/posix-deps-apt.sh",
+            "count": 1,
+            "repos": [
+                "python/cpython"
+            ]
+        },
+        {
+            "command": "sudo apt-get update\nsudo apt-get install -y --no-install-recommends python3-venv\n",
+            "count": 1,
+            "repos": [
+                "python/python-docs-ja"
+            ]
+        },
+        {
+            "command": "sudo apt update -y && sudo apt install gettext -y\npip3 install --upgrade pip\npip3 install -r requirements.txt -r cpython/Doc/requirements.txt\n",
+            "count": 1,
+            "repos": [
+                "python/python-docs-ja"
+            ]
+        },
+        {
+            "command": "sudo apt update -y && sudo apt install gettext -y\npip3 install pomerge powrap\n",
+            "count": 2,
+            "repos": [
+                "python/python-docs-ja",
+                "python/python-docs-pt-br"
+            ]
+        },
+        {
+            "command": "sudo apt update -y && sudo apt install gettext -y\npip3 install --upgrade pip\npip3 install -r requirements.txt\n",
+            "count": 1,
+            "repos": [
+                "python/python-docs-pt-br"
+            ]
+        },
+        {
+            "command": "sudo apt update -y && sudo apt install gettext tree -y",
+            "count": 1,
+            "repos": [
+                "python/python-docs-pt-br"
+            ]
+        },
+        {
+            "command": "python3 -m pip install -U coverage tox\n",
+            "count": 1,
+            "repos": [
+                "python/blurb_it"
+            ]
+        },
+        {
+            "command": "python -m pip install --upgrade pip\npip install tox\n",
+            "count": 2,
+            "repos": [
+                "python/mypy_extensions"
+            ]
+        },
+        {
+            "command": "python -m pip install --upgrade pip wheel\n# TODO: remove setuptools installation when safety==2.4.0 is released\npython -m pip install --upgrade safety setuptools\npython -m pip install --editable .\n",
+            "count": 1,
+            "repos": [
+                "python/cherry-picker"
+            ]
+        },
+        {
+            "command": "python -m pip install --upgrade pip\npip install -U tox\n",
+            "count": 1,
+            "repos": [
+                "python/tzdata"
+            ]
+        },
+        {
+            "command": "python -m pip install --upgrade pip\npython -m pip install --upgrade tox\n",
+            "count": 1,
+            "repos": [
+                "python/tzdata"
+            ]
+        },
+        {
+            "command": "pip install tqdm poutils -r venv/cpython/Doc/requirements.txt && sudo apt install gettext -y",
+            "count": 1,
+            "repos": [
+                "python/python-docs-tr"
+            ]
+        },
+        {
+            "command": "pip install poutils && sudo apt install -y gettext",
+            "count": 1,
+            "repos": [
+                "python/python-docs-tr"
+            ]
+        },
+        {
+            "command": "pip install -r test-requirements.txt",
+            "count": 1,
+            "repos": [
+                "python/typing_extensions"
+            ]
+        },
+        {
+            "command": "python --version\npython -m pip install -U pip\npython -m pip install -U tox\n",
+            "count": 1,
+            "repos": [
+                "python/blurb"
+            ]
+        }
+    ],
+    "Run mypy_primer": [
+        {
+            "command": "cd mypy_to_test\necho \"new commit\"\ngit rev-list --format=%s --max-count=1 $GITHUB_SHA\n\nMERGE_BASE=$(git merge-base $GITHUB_SHA origin/$GITHUB_BASE_REF)\ngit checkout -b base_commit $MERGE_BASE\necho \"base commit\"\ngit rev-list --format=%s --max-count=1 base_commit\n\necho ''\ncd ..\n# fail action if exit code isn't zero or one\n(\n  mypy_primer \\\n  --repo mypy_to_test \\\n  --new $GITHUB_SHA --old base_commit \\\n  --num-shards 5 --shard-index ${{ matrix.shard-index }} \\\n  --debug \\\n  --additional-flags=\"--debug-serialize\" \\\n  --output concise \\\n  | tee diff_${{ matrix.shard-index }}.txt\n) || [ $? -eq 1 ]\n",
+            "count": 1,
+            "repos": [
+                "python/mypy"
+            ]
+        },
+        {
+            "command": "cd typeshed_to_test\nMYPY_VERSION=$(grep mypy== requirements-tests.txt | cut -d = -f 3)\necho \"new commit\"\ngit rev-list --format=%s --max-count=1 $GITHUB_SHA\ngit checkout -b upstream_main origin/main\necho \"base commit\"\ngit rev-list --format=%s --max-count=1 upstream_main\necho ''\ncd ..\n# fail action if exit code isn't zero or one\n(\n  mypy_primer \\\n  --new v${MYPY_VERSION} --old v${MYPY_VERSION} \\\n  --custom-typeshed-repo typeshed_to_test \\\n  --new-typeshed $GITHUB_SHA --old-typeshed upstream_main \\\n  --num-shards 4 --shard-index ${{ matrix.shard-index }} \\\n  --debug \\\n  --output concise \\\n  | tee diff_${{ matrix.shard-index }}.txt\n) || [ $? -eq 1 ]\n",
+            "count": 1,
+            "repos": [
+                "python/typeshed"
+            ]
+        }
+    ],
+    "Upload mypy_primer diff": [
+        {
+            "command": "actions/upload-artifact@v3",
+            "count": 1,
+            "repos": [
+                "python/mypy"
+            ]
+        },
+        {
+            "command": "actions/upload-artifact@v4",
+            "count": 1,
+            "repos": [
+                "python/typeshed"
+            ]
+        }
+    ],
+    "Upload PR number": [
+        {
+            "command": "actions/upload-artifact@v3",
+            "count": 1,
+            "repos": [
+                "python/mypy"
+            ]
+        },
+        {
+            "command": "actions/upload-artifact@v4",
+            "count": 1,
+            "repos": [
+                "python/typeshed"
+            ]
+        }
+    ],
+    "Download diffs": [
+        {
+            "command": "actions/github-script@v6",
+            "count": 1,
+            "repos": [
+                "python/mypy"
+            ]
+        },
+        {
+            "command": "actions/github-script@v7",
+            "count": 1,
+            "repos": [
+                "python/typeshed"
+            ]
+        }
+    ],
+    "Step 3": [
+        {
+            "command": "cat diff_*.txt | tee fulldiff.txt\n",
+            "count": 2,
+            "repos": [
+                "python/mypy",
+                "python/typeshed"
+            ]
+        },
+        {
+            "command": "actions/setup-python@v5",
+            "count": 3,
+            "repos": [
+                "python/typeshed",
+                "python/python-docs-tr"
+            ]
+        },
+        {
+            "command": "curl -LsSf https://astral.sh/uv/install.sh | sh",
+            "count": 8,
+            "repos": [
+                "python/typeshed"
+            ]
+        },
+        {
+            "command": "actions/upload-artifact@v3",
+            "count": 1,
+            "repos": [
+                "python/typed_ast"
+            ]
+        },
+        {
+            "command": "pre-commit/action@v3.0.0",
+            "count": 2,
+            "repos": [
+                "python/devguide",
+                "python/core-workflow"
+            ]
+        },
+        {
+            "command": "pip install -e .[dev]",
+            "count": 1,
+            "repos": [
+                "python/pyperformance"
+            ]
+        },
+        {
+            "command": "pre-commit/action@v3.0.1",
+            "count": 7,
+            "repos": [
+                "python/release-tools",
+                "python/cpython",
+                "python/python-docs-theme",
+                "python/miss-islington",
+                "python/blurb_it",
+                "python/cherry-picker",
+                "python/blurb"
+            ]
+        },
+        {
+            "command": "python -m pip install tox\n",
+            "count": 1,
+            "repos": [
+                "python/release-tools"
+            ]
+        },
+        {
+            "command": "pip install -r Tools/requirements-dev.txt",
+            "count": 1,
+            "repos": [
+                "python/cpython"
+            ]
+        },
+        {
+            "command": "actions/cache/restore@v4",
+            "count": 1,
+            "repos": [
+                "python/python-docs-zh-cn"
+            ]
+        },
+        {
+            "command": "actions/checkout@v4",
+            "count": 1,
+            "repos": [
+                "python/python-docs-es"
+            ]
+        },
+        {
+            "command": "actions/checkout@master",
+            "count": 2,
+            "repos": [
+                "python/python-docs-pl"
+            ]
+        },
+        {
+            "command": "sudo apt-get install -y gettext",
+            "count": 1,
+            "repos": [
+                "python/python-docs-pl"
+            ]
+        },
+        {
+            "command": "make venv",
+            "count": 2,
+            "repos": [
+                "python/python-docs-pl",
+                "python/python-docs-uk"
+            ]
+        },
+        {
+            "command": "sudo apt-get install -y latexmk texlive-xetex fonts-freefont-otf xindy",
+            "count": 2,
+            "repos": [
+                "python/python-docs-pl",
+                "python/python-docs-uk"
+            ]
+        },
+        {
+            "command": "curl -o- https://raw.githubusercontent.com/transifex/cli/master/install.sh | bash",
+            "count": 1,
+            "repos": [
+                "python/python-docs-uk"
+            ]
+        }
+    ],
+    "git config": [
+        {
+            "command": "git config --global user.name mypybot\ngit config --global user.email '<>'\n",
+            "count": 1,
+            "repos": [
+                "python/mypy"
+            ]
+        },
+        {
+            "command": "git config --global user.name stubsabot\ngit config --global user.email '<>'\n",
+            "count": 1,
+            "repos": [
+                "python/typeshed"
+            ]
+        }
+    ],
+    "Set up Python 3": [
+        {
+            "command": "actions/setup-python@v5",
+            "count": 3,
+            "repos": [
+                "python/peps",
+                "python/typing"
+            ]
+        },
+        {
+            "command": "actions/setup-python@v5.1.0",
+            "count": 7,
+            "repos": [
+                "python/python-docs-pt-br"
+            ]
+        }
+    ],
+    "Set up Python ${{ matrix.python-version }}": [
+        {
+            "command": "actions/setup-python@v5",
+            "count": 7,
+            "repos": [
+                "python/peps",
+                "python/bedevere",
+                "python/miss-islington",
+                "python/blurb_it",
+                "python/cherry-picker",
+                "python/blurb"
+            ]
+        },
+        {
+            "command": "actions/setup-python@v2",
+            "count": 1,
+            "repos": [
+                "python/the-knights-who-say-ni"
+            ]
+        }
+    ],
+    "Run tests": [
+        {
+            "command": "tox -e py -- -v --cov-report term\n",
+            "count": 1,
+            "repos": [
+                "python/peps"
+            ]
+        },
+        {
+            "command": "cd stub_uploader\nuv pip install -r requirements.txt --system\npython -m pytest tests\n",
+            "count": 2,
+            "repos": [
+                "python/typeshed"
+            ]
+        },
+        {
+            "command": "python3 -m coverage run --branch -m unittest discover -t . -s ni/test/\npython3 -m coverage xml -o ./coverage.xml\n",
+            "count": 1,
+            "repos": [
+                "python/the-knights-who-say-ni"
+            ]
+        },
+        {
+            "command": "# Most of the excluded tests are slow test suites with no property tests\n#\n# (GH-104097) test_sysconfig is skipped because it has tests that are\n# failing when executed from inside a virtual environment.\n${{ env.VENV_PYTHON }} -m test \\\n  -W \\\n  -o \\\n  -j4 \\\n  -x test_asyncio \\\n  -x test_multiprocessing_fork \\\n  -x test_multiprocessing_forkserver \\\n  -x test_multiprocessing_spawn \\\n  -x test_concurrent_futures \\\n  -x test_socket \\\n  -x test_subprocess \\\n  -x test_signal \\\n  -x test_sysconfig\n",
+            "count": 1,
+            "repos": [
+                "python/cpython"
+            ]
+        },
+        {
+            "command": "./python -m test --multiprocess 0 --timeout 4500 --verbose2 --verbose3\n",
+            "count": 1,
+            "repos": [
+                "python/cpython"
+            ]
+        },
+        {
+            "command": "tox -e py",
+            "count": 1,
+            "repos": [
+                "python/cherry-picker"
+            ]
+        },
+        {
+            "command": "tox -e py\n",
+            "count": 1,
+            "repos": [
+                "python/tzdata"
+            ]
+        },
+        {
+            "command": "tox\n",
+            "count": 1,
+            "repos": [
+                "python/tzdata"
+            ]
+        },
+        {
+            "command": "python runtests.py --current --verbose",
+            "count": 1,
+            "repos": [
+                "python/pythoncapi-compat"
+            ]
+        },
+        {
+            "command": "python2.7 runtests.py --current --verbose",
+            "count": 1,
+            "repos": [
+                "python/pythoncapi-compat"
+            ]
+        }
+    ],
+    "Upload coverage": [
+        {
+            "command": "codecov/codecov-action@v4",
+            "count": 4,
+            "repos": [
+                "python/peps",
+                "python/release-tools",
+                "python/cherry-picker",
+                "python/blurb"
+            ]
+        },
+        {
+            "command": "codecov/codecov-action@v3.1.5",
+            "count": 1,
+            "repos": [
+                "python/blurb_it"
+            ]
+        }
+    ],
+    "Checkout repository": [
+        {
+            "command": "actions/checkout@v3",
+            "count": 1,
+            "repos": [
+                "python/psf-salt"
+            ]
+        },
+        {
+            "command": "actions/checkout@v4",
+            "count": 1,
+            "repos": [
+                "python/psf-salt"
+            ]
+        }
+    ],
+    "Setup Python": [
+        {
+            "command": "actions/setup-python@v4",
+            "count": 7,
+            "repos": [
+                "python/psf-salt",
+                "python/importlib_resources",
+                "python/importlib_metadata"
+            ]
+        },
+        {
+            "command": "actions/setup-python@82c7e631bb3cdc910f68e0081d67478d79c6982d",
+            "count": 2,
+            "repos": [
+                "python/release-tools"
+            ]
+        },
+        {
+            "command": "actions/setup-python@v2",
+            "count": 1,
+            "repos": [
+                "python/buildmaster-config"
+            ]
+        },
+        {
+            "command": "actions/setup-python@v5",
+            "count": 7,
+            "repos": [
+                "python/pythoncapi-compat",
+                "python/typing_extensions"
+            ]
+        }
+    ],
+    "Create Pull Request": [
+        {
+            "command": "peter-evans/create-pull-request@v5",
+            "count": 1,
+            "repos": [
+                "python/psf-salt"
+            ]
+        },
+        {
+            "command": "peter-evans/create-pull-request@v3",
+            "count": 1,
+            "repos": [
+                "python/python-docs-zh-tw"
+            ]
+        },
+        {
+            "command": "peter-evans/create-pull-request@v6.0.5",
+            "count": 2,
+            "repos": [
+                "python/python-docs-tr"
+            ]
+        }
+    ],
+    "Set up Python": [
+        {
+            "command": "actions/setup-python@v5",
+            "count": 9,
+            "repos": [
+                "python/typing",
+                "python/cpython",
+                "python/typing_extensions"
+            ]
+        },
+        {
+            "command": "actions/setup-python@v4",
+            "count": 1,
+            "repos": [
+                "python/pyperformance"
+            ]
+        },
+        {
+            "command": "actions/setup-python@v2",
+            "count": 2,
+            "repos": [
+                "python/steering-council",
+                "python/tzdata"
+            ]
+        }
+    ],
+    "Lint implementation": [
+        {
+            "command": "flake8",
+            "count": 1,
+            "repos": [
+                "python/typing"
+            ]
+        },
+        {
+            "command": "ruff check",
+            "count": 1,
+            "repos": [
+                "python/typing_extensions"
+            ]
+        }
+    ],
+    "Run stubtest": [
+        {
+            "command": "python tests/stubtest_stdlib.py",
+            "count": 2,
+            "repos": [
+                "python/typeshed"
+            ]
+        },
+        {
+            "command": "PACKAGES=$(python tests/get_stubtest_system_requirements.py)\n\nif [ \"${{ runner.os }}\" = \"Linux\" ]; then\n  if [ -n \"$PACKAGES\" ]; then\n    sudo apt-get update && sudo apt-get install -y $PACKAGES\n  fi\n\n  PYTHON_EXECUTABLE=\"xvfb-run python\"\nelse\n  if [ \"${{ runner.os }}\" = \"macOS\" ] && [ -n \"$PACKAGES\" ]; then\n    brew install $PACKAGES\n  fi\n\n  if [ \"${{ runner.os }}\" = \"Windows\" ] && [ -n \"$PACKAGES\" ]; then\n    choco install -y $PACKAGES\n  fi\n\n  PYTHON_EXECUTABLE=\"python\"\nfi\n\n$PYTHON_EXECUTABLE tests/stubtest_third_party.py --specified-platforms-only --num-shards 4 --shard-index ${{ matrix.shard-index }}\n",
+            "count": 1,
+            "repos": [
+                "python/typeshed"
+            ]
+        },
+        {
+            "command": "# This only runs stubtest on changed stubs, because it is much faster.\n# Use the daily.yml workflow to run stubtest on all third party stubs.\nfunction find_stubs {\n  git diff --name-only origin/${{ github.base_ref }} HEAD | \\\n  egrep ^stubs/ | cut -d \"/\" -f 2 | sort -u | \\\n  (while read stub; do [ -d \"stubs/$stub\" ] && echo \"$stub\" || true; done)\n}\nSTUBS=$(find_stubs || echo '')\n\nif [ -n \"$STUBS\" ]; then\n  echo \"Testing $STUBS...\"\n  PACKAGES=$(python tests/get_stubtest_system_requirements.py $STUBS)\n\n  if [ \"${{ runner.os }}\" = \"Linux\" ]; then\n    if [ -n \"$PACKAGES\" ]; then\n      echo \"Installing apt packages: $PACKAGES\"\n      sudo apt-get update && sudo apt-get install -y $PACKAGES\n    fi\n\n    PYTHON_EXECUTABLE=\"xvfb-run python\"\n  else\n    if [ \"${{ runner.os }}\" = \"macOS\" ] && [ -n \"$PACKAGES\" ]; then\n      echo \"Installing Homebrew packages: $PACKAGES\"\n      brew install $PACKAGES\n    fi\n\n    if [ \"${{ runner.os }}\" = \"Windows\" ] && [ -n \"$PACKAGES\" ]; then\n      echo \"Installing Chocolatey packages: $PACKAGES\"\n      choco install -y $PACKAGES\n    fi\n\n    PYTHON_EXECUTABLE=\"python\"\n  fi\n\n  $PYTHON_EXECUTABLE tests/stubtest_third_party.py --specified-platforms-only $STUBS\nelse\n  echo \"Nothing to test\"\nfi\n",
+            "count": 1,
+            "repos": [
+                "python/typeshed"
+            ]
+        }
+    ],
+    "Step 5": [
+        {
+            "command": "python ./tests/typecheck_typeshed.py --platform=${{ matrix.platform }}",
+            "count": 1,
+            "repos": [
+                "python/typeshed"
+            ]
+        },
+        {
+            "command": "uv pip install -r requirements-tests.txt --system",
+            "count": 1,
+            "repos": [
+                "python/typeshed"
+            ]
+        },
+        {
+            "command": "python ./tests/check_typeshed_structure.py",
+            "count": 1,
+            "repos": [
+                "python/typeshed"
+            ]
+        },
+        {
+            "command": "python ./tests/mypy_test.py --platform=${{ matrix.platform }} --python-version=${{ matrix.python-version }}",
+            "count": 1,
+            "repos": [
+                "python/typeshed"
+            ]
+        },
+        {
+            "command": "python ./tests/mypy_test.py --platform=${{ matrix.platform }} --python-version=3.13",
+            "count": 1,
+            "repos": [
+                "python/typeshed"
+            ]
+        },
+        {
+            "command": "python ./tests/regr_test.py --all --verbosity QUIET",
+            "count": 1,
+            "repos": [
+                "python/typeshed"
+            ]
+        },
+        {
+            "command": "actions/upload-artifact@v3",
+            "count": 1,
+            "repos": [
+                "python/typed_ast"
+            ]
+        },
+        {
+            "command": "mypy",
+            "count": 1,
+            "repos": [
+                "python/pyperformance"
+            ]
+        },
+        {
+            "command": "codecov/codecov-action@v4",
+            "count": 2,
+            "repos": [
+                "python/bedevere",
+                "python/miss-islington"
+            ]
+        },
+        {
+            "command": "safety check --ignore 62044",
+            "count": 1,
+            "repos": [
+                "python/cherry-picker"
+            ]
+        },
+        {
+            "command": "git config --local user.email github-actions@github.com",
+            "count": 1,
+            "repos": [
+                "python/python-docs-pl"
+            ]
+        },
+        {
+            "command": "curl -o- https://raw.githubusercontent.com/transifex/cli/master/install.sh | bash",
+            "count": 1,
+            "repos": [
+                "python/python-docs-pl"
+            ]
+        },
+        {
+            "command": "git pull",
+            "count": 2,
+            "repos": [
+                "python/python-docs-pl",
+                "python/python-docs-uk"
+            ]
+        },
+        {
+            "command": "actions/upload-artifact@master",
+            "count": 2,
+            "repos": [
+                "python/python-docs-pl",
+                "python/python-docs-uk"
+            ]
+        },
+        {
+            "command": "actions/checkout@master",
+            "count": 1,
+            "repos": [
+                "python/python-docs-uk"
+            ]
+        }
+    ],
+    "Step 6": [
+        {
+            "command": "python scripts/stubsabot.py --action-level local",
+            "count": 1,
+            "repos": [
+                "python/typeshed"
+            ]
+        },
+        {
+            "command": "uv pip freeze",
+            "count": 1,
+            "repos": [
+                "python/typeshed"
+            ]
+        },
+        {
+            "command": "tibdex/github-app-token@v1",
+            "count": 1,
+            "repos": [
+                "python/python-docs-zh-tw"
+            ]
+        },
+        {
+            "command": "git config --local user.name \"GitHub Action's update-chart job\"",
+            "count": 1,
+            "repos": [
+                "python/python-docs-pl"
+            ]
+        },
+        {
+            "command": "actions/checkout@master",
+            "count": 1,
+            "repos": [
+                "python/python-docs-pl"
+            ]
+        },
+        {
+            "command": "make -e SPHINXOPTS=\"-D language='pl' -D gettext_compact=0 -W --keep-going\" ${{ matrix.format }}",
+            "count": 1,
+            "repos": [
+                "python/python-docs-pl"
+            ]
+        },
+        {
+            "command": ".github/scripts/manage_translation.py recreate_config",
+            "count": 1,
+            "repos": [
+                "python/python-docs-uk"
+            ]
+        },
+        {
+            "command": "make -e SPHINXOPTS=\"-D language='uk' -D gettext_compact=0\" SPHINXERRORHANDLING=\"\" ${{ matrix.format }}",
+            "count": 1,
+            "repos": [
+                "python/python-docs-uk"
+            ]
+        }
+    ],
+    "Step 7": [
+        {
+            "command": "./tests/pytype_test.py --print-stderr",
+            "count": 1,
+            "repos": [
+                "python/typeshed"
+            ]
+        },
+        {
+            "command": "codecov/codecov-action@v2",
+            "count": 1,
+            "repos": [
+                "python/the-knights-who-say-ni"
+            ]
+        },
+        {
+            "command": "actions/cache/restore@v4",
+            "count": 1,
+            "repos": [
+                "python/python-docs-zh-cn"
+            ]
+        },
+        {
+            "command": "git add .",
+            "count": 1,
+            "repos": [
+                "python/python-docs-pl"
+            ]
+        },
+        {
+            "command": "./manage_translation.py recreate_tx_config",
+            "count": 1,
+            "repos": [
+                "python/python-docs-pl"
+            ]
+        },
+        {
+            "command": "actions/upload-artifact@master",
+            "count": 2,
+            "repos": [
+                "python/python-docs-pl",
+                "python/python-docs-uk"
+            ]
+        },
+        {
+            "command": ".github/scripts/manage_translation.py fetch_translations",
+            "count": 1,
+            "repos": [
+                "python/python-docs-uk"
+            ]
+        }
+    ],
+    "Install Python": [
+        {
+            "command": "actions/setup-python@v4",
+            "count": 1,
+            "repos": [
+                "python/typed_ast"
+            ]
+        },
+        {
+            "command": "actions/setup-python@v5",
+            "count": 1,
+            "repos": [
+                "python/cpython"
+            ]
+        }
+    ],
+    "Build docs": [
+        {
+            "command": "make html",
+            "count": 1,
+            "repos": [
+                "python/devguide"
+            ]
+        },
+        {
+            "command": "cd Doc\nSPHINXOPTS=\"-j10\" make dist\n",
+            "count": 1,
+            "repos": [
+                "python/release-tools"
+            ]
+        },
+        {
+            "command": "cd cpython/Doc\nmake venv\nrm -rf ${DOCS_OUTPUT_DIR}\nmake build ALLSPHINXOPTS=\"-b html -D language=ja -D gettext_compact=0 -E -d build/doctrees . ${GITHUB_WORKSPACE}/${DOCS_OUTPUT_DIR}\"\nls -l ${GITHUB_WORKSPACE}/${DOCS_OUTPUT_DIR}\n",
+            "count": 1,
+            "repos": [
+                "python/python-docs-ja"
+            ]
+        },
+        {
+            "command": "make build\n",
+            "count": 1,
+            "repos": [
+                "python/python-docs-pt-br"
+            ]
+        }
+    ],
+    "Build": [
+        {
+            "command": "python -m build\n",
+            "count": 1,
+            "repos": [
+                "python/pyperformance"
+            ]
+        },
+        {
+            "command": "make all",
+            "count": 1,
+            "repos": [
+                "python/python-docs-zh-tw"
+            ]
+        }
+    ],
+    "Install Dependencies": [
+        {
+            "command": "sudo ./.github/workflows/posix-deps-apt.sh",
+            "count": 4,
+            "repos": [
+                "python/cpython"
+            ]
+        },
+        {
+            "command": "sudo ./.github/workflows/posix-deps-apt.sh && sudo apt-get install wamerican",
+            "count": 1,
+            "repos": [
+                "python/cpython"
+            ]
+        },
+        {
+            "command": "sudo ./.github/workflows/posix-deps-apt.sh\n# Install clang-18\nwget https://apt.llvm.org/llvm.sh\nchmod +x llvm.sh\nsudo ./llvm.sh 18\nsudo update-alternatives --install /usr/bin/clang clang /usr/bin/clang-18 100\nsudo update-alternatives --set clang /usr/bin/clang-18\nsudo update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-18 100\nsudo update-alternatives --set clang++ /usr/bin/clang++-18\n# Reduce ASLR to avoid TSAN crashing\nsudo sysctl -w vm.mmap_rnd_bits=28\n",
+            "count": 1,
+            "repos": [
+                "python/cpython"
+            ]
+        },
+        {
+            "command": "sudo apt-get install gettext",
+            "count": 3,
+            "repos": [
+                "python/python-docs-zh-tw"
+            ]
+        }
+    ],
+    "Add ccache to PATH": [
+        {
+            "command": "echo \"PATH=/usr/lib/ccache:$PATH\" >> $GITHUB_ENV",
+            "count": 2,
+            "repos": [
+                "python/cpython"
+            ]
+        },
+        {
+            "command": "echo \"PATH=/usr/lib/ccache:$PATH\" >> $GITHUB_ENV\n",
+            "count": 5,
+            "repos": [
+                "python/cpython"
+            ]
+        }
+    ],
+    "Configure CPython": [
+        {
+            "command": "# Build Python with the libpython dynamic library\n./configure --config-cache --with-pydebug --enable-shared\n",
+            "count": 1,
+            "repos": [
+                "python/cpython"
+            ]
+        },
+        {
+            "command": "./configure --config-cache --with-pydebug --with-openssl=$OPENSSL_DIR",
+            "count": 1,
+            "repos": [
+                "python/cpython"
+            ]
+        },
+        {
+            "command": "./configure --config-cache --with-address-sanitizer --without-pymalloc",
+            "count": 1,
+            "repos": [
+                "python/cpython"
+            ]
+        },
+        {
+            "command": "./configure --with-pydebug",
+            "count": 1,
+            "repos": [
+                "python/cpython"
+            ]
+        },
+        {
+            "command": "GDBM_CFLAGS=\"-I$(brew --prefix gdbm)/include\" \\\nGDBM_LIBS=\"-L$(brew --prefix gdbm)/lib -lgdbm\" \\\n./configure \\\n  --config-cache \\\n  --with-pydebug \\\n  ${{ inputs.free-threading && '--disable-gil' || '' }} \\\n  --prefix=/opt/python-dev \\\n  --with-openssl=\"$(brew --prefix openssl@3.0)\"\n",
+            "count": 1,
+            "repos": [
+                "python/cpython"
+            ]
+        },
+        {
+            "command": "${{ inputs.options }}",
+            "count": 1,
+            "repos": [
+                "python/cpython"
+            ]
+        }
+    ],
+    "Build CPython": [
+        {
+            "command": "make -j4 regen-all\nmake regen-stdlib-module-names regen-sbom\n",
+            "count": 1,
+            "repos": [
+                "python/cpython"
+            ]
+        },
+        {
+            "command": "make -j4",
+            "count": 4,
+            "repos": [
+                "python/cpython"
+            ]
+        },
+        {
+            "command": "make -j8",
+            "count": 1,
+            "repos": [
+                "python/cpython"
+            ]
+        },
+        {
+            "command": ".\\PCbuild\\build.bat -e -d -v -p Win32 ${{ inputs.free-threading && '--disable-gil' || '' }}",
+            "count": 1,
+            "repos": [
+                "python/cpython"
+            ]
+        },
+        {
+            "command": ".\\PCbuild\\build.bat -e -d -v -p x64 ${{ inputs.free-threading && '--disable-gil' || '' }}",
+            "count": 1,
+            "repos": [
+                "python/cpython"
+            ]
+        },
+        {
+            "command": ".\\PCbuild\\build.bat -e -d -v -p arm64 ${{ inputs.free-threading && '--disable-gil' || '' }}",
+            "count": 1,
+            "repos": [
+                "python/cpython"
+            ]
+        }
+    ],
+    "Display build info": [
+        {
+            "command": "make pythoninfo",
+            "count": 6,
+            "repos": [
+                "python/cpython"
+            ]
+        },
+        {
+            "command": "make --directory ${{ env.CROSS_BUILD_WASI }} pythoninfo",
+            "count": 1,
+            "repos": [
+                "python/cpython"
+            ]
+        },
+        {
+            "command": ".\\python.bat -m test.pythoninfo",
+            "count": 2,
+            "repos": [
+                "python/cpython"
+            ]
+        }
+    ],
+    "Setup directory envs for out-of-tree builds": [
+        {
+            "command": "echo \"CPYTHON_RO_SRCDIR=$(realpath -m ${GITHUB_WORKSPACE}/../cpython-ro-srcdir)\" >> $GITHUB_ENV\necho \"CPYTHON_BUILDDIR=$(realpath -m ${GITHUB_WORKSPACE}/../cpython-builddir)\" >> $GITHUB_ENV\n",
+            "count": 2,
+            "repos": [
+                "python/cpython"
+            ]
+        },
+        {
+            "command": "echo \"CPYTHON_BUILDDIR=$(realpath -m ${GITHUB_WORKSPACE}/../cpython-builddir)\" >> $GITHUB_ENV\n",
+            "count": 1,
+            "repos": [
+                "python/cpython"
+            ]
+        }
+    ],
+    "Configure CPython out-of-tree": [
+        {
+            "command": "../cpython-ro-srcdir/configure \\\n  --config-cache \\\n  --with-pydebug \\\n  --with-openssl=$OPENSSL_DIR\n",
+            "count": 1,
+            "repos": [
+                "python/cpython"
+            ]
+        },
+        {
+            "command": "${{ inputs.options }}",
+            "count": 1,
+            "repos": [
+                "python/cpython"
+            ]
+        }
+    ],
+    "Tests": [
+        {
+            "command": "xvfb-run make test",
+            "count": 2,
+            "repos": [
+                "python/cpython"
+            ]
+        },
+        {
+            "command": "make test",
+            "count": 1,
+            "repos": [
+                "python/cpython"
+            ]
+        },
+        {
+            "command": "./python -m test --tsan -j4",
+            "count": 1,
+            "repos": [
+                "python/cpython"
+            ]
+        },
+        {
+            "command": ".\\PCbuild\\rt.bat -p Win32 -d -q --fast-ci ${{ inputs.free-threading && '--disable-gil' || '' }}",
+            "count": 1,
+            "repos": [
+                "python/cpython"
+            ]
+        },
+        {
+            "command": ".\\PCbuild\\rt.bat -p x64 -d -q --fast-ci ${{ inputs.free-threading && '--disable-gil' || '' }}",
+            "count": 1,
+            "repos": [
+                "python/cpython"
+            ]
+        },
+        {
+            "command": "tox -e py\n",
+            "count": 1,
+            "repos": [
+                "python/blurb_it"
+            ]
+        }
+    ],
+    "Install build dependencies": [
+        {
+            "command": "make -C Doc/ venv",
+            "count": 1,
+            "repos": [
+                "python/cpython"
+            ]
+        },
+        {
+            "command": "make -C Doc/ venv REQUIREMENTS=\"requirements-oldest-sphinx.txt\"",
+            "count": 1,
+            "repos": [
+                "python/cpython"
+            ]
+        },
+        {
+            "command": "make -C Doc/ PYTHON=../python venv",
+            "count": 1,
+            "repos": [
+                "python/cpython"
+            ]
+        }
+    ],
+    "Build HTML documentation": [
+        {
+            "command": "set -Eeuo pipefail\n# Build docs with the '-n' (nit-picky) option; write warnings to file\nmake -C Doc/ PYTHON=../python SPHINXOPTS=\"-q -n -W --keep-going -w sphinx-warnings.txt\" html\n",
+            "count": 1,
+            "repos": [
+                "python/cpython"
+            ]
+        },
+        {
+            "command": "make -C Doc/ SPHINXOPTS=\"-q\" SPHINXERRORHANDLING=\"-W --keep-going\" html",
+            "count": 1,
+            "repos": [
+                "python/cpython"
+            ]
+        }
+    ],
+    "Download packages built by build-and-inspect-python-package": [
+        {
+            "command": "actions/download-artifact@v4",
+            "count": 4,
+            "repos": [
+                "python/python-docs-theme",
+                "python/cherry-picker",
+                "python/blurb"
+            ]
+        },
+        {
+            "command": "actions/download-artifact@v3",
+            "count": 1,
+            "repos": [
+                "python/cherry-picker"
+            ]
+        }
+    ],
+    "Prepare environment variables": [
+        {
+            "command": "ref=${GITHUB_REF#refs/pull/}\npr_num=${ref%/merge}\n\necho \"::set-env name=PR_NUM::${pr_num}\"\necho \"::set-env name=PR_BUILD_ID::${GITHUB_BASE_REF}/${pr_num}\"\necho \"::set-env name=DOCS_BASE_DIR::build/html\"\necho \"::set-env name=DOCS_OUTPUT_DIR::build/html/${GITHUB_BASE_REF}/${pr_num}\"\n",
+            "count": 1,
+            "repos": [
+                "python/python-docs-ja"
+            ]
+        },
+        {
+            "command": "ref=${GITHUB_REF#refs/pull/}\npr_num=${ref%/merge}\n\necho \"::set-env name=PR_BUILD_ID::${GITHUB_BASE_REF}/${pr_num}\"\necho \"::set-env name=DOCS_BASE_DIR::build/html\"\necho \"::set-env name=DOCS_OUTPUT_DIR::build/html/${GITHUB_BASE_REF}/${pr_num}\"\n  \n",
+            "count": 1,
+            "repos": [
+                "python/python-docs-ja"
+            ]
+        }
+    ],
+    "Check out ${{ github.repository }}": [
+        {
+            "command": "actions/checkout@v3",
+            "count": 1,
+            "repos": [
+                "python/python-docs-ja"
+            ]
+        },
+        {
+            "command": "actions/checkout@v4.1.7",
+            "count": 4,
+            "repos": [
+                "python/python-docs-pt-br"
+            ]
+        }
+    ],
+    "Check out CPython": [
+        {
+            "command": "actions/checkout@v3",
+            "count": 1,
+            "repos": [
+                "python/python-docs-ja"
+            ]
+        },
+        {
+            "command": "actions/checkout@v4.1.7",
+            "count": 1,
+            "repos": [
+                "python/python-docs-pt-br"
+            ]
+        }
+    ],
+    "Wrap catalog message files": [
+        {
+            "command": "powrap --modified\n",
+            "count": 1,
+            "repos": [
+                "python/python-docs-ja"
+            ]
+        },
+        {
+            "command": "powrap --modified -C ${{ matrix.branch }}\n",
+            "count": 2,
+            "repos": [
+                "python/python-docs-ja",
+                "python/python-docs-pt-br"
+            ]
+        }
+    ],
+    "Commit and push changes": [
+        {
+            "command": "git config user.name github-actions\ngit config user.email github-actions@github.com\ngit status\ngit add -A\ngit diff-index --quiet HEAD || ( git commit -m \"Update translations from Transifex\" && git push )\n",
+            "count": 1,
+            "repos": [
+                "python/python-docs-ja"
+            ]
+        },
+        {
+            "command": "cd ${{ matrix.branch }}\ngit config user.name github-actions\ngit config user.email github-actions@github.com\ngit status\ngit add -A\ngit diff-index --quiet HEAD || ( git commit -m \"Merge ${{ env.CURRENT_BRANCH }} into ${{ matrix.branch }}\" && git push )\n",
+            "count": 1,
+            "repos": [
+                "python/python-docs-ja"
+            ]
+        },
+        {
+            "command": "git config user.name github-actions\ngit config user.email github-actions@github.com\nmake push\n",
+            "count": 1,
+            "repos": [
+                "python/python-docs-pt-br"
+            ]
+        },
+        {
+            "command": "git config user.name github-actions\ngit config user.email github-actions@github.com\ngit diff -I'^\"POT-Creation-Date: ' --numstat *.po **/*.po | cut -f3 | xargs -r git add\ngit add $(git ls-files -o --exclude-standard *.po **/*.po) .tx/config\ngit diff-index --cached --quiet HEAD || git commit -m \"Merge ${{ env.CURRENT_BRANCH }} into ${{ matrix.branch }}\"\n",
+            "count": 1,
+            "repos": [
+                "python/python-docs-pt-br"
+            ]
+        }
+    ],
+    "Check out source branch (${{ env.CURRENT_BRANCH }})": [
+        {
+            "command": "actions/checkout@v3",
+            "count": 1,
+            "repos": [
+                "python/python-docs-ja"
+            ]
+        },
+        {
+            "command": "actions/checkout@v4.1.7",
+            "count": 1,
+            "repos": [
+                "python/python-docs-pt-br"
+            ]
+        }
+    ],
+    "Check out target branch (${{ matrix.branch }})": [
+        {
+            "command": "actions/checkout@v3",
+            "count": 1,
+            "repos": [
+                "python/python-docs-ja"
+            ]
+        },
+        {
+            "command": "actions/checkout@v4.1.7",
+            "count": 1,
+            "repos": [
+                "python/python-docs-pt-br"
+            ]
+        }
+    ],
+    "Add problem matcher": [
+        {
+            "command": "sphinx-doc/github-problem-matcher@v1.1",
+            "count": 1,
+            "repos": [
+                "python/python-docs-pt-br"
+            ]
+        },
+        {
+            "command": "rffontenelle/sphinx-lint-problem-matcher@v1.0.0",
+            "count": 1,
+            "repos": [
+                "python/python-docs-pt-br"
+            ]
+        }
+    ],
+    "Get branch name on push or schedule": [
+        {
+            "command": "echo \"BRANCH=${GITHUB_REF_NAME}\" >>$GITHUB_ENV",
+            "count": 1,
+            "repos": [
+                "python/python-docs-pt-br"
+            ]
+        },
+        {
+            "command": "echo \"CURRENT_BRANCH=${GITHUB_REF_NAME}\" >>$GITHUB_ENV",
+            "count": 1,
+            "repos": [
+                "python/python-docs-pt-br"
+            ]
+        }
+    ],
+    "Get branch name on pull": [
+        {
+            "command": "echo \"BRANCH=${GITHUB_BASE_REF}\" >>$GITHUB_ENV",
+            "count": 1,
+            "repos": [
+                "python/python-docs-pt-br"
+            ]
+        },
+        {
+            "command": "echo \"CURRENT_BRANCH=${GITHUB_BASE_REF}\" >>$GITHUB_ENV",
+            "count": 1,
+            "repos": [
+                "python/python-docs-pt-br"
+            ]
+        }
+    ],
+    "Get branch name on manual run": [
+        {
+            "command": "echo \"BRANCH=${{ github.event.inputs.BRANCH }}\" >> $GITHUB_ENV",
+            "count": 1,
+            "repos": [
+                "python/python-docs-pt-br"
+            ]
+        },
+        {
+            "command": "echo \"CURRENT_BRANCH=${{ github.event.inputs.BRANCH }}\" >> $GITHUB_ENV",
+            "count": 1,
+            "repos": [
+                "python/python-docs-pt-br"
+            ]
+        }
+    ],
+    "Step 9": [
+        {
+            "command": "actions/cache/save@v4",
+            "count": 1,
+            "repos": [
+                "python/python-docs-zh-cn"
+            ]
+        },
+        {
+            "command": "ad-m/github-push-action@master",
+            "count": 1,
+            "repos": [
+                "python/python-docs-pl"
+            ]
+        },
+        {
+            "command": "python -Werror -m cogapp -rP README.md",
+            "count": 1,
+            "repos": [
+                "python/python-docs-pl"
+            ]
+        },
+        {
+            "command": "git config --local user.name \"GitHub Action's update-translation job\"",
+            "count": 1,
+            "repos": [
+                "python/python-docs-uk"
+            ]
+        }
+    ],
+    "Step 8": [
+        {
+            "command": "git commit -m 'Update language switcher progress chart' || return 0",
+            "count": 1,
+            "repos": [
+                "python/python-docs-pl"
+            ]
+        },
+        {
+            "command": "./manage_translation.py fetch",
+            "count": 1,
+            "repos": [
+                "python/python-docs-pl"
+            ]
+        },
+        {
+            "command": "git config --local user.email github-actions@github.com",
+            "count": 1,
+            "repos": [
+                "python/python-docs-uk"
+            ]
+        }
+    ],
+    "Step 10": [
+        {
+            "command": "git config --local user.email github-actions@github.com",
+            "count": 1,
+            "repos": [
+                "python/python-docs-pl"
+            ]
+        },
+        {
+            "command": "git add .",
+            "count": 1,
+            "repos": [
+                "python/python-docs-uk"
+            ]
+        }
+    ],
+    "Step 11": [
+        {
+            "command": "git config --local user.name \"GitHub Action's update-translation job\"",
+            "count": 1,
+            "repos": [
+                "python/python-docs-pl"
+            ]
+        },
+        {
+            "command": "git commit -m 'Update translation from Transifex' || true",
+            "count": 1,
+            "repos": [
+                "python/python-docs-uk"
+            ]
+        }
+    ],
+    "Step 12": [
+        {
+            "command": "! git diff -I'^\"POT-Creation-Date: ' -I'^\"Language-Team: ' -I'^# Copyright (C) 2001-' --exit-code && echo \"SIGNIFICANT_CHANGES=1\" >> $GITHUB_ENV || exit 0\n",
+            "count": 1,
+            "repos": [
+                "python/python-docs-pl"
+            ]
+        },
+        {
+            "command": "ad-m/github-push-action@master",
+            "count": 1,
+            "repos": [
+                "python/python-docs-uk"
+            ]
+        }
+    ],
+    "Step 13": [
+        {
+            "command": "git add .",
+            "count": 1,
+            "repos": [
+                "python/python-docs-pl"
+            ]
+        },
+        {
+            "command": "peter-evans/repository-dispatch@main",
+            "count": 1,
+            "repos": [
+                "python/python-docs-uk"
+            ]
+        }
+    ],
+    "Display the Python version": [
+        {
+            "command": "python -VV",
+            "count": 1,
+            "repos": [
+                "python/pythoncapi-compat"
+            ]
+        },
+        {
+            "command": "python2.7 -VV",
+            "count": 1,
+            "repos": [
+                "python/pythoncapi-compat"
+            ]
+        }
+    ],
+    "Run": [
+        {
+            "command": "tox",
+            "count": 2,
+            "repos": [
+                "python/importlib_resources",
+                "python/importlib_metadata"
+            ]
+        },
+        {
+            "command": "tox -e release",
+            "count": 2,
+            "repos": [
+                "python/importlib_resources",
+                "python/importlib_metadata"
+            ]
+        }
+    ],
+    "List all installed dependencies": [
+        {
+            "command": "uv pip freeze",
+            "count": 5,
+            "repos": [
+                "python/typing_extensions"
+            ]
+        },
+        {
+            "command": "pdm list -vv",
+            "count": 1,
+            "repos": [
+                "python/typing_extensions"
+            ]
+        }
+    ]
+}

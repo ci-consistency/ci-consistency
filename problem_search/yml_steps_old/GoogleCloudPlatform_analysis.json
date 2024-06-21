@@ -1,0 +1,90 @@
+{
+    "Step 1": [
+        {
+            "command": "actions/checkout@v4",
+            "count": 2,
+            "repos": [
+                "GoogleCloudPlatform/php-docs-samples"
+            ]
+        },
+        {
+            "command": "actions/checkout@v2",
+            "count": 2,
+            "repos": [
+                "GoogleCloudPlatform/gsutil",
+                "GoogleCloudPlatform/fluent-plugin-google-cloud"
+            ]
+        },
+        {
+            "command": "hmarr/auto-approve-action@v2.0.0",
+            "count": 1,
+            "repos": [
+                "GoogleCloudPlatform/fluent-plugin-google-cloud"
+            ]
+        }
+    ],
+    "Run Script": [
+        {
+            "command": "testing/run_cs_check.sh",
+            "count": 1,
+            "repos": [
+                "GoogleCloudPlatform/php-docs-samples"
+            ]
+        },
+        {
+            "command": "composer install -d testing/\ngit fetch --no-tags --prune --depth=5 origin main\nbash testing/run_staticanalysis_check.sh\n",
+            "count": 1,
+            "repos": [
+                "GoogleCloudPlatform/php-docs-samples"
+            ]
+        }
+    ],
+    "Install dependencies": [
+        {
+            "command": "set -x\ngit submodule update --init --recursive\n",
+            "count": 1,
+            "repos": [
+                "GoogleCloudPlatform/gsutil"
+            ]
+        },
+        {
+            "command": "bundle install && gem install --no-document toys",
+            "count": 1,
+            "repos": [
+                "GoogleCloudPlatform/ruby-docker"
+            ]
+        }
+    ],
+    "Test": [
+        {
+            "command": "set -x\npython gsutil version -l\npython gsutil test -u\n",
+            "count": 1,
+            "repos": [
+                "GoogleCloudPlatform/gsutil"
+            ]
+        },
+        {
+            "command": "toys test --faster",
+            "count": 1,
+            "repos": [
+                "GoogleCloudPlatform/ruby-docker"
+            ]
+        }
+    ],
+    "Step 3": [
+        {
+            "command": "bundle exec rake\n",
+            "count": 1,
+            "repos": [
+                "GoogleCloudPlatform/fluent-plugin-google-cloud"
+            ]
+        },
+        {
+            "command": "go test -v",
+            "count": 1,
+            "repos": [
+                "GoogleCloudPlatform/protoc-gen-bq-schema"
+            ]
+        }
+    ]
+}

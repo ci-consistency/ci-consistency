@@ -1,0 +1,4244 @@
+{
+    "Checkout the source code": [
+        {
+            "command": "actions/checkout@v4",
+            "count": 1,
+            "repos": [
+                "rust-lang/rust"
+            ]
+        },
+        {
+            "command": "actions/checkout@v2",
+            "count": 12,
+            "repos": [
+                "rust-lang/rust-installer",
+                "rust-lang/rustc-perf",
+                "rust-lang/chalk",
+                "rust-lang/rust-log-analyzer"
+            ]
+        }
+    ],
+    "Step 1": [
+        {
+            "command": "msys2/setup-msys2@v2.22.0",
+            "count": 1,
+            "repos": [
+                "rust-lang/rust"
+            ]
+        },
+        {
+            "command": "# Fetch state and labels of PR\n# Or exit successfully if PR does not exist\nJSON=$(gh pr view cargo_update --repo $GITHUB_REPOSITORY --json labels,state || exit 0)\nSTATE=$(echo \"$JSON\" | jq -r '.state')\nWAITING_ON_BORS=$(echo \"$JSON\" | jq '.labels[] | any(.name == \"S-waiting-on-bors\"; .)')\n\n# Exit with error if open and S-waiting-on-bors\nif [[ \"$STATE\" == \"OPEN\" && \"$WAITING_ON_BORS\" == \"true\" ]]; then\n  exit 1\nfi\n",
+            "count": 1,
+            "repos": [
+                "rust-lang/rust"
+            ]
+        },
+        {
+            "command": "actions/checkout@v1",
+            "count": 3,
+            "repos": [
+                "rust-lang/rust-enhanced",
+                "rust-lang/stacker",
+                "rust-lang/rustc-pr-tracking"
+            ]
+        },
+        {
+            "command": "actions/checkout@v2",
+            "count": 31,
+            "repos": [
+                "rust-lang/rust-enhanced",
+                "rust-lang/rust.vim",
+                "rust-lang/stacker",
+                "rust-lang/rustc-demangle",
+                "rust-lang/rls",
+                "rust-lang/vscode-rust",
+                "rust-lang/crater",
+                "rust-lang/atom-ide-rust",
+                "rust-lang/docker-rust-nightly",
+                "rust-lang/www.rust-lang.org",
+                "rust-lang/polonius",
+                "rust-lang/datafrog"
+            ]
+        },
+        {
+            "command": "actions/checkout@v4",
+            "count": 100,
+            "repos": [
+                "rust-lang/cargo",
+                "rust-lang/rust-by-example",
+                "rust-lang/flate2-rs",
+                "rust-lang/cc-rs",
+                "rust-lang/pkg-config-rs",
+                "rust-lang/libc",
+                "rust-lang/rust-mode",
+                "rust-lang/mdBook",
+                "rust-lang/rustlings",
+                "rust-lang/glacier",
+                "rust-lang/miri",
+                "rust-lang/docs.rs",
+                "rust-lang/rust-bindgen",
+                "rust-lang/compiler-builtins",
+                "rust-lang/stdarch",
+                "rust-lang/socket2",
+                "rust-lang/docker-rust",
+                "rust-lang/ferris-says",
+                "rust-lang/rustc-dev-guide",
+                "rust-lang/annotate-snippets-rs",
+                "rust-lang/cargo-bisect-rustc",
+                "rust-lang/rustc-hash",
+                "rust-lang/rustc_codegen_cranelift"
+            ]
+        },
+        {
+            "command": "echo ok",
+            "count": 1,
+            "repos": [
+                "rust-lang/cargo"
+            ]
+        },
+        {
+            "command": "exit 1",
+            "count": 1,
+            "repos": [
+                "rust-lang/cargo"
+            ]
+        },
+        {
+            "command": "actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29",
+            "count": 1,
+            "repos": [
+                "rust-lang/rfcs"
+            ]
+        },
+        {
+            "command": "actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e",
+            "count": 2,
+            "repos": [
+                "rust-lang/rfcs",
+                "rust-lang/blog.rust-lang.org"
+            ]
+        },
+        {
+            "command": "actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332",
+            "count": 8,
+            "repos": [
+                "rust-lang/crates.io"
+            ]
+        },
+        {
+            "command": "actions/checkout@master",
+            "count": 30,
+            "repos": [
+                "rust-lang/git2-rs",
+                "rust-lang/cmake-rs",
+                "rust-lang/log",
+                "rust-lang/getopts",
+                "rust-lang/book",
+                "rust-lang/rustfix",
+                "rust-lang/reference",
+                "rust-lang/jobserver-rs",
+                "rust-lang/simpleinfra",
+                "rust-lang/edition-guide"
+            ]
+        },
+        {
+            "command": "jq --exit-status 'all(.result == \"success\")' <<< '${{ toJson(needs) }}'",
+            "count": 2,
+            "repos": [
+                "rust-lang/git2-rs",
+                "rust-lang/mdBook"
+            ]
+        },
+        {
+            "command": "actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11",
+            "count": 7,
+            "repos": [
+                "rust-lang/blog.rust-lang.org",
+                "rust-lang/libz-sys"
+            ]
+        },
+        {
+            "command": "XAMPPRocky/get-github-release@f014caa45687655545637a005866289b3af8c69e",
+            "count": 1,
+            "repos": [
+                "rust-lang/libz-sys"
+            ]
+        },
+        {
+            "command": "actions/checkout@v3",
+            "count": 33,
+            "repos": [
+                "rust-lang/cmake-rs",
+                "rust-lang/rustfmt",
+                "rust-lang/backtrace-rs",
+                "rust-lang/rustlings",
+                "rust-lang/miri",
+                "rust-lang/rust-forge",
+                "rust-lang/arewewebyet",
+                "rust-lang/rust-bindgen",
+                "rust-lang/api-guidelines",
+                "rust-lang/nomicon",
+                "rust-lang/rust-semverver"
+            ]
+        },
+        {
+            "command": "actions/checkout@0ad4b8fadaa221de15dcec353f45205ec38ea70b",
+            "count": 2,
+            "repos": [
+                "rust-lang/cfg-if"
+            ]
+        },
+        {
+            "command": "actions-ecosystem/action-remove-labels@v1",
+            "count": 1,
+            "repos": [
+                "rust-lang/docs.rs"
+            ]
+        },
+        {
+            "command": "actions-ecosystem/action-add-labels@v1",
+            "count": 3,
+            "repos": [
+                "rust-lang/docs.rs"
+            ]
+        },
+        {
+            "command": "taiki-e/checkout-action@v1",
+            "count": 13,
+            "repos": [
+                "rust-lang/futures-rs"
+            ]
+        }
+    ],
+    "disable git crlf conversion": [
+        {
+            "command": "git config --global core.autocrlf false",
+            "count": 1,
+            "repos": [
+                "rust-lang/rust"
+            ]
+        },
+        {
+            "command": "src/ci/scripts/disable-git-crlf-conversion.sh",
+            "count": 2,
+            "repos": [
+                "rust-lang/rust"
+            ]
+        }
+    ],
+    "Step 2": [
+        {
+            "command": "bash ci/install-rust.sh ${{ matrix.rust }}",
+            "count": 1,
+            "repos": [
+                "rust-lang/rust-enhanced"
+            ]
+        },
+        {
+            "command": "EmbarkStudios/cargo-deny-action@v1",
+            "count": 2,
+            "repos": [
+                "rust-lang/cargo",
+                "rust-lang/annotate-snippets-rs"
+            ]
+        },
+        {
+            "command": "rustup update stable && rustup default stable",
+            "count": 7,
+            "repos": [
+                "rust-lang/cargo"
+            ]
+        },
+        {
+            "command": "rustup update --no-self-update stable && rustup default stable",
+            "count": 1,
+            "repos": [
+                "rust-lang/cargo"
+            ]
+        },
+        {
+            "command": "rustup update nightly && rustup default nightly",
+            "count": 3,
+            "repos": [
+                "rust-lang/cargo",
+                "rust-lang/rustc-demangle"
+            ]
+        },
+        {
+            "command": "taiki-e/install-action@cargo-hack",
+            "count": 1,
+            "repos": [
+                "rust-lang/cargo"
+            ]
+        },
+        {
+            "command": "tj-actions/changed-files@d6babd6899969df1a11d14c368283ea4436bca78",
+            "count": 1,
+            "repos": [
+                "rust-lang/crates.io"
+            ]
+        },
+        {
+            "command": "rustup component add rustfmt",
+            "count": 1,
+            "repos": [
+                "rust-lang/crates.io"
+            ]
+        },
+        {
+            "command": "Swatinem/rust-cache@23bce251a8cd2ffc3c1075eaa2367cf899916d84",
+            "count": 3,
+            "repos": [
+                "rust-lang/crates.io"
+            ]
+        },
+        {
+            "command": "pnpm/action-setup@fe02b34f77f8bc703788d5817da081398fad5dd2",
+            "count": 3,
+            "repos": [
+                "rust-lang/crates.io"
+            ]
+        },
+        {
+            "command": "rustup override set ${{ env.RUST_VERSION }}",
+            "count": 2,
+            "repos": [
+                "rust-lang/blog.rust-lang.org"
+            ]
+        },
+        {
+            "command": "actions/upload-artifact@a8a3f3ad30e3422c9c7b888a15615d19a852ae32",
+            "count": 1,
+            "repos": [
+                "rust-lang/libz-sys"
+            ]
+        },
+        {
+            "command": "msys2/setup-msys2@7efe20baefed56359985e327d329042cde2434ff",
+            "count": 1,
+            "repos": [
+                "rust-lang/libz-sys"
+            ]
+        },
+        {
+            "command": "ci/set_rust_version.bash ${{ matrix.channel }} ${{ matrix.target }}",
+            "count": 1,
+            "repos": [
+                "rust-lang/libz-sys"
+            ]
+        },
+        {
+            "command": "cargo test --all-features\ncargo run --manifest-path systest/Cargo.toml --all-features\n",
+            "count": 1,
+            "repos": [
+                "rust-lang/libz-sys"
+            ]
+        },
+        {
+            "command": "cargo package --all-features\ncargo package --no-default-features --features zlib-ng-no-cmake-experimental-community-maintained\ncargo package --no-default-features --features zlib-ng\n",
+            "count": 1,
+            "repos": [
+                "rust-lang/libz-sys"
+            ]
+        },
+        {
+            "command": "dtolnay/rust-toolchain@master",
+            "count": 3,
+            "repos": [
+                "rust-lang/pkg-config-rs",
+                "rust-lang/socket2",
+                "rust-lang/ferris-says"
+            ]
+        },
+        {
+            "command": "actions-rs/toolchain@v1",
+            "count": 2,
+            "repos": [
+                "rust-lang/cmake-rs"
+            ]
+        },
+        {
+            "command": "jcs090218/setup-emacs@master",
+            "count": 1,
+            "repos": [
+                "rust-lang/rust-mode"
+            ]
+        },
+        {
+            "command": "rustup target add ${{ matrix.target }}",
+            "count": 1,
+            "repos": [
+                "rust-lang/backtrace-rs"
+            ]
+        },
+        {
+            "command": "msys2/setup-msys2@v2",
+            "count": 2,
+            "repos": [
+                "rust-lang/stacker"
+            ]
+        },
+        {
+            "command": "cargo clippy -- --deny warnings",
+            "count": 1,
+            "repos": [
+                "rust-lang/rustlings"
+            ]
+        },
+        {
+            "command": "dtolnay/rust-toolchain@stable",
+            "count": 7,
+            "repos": [
+                "rust-lang/rustlings",
+                "rust-lang/socket2",
+                "rust-lang/www.rust-lang.org"
+            ]
+        },
+        {
+            "command": "actions-rs/audit-check@v1",
+            "count": 2,
+            "repos": [
+                "rust-lang/docs.rs",
+                "rust-lang/annotate-snippets-rs"
+            ]
+        },
+        {
+            "command": "rustup override set stable\nrustup update stable\n",
+            "count": 3,
+            "repos": [
+                "rust-lang/docs.rs"
+            ]
+        },
+        {
+            "command": "rustup override set stable\nrustup update stable\nrustup component add rustfmt\n",
+            "count": 1,
+            "repos": [
+                "rust-lang/docs.rs"
+            ]
+        },
+        {
+            "command": "rustup override set stable\nrustup update stable\nrustup component add clippy\n",
+            "count": 1,
+            "repos": [
+                "rust-lang/docs.rs"
+            ]
+        },
+        {
+            "command": "actions/setup-node@v4",
+            "count": 1,
+            "repos": [
+                "rust-lang/docs.rs"
+            ]
+        },
+        {
+            "command": "actions-ecosystem/action-remove-labels@v1",
+            "count": 3,
+            "repos": [
+                "rust-lang/docs.rs"
+            ]
+        },
+        {
+            "command": "swatinem/rust-cache@v2",
+            "count": 1,
+            "repos": [
+                "rust-lang/rust-bindgen"
+            ]
+        },
+        {
+            "command": "actions/checkout@v4",
+            "count": 1,
+            "repos": [
+                "rust-lang/compiler-builtins"
+            ]
+        },
+        {
+            "command": "cargo +stable fmt --manifest-path=Cargo.toml -- --check",
+            "count": 1,
+            "repos": [
+                "rust-lang/rls"
+            ]
+        },
+        {
+            "command": "dtolnay/rust-toolchain@nightly",
+            "count": 3,
+            "repos": [
+                "rust-lang/socket2"
+            ]
+        },
+        {
+            "command": "UziTech/action-setup-atom@v1",
+            "count": 1,
+            "repos": [
+                "rust-lang/atom-ide-rust"
+            ]
+        },
+        {
+            "command": "actions/setup-node@v2",
+            "count": 1,
+            "repos": [
+                "rust-lang/atom-ide-rust"
+            ]
+        },
+        {
+            "command": "actions/setup-node@v3",
+            "count": 1,
+            "repos": [
+                "rust-lang/simpleinfra"
+            ]
+        },
+        {
+            "command": "git clone https://github.com/docker-library/official-images.git ~/official-images",
+            "count": 1,
+            "repos": [
+                "rust-lang/docker-rust"
+            ]
+        },
+        {
+            "command": "docker/setup-qemu-action@v3",
+            "count": 1,
+            "repos": [
+                "rust-lang/docker-rust"
+            ]
+        },
+        {
+            "command": "docker/setup-qemu-action@v1",
+            "count": 1,
+            "repos": [
+                "rust-lang/docker-rust-nightly"
+            ]
+        },
+        {
+            "command": "actions/setup-python@v5",
+            "count": 1,
+            "repos": [
+                "rust-lang/annotate-snippets-rs"
+            ]
+        },
+        {
+            "command": "rust-lang/simpleinfra/github-actions/simple-ci@master",
+            "count": 1,
+            "repos": [
+                "rust-lang/rustc-hash"
+            ]
+        },
+        {
+            "command": "sed -i 's/components.*/components = []/' rust-toolchain\necho 'profile = \"minimal\"' >> rust-toolchain\n",
+            "count": 1,
+            "repos": [
+                "rust-lang/rustc_codegen_cranelift"
+            ]
+        }
+    ],
+    "Step 4": [
+        {
+            "command": "SublimeText/UnitTesting/actions/setup@v1",
+            "count": 1,
+            "repos": [
+                "rust-lang/rust-enhanced"
+            ]
+        },
+        {
+            "command": "cargo fmt --all --check",
+            "count": 1,
+            "repos": [
+                "rust-lang/cargo"
+            ]
+        },
+        {
+            "command": "cargo clippy --workspace --all-targets --no-deps -- -D warnings",
+            "count": 1,
+            "repos": [
+                "rust-lang/cargo"
+            ]
+        },
+        {
+            "command": "ci/validate-version-bump.sh",
+            "count": 1,
+            "repos": [
+                "rust-lang/cargo"
+            ]
+        },
+        {
+            "command": "rustup update --no-self-update ${{ matrix.rust }} && rustup default ${{ matrix.rust }}",
+            "count": 1,
+            "repos": [
+                "rust-lang/cargo"
+            ]
+        },
+        {
+            "command": "sudo apt update -y && sudo apt install gcc-multilib libsecret-1-0 libsecret-1-dev -y",
+            "count": 1,
+            "repos": [
+                "rust-lang/cargo"
+            ]
+        },
+        {
+            "command": "cargo build",
+            "count": 1,
+            "repos": [
+                "rust-lang/cargo"
+            ]
+        },
+        {
+            "command": "rustup component add rust-docs",
+            "count": 1,
+            "repos": [
+                "rust-lang/cargo"
+            ]
+        },
+        {
+            "command": "tj-actions/changed-files@d6babd6899969df1a11d14c368283ea4436bca78",
+            "count": 1,
+            "repos": [
+                "rust-lang/crates.io"
+            ]
+        },
+        {
+            "command": "Swatinem/rust-cache@23bce251a8cd2ffc3c1075eaa2367cf899916d84",
+            "count": 1,
+            "repos": [
+                "rust-lang/crates.io"
+            ]
+        },
+        {
+            "command": "cargo deny check",
+            "count": 1,
+            "repos": [
+                "rust-lang/crates.io"
+            ]
+        },
+        {
+            "command": "sudo systemctl start postgresql.service",
+            "count": 1,
+            "repos": [
+                "rust-lang/crates.io"
+            ]
+        },
+        {
+            "command": "pnpm install",
+            "count": 3,
+            "repos": [
+                "rust-lang/crates.io"
+            ]
+        },
+        {
+            "command": "cargo run --package crates_io_smoke_test --quiet",
+            "count": 1,
+            "repos": [
+                "rust-lang/crates.io"
+            ]
+        },
+        {
+            "command": "rustdoc --test README.md -L target/debug/deps --extern flate2=target/debug/libflate2.rlib --edition=2018",
+            "count": 1,
+            "repos": [
+                "rust-lang/flate2-rs"
+            ]
+        },
+        {
+            "command": "cargo doc --all-features",
+            "count": 1,
+            "repos": [
+                "rust-lang/flate2-rs"
+            ]
+        },
+        {
+            "command": "cargo test",
+            "count": 1,
+            "repos": [
+                "rust-lang/git2-rs"
+            ]
+        },
+        {
+            "command": "rustup component add rustfmt",
+            "count": 1,
+            "repos": [
+                "rust-lang/blog.rust-lang.org"
+            ]
+        },
+        {
+            "command": "cargo run",
+            "count": 1,
+            "repos": [
+                "rust-lang/blog.rust-lang.org"
+            ]
+        },
+        {
+            "command": "cargo test -Z build-std=std ${{ matrix.no_run }} --workspace --target ${{ matrix.target }}",
+            "count": 1,
+            "repos": [
+                "rust-lang/cc-rs"
+            ]
+        },
+        {
+            "command": "cargo clippy",
+            "count": 1,
+            "repos": [
+                "rust-lang/cc-rs"
+            ]
+        },
+        {
+            "command": "cargo fmt -- --check",
+            "count": 1,
+            "repos": [
+                "rust-lang/cc-rs"
+            ]
+        },
+        {
+            "command": "Swatinem/rust-cache@v2",
+            "count": 5,
+            "repos": [
+                "rust-lang/cc-rs",
+                "rust-lang/rustc-perf",
+                "rust-lang/jobserver-rs"
+            ]
+        },
+        {
+            "command": "ci/test.bash cargo ${{ matrix.target }}",
+            "count": 1,
+            "repos": [
+                "rust-lang/libz-sys"
+            ]
+        },
+        {
+            "command": "echo RUSTFLAGS=${RUSTFLAGS}\\ -Zlinker-features=-lld >> $GITHUB_ENV",
+            "count": 1,
+            "repos": [
+                "rust-lang/libz-sys"
+            ]
+        },
+        {
+            "command": "cargo test --verbose --no-default-features",
+            "count": 1,
+            "repos": [
+                "rust-lang/log"
+            ]
+        },
+        {
+            "command": "cargo fmt --manifest-path test_max_level_features/Cargo.toml -- --check",
+            "count": 1,
+            "repos": [
+                "rust-lang/log"
+            ]
+        },
+        {
+            "command": "cargo clippy --verbose --manifest-path test_max_level_features/Cargo.toml",
+            "count": 1,
+            "repos": [
+                "rust-lang/log"
+            ]
+        },
+        {
+            "command": "cargo build --verbose -Z avoid-dev-deps --features \"kv std\"",
+            "count": 1,
+            "repos": [
+                "rust-lang/log"
+            ]
+        },
+        {
+            "command": "cargo build --verbose -Z minimal-versions --features \"kv std\"",
+            "count": 1,
+            "repos": [
+                "rust-lang/log"
+            ]
+        },
+        {
+            "command": "cargo build --verbose --target=thumbv6m-none-eabi",
+            "count": 1,
+            "repos": [
+                "rust-lang/log"
+            ]
+        },
+        {
+            "command": "cargo doc",
+            "count": 1,
+            "repos": [
+                "rust-lang/getopts"
+            ]
+        },
+        {
+            "command": "Swatinem/rust-cache@v1",
+            "count": 1,
+            "repos": [
+                "rust-lang/rustc-perf"
+            ]
+        },
+        {
+            "command": "rustup target add aarch64-pc-windows-msvc",
+            "count": 1,
+            "repos": [
+                "rust-lang/backtrace-rs"
+            ]
+        },
+        {
+            "command": "cargo generate-lockfile",
+            "count": 1,
+            "repos": [
+                "rust-lang/backtrace-rs"
+            ]
+        },
+        {
+            "command": "echo RUSTFLAGS=-Dwarnings >> $GITHUB_ENV",
+            "count": 1,
+            "repos": [
+                "rust-lang/backtrace-rs"
+            ]
+        },
+        {
+            "command": "actions-rs/cargo@v1",
+            "count": 1,
+            "repos": [
+                "rust-lang/stacker"
+            ]
+        },
+        {
+            "command": "echo \"${{ matrix.mingw_path }}\" | Out-File -FilePath $env:GITHUB_PATH -Append",
+            "count": 1,
+            "repos": [
+                "rust-lang/stacker"
+            ]
+        },
+        {
+            "command": "cargo test --target wasm32-wasi --all -- --nocapture",
+            "count": 1,
+            "repos": [
+                "rust-lang/stacker"
+            ]
+        },
+        {
+            "command": "./target/release/autofix",
+            "count": 1,
+            "repos": [
+                "rust-lang/glacier"
+            ]
+        },
+        {
+            "command": "./target/release/glacier",
+            "count": 1,
+            "repos": [
+                "rust-lang/glacier"
+            ]
+        },
+        {
+            "command": "npm install -g eslint@8",
+            "count": 1,
+            "repos": [
+                "rust-lang/docs.rs"
+            ]
+        },
+        {
+            "command": "cargo test --workspace --all-features $DOCTEST_XCOMPILE",
+            "count": 1,
+            "repos": [
+                "rust-lang/futures-rs"
+            ]
+        },
+        {
+            "command": "cargo hack --remove-dev-deps --workspace",
+            "count": 2,
+            "repos": [
+                "rust-lang/futures-rs"
+            ]
+        },
+        {
+            "command": "cargo hack build --workspace --no-dev-deps",
+            "count": 1,
+            "repos": [
+                "rust-lang/futures-rs"
+            ]
+        },
+        {
+            "command": "cargo bench --manifest-path futures-util/Cargo.toml --features=bilock,unstable",
+            "count": 1,
+            "repos": [
+                "rust-lang/futures-rs"
+            ]
+        },
+        {
+            "command": "cargo hack check \\\n  --feature-powerset --depth 2 --no-dev-deps \\\n  --workspace --exclude futures-test \\\n  --features unstable --ignore-unknown-features\n",
+            "count": 1,
+            "repos": [
+                "rust-lang/futures-rs"
+            ]
+        },
+        {
+            "command": "cargo -Z build-std test --workspace --all-features --target x86_64-unknown-linux-gnu --lib --tests",
+            "count": 1,
+            "repos": [
+                "rust-lang/futures-rs"
+            ]
+        },
+        {
+            "command": "cargo test --all",
+            "count": 1,
+            "repos": [
+                "rust-lang/rustc-demangle"
+            ]
+        },
+        {
+            "command": "cargo fuzz build --dev",
+            "count": 1,
+            "repos": [
+                "rust-lang/rustc-demangle"
+            ]
+        },
+        {
+            "command": "cargo dist build ${{ needs.plan.outputs.tag-flag }} --output-format=json \"--artifacts=global\" > dist-manifest.json\necho \"cargo dist ran successfully\"\n\n# Parse out what we just built and upload it to scratch storage\necho \"paths<<EOF\" >> \"$GITHUB_OUTPUT\"\njq --raw-output \".artifacts[]?.path | select( . != null )\" dist-manifest.json >> \"$GITHUB_OUTPUT\"\necho \"EOF\" >> \"$GITHUB_OUTPUT\"\n\ncp dist-manifest.json \"$BUILD_MANIFEST_NAME\"\n",
+            "count": 1,
+            "repos": [
+                "rust-lang/rust-bindgen"
+            ]
+        },
+        {
+            "command": "cargo dist host ${{ needs.plan.outputs.tag-flag }} --steps=upload --steps=release --output-format=json > dist-manifest.json\necho \"artifacts uploaded and released successfully\"\ncat dist-manifest.json\necho \"manifest=$(jq -c \".\" dist-manifest.json)\" >> \"$GITHUB_OUTPUT\"\n",
+            "count": 1,
+            "repos": [
+                "rust-lang/rust-bindgen"
+            ]
+        },
+        {
+            "command": "cargo test --all -- --ignored",
+            "count": 1,
+            "repos": [
+                "rust-lang/rustfix"
+            ]
+        },
+        {
+            "command": "rustup target add ${{ matrix.target }}",
+            "count": 1,
+            "repos": [
+                "rust-lang/compiler-builtins"
+            ]
+        },
+        {
+            "command": "cargo clippy -- -D clippy::all",
+            "count": 1,
+            "repos": [
+                "rust-lang/compiler-builtins"
+            ]
+        },
+        {
+            "command": "rustc -vV",
+            "count": 1,
+            "repos": [
+                "rust-lang/rls"
+            ]
+        },
+        {
+            "command": "cargo +stable fmt --manifest-path=rls-data/Cargo.toml -- --check",
+            "count": 1,
+            "repos": [
+                "rust-lang/rls"
+            ]
+        },
+        {
+            "command": "npm ci",
+            "count": 1,
+            "repos": [
+                "rust-lang/vscode-rust"
+            ]
+        },
+        {
+            "command": "rustup default nightly\nrustup target add ${{ matrix.target }}\n",
+            "count": 1,
+            "repos": [
+                "rust-lang/stdarch"
+            ]
+        },
+        {
+            "command": "cargo test --locked",
+            "count": 1,
+            "repos": [
+                "rust-lang/jobserver-rs"
+            ]
+        },
+        {
+            "command": "~/official-images/test/run.sh rust:$RUST_VERSION-${{ matrix.name }}",
+            "count": 1,
+            "repos": [
+                "rust-lang/docker-rust"
+            ]
+        },
+        {
+            "command": "docker/login-action@v3",
+            "count": 1,
+            "repos": [
+                "rust-lang/docker-rust"
+            ]
+        },
+        {
+            "command": "cargo check --features clippy",
+            "count": 1,
+            "repos": [
+                "rust-lang/ferris-says"
+            ]
+        },
+        {
+            "command": "docker/login-action@v1",
+            "count": 1,
+            "repos": [
+                "rust-lang/docker-rust-nightly"
+            ]
+        },
+        {
+            "command": "taiki-e/install-action@cargo-hack",
+            "count": 4,
+            "repos": [
+                "rust-lang/annotate-snippets-rs"
+            ]
+        },
+        {
+            "command": "npm install --production",
+            "count": 1,
+            "repos": [
+                "rust-lang/rustc_codegen_cranelift"
+            ]
+        }
+    ],
+    "Step 5": [
+        {
+            "command": "SublimeText/UnitTesting/actions/run-syntax-tests@v1",
+            "count": 1,
+            "repos": [
+                "rust-lang/rust-enhanced"
+            ]
+        },
+        {
+            "command": "rustup target add ${{ matrix.other }}",
+            "count": 1,
+            "repos": [
+                "rust-lang/cargo"
+            ]
+        },
+        {
+            "command": "rustup component add rustfmt || echo \"rustfmt not available\"",
+            "count": 1,
+            "repos": [
+                "rust-lang/cargo"
+            ]
+        },
+        {
+            "command": "cargo test -p cargo --test build-std",
+            "count": 1,
+            "repos": [
+                "rust-lang/cargo"
+            ]
+        },
+        {
+            "command": "ci/validate-man.sh",
+            "count": 1,
+            "repos": [
+                "rust-lang/cargo"
+            ]
+        },
+        {
+            "command": "cargo fmt --check --all",
+            "count": 1,
+            "repos": [
+                "rust-lang/crates.io"
+            ]
+        },
+        {
+            "command": "sudo -u postgres psql -c \"ALTER USER postgres WITH PASSWORD 'postgres'\"",
+            "count": 1,
+            "repos": [
+                "rust-lang/crates.io"
+            ]
+        },
+        {
+            "command": "pnpm lint:hbs",
+            "count": 1,
+            "repos": [
+                "rust-lang/crates.io"
+            ]
+        },
+        {
+            "command": "pnpm percy exec -- pnpm test-coverage",
+            "count": 1,
+            "repos": [
+                "rust-lang/crates.io"
+            ]
+        },
+        {
+            "command": "pnpm playwright install chromium",
+            "count": 1,
+            "repos": [
+                "rust-lang/crates.io"
+            ]
+        },
+        {
+            "command": "cargo test",
+            "count": 2,
+            "repos": [
+                "rust-lang/flate2-rs",
+                "rust-lang/ferris-says"
+            ]
+        },
+        {
+            "command": "cargo run -p systest",
+            "count": 1,
+            "repos": [
+                "rust-lang/git2-rs"
+            ]
+        },
+        {
+            "command": "Swatinem/rust-cache@23bce251a8cd2ffc3c1075eaa2367cf899916d84",
+            "count": 1,
+            "repos": [
+                "rust-lang/blog.rust-lang.org"
+            ]
+        },
+        {
+            "command": "cp CNAME ./site/",
+            "count": 1,
+            "repos": [
+                "rust-lang/blog.rust-lang.org"
+            ]
+        },
+        {
+            "command": "cargo test -Z build-std=std ${{ matrix.no_run }} --workspace --target ${{ matrix.target }} --release",
+            "count": 1,
+            "repos": [
+                "rust-lang/cc-rs"
+            ]
+        },
+        {
+            "command": "cargo check --lib -p cc --locked",
+            "count": 1,
+            "repos": [
+                "rust-lang/cc-rs"
+            ]
+        },
+        {
+            "command": "ci/set_rust_version.bash ${{ matrix.channel }} ${{ matrix.target }}",
+            "count": 1,
+            "repos": [
+                "rust-lang/libz-sys"
+            ]
+        },
+        {
+            "command": "cargo build --verbose\n",
+            "count": 1,
+            "repos": [
+                "rust-lang/pkg-config-rs"
+            ]
+        },
+        {
+            "command": "cargo test --verbose --features std,serde,sval,sval_ref,value-bag,kv,kv_std,kv_sval,kv_serde",
+            "count": 1,
+            "repos": [
+                "rust-lang/log"
+            ]
+        },
+        {
+            "command": "cargo fmt --manifest-path tests/Cargo.toml -- --check",
+            "count": 1,
+            "repos": [
+                "rust-lang/log"
+            ]
+        },
+        {
+            "command": "cargo clippy --verbose --manifest-path tests/Cargo.toml",
+            "count": 1,
+            "repos": [
+                "rust-lang/log"
+            ]
+        },
+        {
+            "command": "cargo build --verbose -Z avoid-dev-deps --features \"kv kv_sval\"",
+            "count": 1,
+            "repos": [
+                "rust-lang/log"
+            ]
+        },
+        {
+            "command": "cargo build --verbose -Z minimal-versions --features \"kv kv_sval\"",
+            "count": 1,
+            "repos": [
+                "rust-lang/log"
+            ]
+        },
+        {
+            "command": "cargo build --verbose --target=riscv32imc-unknown-none-elf",
+            "count": 1,
+            "repos": [
+                "rust-lang/log"
+            ]
+        },
+        {
+            "command": "Swatinem/rust-cache@v2",
+            "count": 2,
+            "repos": [
+                "rust-lang/rustc-perf"
+            ]
+        },
+        {
+            "command": "actions/setup-node@v3",
+            "count": 1,
+            "repos": [
+                "rust-lang/rustc-perf"
+            ]
+        },
+        {
+            "command": "cargo test --no-run --target aarch64-pc-windows-msvc",
+            "count": 1,
+            "repos": [
+                "rust-lang/backtrace-rs"
+            ]
+        },
+        {
+            "command": "echo RUSTFLAGS=-Dwarnings >> $GITHUB_ENV",
+            "count": 1,
+            "repos": [
+                "rust-lang/backtrace-rs"
+            ]
+        },
+        {
+            "command": "cargo build --target ${{ matrix.target }}",
+            "count": 1,
+            "repos": [
+                "rust-lang/backtrace-rs"
+            ]
+        },
+        {
+            "command": "just lint",
+            "count": 1,
+            "repos": [
+                "rust-lang/docs.rs"
+            ]
+        },
+        {
+            "command": "just lint-js",
+            "count": 1,
+            "repos": [
+                "rust-lang/docs.rs"
+            ]
+        },
+        {
+            "command": "cargo test --workspace --all-features --release $DOCTEST_XCOMPILE",
+            "count": 1,
+            "repos": [
+                "rust-lang/futures-rs"
+            ]
+        },
+        {
+            "command": "cargo hack build --workspace --ignore-private --no-default-features \\\n  --exclude futures --exclude futures-util --exclude futures-task --exclude futures-macro --exclude futures-executor --exclude futures-channel --exclude futures-test\n",
+            "count": 1,
+            "repos": [
+                "rust-lang/futures-rs"
+            ]
+        },
+        {
+            "command": "cargo hack build --workspace --ignore-private",
+            "count": 1,
+            "repos": [
+                "rust-lang/futures-rs"
+            ]
+        },
+        {
+            "command": "cargo build --tests --features default,thread-pool,io-compat --manifest-path futures/Cargo.toml",
+            "count": 1,
+            "repos": [
+                "rust-lang/futures-rs"
+            ]
+        },
+        {
+            "command": "cargo minimal-versions build --workspace --ignore-private --all-features",
+            "count": 1,
+            "repos": [
+                "rust-lang/futures-rs"
+            ]
+        },
+        {
+            "command": "cargo hack --remove-dev-deps --workspace",
+            "count": 1,
+            "repos": [
+                "rust-lang/futures-rs"
+            ]
+        },
+        {
+            "command": "cargo build --features std",
+            "count": 1,
+            "repos": [
+                "rust-lang/rustc-demangle"
+            ]
+        },
+        {
+            "command": "rustup component add llvm-tools-preview",
+            "count": 1,
+            "repos": [
+                "rust-lang/compiler-builtins"
+            ]
+        },
+        {
+            "command": "cargo build -v",
+            "count": 1,
+            "repos": [
+                "rust-lang/rls"
+            ]
+        },
+        {
+            "command": "cargo +stable fmt --manifest-path=rls-ipc/Cargo.toml -- --check",
+            "count": 1,
+            "repos": [
+                "rust-lang/rls"
+            ]
+        },
+        {
+            "command": "npm run prettier -- --list-different",
+            "count": 1,
+            "repos": [
+                "rust-lang/vscode-rust"
+            ]
+        },
+        {
+            "command": "cargo hack check --lib --rust-version --ignore-private --locked",
+            "count": 1,
+            "repos": [
+                "rust-lang/jobserver-rs"
+            ]
+        },
+        {
+            "command": "docker images",
+            "count": 1,
+            "repos": [
+                "rust-lang/docker-rust"
+            ]
+        },
+        {
+            "command": "docker/login-action@v3",
+            "count": 1,
+            "repos": [
+                "rust-lang/docker-rust"
+            ]
+        },
+        {
+            "command": "docker/login-action@v1",
+            "count": 1,
+            "repos": [
+                "rust-lang/docker-rust-nightly"
+            ]
+        }
+    ],
+    "Step 6": [
+        {
+            "command": "SublimeText/UnitTesting/actions/run-tests@v1",
+            "count": 1,
+            "repos": [
+                "rust-lang/rust-enhanced"
+            ]
+        },
+        {
+            "command": "rustup component add rustc-dev llvm-tools-preview rust-docs",
+            "count": 1,
+            "repos": [
+                "rust-lang/cargo"
+            ]
+        },
+        {
+            "command": "cargo test -p cargo",
+            "count": 1,
+            "repos": [
+                "rust-lang/cargo"
+            ]
+        },
+        {
+            "command": "cargo clippy --all-targets --all-features --workspace",
+            "count": 1,
+            "repos": [
+                "rust-lang/crates.io"
+            ]
+        },
+        {
+            "command": "cargo build --tests --workspace",
+            "count": 1,
+            "repos": [
+                "rust-lang/crates.io"
+            ]
+        },
+        {
+            "command": "pnpm lint:js",
+            "count": 1,
+            "repos": [
+                "rust-lang/crates.io"
+            ]
+        },
+        {
+            "command": "pnpm test-coverage",
+            "count": 1,
+            "repos": [
+                "rust-lang/crates.io"
+            ]
+        },
+        {
+            "command": "pnpm percy exec -- pnpm e2e",
+            "count": 1,
+            "repos": [
+                "rust-lang/crates.io"
+            ]
+        },
+        {
+            "command": "cargo test --features zlib",
+            "count": 1,
+            "repos": [
+                "rust-lang/flate2-rs"
+            ]
+        },
+        {
+            "command": "cargo test -p git2-curl",
+            "count": 1,
+            "repos": [
+                "rust-lang/git2-rs"
+            ]
+        },
+        {
+            "command": "cargo clippy --workspace -- -D warnings",
+            "count": 1,
+            "repos": [
+                "rust-lang/blog.rust-lang.org"
+            ]
+        },
+        {
+            "command": "touch site/.nojekyll",
+            "count": 1,
+            "repos": [
+                "rust-lang/blog.rust-lang.org"
+            ]
+        },
+        {
+            "command": "Swatinem/rust-cache@v2",
+            "count": 2,
+            "repos": [
+                "rust-lang/cc-rs",
+                "rust-lang/compiler-builtins"
+            ]
+        },
+        {
+            "command": "cargo test -Z build-std=std ${{ matrix.no_run }} --workspace --target ${{ matrix.target }} --features parallel",
+            "count": 1,
+            "repos": [
+                "rust-lang/cc-rs"
+            ]
+        },
+        {
+            "command": "cargo check --lib -p cc --locked --all-features",
+            "count": 1,
+            "repos": [
+                "rust-lang/cc-rs"
+            ]
+        },
+        {
+            "command": "ci/test.bash /tmp/cross ${{ matrix.target }}",
+            "count": 1,
+            "repos": [
+                "rust-lang/libz-sys"
+            ]
+        },
+        {
+            "command": "cargo test --verbose\n",
+            "count": 1,
+            "repos": [
+                "rust-lang/pkg-config-rs"
+            ]
+        },
+        {
+            "command": "cargo test --verbose --features serde",
+            "count": 1,
+            "repos": [
+                "rust-lang/log"
+            ]
+        },
+        {
+            "command": "cargo build --verbose -Z avoid-dev-deps --features \"kv kv_serde\"",
+            "count": 1,
+            "repos": [
+                "rust-lang/log"
+            ]
+        },
+        {
+            "command": "cargo build --verbose -Z minimal-versions --features \"kv kv_serde\"",
+            "count": 1,
+            "repos": [
+                "rust-lang/log"
+            ]
+        },
+        {
+            "command": "cargo build",
+            "count": 1,
+            "repos": [
+                "rust-lang/backtrace-rs"
+            ]
+        },
+        {
+            "command": "cargo test --no-run --target aarch64-pc-windows-msvc --features verify-winapi",
+            "count": 1,
+            "repos": [
+                "rust-lang/backtrace-rs"
+            ]
+        },
+        {
+            "command": "./ci/run-docker.sh ${{ matrix.target }}",
+            "count": 1,
+            "repos": [
+                "rust-lang/backtrace-rs"
+            ]
+        },
+        {
+            "command": "cargo build --manifest-path crates/as-if-std/Cargo.toml --target ${{ matrix.target }}",
+            "count": 1,
+            "repos": [
+                "rust-lang/backtrace-rs"
+            ]
+        },
+        {
+            "command": "actions-rs/cargo@v1",
+            "count": 1,
+            "repos": [
+                "rust-lang/stacker"
+            ]
+        },
+        {
+            "command": "cargo hack build --workspace --ignore-private --no-default-features --features alloc --ignore-unknown-features \\\n  --exclude futures --exclude futures-util --exclude futures-task --exclude futures-macro --exclude futures-executor --exclude futures-channel --exclude futures-test\n",
+            "count": 1,
+            "repos": [
+                "rust-lang/futures-rs"
+            ]
+        },
+        {
+            "command": "cargo hack build --workspace --exclude futures-test --ignore-private --no-default-features",
+            "count": 1,
+            "repos": [
+                "rust-lang/futures-rs"
+            ]
+        },
+        {
+            "command": "cargo hack build --manifest-path futures/tests/no-std/Cargo.toml \\\n  --each-feature --optional-deps \\\n  --target ${{ matrix.target }}\n",
+            "count": 1,
+            "repos": [
+                "rust-lang/futures-rs"
+            ]
+        },
+        {
+            "command": "cargo test -v",
+            "count": 1,
+            "repos": [
+                "rust-lang/rls"
+            ]
+        },
+        {
+            "command": "cargo +stable fmt --manifest-path=rls-rustc/Cargo.toml -- --check",
+            "count": 1,
+            "repos": [
+                "rust-lang/rls"
+            ]
+        },
+        {
+            "command": "npm run compile",
+            "count": 1,
+            "repos": [
+                "rust-lang/vscode-rust"
+            ]
+        },
+        {
+            "command": "cargo generate-lockfile",
+            "count": 1,
+            "repos": [
+                "rust-lang/stdarch"
+            ]
+        },
+        {
+            "command": "docker/metadata-action@v5",
+            "count": 1,
+            "repos": [
+                "rust-lang/docker-rust"
+            ]
+        },
+        {
+            "command": "cargo test --features clippy",
+            "count": 1,
+            "repos": [
+                "rust-lang/ferris-says"
+            ]
+        },
+        {
+            "command": "docker/metadata-action@v3",
+            "count": 1,
+            "repos": [
+                "rust-lang/docker-rust-nightly"
+            ]
+        }
+    ],
+    "Install mdbook": [
+        {
+            "command": "mkdir mdbook\ncurl -Lf https://github.com/rust-lang/mdBook/releases/download/v0.4.11/mdbook-v0.4.11-x86_64-unknown-linux-gnu.tar.gz | tar -xz --directory=./mdbook\necho `pwd`/mdbook >> $GITHUB_PATH\n",
+            "count": 1,
+            "repos": [
+                "rust-lang/rust-enhanced"
+            ]
+        },
+        {
+            "command": "mkdir mdbook\ncurl -Lf https://github.com/rust-lang/mdBook/releases/download/v0.4.37/mdbook-v0.4.37-x86_64-unknown-linux-gnu.tar.gz | tar -xz --directory=./mdbook\necho `pwd`/mdbook >> $GITHUB_PATH\n",
+            "count": 2,
+            "repos": [
+                "rust-lang/cargo"
+            ]
+        },
+        {
+            "command": "mkdir mdbook\ncurl -Lf https://github.com/rust-lang/mdBook/releases/download/v${{ env.MDBOOK_VERSION }}/mdbook-v${{ env.MDBOOK_VERSION }}-x86_64-unknown-linux-gnu.tar.gz | tar -xz --directory=./mdbook\necho `pwd`/mdbook >> $GITHUB_PATH\n",
+            "count": 1,
+            "repos": [
+                "rust-lang/rfcs"
+            ]
+        },
+        {
+            "command": "mkdir bin\ncurl -sSL https://github.com/rust-lang/mdBook/releases/download/v0.4.37/mdbook-v0.4.37-x86_64-unknown-linux-gnu.tar.gz | tar -xz --directory=bin\necho \"$(pwd)/bin\" >> ${GITHUB_PATH}\n",
+            "count": 1,
+            "repos": [
+                "rust-lang/rust-by-example"
+            ]
+        },
+        {
+            "command": "mkdir mdbook\ncurl -Lf https://github.com/rust-lang/mdBook/releases/download/v0.4.34/mdbook-v0.4.34-x86_64-unknown-linux-gnu.tar.gz | tar -xz --directory=./mdbook\necho `pwd`/mdbook >> $GITHUB_PATH\n",
+            "count": 1,
+            "repos": [
+                "rust-lang/rust-clippy"
+            ]
+        },
+        {
+            "command": "cd book\ncurl -L https://github.com/rust-lang/mdBook/releases/download/v0.4.5/mdbook-v0.4.5-x86_64-unknown-linux-gnu.tar.gz | tar xz\n# Add the book directory to the $PATH\necho \"$GITHUB_WORKSPACE/book\" >> $GITHUB_PATH\n",
+            "count": 2,
+            "repos": [
+                "rust-lang/chalk"
+            ]
+        },
+        {
+            "command": "mkdir bin\ncurl -sSL https://github.com/rust-lang/mdBook/releases/download/v0.4.21/mdbook-v0.4.21-x86_64-unknown-linux-gnu.tar.gz | tar -xz --directory=bin\necho \"$(pwd)/bin\" >> ${GITHUB_PATH}\n",
+            "count": 2,
+            "repos": [
+                "rust-lang/book"
+            ]
+        },
+        {
+            "command": "curl -sSL https://github.com/rust-lang/mdBook/releases/download/v0.4.35/mdbook-v0.4.35-x86_64-unknown-linux-gnu.tar.gz | tar -xz",
+            "count": 1,
+            "repos": [
+                "rust-lang/rust-forge"
+            ]
+        },
+        {
+            "command": "mkdir bin\ncurl -sSL https://github.com/rust-lang/mdBook/releases/download/v0.4.14/mdbook-v0.4.14-x86_64-unknown-linux-gnu.tar.gz | tar -xz --directory=bin\necho \"$(pwd)/bin\" >> $GITHUB_PATH\n",
+            "count": 1,
+            "repos": [
+                "rust-lang/reference"
+            ]
+        },
+        {
+            "command": "mkdir bin\ncurl -sSL https://github.com/rust-lang/mdBook/releases/download/${{ env.MDBOOK_VER }}/mdbook-${{ env.MDBOOK_VER }}-x86_64-unknown-linux-gnu.tar.gz | tar -xz --directory=bin\necho \"$(pwd)/bin\" >> $GITHUB_PATH\n",
+            "count": 1,
+            "repos": [
+                "rust-lang/nomicon"
+            ]
+        },
+        {
+            "command": "mkdir bin\ncurl -sSL https://github.com/rust-lang/mdBook/releases/download/v0.4.7/mdbook-v0.4.7-x86_64-unknown-linux-gnu.tar.gz | tar -xz --directory=bin\necho \"$(pwd)/bin\" >> $GITHUB_PATH\n",
+            "count": 1,
+            "repos": [
+                "rust-lang/edition-guide"
+            ]
+        },
+        {
+            "command": "mkdir mdbook\ncurl -Lf https://github.com/rust-lang/mdBook/releases/download/v${MDBOOK_VERSION}/mdbook-v${MDBOOK_VERSION}-x86_64-unknown-linux-gnu.tar.gz | tar -xz --directory=./mdbook\necho `pwd`/mdbook >> $GITHUB_PATH\n",
+            "count": 1,
+            "repos": [
+                "rust-lang/cargo-bisect-rustc"
+            ]
+        },
+        {
+            "command": "mkdir mdbook\ncurl -Lf https://github.com/rust-lang/mdBook/releases/download/v0.4.8/mdbook-v0.4.8-x86_64-unknown-linux-gnu.tar.gz | tar -xz --directory=./mdbook\necho \"$GITHUB_WORKSPACE/mdbook\" >> $GITHUB_PATH\n",
+            "count": 1,
+            "repos": [
+                "rust-lang/polonius"
+            ]
+        }
+    ],
+    "Deploy docs": [
+        {
+            "command": "cd docs\nmdbook build\ngit worktree add gh-pages gh-pages\ngit config user.name \"Deploy from CI\"\ngit config user.email \"\"\ncd gh-pages\n# Delete the ref to avoid keeping history.\ngit update-ref -d refs/heads/gh-pages\nrm -rf *\nmv ../book/* .\ngit add .\ngit commit -m \"Deploy $GITHUB_SHA to gh-pages\"\ngit push --force\n",
+            "count": 1,
+            "repos": [
+                "rust-lang/rust-enhanced"
+            ]
+        },
+        {
+            "command": "GENERATE_PY=\"$(pwd)/ci/generate.py\"\n\ncd src/doc/contrib\nmdbook build\n\n# Override previous ref to avoid keeping history.\ngit worktree add --orphan -B gh-pages gh-pages\ngit config user.name \"Deploy from CI\"\ngit config user.email \"\"\ncd gh-pages\nmv ../book contrib\ngit add contrib\n\n# Generate HTML for link redirections.\npython3 \"$GENERATE_PY\"\ngit add *.html\n# WARN: The CNAME file is for GitHub to redirect requests to the custom domain.\n# Missing this may entail security hazard and domain takeover.\n# See <https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site#securing-your-custom-domain>\ngit add CNAME\n\ngit commit -m \"Deploy $GITHUB_SHA to gh-pages\"\ngit push origin +gh-pages\n",
+            "count": 1,
+            "repos": [
+                "rust-lang/cargo"
+            ]
+        },
+        {
+            "command": "cd guide\nmdbook build\ngit worktree add gh-pages\ngit config user.name \"Deploy from CI\"\ngit config user.email \"\"\ncd gh-pages\n# Delete the ref to avoid keeping history.\ngit update-ref -d refs/heads/gh-pages\nrm -rf *\nmv ../book/* .\ngit add .\ngit commit -m \"Deploy $GITHUB_SHA to gh-pages\"\ngit push --force --set-upstream origin gh-pages\n",
+            "count": 1,
+            "repos": [
+                "rust-lang/cargo-bisect-rustc"
+            ]
+        }
+    ],
+    "Step 3": [
+        {
+            "command": "rustup component add rustfmt",
+            "count": 1,
+            "repos": [
+                "rust-lang/cargo"
+            ]
+        },
+        {
+            "command": "rustup component add clippy",
+            "count": 3,
+            "repos": [
+                "rust-lang/cargo",
+                "rust-lang/crates.io",
+                "rust-lang/blog.rust-lang.org"
+            ]
+        },
+        {
+            "command": "cargo stale-label",
+            "count": 1,
+            "repos": [
+                "rust-lang/cargo"
+            ]
+        },
+        {
+            "command": "cargo lint-docs --check",
+            "count": 1,
+            "repos": [
+                "rust-lang/cargo"
+            ]
+        },
+        {
+            "command": "cargo update -p cargo --locked",
+            "count": 1,
+            "repos": [
+                "rust-lang/cargo"
+            ]
+        },
+        {
+            "command": "rustup update --no-self-update stable",
+            "count": 1,
+            "repos": [
+                "rust-lang/cargo"
+            ]
+        },
+        {
+            "command": "cargo test -p resolver-tests",
+            "count": 1,
+            "repos": [
+                "rust-lang/cargo"
+            ]
+        },
+        {
+            "command": "rustup target add i686-unknown-linux-gnu",
+            "count": 1,
+            "repos": [
+                "rust-lang/cargo"
+            ]
+        },
+        {
+            "command": "rustup component add rust-src",
+            "count": 1,
+            "repos": [
+                "rust-lang/cargo"
+            ]
+        },
+        {
+            "command": "rustup update stable",
+            "count": 1,
+            "repos": [
+                "rust-lang/cargo"
+            ]
+        },
+        {
+            "command": "cargo hack check --all-targets --rust-version --workspace --ignore-private --locked",
+            "count": 1,
+            "repos": [
+                "rust-lang/cargo"
+            ]
+        },
+        {
+            "command": "tj-actions/changed-files@d6babd6899969df1a11d14c368283ea4436bca78",
+            "count": 1,
+            "repos": [
+                "rust-lang/crates.io"
+            ]
+        },
+        {
+            "command": "cargo install cargo-deny --vers ${{ env.CARGO_DENY_VERSION }}",
+            "count": 1,
+            "repos": [
+                "rust-lang/crates.io"
+            ]
+        },
+        {
+            "command": "sudo /usr/share/postgresql-common/pgdg/apt.postgresql.org.sh -v ${{ env.POSTGRES_VERSION }} -i -p",
+            "count": 1,
+            "repos": [
+                "rust-lang/crates.io"
+            ]
+        },
+        {
+            "command": "actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8",
+            "count": 3,
+            "repos": [
+                "rust-lang/crates.io"
+            ]
+        },
+        {
+            "command": "cargo build --package crates_io_smoke_test",
+            "count": 1,
+            "repos": [
+                "rust-lang/crates.io"
+            ]
+        },
+        {
+            "command": "cargo build",
+            "count": 2,
+            "repos": [
+                "rust-lang/flate2-rs",
+                "rust-lang/backtrace-rs"
+            ]
+        },
+        {
+            "command": "cargo fmt -- --check",
+            "count": 8,
+            "repos": [
+                "rust-lang/flate2-rs",
+                "rust-lang/git2-rs",
+                "rust-lang/cmake-rs",
+                "rust-lang/log",
+                "rust-lang/docs.rs",
+                "rust-lang/rustc-demangle",
+                "rust-lang/compiler-builtins",
+                "rust-lang/jobserver-rs"
+            ]
+        },
+        {
+            "command": "cargo build --target ${{ matrix.target }}",
+            "count": 1,
+            "repos": [
+                "rust-lang/flate2-rs"
+            ]
+        },
+        {
+            "command": "cargo test --no-default-features",
+            "count": 1,
+            "repos": [
+                "rust-lang/git2-rs"
+            ]
+        },
+        {
+            "command": "Swatinem/rust-cache@23bce251a8cd2ffc3c1075eaa2367cf899916d84",
+            "count": 1,
+            "repos": [
+                "rust-lang/blog.rust-lang.org"
+            ]
+        },
+        {
+            "command": "Swatinem/rust-cache@v2",
+            "count": 20,
+            "repos": [
+                "rust-lang/cc-rs",
+                "rust-lang/rustc-perf",
+                "rust-lang/compiler-builtins",
+                "rust-lang/jobserver-rs",
+                "rust-lang/annotate-snippets-rs",
+                "rust-lang/cargo-bisect-rustc"
+            ]
+        },
+        {
+            "command": "ci/set_rust_version.bash ${{ matrix.channel }} ${{ matrix.target }}",
+            "count": 1,
+            "repos": [
+                "rust-lang/libz-sys"
+            ]
+        },
+        {
+            "command": "ci/test.bash cargo ${{ matrix.target }}",
+            "count": 1,
+            "repos": [
+                "rust-lang/libz-sys"
+            ]
+        },
+        {
+            "command": "cargo test --no-default-features --features zlib-ng-no-cmake-experimental-community-maintained || echo \"::warning::failed to build libz-ng with --features zlib-ng-no-cmake-experimental-community-maintained\"\ncargo run --manifest-path systest/Cargo.toml --no-default-features --features zlib-ng-no-cmake-experimental-community-maintained || echo \"::warning::failed to run systest with --features zlib-ng-no-cmake-experimental-community-maintained\"\n",
+            "count": 1,
+            "repos": [
+                "rust-lang/libz-sys"
+            ]
+        },
+        {
+            "command": "chmod +x /tmp/cross",
+            "count": 1,
+            "repos": [
+                "rust-lang/libz-sys"
+            ]
+        },
+        {
+            "command": "rustup component add rustfmt-preview",
+            "count": 1,
+            "repos": [
+                "rust-lang/pkg-config-rs"
+            ]
+        },
+        {
+            "command": "cargo test",
+            "count": 2,
+            "repos": [
+                "rust-lang/cmake-rs",
+                "rust-lang/getopts"
+            ]
+        },
+        {
+            "command": "taiki-e/install-action@v1",
+            "count": 1,
+            "repos": [
+                "rust-lang/cmake-rs"
+            ]
+        },
+        {
+            "command": "cargo test --verbose",
+            "count": 1,
+            "repos": [
+                "rust-lang/log"
+            ]
+        },
+        {
+            "command": "cargo clippy --verbose",
+            "count": 1,
+            "repos": [
+                "rust-lang/log"
+            ]
+        },
+        {
+            "command": "cargo build --verbose -Z avoid-dev-deps --features kv",
+            "count": 1,
+            "repos": [
+                "rust-lang/log"
+            ]
+        },
+        {
+            "command": "cargo build --verbose -Z minimal-versions --features kv",
+            "count": 1,
+            "repos": [
+                "rust-lang/log"
+            ]
+        },
+        {
+            "command": "cargo test --verbose --manifest-path tests/Cargo.toml\ncargo test --verbose --manifest-path tests/Cargo.toml --features kv\n",
+            "count": 1,
+            "repos": [
+                "rust-lang/log"
+            ]
+        },
+        {
+            "command": "rustup target add thumbv6m-none-eabi riscv32imc-unknown-none-elf",
+            "count": 1,
+            "repos": [
+                "rust-lang/log"
+            ]
+        },
+        {
+            "command": "emacs-eask/setup-eask@master",
+            "count": 1,
+            "repos": [
+                "rust-lang/rust-mode"
+            ]
+        },
+        {
+            "command": "echo RUSTFLAGS=-Dwarnings >> $GITHUB_ENV",
+            "count": 2,
+            "repos": [
+                "rust-lang/backtrace-rs"
+            ]
+        },
+        {
+            "command": "rustup target add ${{ matrix.target }}",
+            "count": 3,
+            "repos": [
+                "rust-lang/backtrace-rs",
+                "rust-lang/futures-rs"
+            ]
+        },
+        {
+            "command": "cargo fmt --all -- --check",
+            "count": 2,
+            "repos": [
+                "rust-lang/backtrace-rs",
+                "rust-lang/futures-rs"
+            ]
+        },
+        {
+            "command": "MIRIFLAGS=\"-Zmiri-disable-isolation\" cargo miri test",
+            "count": 1,
+            "repos": [
+                "rust-lang/backtrace-rs"
+            ]
+        },
+        {
+            "command": "cargo fmt --check",
+            "count": 2,
+            "repos": [
+                "rust-lang/mdBook",
+                "rust-lang/rustfix"
+            ]
+        },
+        {
+            "command": "actions-rs/toolchain@v1",
+            "count": 1,
+            "repos": [
+                "rust-lang/stacker"
+            ]
+        },
+        {
+            "command": "echo \"c:/msys64/bin\" | Out-File -FilePath $env:GITHUB_PATH -Append",
+            "count": 1,
+            "repos": [
+                "rust-lang/stacker"
+            ]
+        },
+        {
+            "command": "curl -Lf https://github.com/bytecodealliance/wasmtime/releases/download/v0.19.0/wasmtime-v0.19.0-x86_64-linux.tar.xz | tar xJf - -C ${{ runner.tool_cache }}\necho \"${{ runner.tool_cache }}/wasmtime-v0.19.0-x86_64-linux\" >> $GITHUB_PATH\necho \"CARGO_TARGET_WASM32_WASI_RUNNER=wasmtime run --\" >> $GITHUB_ENV\n",
+            "count": 1,
+            "repos": [
+                "rust-lang/stacker"
+            ]
+        },
+        {
+            "command": "DavidAnson/markdownlint-cli2-action@v9",
+            "count": 1,
+            "repos": [
+                "rust-lang/rustlings"
+            ]
+        },
+        {
+            "command": "swatinem/rust-cache@v2",
+            "count": 2,
+            "repos": [
+                "rust-lang/rustlings"
+            ]
+        },
+        {
+            "command": "./target/release/labeler",
+            "count": 1,
+            "repos": [
+                "rust-lang/glacier"
+            ]
+        },
+        {
+            "command": "actions/checkout@v4",
+            "count": 1,
+            "repos": [
+                "rust-lang/miri"
+            ]
+        },
+        {
+            "command": "taiki-e/setup-cross-toolchain-action@v1",
+            "count": 1,
+            "repos": [
+                "rust-lang/futures-rs"
+            ]
+        },
+        {
+            "command": "cargo bench --workspace",
+            "count": 1,
+            "repos": [
+                "rust-lang/futures-rs"
+            ]
+        },
+        {
+            "command": "cargo miri test --workspace --all-features",
+            "count": 1,
+            "repos": [
+                "rust-lang/futures-rs"
+            ]
+        },
+        {
+            "command": "sudo sysctl vm.mmap_rnd_bits=28",
+            "count": 1,
+            "repos": [
+                "rust-lang/futures-rs"
+            ]
+        },
+        {
+            "command": "cargo clippy --workspace --all-features --all-targets",
+            "count": 1,
+            "repos": [
+                "rust-lang/futures-rs"
+            ]
+        },
+        {
+            "command": "cargo doc --workspace --no-deps --all-features",
+            "count": 1,
+            "repos": [
+                "rust-lang/futures-rs"
+            ]
+        },
+        {
+            "command": "cargo build --all",
+            "count": 1,
+            "repos": [
+                "rust-lang/rustc-demangle"
+            ]
+        },
+        {
+            "command": "cargo install cargo-fuzz --vers \"^0.11\"",
+            "count": 1,
+            "repos": [
+                "rust-lang/rustc-demangle"
+            ]
+        },
+        {
+            "command": "cargo dist ${{ (!github.event.pull_request && format('host --steps=create --tag={0}', github.ref_name)) || 'plan' }} --output-format=json > plan-dist-manifest.json\necho \"cargo dist ran successfully\"\ncat plan-dist-manifest.json\necho \"manifest=$(jq -c \".\" plan-dist-manifest.json)\" >> \"$GITHUB_OUTPUT\"\n",
+            "count": 1,
+            "repos": [
+                "rust-lang/rust-bindgen"
+            ]
+        },
+        {
+            "command": "cargo test --all",
+            "count": 1,
+            "repos": [
+                "rust-lang/rustfix"
+            ]
+        },
+        {
+            "command": "rustup component add rust-src rust-analysis rustc-dev llvm-tools-preview",
+            "count": 1,
+            "repos": [
+                "rust-lang/rls"
+            ]
+        },
+        {
+            "command": "cargo +stable fmt --manifest-path=rls-analysis/Cargo.toml -- --check",
+            "count": 1,
+            "repos": [
+                "rust-lang/rls"
+            ]
+        },
+        {
+            "command": "ci/style.sh",
+            "count": 1,
+            "repos": [
+                "rust-lang/stdarch"
+            ]
+        },
+        {
+            "command": "ci/dox.sh",
+            "count": 1,
+            "repos": [
+                "rust-lang/stdarch"
+            ]
+        },
+        {
+            "command": "cargo test --manifest-path crates/stdarch-verify/Cargo.toml",
+            "count": 1,
+            "repos": [
+                "rust-lang/stdarch"
+            ]
+        },
+        {
+            "command": "RUST_STD_DETECT_UNSTABLE=avx cargo test --features=std_detect_env_override --manifest-path crates/std_detect/Cargo.toml env_override_no_avx",
+            "count": 1,
+            "repos": [
+                "rust-lang/stdarch"
+            ]
+        },
+        {
+            "command": "./ci/build-std-detect.sh",
+            "count": 1,
+            "repos": [
+                "rust-lang/stdarch"
+            ]
+        },
+        {
+            "command": "taiki-e/install-action@cargo-hack",
+            "count": 4,
+            "repos": [
+                "rust-lang/socket2",
+                "rust-lang/jobserver-rs"
+            ]
+        },
+        {
+            "command": "actions/setup-node@v2",
+            "count": 1,
+            "repos": [
+                "rust-lang/atom-ide-rust"
+            ]
+        },
+        {
+            "command": "docker build -t rust:$RUST_VERSION-${{ matrix.name }} $RUST_VERSION/${{ matrix.variant }}",
+            "count": 1,
+            "repos": [
+                "rust-lang/docker-rust"
+            ]
+        },
+        {
+            "command": "docker/setup-buildx-action@v3",
+            "count": 1,
+            "repos": [
+                "rust-lang/docker-rust"
+            ]
+        },
+        {
+            "command": "cargo check",
+            "count": 1,
+            "repos": [
+                "rust-lang/ferris-says"
+            ]
+        },
+        {
+            "command": "docker/setup-buildx-action@v1",
+            "count": 1,
+            "repos": [
+                "rust-lang/docker-rust-nightly"
+            ]
+        },
+        {
+            "command": "pre-commit/action@v3.0.1",
+            "count": 1,
+            "repos": [
+                "rust-lang/annotate-snippets-rs"
+            ]
+        },
+        {
+            "command": "rustsec/audit-check@v1.4.1",
+            "count": 1,
+            "repos": [
+                "rust-lang/rustc_codegen_cranelift"
+            ]
+        },
+        {
+            "command": "ls -R artifacts/\nmkdir release/\npushd artifacts/\nfor dir in *; do\n  mv $dir/cg_clif.tar.xz ../release/$dir.tar.xz\n  rmdir $dir/ # verify $dir is empty\ndone\npopd\nrmdir artifacts/ # verify all artifacts are represented in release/\nls -R release/\n",
+            "count": 1,
+            "repos": [
+                "rust-lang/rustc_codegen_cranelift"
+            ]
+        }
+    ],
+    "Step 7": [
+        {
+            "command": "sudo apt update -y && sudo apt install lldb gcc-multilib libsecret-1-0 libsecret-1-dev -y",
+            "count": 1,
+            "repos": [
+                "rust-lang/cargo"
+            ]
+        },
+        {
+            "command": "cargo doc --no-deps --document-private-items",
+            "count": 1,
+            "repos": [
+                "rust-lang/crates.io"
+            ]
+        },
+        {
+            "command": "cargo test --workspace",
+            "count": 1,
+            "repos": [
+                "rust-lang/crates.io"
+            ]
+        },
+        {
+            "command": "pnpm lint:deps",
+            "count": 1,
+            "repos": [
+                "rust-lang/crates.io"
+            ]
+        },
+        {
+            "command": "actions/upload-artifact@v4",
+            "count": 1,
+            "repos": [
+                "rust-lang/crates.io"
+            ]
+        },
+        {
+            "command": "cargo test --features zlib --no-default-features",
+            "count": 1,
+            "repos": [
+                "rust-lang/flate2-rs"
+            ]
+        },
+        {
+            "command": "cargo fmt --check --all",
+            "count": 1,
+            "repos": [
+                "rust-lang/blog.rust-lang.org"
+            ]
+        },
+        {
+            "command": "actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa",
+            "count": 1,
+            "repos": [
+                "rust-lang/blog.rust-lang.org"
+            ]
+        },
+        {
+            "command": "cargo test ${{ matrix.no_run }} --workspace --target ${{ matrix.target }}",
+            "count": 1,
+            "repos": [
+                "rust-lang/cc-rs"
+            ]
+        },
+        {
+            "command": "cargo test --verbose --features std",
+            "count": 1,
+            "repos": [
+                "rust-lang/log"
+            ]
+        },
+        {
+            "command": "cargo build --verbose -Z avoid-dev-deps --features \"kv kv_std\"",
+            "count": 1,
+            "repos": [
+                "rust-lang/log"
+            ]
+        },
+        {
+            "command": "cargo build --verbose -Z minimal-versions --features \"kv kv_std\"",
+            "count": 1,
+            "repos": [
+                "rust-lang/log"
+            ]
+        },
+        {
+            "command": "docker/setup-buildx-action@v2",
+            "count": 1,
+            "repos": [
+                "rust-lang/rustc-perf"
+            ]
+        },
+        {
+            "command": "cargo test",
+            "count": 1,
+            "repos": [
+                "rust-lang/backtrace-rs"
+            ]
+        },
+        {
+            "command": "cargo hack build --workspace --ignore-private --no-default-features --features std \\\n  --exclude futures --exclude futures-util --exclude futures-task --exclude futures-macro --exclude futures-executor --exclude futures-channel --exclude futures-test\n",
+            "count": 1,
+            "repos": [
+                "rust-lang/futures-rs"
+            ]
+        },
+        {
+            "command": "cargo hack build --workspace --exclude futures-test --ignore-private --no-default-features --features alloc --ignore-unknown-features",
+            "count": 1,
+            "repos": [
+                "rust-lang/futures-rs"
+            ]
+        },
+        {
+            "command": "cargo hack build --workspace --ignore-private \\\n  --exclude futures-test --exclude futures-macro \\\n  --no-default-features \\\n  --target ${{ matrix.target }}\n",
+            "count": 1,
+            "repos": [
+                "rust-lang/futures-rs"
+            ]
+        },
+        {
+            "command": "cargo test -v test_tooltip_std -- --ignored",
+            "count": 1,
+            "repos": [
+                "rust-lang/rls"
+            ]
+        },
+        {
+            "command": "cargo +stable fmt --manifest-path=rls-span/Cargo.toml -- --check",
+            "count": 1,
+            "repos": [
+                "rust-lang/rls"
+            ]
+        },
+        {
+            "command": "npm run lint",
+            "count": 1,
+            "repos": [
+                "rust-lang/vscode-rust"
+            ]
+        },
+        {
+            "command": "echo \"NORUN=1\" >> $GITHUB_ENV",
+            "count": 1,
+            "repos": [
+                "rust-lang/stdarch"
+            ]
+        },
+        {
+            "command": "docker/build-push-action@v5",
+            "count": 1,
+            "repos": [
+                "rust-lang/docker-rust"
+            ]
+        },
+        {
+            "command": "cargo doc",
+            "count": 1,
+            "repos": [
+                "rust-lang/ferris-says"
+            ]
+        },
+        {
+            "command": "docker/build-push-action@v2",
+            "count": 1,
+            "repos": [
+                "rust-lang/docker-rust-nightly"
+            ]
+        }
+    ],
+    "Step 8": [
+        {
+            "command": "rustup component add rustfmt || echo \"rustfmt not available\"",
+            "count": 1,
+            "repos": [
+                "rust-lang/cargo"
+            ]
+        },
+        {
+            "command": "curl -sL https://github.com/mozilla/grcov/releases/download/v${{ env.GRCOV_VERSION }}/grcov-x86_64-unknown-linux-gnu.tar.bz2 | tar xjf -",
+            "count": 1,
+            "repos": [
+                "rust-lang/crates.io"
+            ]
+        },
+        {
+            "command": "pnpm prettier:check",
+            "count": 1,
+            "repos": [
+                "rust-lang/crates.io"
+            ]
+        },
+        {
+            "command": "cargo test --features zlib-default --no-default-features",
+            "count": 1,
+            "repos": [
+                "rust-lang/flate2-rs"
+            ]
+        },
+        {
+            "command": "cargo test ${{ matrix.no_run }} --workspace --target ${{ matrix.target }} --release",
+            "count": 1,
+            "repos": [
+                "rust-lang/cc-rs"
+            ]
+        },
+        {
+            "command": "cargo test --verbose --features kv",
+            "count": 1,
+            "repos": [
+                "rust-lang/log"
+            ]
+        },
+        {
+            "command": "cargo build --verbose -Z avoid-dev-deps --features \"kv kv_sval kv_serde\"",
+            "count": 1,
+            "repos": [
+                "rust-lang/log"
+            ]
+        },
+        {
+            "command": "cargo build --verbose -Z minimal-versions --features \"kv kv_sval kv_serde\"",
+            "count": 1,
+            "repos": [
+                "rust-lang/log"
+            ]
+        },
+        {
+            "command": "cargo test --features \"serialize-serde\"",
+            "count": 1,
+            "repos": [
+                "rust-lang/backtrace-rs"
+            ]
+        },
+        {
+            "command": "cargo hack build --workspace --ignore-private --no-default-features --features std --ignore-unknown-features",
+            "count": 1,
+            "repos": [
+                "rust-lang/futures-rs"
+            ]
+        },
+        {
+            "command": "cargo hack build --workspace --ignore-private \\\n  --exclude futures-test --exclude futures-macro \\\n  --no-default-features --features alloc --ignore-unknown-features \\\n  --target ${{ matrix.target }}\n",
+            "count": 1,
+            "repos": [
+                "rust-lang/futures-rs"
+            ]
+        },
+        {
+            "command": "cargo test -v --no-default-features",
+            "count": 1,
+            "repos": [
+                "rust-lang/rls"
+            ]
+        },
+        {
+            "command": "cargo +stable fmt --manifest-path=rls-vfs/Cargo.toml -- --check",
+            "count": 1,
+            "repos": [
+                "rust-lang/rls"
+            ]
+        },
+        {
+            "command": "npm audit",
+            "count": 1,
+            "repos": [
+                "rust-lang/vscode-rust"
+            ]
+        },
+        {
+            "command": "echo \"STDARCH_TEST_EVERYTHING=1\" >> $GITHUB_ENV",
+            "count": 1,
+            "repos": [
+                "rust-lang/stdarch"
+            ]
+        }
+    ],
+    "Step 10": [
+        {
+            "command": "cargo test -p cargo",
+            "count": 1,
+            "repos": [
+                "rust-lang/cargo"
+            ]
+        },
+        {
+            "command": "./grcov . --binary-path ./target/debug/ -s . -t lcov --branch --ignore-not-existing --ignore \"/*\" --ignore \"target/debug/build/**\" -o target/coverage.lcov",
+            "count": 1,
+            "repos": [
+                "rust-lang/crates.io"
+            ]
+        },
+        {
+            "command": "cargo test --features zlib-ng --no-default-features",
+            "count": 1,
+            "repos": [
+                "rust-lang/flate2-rs"
+            ]
+        },
+        {
+            "command": "cargo test --verbose --features kv_serde",
+            "count": 1,
+            "repos": [
+                "rust-lang/log"
+            ]
+        },
+        {
+            "command": "cargo test --features \"cpp_demangle\"",
+            "count": 1,
+            "repos": [
+                "rust-lang/backtrace-rs"
+            ]
+        },
+        {
+            "command": "cargo hack build -p futures -p futures-executor --no-default-features --features std,thread-pool",
+            "count": 1,
+            "repos": [
+                "rust-lang/futures-rs"
+            ]
+        },
+        {
+            "command": "./ci/run.sh ${{ matrix.target }}",
+            "count": 1,
+            "repos": [
+                "rust-lang/compiler-builtins"
+            ]
+        },
+        {
+            "command": "cargo test -v --manifest-path=rls-data/Cargo.toml",
+            "count": 1,
+            "repos": [
+                "rust-lang/rls"
+            ]
+        },
+        {
+            "command": "npm test",
+            "count": 1,
+            "repos": [
+                "rust-lang/vscode-rust"
+            ]
+        },
+        {
+            "command": "echo \"STDARCH_DISABLE_ASSERT_INSTR=1\" >> $GITHUB_ENV",
+            "count": 1,
+            "repos": [
+                "rust-lang/stdarch"
+            ]
+        }
+    ],
+    "Step 15": [
+        {
+            "command": "cargo test --workspace --exclude cargo --exclude benchsuite --exclude resolver-tests",
+            "count": 1,
+            "repos": [
+                "rust-lang/cargo"
+            ]
+        },
+        {
+            "command": "cargo test --manifest-path crates/without_debuginfo/Cargo.toml",
+            "count": 1,
+            "repos": [
+                "rust-lang/backtrace-rs"
+            ]
+        }
+    ],
+    "Step 9": [
+        {
+            "command": "cd src/doc && mdbook build --dest-dir ../../target/doc",
+            "count": 1,
+            "repos": [
+                "rust-lang/cargo"
+            ]
+        },
+        {
+            "command": "rustup component add llvm-tools",
+            "count": 1,
+            "repos": [
+                "rust-lang/crates.io"
+            ]
+        },
+        {
+            "command": "cargo test --features zlib-ng-compat --no-default-features",
+            "count": 1,
+            "repos": [
+                "rust-lang/flate2-rs"
+            ]
+        },
+        {
+            "command": "cargo test ${{ matrix.no_run }} --workspace --target ${{ matrix.target }} --features parallel",
+            "count": 1,
+            "repos": [
+                "rust-lang/cc-rs"
+            ]
+        },
+        {
+            "command": "cargo test --verbose --features kv_sval",
+            "count": 1,
+            "repos": [
+                "rust-lang/log"
+            ]
+        },
+        {
+            "command": "cargo test --features \"verify-winapi\"",
+            "count": 1,
+            "repos": [
+                "rust-lang/backtrace-rs"
+            ]
+        },
+        {
+            "command": "cargo hack build -p futures -p futures-util --no-default-features --features std,compat",
+            "count": 1,
+            "repos": [
+                "rust-lang/futures-rs"
+            ]
+        },
+        {
+            "command": "cargo hack build --workspace --ignore-private \\\n  --exclude futures-test --exclude futures-macro \\\n  --no-default-features --features async-await,alloc --ignore-unknown-features \\\n  --target ${{ matrix.target }}\n",
+            "count": 1,
+            "repos": [
+                "rust-lang/futures-rs"
+            ]
+        },
+        {
+            "command": "cargo test -v --manifest-path=rls-analysis/Cargo.toml",
+            "count": 1,
+            "repos": [
+                "rust-lang/rls"
+            ]
+        },
+        {
+            "command": "xvfb-run -a npm test",
+            "count": 1,
+            "repos": [
+                "rust-lang/vscode-rust"
+            ]
+        },
+        {
+            "command": "echo \"RUSTFLAGS=${{ matrix.rustflags }}\" >> $GITHUB_ENV",
+            "count": 1,
+            "repos": [
+                "rust-lang/stdarch"
+            ]
+        }
+    ],
+    "Upload Artifact": [
+        {
+            "command": "actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa",
+            "count": 1,
+            "repos": [
+                "rust-lang/rfcs"
+            ]
+        },
+        {
+            "command": "actions/upload-artifact@v3",
+            "count": 1,
+            "repos": [
+                "rust-lang/rust-by-example"
+            ]
+        }
+    ],
+    "Install Rust": [
+        {
+            "command": "rustup set profile minimal\nrustup toolchain install nightly -c rust-docs\nrustup default nightly\n",
+            "count": 4,
+            "repos": [
+                "rust-lang/rust-by-example",
+                "rust-lang/reference",
+                "rust-lang/nomicon",
+                "rust-lang/edition-guide"
+            ]
+        },
+        {
+            "command": "rustup update stable && rustup default stable && rustup component add rustfmt",
+            "count": 7,
+            "repos": [
+                "rust-lang/flate2-rs",
+                "rust-lang/git2-rs",
+                "rust-lang/cmake-rs",
+                "rust-lang/mdBook",
+                "rust-lang/rustc-demangle",
+                "rust-lang/rustfix",
+                "rust-lang/jobserver-rs"
+            ]
+        },
+        {
+            "command": "rustup update stable && rustup default stable && rustup target add ${{ matrix.target }}",
+            "count": 1,
+            "repos": [
+                "rust-lang/flate2-rs"
+            ]
+        },
+        {
+            "command": "rustup toolchain install 1.63.0 --no-self-update --profile minimal\nrustup toolchain install nightly --no-self-update --profile minimal\nrustup default 1.63.0\n",
+            "count": 1,
+            "repos": [
+                "rust-lang/cc-rs"
+            ]
+        },
+        {
+            "command": "rustup toolchain install stable --no-self-update --profile minimal --component rustfmt\nrustup default stable\n",
+            "count": 2,
+            "repos": [
+                "rust-lang/cc-rs"
+            ]
+        },
+        {
+            "command": "rustup update ${{ matrix.rust }} && rustup default ${{ matrix.rust }}",
+            "count": 6,
+            "repos": [
+                "rust-lang/cmake-rs",
+                "rust-lang/getopts",
+                "rust-lang/futures-rs",
+                "rust-lang/rustc-demangle"
+            ]
+        },
+        {
+            "command": "dtolnay/rust-toolchain@master",
+            "count": 9,
+            "repos": [
+                "rust-lang/regex",
+                "rust-lang/cargo-bisect-rustc"
+            ]
+        },
+        {
+            "command": "rustup update ${{ matrix.rust }} --no-self-update\nrustup default ${{ matrix.rust }}\n",
+            "count": 1,
+            "repos": [
+                "rust-lang/log"
+            ]
+        },
+        {
+            "command": "rustup update stable --no-self-update\nrustup default stable\nrustup component add rustfmt\n",
+            "count": 1,
+            "repos": [
+                "rust-lang/log"
+            ]
+        },
+        {
+            "command": "rustup update stable --no-self-update\nrustup default stable\nrustup component add clippy\n",
+            "count": 1,
+            "repos": [
+                "rust-lang/log"
+            ]
+        },
+        {
+            "command": "rustup update stable --no-self-update\nrustup default stable\nrustup component add rust-docs\n",
+            "count": 1,
+            "repos": [
+                "rust-lang/log"
+            ]
+        },
+        {
+            "command": "rustup update nightly --no-self-update\nrustup default nightly\n",
+            "count": 2,
+            "repos": [
+                "rust-lang/log"
+            ]
+        },
+        {
+            "command": "rustup update 1.60.0 --no-self-update\nrustup default 1.60.0\n",
+            "count": 1,
+            "repos": [
+                "rust-lang/log"
+            ]
+        },
+        {
+            "command": "rustup update stable --no-self-update\nrustup default stable\n",
+            "count": 1,
+            "repos": [
+                "rust-lang/log"
+            ]
+        },
+        {
+            "command": "rustup update stable --no-self-update && rustup default stable",
+            "count": 2,
+            "repos": [
+                "rust-lang/backtrace-rs"
+            ]
+        },
+        {
+            "command": "rustup update stable --no-self-update && rustup default stable && rustup component add rustfmt",
+            "count": 1,
+            "repos": [
+                "rust-lang/backtrace-rs"
+            ]
+        },
+        {
+            "command": "rustup update nightly --no-self-update && rustup default nightly",
+            "count": 6,
+            "repos": [
+                "rust-lang/backtrace-rs",
+                "rust-lang/futures-rs",
+                "rust-lang/stdarch"
+            ]
+        },
+        {
+            "command": "rustup update 1.65.0 --no-self-update && rustup default 1.65.0",
+            "count": 1,
+            "repos": [
+                "rust-lang/backtrace-rs"
+            ]
+        },
+        {
+            "command": "ci/install-rust.sh stable ${{ matrix.target }}",
+            "count": 1,
+            "repos": [
+                "rust-lang/mdBook"
+            ]
+        },
+        {
+            "command": "bash ci/install-rust.sh ${{ matrix.rust }} ${{ matrix.target }}",
+            "count": 1,
+            "repos": [
+                "rust-lang/mdBook"
+            ]
+        },
+        {
+            "command": "bash ci/install-rust.sh stable aarch64-unknown-linux-musl",
+            "count": 1,
+            "repos": [
+                "rust-lang/mdBook"
+            ]
+        },
+        {
+            "command": "actions-rs/toolchain@v1",
+            "count": 5,
+            "repos": [
+                "rust-lang/stacker"
+            ]
+        },
+        {
+            "command": "rustup set profile minimal\nrustup toolchain install 1.78 -c rust-docs\nrustup default 1.78\n",
+            "count": 1,
+            "repos": [
+                "rust-lang/book"
+            ]
+        },
+        {
+            "command": "rustup set profile minimal\nrustup toolchain install 1.76 -c rust-docs\nrustup default 1.76\n",
+            "count": 1,
+            "repos": [
+                "rust-lang/book"
+            ]
+        },
+        {
+            "command": "rustup set profile minimal\nrustup toolchain install nightly -c rust-docs\nrustup override set nightly\n",
+            "count": 1,
+            "repos": [
+                "rust-lang/book"
+            ]
+        },
+        {
+            "command": "rustup update nightly && rustup default nightly",
+            "count": 6,
+            "repos": [
+                "rust-lang/futures-rs",
+                "rust-lang/stdarch"
+            ]
+        },
+        {
+            "command": "rustup toolchain install nightly --component miri && rustup default nightly",
+            "count": 1,
+            "repos": [
+                "rust-lang/futures-rs"
+            ]
+        },
+        {
+            "command": "rustup toolchain install nightly --component rust-src && rustup default nightly",
+            "count": 1,
+            "repos": [
+                "rust-lang/futures-rs"
+            ]
+        },
+        {
+            "command": "rustup toolchain install nightly --component clippy && rustup default nightly",
+            "count": 1,
+            "repos": [
+                "rust-lang/futures-rs"
+            ]
+        },
+        {
+            "command": "rustup update stable",
+            "count": 1,
+            "repos": [
+                "rust-lang/futures-rs"
+            ]
+        },
+        {
+            "command": "rustup update stable && rustup default stable",
+            "count": 3,
+            "repos": [
+                "rust-lang/rustc-demangle",
+                "rust-lang/jobserver-rs",
+                "rust-lang/rust-log-analyzer"
+            ]
+        },
+        {
+            "command": "dtolnay/rust-toolchain@stable",
+            "count": 10,
+            "repos": [
+                "rust-lang/rust-playground",
+                "rust-lang/annotate-snippets-rs",
+                "rust-lang/cargo-bisect-rustc"
+            ]
+        }
+    ],
+    "Report versions": [
+        {
+            "command": "rustup --version\nrustc -Vv\nmdbook --version\n",
+            "count": 5,
+            "repos": [
+                "rust-lang/rust-by-example",
+                "rust-lang/book",
+                "rust-lang/reference",
+                "rust-lang/nomicon",
+                "rust-lang/edition-guide"
+            ]
+        },
+        {
+            "command": "rustup --version\nrustc -Vv\nmdbook --version\naspell --version\nshellcheck --version\n",
+            "count": 1,
+            "repos": [
+                "rust-lang/book"
+            ]
+        }
+    ],
+    "Run tests": [
+        {
+            "command": "mdbook test",
+            "count": 5,
+            "repos": [
+                "rust-lang/rust-by-example",
+                "rust-lang/book",
+                "rust-lang/reference",
+                "rust-lang/nomicon",
+                "rust-lang/edition-guide"
+            ]
+        },
+        {
+            "command": "cd test && ./run-tests",
+            "count": 1,
+            "repos": [
+                "rust-lang/rust.vim"
+            ]
+        },
+        {
+            "command": "make ci",
+            "count": 1,
+            "repos": [
+                "rust-lang/rust-mode"
+            ]
+        },
+        {
+            "command": "cargo test",
+            "count": 1,
+            "repos": [
+                "rust-lang/cfg-if"
+            ]
+        },
+        {
+            "command": "pnpm --dir ui/frontend/ run test",
+            "count": 1,
+            "repos": [
+                "rust-lang/rust-playground"
+            ]
+        },
+        {
+            "command": "killall -q ui || true\nchmod +x ./server/ui && ./server/ui &\nbundle exec rspec",
+            "count": 1,
+            "repos": [
+                "rust-lang/rust-playground"
+            ]
+        },
+        {
+            "command": "cargo hack test --feature-powerset && cargo hack test --feature-powerset --release",
+            "count": 1,
+            "repos": [
+                "rust-lang/socket2"
+            ]
+        },
+        {
+            "command": "sh ci/run.sh ${{ matrix.os }}",
+            "count": 1,
+            "repos": [
+                "rust-lang/rust-semverver"
+            ]
+        }
+    ],
+    "Check for broken links": [
+        {
+            "command": "curl -sSLo linkcheck.sh \\\n  https://raw.githubusercontent.com/rust-lang/rust/master/src/tools/linkchecker/linkcheck.sh\nsh linkcheck.sh --all rust-by-example\n",
+            "count": 1,
+            "repos": [
+                "rust-lang/rust-by-example"
+            ]
+        },
+        {
+            "command": "curl -sSLo linkcheck.sh \\\n  https://raw.githubusercontent.com/rust-lang/rust/master/src/tools/linkchecker/linkcheck.sh\n# Cannot use --all here because of the generated redirect pages aren't available.\nsh linkcheck.sh book\n",
+            "count": 1,
+            "repos": [
+                "rust-lang/book"
+            ]
+        },
+        {
+            "command": "curl -sSLo linkcheck.sh \\\n  https://raw.githubusercontent.com/rust-lang/rust/master/src/tools/linkchecker/linkcheck.sh\nsh linkcheck.sh --all reference\n",
+            "count": 1,
+            "repos": [
+                "rust-lang/reference"
+            ]
+        },
+        {
+            "command": "curl -sSLo linkcheck.sh \\\n  https://raw.githubusercontent.com/rust-lang/rust/master/src/tools/linkchecker/linkcheck.sh\nsh linkcheck.sh --all nomicon\n",
+            "count": 1,
+            "repos": [
+                "rust-lang/nomicon"
+            ]
+        },
+        {
+            "command": "curl -sSLo linkcheck.sh \\\n  https://raw.githubusercontent.com/rust-lang/rust/master/src/tools/linkchecker/linkcheck.sh\nsh linkcheck.sh --all edition-guide\n",
+            "count": 1,
+            "repos": [
+                "rust-lang/edition-guide"
+            ]
+        }
+    ],
+    "Step 11": [
+        {
+            "command": "codecov/codecov-action@e28ff129e5465c2c0dcc6f003fc735cb6ae0c673",
+            "count": 1,
+            "repos": [
+                "rust-lang/crates.io"
+            ]
+        },
+        {
+            "command": "cargo test --features zlib-rs --no-default-features",
+            "count": 1,
+            "repos": [
+                "rust-lang/flate2-rs"
+            ]
+        },
+        {
+            "command": "cargo test --verbose --features \"kv kv_std kv_sval kv_serde\"",
+            "count": 1,
+            "repos": [
+                "rust-lang/log"
+            ]
+        },
+        {
+            "command": "cargo test --no-default-features",
+            "count": 1,
+            "repos": [
+                "rust-lang/backtrace-rs"
+            ]
+        },
+        {
+            "command": "docker/setup-buildx-action@v3",
+            "count": 1,
+            "repos": [
+                "rust-lang/compiler-builtins"
+            ]
+        },
+        {
+            "command": "cargo test -v --manifest-path=rls-ipc/Cargo.toml",
+            "count": 1,
+            "repos": [
+                "rust-lang/rls"
+            ]
+        },
+        {
+            "command": "echo \"NOSTD=1\" >> $GITHUB_ENV",
+            "count": 1,
+            "repos": [
+                "rust-lang/stdarch"
+            ]
+        }
+    ],
+    "Install Rust (rustup)": [
+        {
+            "command": "rustup update ${{ matrix.rust }} --no-self-update && rustup default ${{ matrix.rust }}",
+            "count": 4,
+            "repos": [
+                "rust-lang/flate2-rs",
+                "rust-lang/git2-rs",
+                "rust-lang/backtrace-rs",
+                "rust-lang/compiler-builtins"
+            ]
+        },
+        {
+            "command": "set -euxo pipefail\nrustup toolchain install ${{ matrix.rust }} --no-self-update --profile minimal --target ${{ matrix.target }}\nrustup default ${{ matrix.rust }}\n",
+            "count": 1,
+            "repos": [
+                "rust-lang/cc-rs"
+            ]
+        },
+        {
+            "command": "set -euxo pipefail\nrustup toolchain install ${{ matrix.rust }} --no-self-update --profile minimal\nrustup component add rust-src --toolchain ${{ matrix.rust }}\nrustup default ${{ matrix.rust }}\n",
+            "count": 1,
+            "repos": [
+                "rust-lang/cc-rs"
+            ]
+        },
+        {
+            "command": "rustup update stable --no-self-update && rustup default stable",
+            "count": 2,
+            "repos": [
+                "rust-lang/mdBook"
+            ]
+        },
+        {
+            "command": "rustup update nightly --no-self-update && rustup default nightly",
+            "count": 1,
+            "repos": [
+                "rust-lang/rustfix"
+            ]
+        },
+        {
+            "command": "rustup update nightly --no-self-update\nrustup default nightly\n",
+            "count": 1,
+            "repos": [
+                "rust-lang/stdarch"
+            ]
+        },
+        {
+            "command": "rustup toolchain install ${{ matrix.rust }} --no-self-update --profile minimal\nrustup default ${{ matrix.rust }}\n",
+            "count": 1,
+            "repos": [
+                "rust-lang/jobserver-rs"
+            ]
+        },
+        {
+            "command": "rustup toolchain install nightly --no-self-update --profile minimal",
+            "count": 1,
+            "repos": [
+                "rust-lang/jobserver-rs"
+            ]
+        }
+    ],
+    "Step 12": [
+        {
+            "command": "cargo test --features cloudflare_zlib --no-default-features",
+            "count": 1,
+            "repos": [
+                "rust-lang/flate2-rs"
+            ]
+        },
+        {
+            "command": "cargo run --verbose --manifest-path test_max_level_features/Cargo.toml",
+            "count": 1,
+            "repos": [
+                "rust-lang/log"
+            ]
+        },
+        {
+            "command": "cargo test --no-default-features --features \"std\"",
+            "count": 1,
+            "repos": [
+                "rust-lang/backtrace-rs"
+            ]
+        },
+        {
+            "command": "cargo generate-lockfile && ./ci/run-docker.sh ${{ matrix.target }}",
+            "count": 1,
+            "repos": [
+                "rust-lang/compiler-builtins"
+            ]
+        },
+        {
+            "command": "cargo test -v --manifest-path=rls-rustc/Cargo.toml",
+            "count": 1,
+            "repos": [
+                "rust-lang/rls"
+            ]
+        },
+        {
+            "command": "./ci/run.sh",
+            "count": 1,
+            "repos": [
+                "rust-lang/stdarch"
+            ]
+        }
+    ],
+    "Step 13": [
+        {
+            "command": "if ! cargo check --no-default-features 2>&1 | grep \"You need to choose\"; then \n  echo \"expected message stating a zlib backend must be chosen\"\n  exit 1\nfi\n",
+            "count": 1,
+            "repos": [
+                "rust-lang/flate2-rs"
+            ]
+        },
+        {
+            "command": "cargo run --verbose --manifest-path test_max_level_features/Cargo.toml --release",
+            "count": 1,
+            "repos": [
+                "rust-lang/log"
+            ]
+        },
+        {
+            "command": "cargo test --manifest-path crates/cpp_smoke_test/Cargo.toml",
+            "count": 1,
+            "repos": [
+                "rust-lang/backtrace-rs"
+            ]
+        },
+        {
+            "command": "cargo test -v --manifest-path=rls-span/Cargo.toml",
+            "count": 1,
+            "repos": [
+                "rust-lang/rls"
+            ]
+        },
+        {
+            "command": "./ci/run-docker.sh ${{ matrix.target }}",
+            "count": 1,
+            "repos": [
+                "rust-lang/stdarch"
+            ]
+        }
+    ],
+    "Publish": [
+        {
+            "command": "./ci/publish.sh",
+            "count": 1,
+            "repos": [
+                "rust-lang/git2-rs"
+            ]
+        },
+        {
+            "command": "cargo publish --no-verify",
+            "count": 1,
+            "repos": [
+                "rust-lang/mdBook"
+            ]
+        }
+    ],
+    "Checkout repository": [
+        {
+            "command": "actions/checkout@v4",
+            "count": 20,
+            "repos": [
+                "rust-lang/glob",
+                "rust-lang/regex",
+                "rust-lang/rust-analyzer",
+                "rust-lang/annotate-snippets-rs",
+                "rust-lang/cargo-bisect-rustc"
+            ]
+        },
+        {
+            "command": "actions/checkout@v2",
+            "count": 1,
+            "repos": [
+                "rust-lang/chalk"
+            ]
+        }
+    ],
+    "Generate branch name": [
+        {
+            "command": "git checkout -b regenerate-target-info-${{ github.run_id }}\n",
+            "count": 1,
+            "repos": [
+                "rust-lang/cc-rs"
+            ]
+        },
+        {
+            "command": "git checkout -b regenerate-windows-sys-${{ github.run_id }}\n",
+            "count": 1,
+            "repos": [
+                "rust-lang/cc-rs"
+            ]
+        }
+    ],
+    "Commit and push changes": [
+        {
+            "command": "git config user.name github-actions\ngit config user.email github-actions@github.com\ngit commit -am \"Regenerate target info\"\ngit push origin HEAD\n",
+            "count": 1,
+            "repos": [
+                "rust-lang/cc-rs"
+            ]
+        },
+        {
+            "command": "git config user.name github-actions\ngit config user.email github-actions@github.com\ngit commit -am \"Regenerate windows sys bindings\"\ngit push origin HEAD\n",
+            "count": 1,
+            "repos": [
+                "rust-lang/cc-rs"
+            ]
+        }
+    ],
+    "Open pull request if needed": [
+        {
+            "command": "gh pr create --base main --title \"Update src/target_info.rs\" --body \"Automatically regenerated in CI\"\n",
+            "count": 1,
+            "repos": [
+                "rust-lang/cc-rs"
+            ]
+        },
+        {
+            "command": "gh pr create --base main --title \"Regenerate windows sys bindings\" --body \"Automatically regenerated in CI\"\n",
+            "count": 1,
+            "repos": [
+                "rust-lang/cc-rs"
+            ]
+        }
+    ],
+    "checkout": [
+        {
+            "command": "actions/checkout@v2",
+            "count": 1,
+            "repos": [
+                "rust-lang/this-week-in-rust"
+            ]
+        },
+        {
+            "command": "actions/checkout@v3",
+            "count": 6,
+            "repos": [
+                "rust-lang/rustfmt"
+            ]
+        }
+    ],
+    "Install Python dependencies": [
+        {
+            "command": "py-actions/py-dependency-install@v3",
+            "count": 1,
+            "repos": [
+                "rust-lang/this-week-in-rust"
+            ]
+        },
+        {
+            "command": "python3 -m pip install msgpack requests",
+            "count": 1,
+            "repos": [
+                "rust-lang/rustc-perf"
+            ]
+        }
+    ],
+    "Install toolchain": [
+        {
+            "command": "rustup show active-toolchain",
+            "count": 4,
+            "repos": [
+                "rust-lang/rust-clippy"
+            ]
+        },
+        {
+            "command": "rustup set default-host ${{ matrix.host }}\nrustup show active-toolchain\n",
+            "count": 1,
+            "repos": [
+                "rust-lang/rust-clippy"
+            ]
+        },
+        {
+            "command": "actions-rs/toolchain@v1",
+            "count": 1,
+            "repos": [
+                "rust-lang/rustc-perf"
+            ]
+        }
+    ],
+    "Build": [
+        {
+            "command": "cargo build --tests --features deny-warnings,internal",
+            "count": 2,
+            "repos": [
+                "rust-lang/rust-clippy"
+            ]
+        },
+        {
+            "command": "cargo build --features deny-warnings",
+            "count": 1,
+            "repos": [
+                "rust-lang/rust-clippy"
+            ]
+        },
+        {
+            "command": "cargo build --locked --target aarch64-unknown-linux-musl",
+            "count": 1,
+            "repos": [
+                "rust-lang/mdBook"
+            ]
+        },
+        {
+            "command": "actions-rs/cargo@v1",
+            "count": 1,
+            "repos": [
+                "rust-lang/stacker"
+            ]
+        },
+        {
+            "command": "./.github/actions/build",
+            "count": 3,
+            "repos": [
+                "rust-lang/glacier"
+            ]
+        },
+        {
+            "command": "cargo build --workspace --locked",
+            "count": 2,
+            "repos": [
+                "rust-lang/docs.rs"
+            ]
+        },
+        {
+            "command": "export CURRENT_TIME=$(date '+%d %B %Y'); ./zola build",
+            "count": 1,
+            "repos": [
+                "rust-lang/arewewebyet"
+            ]
+        },
+        {
+            "command": "./mdbook build",
+            "count": 1,
+            "repos": [
+                "rust-lang/api-guidelines"
+            ]
+        },
+        {
+            "command": "cargo test --workspace --no-run",
+            "count": 3,
+            "repos": [
+                "rust-lang/annotate-snippets-rs"
+            ]
+        },
+        {
+            "command": "cargo test --no-run",
+            "count": 1,
+            "repos": [
+                "rust-lang/cargo-bisect-rustc"
+            ]
+        },
+        {
+            "command": "./y.sh build --sysroot none",
+            "count": 3,
+            "repos": [
+                "rust-lang/rustc_codegen_cranelift"
+            ]
+        }
+    ],
+    "Test": [
+        {
+            "command": "cargo test --features deny-warnings,internal",
+            "count": 2,
+            "repos": [
+                "rust-lang/rust-clippy"
+            ]
+        },
+        {
+            "command": "cargo test --features deny-warnings,internal -- --skip dogfood",
+            "count": 1,
+            "repos": [
+                "rust-lang/rust-clippy"
+            ]
+        },
+        {
+            "command": "actions-rs/cargo@v1",
+            "count": 1,
+            "repos": [
+                "rust-lang/stacker"
+            ]
+        },
+        {
+            "command": "set -eux\ncargo build --target ${{ matrix.rust_target }} --manifest-path ${{ matrix.manifest }}\n",
+            "count": 1,
+            "repos": [
+                "rust-lang/stacker"
+            ]
+        },
+        {
+            "command": "set -euo pipefail\nIFS=$'\\n\\t'\n# Check if the code is good\ncargo build --all --locked\ncargo clippy -- --deny warnings\ncargo test --all --locked\n",
+            "count": 1,
+            "repos": [
+                "rust-lang/www.rust-lang.org"
+            ]
+        },
+        {
+            "command": "cargo hack test --feature-powerset --workspace",
+            "count": 3,
+            "repos": [
+                "rust-lang/annotate-snippets-rs"
+            ]
+        },
+        {
+            "command": "cargo test",
+            "count": 1,
+            "repos": [
+                "rust-lang/cargo-bisect-rustc"
+            ]
+        },
+        {
+            "command": "./y.sh test",
+            "count": 1,
+            "repos": [
+                "rust-lang/rustc_codegen_cranelift"
+            ]
+        },
+        {
+            "command": "./y.sh test --use-backend llvm",
+            "count": 1,
+            "repos": [
+                "rust-lang/rustc_codegen_cranelift"
+            ]
+        },
+        {
+            "command": "./scripts/test_bootstrap.sh",
+            "count": 1,
+            "repos": [
+                "rust-lang/rustc_codegen_cranelift"
+            ]
+        },
+        {
+            "command": "./scripts/test_rustc_tests.sh",
+            "count": 1,
+            "repos": [
+                "rust-lang/rustc_codegen_cranelift"
+            ]
+        }
+    ],
+    "Deploy": [
+        {
+            "command": "eval \"$(ssh-agent -s)\"\nssh-add - <<< \"${{ secrets.DEPLOY_KEY }}\"\nbash .github/deploy.sh\n",
+            "count": 1,
+            "repos": [
+                "rust-lang/rust-clippy"
+            ]
+        },
+        {
+            "command": "peaceiris/actions-gh-pages@v3",
+            "count": 1,
+            "repos": [
+                "rust-lang/arewewebyet"
+            ]
+        }
+    ],
+    "Create cache key": [
+        {
+            "command": "echo \"key=lintcheck-base-${{ hashfiles('lintcheck/**') }}-$(git rev-parse HEAD)\" >> \"$GITHUB_OUTPUT\"",
+            "count": 1,
+            "repos": [
+                "rust-lang/rust-clippy"
+            ]
+        },
+        {
+            "command": "echo \"key=lintcheck-head-${{ github.sha }}\" >> \"$GITHUB_OUTPUT\"",
+            "count": 1,
+            "repos": [
+                "rust-lang/rust-clippy"
+            ]
+        }
+    ],
+    "Rename JSON file": [
+        {
+            "command": "mv lintcheck-logs/lintcheck_crates_logs.json lintcheck-logs/base.json",
+            "count": 1,
+            "repos": [
+                "rust-lang/rust-clippy"
+            ]
+        },
+        {
+            "command": "mv lintcheck-logs/lintcheck_crates_logs.json lintcheck-logs/head.json",
+            "count": 1,
+            "repos": [
+                "rust-lang/rust-clippy"
+            ]
+        }
+    ],
+    "Install Rust stable": [
+        {
+            "command": "rustup toolchain update stable && rustup default stable",
+            "count": 1,
+            "repos": [
+                "rust-lang/rust-installer"
+            ]
+        },
+        {
+            "command": "rustup update stable && rustup default stable",
+            "count": 1,
+            "repos": [
+                "rust-lang/simpleinfra"
+            ]
+        }
+    ],
+    "Basic build": [
+        {
+            "command": "${{ env.CARGO }} build --verbose $TARGET",
+            "count": 1,
+            "repos": [
+                "rust-lang/regex"
+            ]
+        },
+        {
+            "command": "cargo build --verbose",
+            "count": 1,
+            "repos": [
+                "rust-lang/regex"
+            ]
+        }
+    ],
+    "Build docs": [
+        {
+            "command": "${{ env.CARGO }} doc --verbose $TARGET",
+            "count": 1,
+            "repos": [
+                "rust-lang/regex"
+            ]
+        },
+        {
+            "command": "cargo doc --verbose",
+            "count": 1,
+            "repos": [
+                "rust-lang/regex"
+            ]
+        }
+    ],
+    "Run full test suite": [
+        {
+            "command": "./test",
+            "count": 1,
+            "repos": [
+                "rust-lang/regex"
+            ]
+        },
+        {
+            "command": "./regex-automata/test",
+            "count": 1,
+            "repos": [
+                "rust-lang/regex"
+            ]
+        },
+        {
+            "command": "./regex-syntax/test",
+            "count": 1,
+            "repos": [
+                "rust-lang/regex"
+            ]
+        },
+        {
+            "command": "./regex-capi/test",
+            "count": 1,
+            "repos": [
+                "rust-lang/regex"
+            ]
+        },
+        {
+            "command": "cargo miri test --manifest-path regex-automata/Cargo.toml",
+            "count": 1,
+            "repos": [
+                "rust-lang/regex"
+            ]
+        }
+    ],
+    "Check formatting": [
+        {
+            "command": "cargo fmt --all -- --check\n",
+            "count": 1,
+            "repos": [
+                "rust-lang/regex"
+            ]
+        },
+        {
+            "command": "cargo fmt --all -- --check",
+            "count": 2,
+            "repos": [
+                "rust-lang/socket2",
+                "rust-lang/annotate-snippets-rs"
+            ]
+        },
+        {
+            "command": "cargo fmt -- --check",
+            "count": 1,
+            "repos": [
+                "rust-lang/rust-log-analyzer"
+            ]
+        }
+    ],
+    "Setup Rust toolchain": [
+        {
+            "command": "TARGET=${{ matrix.target }} sh ./ci/install-rust.sh",
+            "count": 4,
+            "repos": [
+                "rust-lang/libc"
+            ]
+        },
+        {
+            "command": "sh ./ci/install-rust.sh",
+            "count": 2,
+            "repos": [
+                "rust-lang/libc"
+            ]
+        },
+        {
+            "command": "TOOLCHAIN=nightly INSTALL_RUST_SRC=1 sh ./ci/install-rust.sh",
+            "count": 1,
+            "repos": [
+                "rust-lang/libc"
+            ]
+        },
+        {
+            "command": "TOOLCHAIN=${{ matrix.toolchain }} sh ./ci/install-rust.sh",
+            "count": 1,
+            "repos": [
+                "rust-lang/libc"
+            ]
+        },
+        {
+            "command": "TOOLCHAIN=${{ matrix.target.toolchain }} sh ./ci/install-rust.sh",
+            "count": 1,
+            "repos": [
+                "rust-lang/libc"
+            ]
+        },
+        {
+            "command": "TOOLCHAIN=nightly sh ./ci/install-rust.sh",
+            "count": 1,
+            "repos": [
+                "rust-lang/libc"
+            ]
+        }
+    ],
+    "Execute run-docker.sh": [
+        {
+            "command": "LIBC_CI=1 sh ./ci/run-docker.sh ${{ matrix.target }}",
+            "count": 2,
+            "repos": [
+                "rust-lang/libc"
+            ]
+        },
+        {
+            "command": "LIBC_CI=1 TOOLCHAIN=nightly LIBC_CI_ZBUILD_STD=1 sh ./ci/run-docker.sh ${{ matrix.target }}",
+            "count": 1,
+            "repos": [
+                "rust-lang/libc"
+            ]
+        },
+        {
+            "command": "LIBC_CI=1 sh ./ci/run-docker.sh switch",
+            "count": 1,
+            "repos": [
+                "rust-lang/libc"
+            ]
+        }
+    ],
+    "Execute build.sh": [
+        {
+            "command": "LIBC_CI=1 TOOLCHAIN=${{ matrix.toolchain }} sh ./ci/build.sh",
+            "count": 2,
+            "repos": [
+                "rust-lang/libc"
+            ]
+        },
+        {
+            "command": "LIBC_CI=1 TOOLCHAIN=${{ matrix.target.toolchain }} sh ./ci/build.sh",
+            "count": 1,
+            "repos": [
+                "rust-lang/libc"
+            ]
+        }
+    ],
+    "Install nightly": [
+        {
+            "command": "rustup install nightly",
+            "count": 1,
+            "repos": [
+                "rust-lang/rustc-perf"
+            ]
+        },
+        {
+            "command": "actions-rs/toolchain@v1",
+            "count": 1,
+            "repos": [
+                "rust-lang/rust-bindgen"
+            ]
+        }
+    ],
+    "Install stable toolchain": [
+        {
+            "command": "actions-rs/toolchain@v1",
+            "count": 1,
+            "repos": [
+                "rust-lang/rustc-perf"
+            ]
+        },
+        {
+            "command": "dtolnay/rust-toolchain@master",
+            "count": 1,
+            "repos": [
+                "rust-lang/rust-bindgen"
+            ]
+        }
+    ],
+    "install rustup": [
+        {
+            "command": "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs > rustup-init.sh\nsh rustup-init.sh -y --default-toolchain none\nrustup target add x86_64-unknown-linux-gnu\n",
+            "count": 2,
+            "repos": [
+                "rust-lang/rustfmt"
+            ]
+        },
+        {
+            "command": "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs > rustup-init.sh\nsh rustup-init.sh -y --default-toolchain none\n",
+            "count": 1,
+            "repos": [
+                "rust-lang/rustfmt"
+            ]
+        },
+        {
+            "command": "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs > rustup-init.sh\nsh rustup-init.sh -y --default-toolchain none\nrustup target add ${{ matrix.target }}\n",
+            "count": 3,
+            "repos": [
+                "rust-lang/rustfmt"
+            ]
+        }
+    ],
+    "Build and Test": [
+        {
+            "command": "./ci/build_and_test.sh",
+            "count": 2,
+            "repos": [
+                "rust-lang/rustfmt"
+            ]
+        },
+        {
+            "command": "ci\\build_and_test.bat",
+            "count": 1,
+            "repos": [
+                "rust-lang/rustfmt"
+            ]
+        }
+    ],
+    "Step 14": [
+        {
+            "command": "cargo test --manifest-path crates/macos_frames_test/Cargo.toml",
+            "count": 1,
+            "repos": [
+                "rust-lang/backtrace-rs"
+            ]
+        },
+        {
+            "command": "cargo test -v --manifest-path=rls-vfs/Cargo.toml",
+            "count": 1,
+            "repos": [
+                "rust-lang/rls"
+            ]
+        }
+    ],
+    "Build book": [
+        {
+            "command": "cargo run -- build guide",
+            "count": 1,
+            "repos": [
+                "rust-lang/mdBook"
+            ]
+        },
+        {
+            "command": "./mdbook build",
+            "count": 1,
+            "repos": [
+                "rust-lang/rust-forge"
+            ]
+        },
+        {
+            "command": "mdbook build ./book/",
+            "count": 1,
+            "repos": [
+                "rust-lang/polonius"
+            ]
+        }
+    ],
+    "Run rustfmt": [
+        {
+            "command": "cargo fmt -- --check",
+            "count": 1,
+            "repos": [
+                "rust-lang/cfg-if"
+            ]
+        },
+        {
+            "command": "actions-rs/cargo@v1",
+            "count": 1,
+            "repos": [
+                "rust-lang/rust-bindgen"
+            ]
+        },
+        {
+            "command": "cargo fmt --all -- --check",
+            "count": 1,
+            "repos": [
+                "rust-lang/simpleinfra"
+            ]
+        }
+    ],
+    "Install Rust nightly": [
+        {
+            "command": "actions-rs/toolchain@v1",
+            "count": 2,
+            "repos": [
+                "rust-lang/stacker"
+            ]
+        },
+        {
+            "command": "rustup update nightly && rustup default nightly && rustup component add rustfmt clippy",
+            "count": 2,
+            "repos": [
+                "rust-lang/crater"
+            ]
+        },
+        {
+            "command": "rustup update --no-self-update nightly && rustup default nightly",
+            "count": 1,
+            "repos": [
+                "rust-lang/crater"
+            ]
+        },
+        {
+            "command": "rustup update nightly && rustup default nightly",
+            "count": 1,
+            "repos": [
+                "rust-lang/crater"
+            ]
+        }
+    ],
+    "Install Rust toolchain": [
+        {
+            "command": "actions-rs/toolchain@v1",
+            "count": 3,
+            "repos": [
+                "rust-lang/chalk"
+            ]
+        },
+        {
+            "command": "rustup install --profile minimal nightly\n",
+            "count": 1,
+            "repos": [
+                "rust-lang/rust-analyzer"
+            ]
+        }
+    ],
+    "rustfmt": [
+        {
+            "command": "./miri fmt --check",
+            "count": 1,
+            "repos": [
+                "rust-lang/miri"
+            ]
+        },
+        {
+            "command": "if rustup component add rustfmt; then\n  cargo fmt --all -- --check\nfi\n",
+            "count": 1,
+            "repos": [
+                "rust-lang/rust-semverver"
+            ]
+        }
+    ],
+    "Send Zulip notification": [
+        {
+            "command": "~/.local/bin/zulip-send --user $ZULIP_BOT_EMAIL --api-key $ZULIP_API_TOKEN --site https://rust-lang.zulipchat.com \\\n  --stream miri --subject \"Miri Build Failure ($(date -u +%Y-%m))\" \\\n  --message 'Dear @*T-miri*,\n\nIt would appear that the [Miri cron job build]('\"https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID\"') failed.\n\nThis likely means that rustc changed the miri directory and\nwe now need to do a [`./miri rustc-pull`](https://github.com/rust-lang/miri/blob/master/CONTRIBUTING.md#importing-changes-from-the-rustc-repo).\n\nWould you mind investigating this issue?\n\nThanks in advance!\nSincerely,\nThe Miri Cronjobs Bot'\n",
+            "count": 1,
+            "repos": [
+                "rust-lang/miri"
+            ]
+        },
+        {
+            "command": "tar xf failures.tar.gz\nls failures\n~/.local/bin/zulip-send --user $ZULIP_BOT_EMAIL --api-key $ZULIP_API_TOKEN --site https://rust-lang.zulipchat.com \\\n  --stream miri --subject \"Sysroot Build Errors ($(date -u +%Y-%m))\" \\\n  --message 'It would appear that the [Miri sysroots cron job build]('\"https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID\"') failed to build these targets:\n'\"$(ls failures)\"'\n\nWould you mind investigating this issue?\n\nThanks in advance!\nSincerely,\nThe Miri Cronjobs Bot'\n",
+            "count": 1,
+            "repos": [
+                "rust-lang/miri"
+            ]
+        }
+    ],
+    "Shellcheck": [
+        {
+            "command": "find . -name '*.sh' | xargs shellcheck",
+            "count": 1,
+            "repos": [
+                "rust-lang/book"
+            ]
+        },
+        {
+            "command": "shellcheck --version\nshellcheck ci/*.sh scripts/toolchain-version\n",
+            "count": 1,
+            "repos": [
+                "rust-lang/rust-semverver"
+            ]
+        }
+    ],
+    "Deploy book": [
+        {
+            "command": "rust-lang/simpleinfra/github-actions/static-websites@master",
+            "count": 1,
+            "repos": [
+                "rust-lang/rust-forge"
+            ]
+        },
+        {
+            "command": "JamesIves/github-pages-deploy-action@3.7.1",
+            "count": 1,
+            "repos": [
+                "rust-lang/rust-bindgen"
+            ]
+        }
+    ],
+    "Build the Docker image": [
+        {
+            "command": "docker build -t docs-rs-web -f dockerfiles/Dockerfile --target web-server .",
+            "count": 2,
+            "repos": [
+                "rust-lang/docs.rs"
+            ]
+        },
+        {
+            "command": "docker build -t docs-rs -f dockerfiles/Dockerfile .",
+            "count": 1,
+            "repos": [
+                "rust-lang/docs.rs"
+            ]
+        },
+        {
+            "command": "docker build -t crater .",
+            "count": 1,
+            "repos": [
+                "rust-lang/crater"
+            ]
+        },
+        {
+            "command": "docker build -t website .",
+            "count": 1,
+            "repos": [
+                "rust-lang/www.rust-lang.org"
+            ]
+        },
+        {
+            "command": "docker build -t homu .",
+            "count": 1,
+            "repos": [
+                "rust-lang/homu"
+            ]
+        }
+    ],
+    "Build documentation": [
+        {
+            "command": "cargo doc --no-deps",
+            "count": 1,
+            "repos": [
+                "rust-lang/rustc-demangle"
+            ]
+        },
+        {
+            "command": "cargo doc --no-deps --all-features",
+            "count": 1,
+            "repos": [
+                "rust-lang/jobserver-rs"
+            ]
+        }
+    ],
+    "Run clippy": [
+        {
+            "command": "actions-rs/cargo@v1",
+            "count": 1,
+            "repos": [
+                "rust-lang/rust-bindgen"
+            ]
+        },
+        {
+            "command": "cargo clippy --all -- -Dwarnings",
+            "count": 1,
+            "repos": [
+                "rust-lang/simpleinfra"
+            ]
+        }
+    ],
+    "Install cargo-dist": [
+        {
+            "command": "curl --proto '=https' --tlsv1.2 -LsSf https://github.com/axodotdev/cargo-dist/releases/download/v0.12.0/cargo-dist-installer.sh | sh",
+            "count": 3,
+            "repos": [
+                "rust-lang/rust-bindgen"
+            ]
+        },
+        {
+            "command": "${{ matrix.install_dist }}",
+            "count": 1,
+            "repos": [
+                "rust-lang/rust-bindgen"
+            ]
+        }
+    ],
+    "Install dependencies": [
+        {
+            "command": "${{ matrix.packages_install }}\n",
+            "count": 1,
+            "repos": [
+                "rust-lang/rust-bindgen"
+            ]
+        },
+        {
+            "command": "pnpm --dir ui/frontend/ install",
+            "count": 1,
+            "repos": [
+                "rust-lang/rust-playground"
+            ]
+        },
+        {
+            "command": "apm install --production\nnpm install --only=dev\n",
+            "count": 1,
+            "repos": [
+                "rust-lang/atom-ide-rust"
+            ]
+        },
+        {
+            "command": "npm install",
+            "count": 1,
+            "repos": [
+                "rust-lang/atom-ide-rust"
+            ]
+        }
+    ],
+    "Checkout code": [
+        {
+            "command": "actions/checkout@v4",
+            "count": 10,
+            "repos": [
+                "rust-lang/rust-playground",
+                "rust-lang/infra-team"
+            ]
+        },
+        {
+            "command": "actions/checkout@v2",
+            "count": 1,
+            "repos": [
+                "rust-lang/vscode-rust"
+            ]
+        }
+    ],
+    "Build backend": [
+        {
+            "command": "./ci/build-backend.sh",
+            "count": 1,
+            "repos": [
+                "rust-lang/rust-playground"
+            ]
+        },
+        {
+            "command": "./y.sh build --sysroot none",
+            "count": 1,
+            "repos": [
+                "rust-lang/rustc_codegen_cranelift"
+            ]
+        }
+    ],
+    "Run check": [
+        {
+            "command": "cargo hack check --feature-powerset --all-targets --examples --bins --tests --target ${{ matrix.target }}",
+            "count": 1,
+            "repos": [
+                "rust-lang/socket2"
+            ]
+        },
+        {
+            "command": "cargo hack check -Z build-std=std,panic_abort --feature-powerset --all-targets --examples --bins --tests --target ${{ matrix.target }}",
+            "count": 1,
+            "repos": [
+                "rust-lang/socket2"
+            ]
+        }
+    ],
+    "Check docs for docs.rs": [
+        {
+            "command": "RUSTDOCFLAGS=\"-D warnings --cfg docsrs\" cargo doc --no-deps --all-features --target ${{ matrix.target }}",
+            "count": 1,
+            "repos": [
+                "rust-lang/socket2"
+            ]
+        },
+        {
+            "command": "RUSTDOCFLAGS=\"-D warnings --cfg docsrs\" cargo doc -Z build-std=std,panic_abort --no-deps --all-features --target ${{ matrix.target }}",
+            "count": 1,
+            "repos": [
+                "rust-lang/socket2"
+            ]
+        }
+    ],
+    "Run the test suite": [
+        {
+            "command": "cargo test --all",
+            "count": 1,
+            "repos": [
+                "rust-lang/simpleinfra"
+            ]
+        },
+        {
+            "command": "python3 setup.py test",
+            "count": 1,
+            "repos": [
+                "rust-lang/homu"
+            ]
+        },
+        {
+            "command": "cargo test",
+            "count": 1,
+            "repos": [
+                "rust-lang/rust-log-analyzer"
+            ]
+        }
+    ],
+    "Install SARIF tools": [
+        {
+            "command": "cargo install clippy-sarif --locked",
+            "count": 1,
+            "repos": [
+                "rust-lang/annotate-snippets-rs"
+            ]
+        },
+        {
+            "command": "cargo install sarif-fmt --locked",
+            "count": 1,
+            "repos": [
+                "rust-lang/annotate-snippets-rs"
+            ]
+        }
+    ]
+}

@@ -1,0 +1,1123 @@
+{
+    "Checkout code": [
+        {
+            "command": "actions/checkout@v4",
+            "count": 19,
+            "repos": [
+                "flipperdevices/flipperzero-firmware",
+                "flipperdevices/qFlipper",
+                "flipperdevices/flipperzero-toolchain",
+                "flipperdevices/firmware-report-client",
+                "flipperdevices/video-game-module"
+            ]
+        },
+        {
+            "command": "actions/checkout@v2",
+            "count": 4,
+            "repos": [
+                "flipperdevices/docs",
+                "flipperdevices/update.flipperzero.one",
+                "flipperdevices/flipper-update-server"
+            ]
+        },
+        {
+            "command": "actions/checkout@v3",
+            "count": 10,
+            "repos": [
+                "flipperdevices/blackmagic-esp32-s2",
+                "flipperdevices/flpr.app",
+                "flipperdevices/lab.flipper.net",
+                "flipperdevices/go-metric",
+                "flipperdevices/firmware-report-server",
+                "flipperdevices/flipper-update-indexer",
+                "flipperdevices/flipper-documentation-indexer",
+                "flipperdevices/flipper-tilda-webserver",
+                "flipperdevices/nginx-headers-more"
+            ]
+        }
+    ],
+    "Get commit details": [
+        {
+            "command": "BUILD_TYPE='DEBUG=1 COMPACT=0'\nif [[ ${{ github.event_name }} == 'pull_request' ]]; then\n  TYPE=\"pull\"\nelif [[ \"${{ github.ref }}\" == \"refs/tags/\"* ]]; then\n  TYPE=\"tag\"\n  BUILD_TYPE='DEBUG=0 COMPACT=1'\nelse\n  TYPE=\"other\"\nfi\npython3 scripts/get_env.py \"--event_file=${{ github.event_path }}\" \"--type=$TYPE\" || cat \"${{ github.event_path }}\"\necho \"event_type=$TYPE\" >> $GITHUB_OUTPUT\necho \"FBT_BUILD_TYPE=$BUILD_TYPE\" >> $GITHUB_ENV\necho \"TARGET=${{ matrix.target }}\" >> $GITHUB_ENV\necho \"TARGET_HW=$(echo \"${{ matrix.target }}\" | sed 's/f//')\" >> $GITHUB_ENV\n",
+            "count": 1,
+            "repos": [
+                "flipperdevices/flipperzero-firmware"
+            ]
+        },
+        {
+            "command": "if [[ ${{ github.event_name }} == 'pull_request' ]]; then\n  TYPE=\"pull\"\nelif [[ \"${{ github.ref }}\" == \"refs/tags/\"* ]]; then\n  TYPE=\"tag\"\nelse\n  TYPE=\"other\"\nfi\npython3 scripts/get_env.py \"--event_file=${{ github.event_path }}\" \"--type=$TYPE\" || cat \"${{ github.event_path }}\"\n",
+            "count": 3,
+            "repos": [
+                "flipperdevices/flipperzero-firmware"
+            ]
+        },
+        {
+            "command": "if [[ ${{ github.event_name }} == 'pull_request' ]]; then\n  TYPE=\"pull\"\nelif [[ \"${{ github.ref }}\" == \"refs/tags/\"* ]]; then\n  TYPE=\"tag\"\nelse\n  TYPE=\"other\"\nfi\npython3 scripts/get_env.py \"--event_file=${{ github.event_path }}\" \"--type=$TYPE\"\n",
+            "count": 1,
+            "repos": [
+                "flipperdevices/flipperzero-firmware"
+            ]
+        },
+        {
+            "command": "if [[ ${{ github.event_name }} == 'pull_request' ]]; then\n  TYPE=\"pull\"\nelif [[ \"${{ github.ref }}\" == \"refs/tags/\"* ]]; then\n  TYPE=\"tag\"\nelse\n  TYPE=\"other\"\nfi\npython3 scripts/get_env.py \"--event_file=${{ github.event_path }}\" \"--type=$TYPE\"\necho \"event_type=$TYPE\" >> $GITHUB_OUTPUT\n",
+            "count": 1,
+            "repos": [
+                "flipperdevices/blackmagic-esp32-s2"
+            ]
+        },
+        {
+            "command": "if [[ ${{ github.event_name }} == 'pull_request' ]]; then\n  TYPE=\"pull\"\nelif [[ \"${{ github.ref }}\" == \"refs/tags/\"* ]]; then\n  TYPE=\"tag\"\nelse\n  TYPE=\"other\"\nfi\nsource scripts/toolchain/fbtenv.sh;\npython3 scripts/get_env.py \\\n    \"--event_file=${{ github.event_path }}\" \\\n    \"--type=$TYPE\" \\\n    \"--github_auth_token=${{ secrets.GITHUB_TOKEN }}\";\necho \"event_type=$TYPE\" >> $GITHUB_OUTPUT\n",
+            "count": 1,
+            "repos": [
+                "flipperdevices/video-game-module"
+            ]
+        }
+    ],
+    "Upload artifacts to update server": [
+        {
+            "command": "FILES=$(for ARTIFACT in $(find artifacts -maxdepth 1 -not -type d); do echo \"-F files=@${ARTIFACT}\"; done)\ncurl --fail -L -H \"Token: ${{ secrets.INDEXER_TOKEN }}\" \\\n    -F \"branch=${BRANCH_NAME}\" \\\n    -F \"version_token=${COMMIT_SHA}\" \\\n    ${FILES[@]} \\\n    \"${{ secrets.INDEXER_URL }}\"/firmware/uploadfiles\n",
+            "count": 1,
+            "repos": [
+                "flipperdevices/flipperzero-firmware"
+            ]
+        },
+        {
+            "command": "FILES=$(for CUR in $(ls artifacts/); do echo \"-F files=@artifacts/$CUR\"; done)\ncurl --fail -L -H \"Token: ${{ secrets.INDEXER_TOKEN }}\" \\\n    -F \"branch=${REF}\" \\\n    ${FILES[@]} \\\n    \"${{ secrets.INDEXER_URL }}\"/qFlipper/uploadfiles\n",
+            "count": 1,
+            "repos": [
+                "flipperdevices/qFlipper"
+            ]
+        },
+        {
+            "command": "FILES=$(for CUR in $(ls artifacts-archive/); do echo \"-F files=@artifacts-archive/$CUR\"; done)\ncurl --fail -L -H \"Token: ${{ secrets.INDEXER_TOKEN }}\" \\\n    -F \"branch=${BRANCH_NAME}\" \\\n    ${FILES[@]} \\\n    \"${{ secrets.INDEXER_URL }}\"/blackmagic-firmware/uploadfiles\n",
+            "count": 1,
+            "repos": [
+                "flipperdevices/blackmagic-esp32-s2"
+            ]
+        },
+        {
+            "command": "FILES=$(for CUR in $(ls artifacts/); do echo \"-F files=@artifacts/$CUR\"; done)\ncurl --fail -L -H \"Token: ${{ secrets.INDEXER_TOKEN }}\" \\\n    -F \"branch=${BRANCH_NAME}\" \\\n    ${FILES[@]} \\\n    \"${{ secrets.INDEXER_URL }}\"/vgm-firmware/uploadfiles;\n",
+            "count": 1,
+            "repos": [
+                "flipperdevices/video-game-module"
+            ]
+        }
+    ],
+    "Trigger reindex": [
+        {
+            "command": "curl --fail -L -H \"Token: ${{ secrets.INDEXER_TOKEN }}\" \\\n    \"${{ secrets.INDEXER_URL }}\"/firmware/reindex;\n",
+            "count": 1,
+            "repos": [
+                "flipperdevices/flipperzero-firmware"
+            ]
+        },
+        {
+            "command": "curl --fail -L -H \"Token: ${{ secrets.INDEXER_TOKEN }}\" \\\n    \"${{ secrets.INDEXER_URL }}\"/blackmagic-firmware/reindex\n",
+            "count": 1,
+            "repos": [
+                "flipperdevices/blackmagic-esp32-s2"
+            ]
+        }
+    ],
+    "Get flipper from device manager (mock)": [
+        {
+            "command": "echo \"flipper=/dev/ttyACM0\" >> $GITHUB_OUTPUT\n",
+            "count": 1,
+            "repos": [
+                "flipperdevices/flipperzero-firmware"
+            ]
+        },
+        {
+            "command": "echo \"flipper=Rekigyn\" >> $GITHUB_OUTPUT\necho \"stlink=0F020D026415303030303032\" >> $GITHUB_OUTPUT\n",
+            "count": 1,
+            "repos": [
+                "flipperdevices/flipperzero-firmware"
+            ]
+        }
+    ],
+    "Step 4": [
+        {
+            "command": "sdkmanager --list",
+            "count": 1,
+            "repos": [
+                "flipperdevices/Flipper-Android-App"
+            ]
+        },
+        {
+            "command": "actions/download-artifact@65a9edc5881444af0b9093a5e628f2fe47ea3b2e",
+            "count": 2,
+            "repos": [
+                "flipperdevices/Flipper-Android-App"
+            ]
+        },
+        {
+            "command": "bahmutov/npm-install@v1",
+            "count": 1,
+            "repos": [
+                "flipperdevices/webdfu"
+            ]
+        },
+        {
+            "command": "npm run build",
+            "count": 1,
+            "repos": [
+                "flipperdevices/webdfu"
+            ]
+        }
+    ],
+    "Step 6": [
+        {
+            "command": "build_variant=\"${{ inputs.BUILD_VARIANT_NAME }}\"\necho \"BUILD_VARIANT_NAME=${build_variant}\" >> $GITHUB_OUTPUT        \necho \"BUILD_VARIANT_NAME_UPPERCASE=${build_variant^}\" >> $GITHUB_OUTPUT\n",
+            "count": 1,
+            "repos": [
+                "flipperdevices/Flipper-Android-App"
+            ]
+        },
+        {
+            "command": "actions/download-artifact@v4",
+            "count": 1,
+            "repos": [
+                "flipperdevices/qFlipper"
+            ]
+        }
+    ],
+    "Step 7": [
+        {
+            "command": "build_variant=${{ steps.create_uppercase_variant.outputs.BUILD_VARIANT_NAME }}\nbaseline_file_id=\"baseline_profile_file_${build_variant}\"\necho \"BASELINE_FILE_ID=${baseline_file_id}\" >> $GITHUB_OUTPUT\n",
+            "count": 1,
+            "repos": [
+                "flipperdevices/Flipper-Android-App"
+            ]
+        },
+        {
+            "command": "actions/download-artifact@v4",
+            "count": 1,
+            "repos": [
+                "flipperdevices/qFlipper"
+            ]
+        }
+    ],
+    "Step 1": [
+        {
+            "command": "actions/checkout@0ad4b8fadaa221de15dcec353f45205ec38ea70b",
+            "count": 17,
+            "repos": [
+                "flipperdevices/Flipper-Android-App"
+            ]
+        },
+        {
+            "command": "actions/download-artifact@65a9edc5881444af0b9093a5e628f2fe47ea3b2e",
+            "count": 2,
+            "repos": [
+                "flipperdevices/Flipper-Android-App"
+            ]
+        },
+        {
+            "command": "echo \"github.workflow=${{ github.workflow }}\"\necho \"github.event_name=${{ github.event_name }}\"\necho \"github.ref_name=${{ github.ref_name }}\"\necho \"github.repository=${{ github.repository }}\"\n",
+            "count": 1,
+            "repos": [
+                "flipperdevices/Flipper-Android-App"
+            ]
+        },
+        {
+            "command": "actions/checkout@v3",
+            "count": 2,
+            "repos": [
+                "flipperdevices/Casper-flipper-blog-theme",
+                "flipperdevices/flipperzero-ufbt"
+            ]
+        },
+        {
+            "command": "actions/checkout@v2",
+            "count": 7,
+            "repos": [
+                "flipperdevices/Casper-flipper-blog-theme",
+                "flipperdevices/webdfu",
+                "flipperdevices/blackmagic",
+                "flipperdevices/flipperzero-ufbt"
+            ]
+        },
+        {
+            "command": "numworks/setup-arm-toolchain@2020-q4",
+            "count": 1,
+            "repos": [
+                "flipperdevices/blackmagic"
+            ]
+        },
+        {
+            "command": "actions/checkout@v3.0.2",
+            "count": 1,
+            "repos": [
+                "flipperdevices/blackmagic"
+            ]
+        },
+        {
+            "command": "echo \"All good \u2728\" ;",
+            "count": 1,
+            "repos": [
+                "flipperdevices/flipper-application-catalog"
+            ]
+        }
+    ],
+    "Step 2": [
+        {
+            "command": "gradle/wrapper-validation-action@216d1ad2b3710bf005dc39237337b9673fd8fcd5",
+            "count": 1,
+            "repos": [
+                "flipperdevices/Flipper-Android-App"
+            ]
+        },
+        {
+            "command": "actions/download-artifact@65a9edc5881444af0b9093a5e628f2fe47ea3b2e",
+            "count": 4,
+            "repos": [
+                "flipperdevices/Flipper-Android-App"
+            ]
+        },
+        {
+            "command": "TryGhost/action-deploy-theme@v1.4.1",
+            "count": 1,
+            "repos": [
+                "flipperdevices/Casper-flipper-blog-theme"
+            ]
+        },
+        {
+            "command": "yarn",
+            "count": 1,
+            "repos": [
+                "flipperdevices/Casper-flipper-blog-theme"
+            ]
+        },
+        {
+            "command": "actions/setup-node@v2",
+            "count": 2,
+            "repos": [
+                "flipperdevices/webdfu"
+            ]
+        },
+        {
+            "command": "numworks/setup-arm-toolchain@2020-q4",
+            "count": 2,
+            "repos": [
+                "flipperdevices/blackmagic"
+            ]
+        },
+        {
+            "command": "actions/checkout@v2",
+            "count": 1,
+            "repos": [
+                "flipperdevices/blackmagic"
+            ]
+        },
+        {
+            "command": "actions/setup-python@v2",
+            "count": 1,
+            "repos": [
+                "flipperdevices/flipperzero-ufbt"
+            ]
+        }
+    ],
+    "Set variables": [
+        {
+            "command": "export $(cat .github/workflows/version.env | xargs)\necho \"major_version=${MAJOR_VERSION}\" >> $GITHUB_OUTPUT\necho \"minor_version=${{ needs.build_number.outputs.number }}\" >> $GITHUB_OUTPUT\n",
+            "count": 3,
+            "repos": [
+                "flipperdevices/Flipper-Android-App"
+            ]
+        },
+        {
+            "command": "export $(cat .github/workflows/version.env | xargs)\necho \"major_version=${MAJOR_VERSION}\" >> $GITHUB_OUTPUT\necho \"minor_version=${{ needs.build_number.outputs.number_wearos }}\" >> $GITHUB_OUTPUT\n",
+            "count": 2,
+            "repos": [
+                "flipperdevices/Flipper-Android-App"
+            ]
+        },
+        {
+            "command": "export $(cat .github/workflows/version.env | xargs)\necho \"major_version=${MAJOR_VERSION}\" >> $GITHUB_OUTPUT\necho \"minor_version=${{ needs.build_number.outputs.number }}\" >> $GITHUB_OUTPUT\necho \"minor_version_wearos=${{ needs.build_number.outputs.number_wearos }}\" >> $GITHUB_OUTPUT\n",
+            "count": 1,
+            "repos": [
+                "flipperdevices/Flipper-Android-App"
+            ]
+        }
+    ],
+    "Build internal release": [
+        {
+            "command": "export $(cat .github/workflows/targets/${{ matrix.target }}.env | xargs)\n./gradlew :instances:android:app:assembleInternal :instances:android:app:bundleInternal\n",
+            "count": 1,
+            "repos": [
+                "flipperdevices/Flipper-Android-App"
+            ]
+        },
+        {
+            "command": "export $(cat .github/workflows/targets/wearos.env | xargs)\n./gradlew :instances:wearable:assembleInternal :instances:wearable:bundleInternal\n",
+            "count": 1,
+            "repos": [
+                "flipperdevices/Flipper-Android-App"
+            ]
+        }
+    ],
+    "Copy artifacts": [
+        {
+            "command": "mkdir artifacts\ncp ${{ steps.sign_aab.outputs.signedReleaseFile }} artifacts/flipper-zero-${{ matrix.target }}.aab\ncp ${{ steps.sign_apk.outputs.signedReleaseFile }} artifacts/flipper-zero-${{ matrix.target }}.apk\ncp instances/android/app/build/outputs/mapping/internal/mapping.txt artifacts/mapping-${{ matrix.target }}.txt\necho \"path=artifacts/\" >> $GITHUB_OUTPUT\n",
+            "count": 1,
+            "repos": [
+                "flipperdevices/Flipper-Android-App"
+            ]
+        },
+        {
+            "command": "mkdir artifacts\ncp ${{ steps.sign_wear_aab.outputs.signedReleaseFile }} artifacts/flipper-zero-wearos.aab\ncp ${{ steps.sign_wear_apk.outputs.signedReleaseFile }} artifacts/flipper-zero-wearos.apk\ncp instances/wearable/build/outputs/mapping/internal/mapping.txt artifacts/mapping-wearos.txt\necho \"path=artifacts/\" >> $GITHUB_OUTPUT\n",
+            "count": 1,
+            "repos": [
+                "flipperdevices/Flipper-Android-App"
+            ]
+        },
+        {
+            "command": "mkdir artifacts\ncp ${{steps.download-gh_gms.outputs.download-path}}/* artifacts/\ncp ${{steps.download-gh_nogms.outputs.download-path}}/* artifacts/\ncp ${{steps.download-googleplay.outputs.download-path}}/* artifacts/\ncp ${{steps.download-wearos.outputs.download-path}}/* artifacts/\necho \"path=artifacts/\" >> $GITHUB_OUTPUT\n",
+            "count": 2,
+            "repos": [
+                "flipperdevices/Flipper-Android-App"
+            ]
+        },
+        {
+            "command": "mkdir artifacts\ncp ${{ steps.sign_aab.outputs.signedReleaseFile }} artifacts/flipper-zero-${{ matrix.target }}.aab\ncp ${{ steps.sign_apk.outputs.signedReleaseFile }} artifacts/flipper-zero-${{ matrix.target }}.apk\ncp instances/android/app/build/outputs/mapping/release/mapping.txt artifacts/mapping-${{ matrix.target }}.txt\necho \"path=artifacts/\" >> $GITHUB_OUTPUT\n",
+            "count": 1,
+            "repos": [
+                "flipperdevices/Flipper-Android-App"
+            ]
+        },
+        {
+            "command": "mkdir artifacts\ncp ${{ steps.sign_wear_aab.outputs.signedReleaseFile }} artifacts/flipper-zero-wearos.aab\ncp ${{ steps.sign_wear_apk.outputs.signedReleaseFile }} artifacts/flipper-zero-wearos.apk\ncp instances/wearable/build/outputs/mapping/release/mapping.txt artifacts/mapping-wearos.txt\necho \"path=artifacts/\" >> $GITHUB_OUTPUT\n",
+            "count": 1,
+            "repos": [
+                "flipperdevices/Flipper-Android-App"
+            ]
+        }
+    ],
+    "Step 3": [
+        {
+            "command": "actions/download-artifact@65a9edc5881444af0b9093a5e628f2fe47ea3b2e",
+            "count": 2,
+            "repos": [
+                "flipperdevices/Flipper-Android-App"
+            ]
+        },
+        {
+            "command": "yarn test:ci",
+            "count": 1,
+            "repos": [
+                "flipperdevices/Casper-flipper-blog-theme"
+            ]
+        },
+        {
+            "command": "bahmutov/npm-install@v1",
+            "count": 2,
+            "repos": [
+                "flipperdevices/webdfu"
+            ]
+        },
+        {
+            "command": "actions/checkout@v2",
+            "count": 1,
+            "repos": [
+                "flipperdevices/blackmagic"
+            ]
+        }
+    ],
+    "Step 5": [
+        {
+            "command": "actions/download-artifact@65a9edc5881444af0b9093a5e628f2fe47ea3b2e",
+            "count": 2,
+            "repos": [
+                "flipperdevices/Flipper-Android-App"
+            ]
+        },
+        {
+            "command": "actions/download-artifact@v4",
+            "count": 1,
+            "repos": [
+                "flipperdevices/qFlipper"
+            ]
+        },
+        {
+            "command": "npm run test",
+            "count": 1,
+            "repos": [
+                "flipperdevices/webdfu"
+            ]
+        }
+    ],
+    "Build release": [
+        {
+            "command": "gradle/gradle-build-action@4c39dd82cd5e1ec7c6fa0173bb41b4b6bb3b86ff",
+            "count": 1,
+            "repos": [
+                "flipperdevices/Flipper-Android-App"
+            ]
+        },
+        {
+            "command": "export $(cat .github/workflows/targets/${{ matrix.target }}.env | xargs)\n./gradlew :instances:android:app:assembleRelease :instances:android:app:bundleRelease\n",
+            "count": 1,
+            "repos": [
+                "flipperdevices/Flipper-Android-App"
+            ]
+        },
+        {
+            "command": "export $(cat .github/workflows/targets/wearos.env | xargs)\n./gradlew :instances:wearable:assembleRelease :instances:wearable:bundleRelease\n",
+            "count": 1,
+            "repos": [
+                "flipperdevices/Flipper-Android-App"
+            ]
+        }
+    ],
+    "Set up Docker Buildx": [
+        {
+            "command": "docker/setup-buildx-action@v1",
+            "count": 9,
+            "repos": [
+                "flipperdevices/docker-rsync-server",
+                "flipperdevices/docs",
+                "flipperdevices/update.flipperzero.one",
+                "flipperdevices/flipper-update-server",
+                "flipperdevices/thumbnail-autogen",
+                "flipperdevices/go-metric",
+                "flipperdevices/welcomer-bot",
+                "flipperdevices/json_exporter"
+            ]
+        },
+        {
+            "command": "docker/setup-buildx-action@v3",
+            "count": 1,
+            "repos": [
+                "flipperdevices/qFlipper"
+            ]
+        },
+        {
+            "command": "docker/setup-buildx-action@v2",
+            "count": 6,
+            "repos": [
+                "flipperdevices/flpr.app",
+                "flipperdevices/lab.flipper.net",
+                "flipperdevices/firmware-report-client",
+                "flipperdevices/firmware-report-server",
+                "flipperdevices/flipper-tilda-webserver",
+                "flipperdevices/nginx-headers-more"
+            ]
+        }
+    ],
+    "Build and push": [
+        {
+            "command": "docker/build-push-action@v2",
+            "count": 7,
+            "repos": [
+                "flipperdevices/docker-rsync-server",
+                "flipperdevices/docs",
+                "flipperdevices/update.flipperzero.one",
+                "flipperdevices/flipper-update-server",
+                "flipperdevices/thumbnail-autogen",
+                "flipperdevices/welcomer-bot",
+                "flipperdevices/json_exporter"
+            ]
+        },
+        {
+            "command": "docker/build-push-action@v5",
+            "count": 1,
+            "repos": [
+                "flipperdevices/qFlipper"
+            ]
+        },
+        {
+            "command": "docker/build-push-action@v4",
+            "count": 4,
+            "repos": [
+                "flipperdevices/flpr.app",
+                "flipperdevices/firmware-report-client",
+                "flipperdevices/firmware-report-server",
+                "flipperdevices/flipper-tilda-webserver"
+            ]
+        }
+    ],
+    "Set up QEMU": [
+        {
+            "command": "docker/setup-qemu-action@v1",
+            "count": 3,
+            "repos": [
+                "flipperdevices/docs",
+                "flipperdevices/flipper-update-server"
+            ]
+        },
+        {
+            "command": "docker/setup-qemu-action@v2",
+            "count": 1,
+            "repos": [
+                "flipperdevices/flpr.app"
+            ]
+        }
+    ],
+    "Image digest": [
+        {
+            "command": "echo ${{ steps.docker_build.outputs.digest }}",
+            "count": 5,
+            "repos": [
+                "flipperdevices/docs",
+                "flipperdevices/update.flipperzero.one",
+                "flipperdevices/flipper-update-server",
+                "flipperdevices/welcomer-bot",
+                "flipperdevices/json_exporter"
+            ]
+        },
+        {
+            "command": "echo ${{ steps.docker_build.outputs.digest }}\n",
+            "count": 1,
+            "repos": [
+                "flipperdevices/flpr.app"
+            ]
+        }
+    ],
+    "Build application": [
+        {
+            "command": "./build_mac.sh",
+            "count": 1,
+            "repos": [
+                "flipperdevices/qFlipper"
+            ]
+        },
+        {
+            "command": ".\\build_windows.bat",
+            "count": 1,
+            "repos": [
+                "flipperdevices/qFlipper"
+            ]
+        }
+    ],
+    "Make artifacts directory": [
+        {
+            "command": "test -d artifacts && rm -rf artifacts || true\nmkdir artifacts\n",
+            "count": 1,
+            "repos": [
+                "flipperdevices/qFlipper"
+            ]
+        },
+        {
+            "command": "rm -rf artifacts\nmkdir artifacts\n",
+            "count": 1,
+            "repos": [
+                "flipperdevices/blackmagic-esp32-s2"
+            ]
+        },
+        {
+            "command": "rm -rf artifacts;\nmkdir artifacts;\n",
+            "count": 1,
+            "repos": [
+                "flipperdevices/video-game-module"
+            ]
+        }
+    ],
+    "Setup python": [
+        {
+            "command": "actions/setup-python@v3",
+            "count": 1,
+            "repos": [
+                "flipperdevices/flipperzero-protobuf"
+            ]
+        },
+        {
+            "command": "actions/setup-python@v4",
+            "count": 1,
+            "repos": [
+                "flipperdevices/blackmagic-esp32-s2"
+            ]
+        }
+    ],
+    "Checkout": [
+        {
+            "command": "actions/checkout@v2",
+            "count": 3,
+            "repos": [
+                "flipperdevices/libusb_stm32"
+            ]
+        },
+        {
+            "command": "actions/checkout@v4",
+            "count": 8,
+            "repos": [
+                "flipperdevices/flipper-application-catalog",
+                "flipperdevices/flipperzero-ufbt-action",
+                "flipperdevices/flipperzero-good-faps"
+            ]
+        }
+    ],
+    "Resolve prerequisites": [
+        {
+            "command": "make cmsis",
+            "count": 1,
+            "repos": [
+                "flipperdevices/libusb_stm32"
+            ]
+        },
+        {
+            "command": "gmake cmsis",
+            "count": 1,
+            "repos": [
+                "flipperdevices/libusb_stm32"
+            ]
+        },
+        {
+            "command": "make cmsis SHELL=cmd",
+            "count": 1,
+            "repos": [
+                "flipperdevices/libusb_stm32"
+            ]
+        }
+    ],
+    "testbuild F103": [
+        {
+            "command": "make stm32f103x6",
+            "count": 1,
+            "repos": [
+                "flipperdevices/libusb_stm32"
+            ]
+        },
+        {
+            "command": "gmake stm32f103x6",
+            "count": 1,
+            "repos": [
+                "flipperdevices/libusb_stm32"
+            ]
+        },
+        {
+            "command": "make stm32f103x6 SHELL=cmd",
+            "count": 1,
+            "repos": [
+                "flipperdevices/libusb_stm32"
+            ]
+        }
+    ],
+    "testbuild F303": [
+        {
+            "command": "make stm32f303xe",
+            "count": 1,
+            "repos": [
+                "flipperdevices/libusb_stm32"
+            ]
+        },
+        {
+            "command": "gmake stm32f303xe",
+            "count": 1,
+            "repos": [
+                "flipperdevices/libusb_stm32"
+            ]
+        },
+        {
+            "command": "make stm32f303xe SHELL=cmd",
+            "count": 1,
+            "repos": [
+                "flipperdevices/libusb_stm32"
+            ]
+        }
+    ],
+    "testbuild F105": [
+        {
+            "command": "make stm32f105xb",
+            "count": 1,
+            "repos": [
+                "flipperdevices/libusb_stm32"
+            ]
+        },
+        {
+            "command": "gmake stm32f105xb",
+            "count": 1,
+            "repos": [
+                "flipperdevices/libusb_stm32"
+            ]
+        },
+        {
+            "command": "make stm32f105xb SHELL=cmd",
+            "count": 1,
+            "repos": [
+                "flipperdevices/libusb_stm32"
+            ]
+        }
+    ],
+    "testbuild L052": [
+        {
+            "command": "make stm32l052x8",
+            "count": 1,
+            "repos": [
+                "flipperdevices/libusb_stm32"
+            ]
+        },
+        {
+            "command": "gmake stm32l052x8",
+            "count": 1,
+            "repos": [
+                "flipperdevices/libusb_stm32"
+            ]
+        },
+        {
+            "command": "make stm32l052x8 SHELL=cmd",
+            "count": 1,
+            "repos": [
+                "flipperdevices/libusb_stm32"
+            ]
+        }
+    ],
+    "testbuild L100": [
+        {
+            "command": "make stm32l100xc",
+            "count": 1,
+            "repos": [
+                "flipperdevices/libusb_stm32"
+            ]
+        },
+        {
+            "command": "gmake stm32l100xc",
+            "count": 1,
+            "repos": [
+                "flipperdevices/libusb_stm32"
+            ]
+        },
+        {
+            "command": "make stm32l100xc SHELL=cmd",
+            "count": 1,
+            "repos": [
+                "flipperdevices/libusb_stm32"
+            ]
+        }
+    ],
+    "testbuild L476": [
+        {
+            "command": "make stm32l476xg",
+            "count": 1,
+            "repos": [
+                "flipperdevices/libusb_stm32"
+            ]
+        },
+        {
+            "command": "gmake stm32l476xg",
+            "count": 1,
+            "repos": [
+                "flipperdevices/libusb_stm32"
+            ]
+        },
+        {
+            "command": "make stm32l476xg SHELL=cmd",
+            "count": 1,
+            "repos": [
+                "flipperdevices/libusb_stm32"
+            ]
+        }
+    ],
+    "testbuild F429": [
+        {
+            "command": "make stm32f429xi",
+            "count": 1,
+            "repos": [
+                "flipperdevices/libusb_stm32"
+            ]
+        },
+        {
+            "command": "gmake stm32f429xi",
+            "count": 1,
+            "repos": [
+                "flipperdevices/libusb_stm32"
+            ]
+        },
+        {
+            "command": "make stm32f429xi SHELL=cmd",
+            "count": 1,
+            "repos": [
+                "flipperdevices/libusb_stm32"
+            ]
+        }
+    ],
+    "testbuild L433": [
+        {
+            "command": "make stm32l433cc",
+            "count": 1,
+            "repos": [
+                "flipperdevices/libusb_stm32"
+            ]
+        },
+        {
+            "command": "gmake stm32l433cc",
+            "count": 1,
+            "repos": [
+                "flipperdevices/libusb_stm32"
+            ]
+        },
+        {
+            "command": "make stm32l433cc SHELL=cmd",
+            "count": 1,
+            "repos": [
+                "flipperdevices/libusb_stm32"
+            ]
+        }
+    ],
+    "testbuild F070": [
+        {
+            "command": "make stm32f070xb",
+            "count": 1,
+            "repos": [
+                "flipperdevices/libusb_stm32"
+            ]
+        },
+        {
+            "command": "gmake stm32f070xb",
+            "count": 1,
+            "repos": [
+                "flipperdevices/libusb_stm32"
+            ]
+        },
+        {
+            "command": "make stm32f070xb SHELL=cmd",
+            "count": 1,
+            "repos": [
+                "flipperdevices/libusb_stm32"
+            ]
+        }
+    ],
+    "testbuild G431": [
+        {
+            "command": "make stm32g431xb",
+            "count": 1,
+            "repos": [
+                "flipperdevices/libusb_stm32"
+            ]
+        },
+        {
+            "command": "gmake stm32g431xb",
+            "count": 1,
+            "repos": [
+                "flipperdevices/libusb_stm32"
+            ]
+        },
+        {
+            "command": "make stm32g431xb SHELL=cmd",
+            "count": 1,
+            "repos": [
+                "flipperdevices/libusb_stm32"
+            ]
+        }
+    ],
+    "testbuild F446": [
+        {
+            "command": "make stm32f446xc",
+            "count": 1,
+            "repos": [
+                "flipperdevices/libusb_stm32"
+            ]
+        },
+        {
+            "command": "gmake stm32f446xc",
+            "count": 1,
+            "repos": [
+                "flipperdevices/libusb_stm32"
+            ]
+        },
+        {
+            "command": "make stm32f446xc SHELL=cmd",
+            "count": 1,
+            "repos": [
+                "flipperdevices/libusb_stm32"
+            ]
+        }
+    ],
+    "testbuild F373": [
+        {
+            "command": "make stm32f373xc",
+            "count": 1,
+            "repos": [
+                "flipperdevices/libusb_stm32"
+            ]
+        },
+        {
+            "command": "gmake stm32f373xc",
+            "count": 1,
+            "repos": [
+                "flipperdevices/libusb_stm32"
+            ]
+        },
+        {
+            "command": "make stm32f373xc SHELL=cmd",
+            "count": 1,
+            "repos": [
+                "flipperdevices/libusb_stm32"
+            ]
+        }
+    ],
+    "testbuild F745": [
+        {
+            "command": "make stm32f745xe",
+            "count": 1,
+            "repos": [
+                "flipperdevices/libusb_stm32"
+            ]
+        },
+        {
+            "command": "gmake stm32f745xe",
+            "count": 1,
+            "repos": [
+                "flipperdevices/libusb_stm32"
+            ]
+        },
+        {
+            "command": "make stm32f745xe SHELL=cmd",
+            "count": 1,
+            "repos": [
+                "flipperdevices/libusb_stm32"
+            ]
+        }
+    ],
+    "Build firmware": [
+        {
+            "command": "Intake-Health/esp-idf-ci-action@release-v4.4",
+            "count": 1,
+            "repos": [
+                "flipperdevices/blackmagic-esp32-s2"
+            ]
+        },
+        {
+            "command": "source scripts/toolchain/fbtenv.sh;\npushd build;\ncmake -DCMAKE_BUILD_TYPE=Release ../;\nmake -j\"$(getconf _NPROCESSORS_ONLN)\";\npopd;\n",
+            "count": 1,
+            "repos": [
+                "flipperdevices/video-game-module"
+            ]
+        }
+    ],
+    "Move upload files": [
+        {
+            "command": "mv build/bootloader/bootloader.bin artifacts/\nmv build/partition_table/partition-table.bin artifacts/\nmv build/blackmagic.bin artifacts/\ncp scripts/flash_nix.sh artifacts/\n",
+            "count": 1,
+            "repos": [
+                "flipperdevices/blackmagic-esp32-s2"
+            ]
+        },
+        {
+            "command": "mv build/app/firmware.elf artifacts/vgm-rp2040-firmware-${SUFFIX}.elf;\nmv build/app/firmware.bin artifacts/vgm-rp2040-firmware-${SUFFIX}.bin;\nmv build/app/firmware.uf2 artifacts/vgm-rp2040-firmware-${SUFFIX}.uf2;\nmv build/app/firmware.elf.map artifacts/vgm-rp2040-firmware-${SUFFIX}.map;\n",
+            "count": 1,
+            "repos": [
+                "flipperdevices/video-game-module"
+            ]
+        }
+    ],
+    "Set image tag": [
+        {
+            "command": "IMAGE_TAG=\"0.0.0\"\nif [[ \"${{ github.ref }}\" == \"refs/tags/\"* ]]; then\n  REF=${{ github.ref }};\n  TAG_FULL=${REF#refs/*/};\n  IMAGE_TAG=${TAG_FULL//\\//_};\nfi\necho \"IMAGE_TAG=${IMAGE_TAG}\" >> $GITHUB_ENV\necho \"image_tag=${IMAGE_TAG}\" >> $GITHUB_OUTPUT\n",
+            "count": 3,
+            "repos": [
+                "flipperdevices/flpr.app",
+                "flipperdevices/go-metric",
+                "flipperdevices/nginx-headers-more"
+            ]
+        },
+        {
+            "command": "IMAGE_TAG=0.0.0\nif [[ \"${{ github.ref }}\" == \"refs/tags/\"* ]]; then\n  REF=${{ github.ref }};\n  TAG_FULL=${REF#refs/*/};\n  IMAGE_TAG=${TAG_FULL//\\//_};\nfi\necho \"IMAGE_TAG=${IMAGE_TAG}\" >> $GITHUB_ENV\necho \"image_tag=${IMAGE_TAG}\" >> $GITHUB_OUTPUT\necho \"image_name=${IMAGE_NAME}\" >> $GITHUB_OUTPUT\n",
+            "count": 1,
+            "repos": [
+                "flipperdevices/firmware-report-client"
+            ]
+        },
+        {
+            "command": "IMAGE_TAG=0.0.0\nif [[ \"${{ github.ref }}\" == \"refs/tags/\"* ]]; then\n  REF=${{ github.ref }};\n  TAG_FULL=${REF#refs/*/};\n  IMAGE_TAG=${TAG_FULL//\\//_};\nfi\necho \"image_tag=${IMAGE_TAG}\" >> $GITHUB_OUTPUT\necho \"image_name=${IMAGE_NAME}\" >> $GITHUB_OUTPUT\n",
+            "count": 1,
+            "repos": [
+                "flipperdevices/firmware-report-server"
+            ]
+        },
+        {
+            "command": "REF=${{ github.ref }};\nTAG_FULL=${REF#refs/*/};\nIMAGE_TAG=${TAG_FULL//\\//_};\necho \"IMAGE_TAG=${IMAGE_TAG}\" >> $GITHUB_ENV\necho \"image_tag=${IMAGE_TAG}\" >> $GITHUB_OUTPUT\n",
+            "count": 3,
+            "repos": [
+                "flipperdevices/flipper-update-indexer",
+                "flipperdevices/flipper-documentation-indexer",
+                "flipperdevices/flipper-tilda-webserver"
+            ]
+        }
+    ],
+    "Login to GHCR": [
+        {
+            "command": "docker/login-action@v2",
+            "count": 1,
+            "repos": [
+                "flipperdevices/flpr.app"
+            ]
+        },
+        {
+            "command": "docker/login-action@v1",
+            "count": 3,
+            "repos": [
+                "flipperdevices/go-metric",
+                "flipperdevices/welcomer-bot",
+                "flipperdevices/json_exporter"
+            ]
+        }
+    ],
+    "Set image tag and name": [
+        {
+            "command": "IMAGE_TAG=\"0.0.0\"\nif [[ \"${{ github.ref }}\" == \"refs/tags/\"* ]]; then\n  REF=${{ github.ref }};\n  TAG_FULL=${REF#refs/*/};\n  IMAGE_TAG=${TAG_FULL//\\//_};\nfi\necho \"IMAGE_TAG=${IMAGE_TAG}\" >> $GITHUB_ENV\necho \"image_tag=${IMAGE_TAG}\" >> $GITHUB_OUTPUT\necho \"image_name=${IMAGE_NAME}\" >> $GITHUB_OUTPUT\n",
+            "count": 1,
+            "repos": [
+                "flipperdevices/lab.flipper.net"
+            ]
+        },
+        {
+            "command": "IMAGE_TAG=\"0\"\nif [[ \"${{ github.ref }}\" == \"refs/tags/\"* ]]; then\n  REF=${{ github.ref }};\n  TAG_FULL=${REF#refs/*/};\n  IMAGE_TAG=${TAG_FULL//\\//_};\nfi\necho \"IMAGE_TAG=${IMAGE_TAG}\" >> $GITHUB_ENV\necho \"image_tag=${IMAGE_TAG}\" >> $GITHUB_OUTPUT\n",
+            "count": 4,
+            "repos": [
+                "flipperdevices/flipperzero-toolchain"
+            ]
+        }
+    ],
+    "Login to Docker Hub": [
+        {
+            "command": "docker/login-action@v2",
+            "count": 4,
+            "repos": [
+                "flipperdevices/lab.flipper.net",
+                "flipperdevices/flipper-update-indexer",
+                "flipperdevices/flipper-documentation-indexer",
+                "flipperdevices/flipper-tilda-webserver"
+            ]
+        },
+        {
+            "command": "docker/login-action@v3",
+            "count": 2,
+            "repos": [
+                "flipperdevices/firmware-report-client",
+                "flipperdevices/firmware-report-server"
+            ]
+        }
+    ],
+    "Set up source code flag": [
+        {
+            "command": "ARCHIVARIUS_URL=$( < .github/.ARCHIVARIUS_URL ) ;\necho \"ARCHIVARIUS_URL=${ARCHIVARIUS_URL}\" >> $GITHUB_ENV ;\nif [ \"z{{ vars.CATALOG_STAGING }}\" != \"z\" ] ; then\n  echo \"BUNDLE_ALLOW_VERSION_MISMATCH=1\" >> $GITHUB_ENV ;\nfi ;\n",
+            "count": 1,
+            "repos": [
+                "flipperdevices/flipper-application-catalog"
+            ]
+        },
+        {
+            "command": "ARCHIVARIUS_URL=$( < .github/.ARCHIVARIUS_URL ) ;\necho \"ARCHIVARIUS_URL=${ARCHIVARIUS_URL}\" >> $GITHUB_ENV ;\nif [ \"z{{ vars.CATALOG_STAGING }}\" != \"z\" ] ; then\n  echo \"BUNDLE_ALLOW_VERSION_MISMATCH=1\" >> $GITHUB_ENV ;\nfi\n",
+            "count": 1,
+            "repos": [
+                "flipperdevices/flipper-application-catalog"
+            ]
+        }
+    ],
+    "Install dependencies": [
+        {
+            "command": "python -m pip install --upgrade pip\npip install build\n",
+            "count": 1,
+            "repos": [
+                "flipperdevices/flipperzero-ufbt"
+            ]
+        },
+        {
+            "command": "python -m pip install --upgrade pip .\n",
+            "count": 1,
+            "repos": [
+                "flipperdevices/flipperzero-ufbt"
+            ]
+        }
+    ]
+}

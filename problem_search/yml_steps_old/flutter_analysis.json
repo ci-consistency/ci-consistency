@@ -1,0 +1,634 @@
+{
+    "Step 1": [
+        {
+            "command": "actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332",
+            "count": 6,
+            "repos": [
+                "flutter/flutter",
+                "flutter/tests",
+                "flutter/games"
+            ]
+        },
+        {
+            "command": "actions/labeler@8558fd74291d67161a8a78ce36a881fa63b766a9",
+            "count": 1,
+            "repos": [
+                "flutter/flutter"
+            ]
+        },
+        {
+            "command": "actions/labeler@ac9175f8a1f3625fd0d4fb234536d26811351594",
+            "count": 1,
+            "repos": [
+                "flutter/engine"
+            ]
+        },
+        {
+            "command": "actions/labeler@9794b1493b6f1fa7b006c5f8635a19c76c98be95",
+            "count": 1,
+            "repos": [
+                "flutter/plugins"
+            ]
+        },
+        {
+            "command": "actions/labeler@9fd24f1f9d6ceb64ba34d181b329ee72f99978a0",
+            "count": 1,
+            "repos": [
+                "flutter/packages"
+            ]
+        },
+        {
+            "command": "actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab",
+            "count": 7,
+            "repos": [
+                "flutter/samples",
+                "flutter/gallery"
+            ]
+        },
+        {
+            "command": "actions/checkout@v3",
+            "count": 1,
+            "repos": [
+                "flutter/flutter-github-scripts.dart"
+            ]
+        },
+        {
+            "command": "actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9",
+            "count": 2,
+            "repos": [
+                "flutter/uxr"
+            ]
+        }
+    ],
+    "Mirror action step": [
+        {
+            "command": "google/mirror-branch-action@30c52ee21f5d3bd7fb28b95501c11aae7f17eebb",
+            "count": 2,
+            "repos": [
+                "flutter/flutter",
+                "flutter/tests"
+            ]
+        },
+        {
+            "command": "google/mirror-branch-action@c6b07e441a7ffc5ae15860c1d0a8107a3a151db8",
+            "count": 1,
+            "repos": [
+                "flutter/goldens"
+            ]
+        }
+    ],
+    "Checkout code": [
+        {
+            "command": "actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332",
+            "count": 6,
+            "repos": [
+                "flutter/flutter",
+                "flutter/flutter-intellij",
+                "flutter/buildroot",
+                "flutter/platform_tests",
+                "flutter/tests",
+                "flutter/games"
+            ]
+        },
+        {
+            "command": "actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11",
+            "count": 3,
+            "repos": [
+                "flutter/engine",
+                "flutter/put-flutter-to-work"
+            ]
+        },
+        {
+            "command": "actions/checkout@a12a3943b4bdde767164f792f33f40b04645d846",
+            "count": 1,
+            "repos": [
+                "flutter/plugins"
+            ]
+        },
+        {
+            "command": "actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b",
+            "count": 1,
+            "repos": [
+                "flutter/packages"
+            ]
+        },
+        {
+            "command": "actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab",
+            "count": 2,
+            "repos": [
+                "flutter/samples",
+                "flutter/gallery"
+            ]
+        },
+        {
+            "command": "actions/checkout@3df4ab11eba7bda6032a0b82a6bb43b11571feac",
+            "count": 1,
+            "repos": [
+                "flutter/devtools"
+            ]
+        }
+    ],
+    "Run analysis": [
+        {
+            "command": "ossf/scorecard-action@dc50aa9510b46c811795eb24b2f1ba02a914e534",
+            "count": 6,
+            "repos": [
+                "flutter/flutter",
+                "flutter/flutter-intellij",
+                "flutter/buildroot",
+                "flutter/platform_tests",
+                "flutter/tests",
+                "flutter/games"
+            ]
+        },
+        {
+            "command": "ossf/scorecard-action@0864cf19026789058feabb7e87baa5f140aac736",
+            "count": 3,
+            "repos": [
+                "flutter/engine",
+                "flutter/devtools",
+                "flutter/put-flutter-to-work"
+            ]
+        },
+        {
+            "command": "ossf/scorecard-action@c1aec4ac820532bab364f02a81873c555a0ba3a1",
+            "count": 1,
+            "repos": [
+                "flutter/plugins"
+            ]
+        },
+        {
+            "command": "ossf/scorecard-action@5c8bc69dc88b65c66584e07611df79d3579b0377",
+            "count": 1,
+            "repos": [
+                "flutter/packages"
+            ]
+        },
+        {
+            "command": "ossf/scorecard-action@80e868c13c90f172d68d1f4501dee99e2479f7af",
+            "count": 2,
+            "repos": [
+                "flutter/samples",
+                "flutter/gallery"
+            ]
+        }
+    ],
+    "Upload artifact": [
+        {
+            "command": "actions/upload-artifact@65462800fd760344b1a7b4382951275a0abb4808",
+            "count": 6,
+            "repos": [
+                "flutter/flutter",
+                "flutter/flutter-intellij",
+                "flutter/buildroot",
+                "flutter/platform_tests",
+                "flutter/tests",
+                "flutter/games"
+            ]
+        },
+        {
+            "command": "actions/upload-artifact@a8a3f3ad30e3422c9c7b888a15615d19a852ae32",
+            "count": 3,
+            "repos": [
+                "flutter/engine",
+                "flutter/devtools"
+            ]
+        },
+        {
+            "command": "actions/upload-artifact@6673cd052c4cd6fcf4b4e6e60ea986c889389535",
+            "count": 1,
+            "repos": [
+                "flutter/plugins"
+            ]
+        },
+        {
+            "command": "actions/upload-artifact@3cea5372237819ed00197afe530f5a7ea3e805c8",
+            "count": 1,
+            "repos": [
+                "flutter/packages"
+            ]
+        },
+        {
+            "command": "actions/upload-artifact@0b7f8abb1508181956e8e162db84b466c27e18ce",
+            "count": 2,
+            "repos": [
+                "flutter/samples",
+                "flutter/gallery"
+            ]
+        },
+        {
+            "command": "actions/upload-artifact@c7d193f32edcb7bfad88892161225aeda64e9392",
+            "count": 1,
+            "repos": [
+                "flutter/put-flutter-to-work"
+            ]
+        }
+    ],
+    "Upload to code-scanning": [
+        {
+            "command": "github/codeql-action/upload-sarif@23acc5c183826b7a8a97bce3cecc52db901f8251",
+            "count": 6,
+            "repos": [
+                "flutter/flutter",
+                "flutter/flutter-intellij",
+                "flutter/buildroot",
+                "flutter/platform_tests",
+                "flutter/tests",
+                "flutter/games"
+            ]
+        },
+        {
+            "command": "github/codeql-action/upload-sarif@cdcdbb579706841c47f7063dda365e292e5cad7a",
+            "count": 3,
+            "repos": [
+                "flutter/engine",
+                "flutter/devtools",
+                "flutter/put-flutter-to-work"
+            ]
+        },
+        {
+            "command": "github/codeql-action/upload-sarif@f5d822707ee6e8fb81b04a5c0040b736da22e587",
+            "count": 1,
+            "repos": [
+                "flutter/plugins"
+            ]
+        },
+        {
+            "command": "github/codeql-action/upload-sarif@a3a6c128d771b6b9bdebb1c9d0583ebd2728a108",
+            "count": 1,
+            "repos": [
+                "flutter/packages"
+            ]
+        },
+        {
+            "command": "github/codeql-action/upload-sarif@29b1f65c5e92e24fe6b6647da1eaabe529cec70f",
+            "count": 1,
+            "repos": [
+                "flutter/samples"
+            ]
+        },
+        {
+            "command": "github/codeql-action/upload-sarif@83f0fe6c4988d98a455712a27f0255212bba9bd4",
+            "count": 1,
+            "repos": [
+                "flutter/gallery"
+            ]
+        }
+    ],
+    "Check out code": [
+        {
+            "command": "actions/checkout@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f",
+            "count": 1,
+            "repos": [
+                "flutter/plugins"
+            ]
+        },
+        {
+            "command": "actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b",
+            "count": 1,
+            "repos": [
+                "flutter/packages"
+            ]
+        }
+    ],
+    "Set up tools": [
+        {
+            "command": "dart pub get",
+            "count": 1,
+            "repos": [
+                "flutter/plugins"
+            ]
+        },
+        {
+            "command": "dart pub global activate flutter_plugin_tools 0.8.5",
+            "count": 1,
+            "repos": [
+                "flutter/packages"
+            ]
+        }
+    ],
+    "Wait on all tests": [
+        {
+            "command": "lewagon/wait-on-check-action@5e937358caba2c7876a2ee06e4a48d0664fe4967",
+            "count": 1,
+            "repos": [
+                "flutter/plugins"
+            ]
+        },
+        {
+            "command": "lewagon/wait-on-check-action@752bfae19aef55dab12a00bc36d48acc46b77e9d",
+            "count": 1,
+            "repos": [
+                "flutter/packages"
+            ]
+        }
+    ],
+    "run release": [
+        {
+            "command": "git config --global user.name ${{ secrets.USER_NAME }}\ngit config --global user.email ${{ secrets.USER_EMAIL }}\ndart ./script/tool/lib/src/main.dart publish-plugin --all-changed --base-sha=HEAD~ --skip-confirmation --remote=origin\n",
+            "count": 1,
+            "repos": [
+                "flutter/plugins"
+            ]
+        },
+        {
+            "command": "git config --global user.name ${{ secrets.USER_NAME }}\ngit config --global user.email ${{ secrets.USER_EMAIL }}\ndart pub global run flutter_plugin_tools publish-plugin --all-changed --base-sha=HEAD~ --skip-confirmation --remote=origin\n",
+            "count": 1,
+            "repos": [
+                "flutter/packages"
+            ]
+        }
+    ],
+    "Step 2": [
+        {
+            "command": "actions/setup-java@5ffc13f4174014e2d4d4572b3d74c3fa61aeb2c2",
+            "count": 6,
+            "repos": [
+                "flutter/samples"
+            ]
+        },
+        {
+            "command": "subosito/flutter-action@48cafc24713cca54bbe03cdc3a423187d413aafa",
+            "count": 3,
+            "repos": [
+                "flutter/samples",
+                "flutter/gallery"
+            ]
+        },
+        {
+            "command": "flutter doctor -v",
+            "count": 5,
+            "repos": [
+                "flutter/gallery"
+            ]
+        },
+        {
+            "command": "dart-lang/setup-dart@v1",
+            "count": 1,
+            "repos": [
+                "flutter/flutter-github-scripts.dart"
+            ]
+        },
+        {
+            "command": "dart-lang/setup-dart@d6a63dab3335f427404425de0fbfed4686d93c4f",
+            "count": 2,
+            "repos": [
+                "flutter/uxr"
+            ]
+        },
+        {
+            "command": "actions/setup-java@99b8673ff64fbf99d8d325f52d9a5bdedb8483e9",
+            "count": 1,
+            "repos": [
+                "flutter/games"
+            ]
+        }
+    ],
+    "Step 3": [
+        {
+            "command": "subosito/flutter-action@48cafc24713cca54bbe03cdc3a423187d413aafa",
+            "count": 6,
+            "repos": [
+                "flutter/samples"
+            ]
+        },
+        {
+            "command": "flutter config --enable-macos-desktop",
+            "count": 1,
+            "repos": [
+                "flutter/gallery"
+            ]
+        },
+        {
+            "command": "dart-lang/setup-dart@d6a63dab3335f427404425de0fbfed4686d93c4f",
+            "count": 1,
+            "repos": [
+                "flutter/gallery"
+            ]
+        },
+        {
+            "command": "flutter config --enable-web",
+            "count": 1,
+            "repos": [
+                "flutter/gallery"
+            ]
+        },
+        {
+            "command": "dart pub get",
+            "count": 2,
+            "repos": [
+                "flutter/uxr"
+            ]
+        },
+        {
+            "command": "subosito/flutter-action@44ac965b96f18d999802d4b807e3256d5a3f9fa1",
+            "count": 1,
+            "repos": [
+                "flutter/games"
+            ]
+        }
+    ],
+    "Step 4": [
+        {
+            "command": "./tool/flutter_ci_script_stable.sh",
+            "count": 1,
+            "repos": [
+                "flutter/samples"
+            ]
+        },
+        {
+            "command": "./tool/android_ci_script.sh",
+            "count": 2,
+            "repos": [
+                "flutter/samples"
+            ]
+        },
+        {
+            "command": "./tool/ios_ci_script.sh",
+            "count": 2,
+            "repos": [
+                "flutter/samples"
+            ]
+        },
+        {
+            "command": "./tool/flutter_ci_script_${{ matrix.flutter_version }}.sh",
+            "count": 1,
+            "repos": [
+                "flutter/samples"
+            ]
+        },
+        {
+            "command": "flutter doctor -v",
+            "count": 1,
+            "repos": [
+                "flutter/gallery"
+            ]
+        },
+        {
+            "command": "flutter pub get",
+            "count": 3,
+            "repos": [
+                "flutter/gallery"
+            ]
+        },
+        {
+            "command": "npm install -g firebase-tools@11.0.1",
+            "count": 1,
+            "repos": [
+                "flutter/gallery"
+            ]
+        },
+        {
+            "command": "microsoft/setup-msstore-cli@3b2ec9136230357ce9abc02b9d056626fb248d3f",
+            "count": 1,
+            "repos": [
+                "flutter/gallery"
+            ]
+        },
+        {
+            "command": "dart run",
+            "count": 1,
+            "repos": [
+                "flutter/uxr"
+            ]
+        },
+        {
+            "command": "./flutter_ci_script_${{ matrix.flutter_version }}.sh",
+            "count": 1,
+            "repos": [
+                "flutter/games"
+            ]
+        }
+    ],
+    "${{ matrix.name }}": [
+        {
+            "command": "scripts/verify_tests_on_main.sh --shards 3 --shard-index ${{ matrix.shard-index }}",
+            "count": 1,
+            "repos": [
+                "flutter/tests"
+            ]
+        },
+        {
+            "command": "scripts\\verify_tests_on_main.bat --shards 5 --shard-index ${{ matrix.shard-index }}",
+            "count": 1,
+            "repos": [
+                "flutter/tests"
+            ]
+        },
+        {
+            "command": "scripts/verify_tests_on_main.sh --shards 2 --shard-index ${{ matrix.shard-index }}",
+            "count": 1,
+            "repos": [
+                "flutter/tests"
+            ]
+        }
+    ],
+    "Step 6": [
+        {
+            "command": "flutter pub get",
+            "count": 2,
+            "repos": [
+                "flutter/gallery"
+            ]
+        },
+        {
+            "command": "flutter test test_benchmarks",
+            "count": 1,
+            "repos": [
+                "flutter/gallery"
+            ]
+        }
+    ],
+    "Step 7": [
+        {
+            "command": "flutter build ${{ matrix.target }}",
+            "count": 1,
+            "repos": [
+                "flutter/gallery"
+            ]
+        },
+        {
+            "command": "bundle exec fastlane ${{ github.event.inputs.lane || 'beta' }}",
+            "count": 1,
+            "repos": [
+                "flutter/gallery"
+            ]
+        },
+        {
+            "command": "flutter build -v web --release",
+            "count": 1,
+            "repos": [
+                "flutter/gallery"
+            ]
+        },
+        {
+            "command": "flutter create .",
+            "count": 1,
+            "repos": [
+                "flutter/gallery"
+            ]
+        }
+    ],
+    "Step 8": [
+        {
+            "command": "firebase deploy --only hosting:${{ github.event.inputs.environment || 'staging' }}",
+            "count": 1,
+            "repos": [
+                "flutter/gallery"
+            ]
+        },
+        {
+            "command": "flutter pub get",
+            "count": 1,
+            "repos": [
+                "flutter/gallery"
+            ]
+        }
+    ],
+    "Install dependencies": [
+        {
+            "command": "flutter pub get",
+            "count": 1,
+            "repos": [
+                "flutter/gallery"
+            ]
+        },
+        {
+            "command": "dart pub get",
+            "count": 1,
+            "repos": [
+                "flutter/flutter-github-scripts.dart"
+            ]
+        }
+    ],
+    "Step 5": [
+        {
+            "command": "flutter doctor -v",
+            "count": 1,
+            "repos": [
+                "flutter/gallery"
+            ]
+        },
+        {
+            "command": "flutter analyze",
+            "count": 1,
+            "repos": [
+                "flutter/gallery"
+            ]
+        },
+        {
+            "command": "flutter pub get",
+            "count": 1,
+            "repos": [
+                "flutter/gallery"
+            ]
+        },
+        {
+            "command": "flutter test test_goldens",
+            "count": 1,
+            "repos": [
+                "flutter/gallery"
+            ]
+        }
+    ]
+}

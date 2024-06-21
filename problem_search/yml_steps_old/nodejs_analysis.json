@@ -1,0 +1,1097 @@
+{
+    "Step 1": [
+        {
+            "command": "google-github-actions/release-please-action@v4",
+            "count": 1,
+            "repos": [
+                "nodejs/node-gyp"
+            ]
+        },
+        {
+            "command": "actions/checkout@v4",
+            "count": 10,
+            "repos": [
+                "nodejs/node-gyp",
+                "nodejs/build",
+                "nodejs/docker-node"
+            ]
+        },
+        {
+            "command": "actions/stale@v9",
+            "count": 1,
+            "repos": [
+                "nodejs/build"
+            ]
+        },
+        {
+            "command": "actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29",
+            "count": 31,
+            "repos": [
+                "nodejs/node"
+            ]
+        },
+        {
+            "command": "actions/stale@28ca1036281a5e5922ead5184a1bbf96e5fc984e",
+            "count": 3,
+            "repos": [
+                "nodejs/node",
+                "nodejs/help"
+            ]
+        },
+        {
+            "command": "nodejs/node-pr-labeler@d4cf1b8b9f23189c37917000e5e17e796c770a6b",
+            "count": 1,
+            "repos": [
+                "nodejs/node"
+            ]
+        },
+        {
+            "command": "actions/stale@f7176fd3007623b69d27091f9b9d4ab7995f0a06",
+            "count": 1,
+            "repos": [
+                "nodejs/diagnostics"
+            ]
+        },
+        {
+            "command": "actions/labeler@v2",
+            "count": 1,
+            "repos": [
+                "nodejs/nodejs-ko"
+            ]
+        },
+        {
+            "command": "actions/checkout@v2",
+            "count": 2,
+            "repos": [
+                "nodejs/nodejs-ko"
+            ]
+        },
+        {
+            "command": "actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332",
+            "count": 2,
+            "repos": [
+                "nodejs/TSC"
+            ]
+        },
+        {
+            "command": "actions/checkout@v3",
+            "count": 7,
+            "repos": [
+                "nodejs/full-icu-npm",
+                "nodejs/llnode",
+                "nodejs/core-validate-commit"
+            ]
+        },
+        {
+            "command": "actions/stale@v8",
+            "count": 1,
+            "repos": [
+                "nodejs/full-icu-npm"
+            ]
+        }
+    ],
+    "Step 2": [
+        {
+            "command": "pip install --user ruff",
+            "count": 1,
+            "repos": [
+                "nodejs/node-gyp"
+            ]
+        },
+        {
+            "command": "actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9",
+            "count": 4,
+            "repos": [
+                "nodejs/node-addon-examples"
+            ]
+        },
+        {
+            "command": "actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29",
+            "count": 1,
+            "repos": [
+                "nodejs/node"
+            ]
+        },
+        {
+            "command": "./tools/license-builder.sh",
+            "count": 1,
+            "repos": [
+                "nodejs/node"
+            ]
+        },
+        {
+            "command": "shellcheck -V",
+            "count": 1,
+            "repos": [
+                "nodejs/node"
+            ]
+        },
+        {
+            "command": "mszostok/codeowners-validator@7f3f5e28c6d7b8dfae5731e54ce2272ca384592f",
+            "count": 1,
+            "repos": [
+                "nodejs/node"
+            ]
+        },
+        {
+            "command": "git diff HEAD^ HEAD -G\"pr-url:\" -- \"*.md\" | ./tools/lint-pr-url.mjs ${{ github.event.pull_request.html_url }}",
+            "count": 1,
+            "repos": [
+                "nodejs/node"
+            ]
+        },
+        {
+            "command": "tools/lint-readme-lists.mjs",
+            "count": 1,
+            "repos": [
+                "nodejs/node"
+            ]
+        },
+        {
+            "command": "actions/setup-node@v4",
+            "count": 3,
+            "repos": [
+                "nodejs/docker-node"
+            ]
+        },
+        {
+            "command": "docker run -v \"$(pwd)\":/sh -w /sh peterdavehello/shfmt:2.6.3 shfmt -sr -i 2 -l -w -ci .",
+            "count": 1,
+            "repos": [
+                "nodejs/docker-node"
+            ]
+        },
+        {
+            "command": "shellcheck *.sh",
+            "count": 1,
+            "repos": [
+                "nodejs/docker-node"
+            ]
+        },
+        {
+            "command": "actions/setup-node@v2",
+            "count": 2,
+            "repos": [
+                "nodejs/nodejs-ko"
+            ]
+        },
+        {
+            "command": "thollander/actions-comment-pull-request@fabd468d3a1a0b97feee5f6b9e499eab0dd903f6",
+            "count": 1,
+            "repos": [
+                "nodejs/nodejs.org"
+            ]
+        },
+        {
+            "command": "! grep -q \"subject: REPLACEME\" votes/initiateNewVote.yml",
+            "count": 1,
+            "repos": [
+                "nodejs/TSC"
+            ]
+        },
+        {
+            "command": "actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332",
+            "count": 1,
+            "repos": [
+                "nodejs/TSC"
+            ]
+        },
+        {
+            "command": "actions/setup-node@v3",
+            "count": 2,
+            "repos": [
+                "nodejs/full-icu-npm"
+            ]
+        },
+        {
+            "command": "actions/checkout@v3",
+            "count": 2,
+            "repos": [
+                "nodejs/full-icu-npm"
+            ]
+        }
+    ],
+    "Step 3": [
+        {
+            "command": "ruff --output-format=github --select=\"E,F,PLC,PLE,UP,W,YTT\" --ignore=\"E721,PLC1901,S101,UP031\" --target-version=py38 .",
+            "count": 1,
+            "repos": [
+                "nodejs/node-gyp"
+            ]
+        },
+        {
+            "command": "npm install",
+            "count": 2,
+            "repos": [
+                "nodejs/node-addon-examples",
+                "nodejs/core-validate-commit"
+            ]
+        },
+        {
+            "command": "npm i -g n && n nightly",
+            "count": 1,
+            "repos": [
+                "nodejs/node-addon-examples"
+            ]
+        },
+        {
+            "command": "npx envinfo",
+            "count": 2,
+            "repos": [
+                "nodejs/node-addon-examples"
+            ]
+        },
+        {
+            "command": "mhdawson/stale@453d6581568dc43dbe345757f24408d7b451c651",
+            "count": 1,
+            "repos": [
+                "nodejs/node"
+            ]
+        },
+        {
+            "command": "git reset HEAD^2",
+            "count": 1,
+            "repos": [
+                "nodejs/node"
+            ]
+        },
+        {
+            "command": "gr2m/create-or-update-pull-request-action@86ec1766034c8173518f61d2075cc2a173fb8c97",
+            "count": 1,
+            "repos": [
+                "nodejs/node"
+            ]
+        },
+        {
+            "command": "${{ matrix.run }}",
+            "count": 1,
+            "repos": [
+                "nodejs/node"
+            ]
+        },
+        {
+            "command": "npm i -g eclint",
+            "count": 1,
+            "repos": [
+                "nodejs/docker-node"
+            ]
+        },
+        {
+            "command": "git diff --color --exit-code",
+            "count": 1,
+            "repos": [
+                "nodejs/docker-node"
+            ]
+        },
+        {
+            "command": "actions/cache@v2",
+            "count": 2,
+            "repos": [
+                "nodejs/nodejs-ko"
+            ]
+        },
+        {
+            "command": "npm i",
+            "count": 2,
+            "repos": [
+                "nodejs/full-icu-npm"
+            ]
+        }
+    ],
+    "Checkout Repository": [
+        {
+            "command": "actions/checkout@v4",
+            "count": 7,
+            "repos": [
+                "nodejs/node-gyp",
+                "nodejs/changelog-maker",
+                "nodejs/branch-diff"
+            ]
+        },
+        {
+            "command": "actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9",
+            "count": 1,
+            "repos": [
+                "nodejs/node-addon-examples"
+            ]
+        },
+        {
+            "command": "actions/checkout@v3",
+            "count": 1,
+            "repos": [
+                "nodejs/commit-stream"
+            ]
+        }
+    ],
+    "Install Dependencies": [
+        {
+            "command": "npm install",
+            "count": 4,
+            "repos": [
+                "nodejs/node-gyp"
+            ]
+        },
+        {
+            "command": "npm install\npip install pytest\n",
+            "count": 1,
+            "repos": [
+                "nodejs/node-gyp"
+            ]
+        },
+        {
+            "command": "npm install --no-progress\n",
+            "count": 3,
+            "repos": [
+                "nodejs/changelog-maker",
+                "nodejs/commit-stream",
+                "nodejs/branch-diff"
+            ]
+        }
+    ],
+    "Test": [
+        {
+            "command": "npm install\nnpm test\n",
+            "count": 1,
+            "repos": [
+                "nodejs/node-gyp"
+            ]
+        },
+        {
+            "command": "cd $TAR_DIR\nmake run-ci -j4 V=1 TEST_CI_ARGS=\"-p dots --node-args='--test-reporter=spec' --measure-flakiness 9\"\n",
+            "count": 1,
+            "repos": [
+                "nodejs/node"
+            ]
+        },
+        {
+            "command": "NODE_V8_COVERAGE=coverage/tmp make test-cov -j4 V=1 TEST_CI_ARGS=\"-p dots --node-args='--test-reporter=spec' --measure-flakiness 9\" || exit 0",
+            "count": 2,
+            "repos": [
+                "nodejs/node"
+            ]
+        },
+        {
+            "command": "./vcbuild.bat test-ci-js; node -e 'process.exit(0)'",
+            "count": 1,
+            "repos": [
+                "nodejs/node"
+            ]
+        },
+        {
+            "command": "NODE=$(command -v node) make test-doc-ci TEST_CI_ARGS=\"-p actions --node-args='--test-reporter=spec' --node-args='--test-reporter-destination=stdout' --measure-flakiness 9\"",
+            "count": 1,
+            "repos": [
+                "nodejs/node"
+            ]
+        },
+        {
+            "command": "make run-ci -j4 V=1 TEST_CI_ARGS=\"-p actions --node-args='--test-reporter=spec' --node-args='--test-reporter-destination=stdout' -t 300 --measure-flakiness 9\"",
+            "count": 1,
+            "repos": [
+                "nodejs/node"
+            ]
+        },
+        {
+            "command": "make run-ci -j4 V=1 TEST_CI_ARGS=\"-p actions --node-args='--test-reporter=spec' --node-args='--test-reporter-destination=stdout' --measure-flakiness 9\"",
+            "count": 1,
+            "repos": [
+                "nodejs/node"
+            ]
+        },
+        {
+            "command": "make run-ci -j$(getconf _NPROCESSORS_ONLN) V=1 TEST_CI_ARGS=\"-p actions --node-args='--test-reporter=spec' --node-args='--test-reporter-destination=stdout' --measure-flakiness 9\"",
+            "count": 1,
+            "repos": [
+                "nodejs/node"
+            ]
+        },
+        {
+            "command": "make run-ci -j2 V=1 TEST_CI_ARGS=\"-p actions --node-args='--test-reporter=spec' --node-args='--test-reporter-destination=stdout' -t 300 --measure-flakiness 9\"",
+            "count": 1,
+            "repos": [
+                "nodejs/node"
+            ]
+        }
+    ],
+    "Use Node.js ${{ matrix.node }}": [
+        {
+            "command": "actions/setup-node@v4",
+            "count": 1,
+            "repos": [
+                "nodejs/node-gyp"
+            ]
+        },
+        {
+            "command": "actions/setup-node@v4.0.2",
+            "count": 2,
+            "repos": [
+                "nodejs/changelog-maker",
+                "nodejs/branch-diff"
+            ]
+        },
+        {
+            "command": "actions/setup-node@v3.6.0",
+            "count": 1,
+            "repos": [
+                "nodejs/commit-stream"
+            ]
+        }
+    ],
+    "Step 4": [
+        {
+            "command": "seanmiddleditch/gha-setup-ninja@v4",
+            "count": 1,
+            "repos": [
+                "nodejs/node-gyp"
+            ]
+        },
+        {
+            "command": "npm install -g cmake-js@6.3.2",
+            "count": 1,
+            "repos": [
+                "nodejs/node-addon-examples"
+            ]
+        },
+        {
+            "command": "node -p process.versions",
+            "count": 1,
+            "repos": [
+                "nodejs/node-addon-examples"
+            ]
+        },
+        {
+            "command": "eclint check",
+            "count": 1,
+            "repos": [
+                "nodejs/docker-node"
+            ]
+        },
+        {
+            "command": "npm install @node-core/caritat",
+            "count": 1,
+            "repos": [
+                "nodejs/TSC"
+            ]
+        },
+        {
+            "command": "npm run lint",
+            "count": 1,
+            "repos": [
+                "nodejs/full-icu-npm"
+            ]
+        },
+        {
+            "command": "npm t",
+            "count": 1,
+            "repos": [
+                "nodejs/full-icu-npm"
+            ]
+        },
+        {
+            "command": "npm run build --if-present",
+            "count": 1,
+            "repos": [
+                "nodejs/core-validate-commit"
+            ]
+        }
+    ],
+    "Checkout": [
+        {
+            "command": "actions/checkout@v3",
+            "count": 4,
+            "repos": [
+                "nodejs/readable-stream",
+                "nodejs/commit-stream"
+            ]
+        },
+        {
+            "command": "actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9",
+            "count": 1,
+            "repos": [
+                "nodejs/node-addon-examples"
+            ]
+        },
+        {
+            "command": "actions/checkout@v4",
+            "count": 4,
+            "repos": [
+                "nodejs/docker-node",
+                "nodejs/changelog-maker",
+                "nodejs/branch-diff"
+            ]
+        }
+    ],
+    "Install dependencies": [
+        {
+            "command": "npm install",
+            "count": 3,
+            "repos": [
+                "nodejs/readable-stream"
+            ]
+        },
+        {
+            "command": "python -m pip install --upgrade pip\n# pip install -r requirements.txt  # TODO: Add tap2junit\n",
+            "count": 1,
+            "repos": [
+                "nodejs/build"
+            ]
+        },
+        {
+            "command": "npm install --no-progress --no-package-lock --no-save\n",
+            "count": 3,
+            "repos": [
+                "nodejs/changelog-maker",
+                "nodejs/commit-stream",
+                "nodejs/branch-diff"
+            ]
+        }
+    ],
+    "Run Tests on Browsers": [
+        {
+            "command": "npm run test:browsers ${{ matrix.browser }} ${{ matrix.bundler }}",
+            "count": 1,
+            "repos": [
+                "nodejs/readable-stream"
+            ]
+        },
+        {
+            "command": "npm run test:bundlers ${{ matrix.bundler }}",
+            "count": 1,
+            "repos": [
+                "nodejs/readable-stream"
+            ]
+        }
+    ],
+    "Harden Runner": [
+        {
+            "command": "step-security/harden-runner@55d479fb1c5bcad5a4f9099a5d9f37c8857b2845",
+            "count": 8,
+            "repos": [
+                "nodejs/node-addon-examples"
+            ]
+        },
+        {
+            "command": "step-security/harden-runner@f086349bfa2bd1361f7909c78558e816508cdc10",
+            "count": 12,
+            "repos": [
+                "nodejs/node",
+                "nodejs/nodejs.org"
+            ]
+        }
+    ],
+    "Checkout repository": [
+        {
+            "command": "actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9",
+            "count": 1,
+            "repos": [
+                "nodejs/node-addon-examples"
+            ]
+        },
+        {
+            "command": "actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29",
+            "count": 1,
+            "repos": [
+                "nodejs/nodejs.org"
+            ]
+        }
+    ],
+    "Initialize CodeQL": [
+        {
+            "command": "github/codeql-action/init@46ed16ded91731b2df79a2893d3aea8e9f03b5c4",
+            "count": 1,
+            "repos": [
+                "nodejs/node-addon-examples"
+            ]
+        },
+        {
+            "command": "github/codeql-action/init@f079b8493333aace61c81488f8bd40919487bd9f",
+            "count": 1,
+            "repos": [
+                "nodejs/nodejs.org"
+            ]
+        }
+    ],
+    "Perform CodeQL Analysis": [
+        {
+            "command": "github/codeql-action/analyze@46ed16ded91731b2df79a2893d3aea8e9f03b5c4",
+            "count": 1,
+            "repos": [
+                "nodejs/node-addon-examples"
+            ]
+        },
+        {
+            "command": "github/codeql-action/analyze@f079b8493333aace61c81488f8bd40919487bd9f",
+            "count": 1,
+            "repos": [
+                "nodejs/nodejs.org"
+            ]
+        }
+    ],
+    "Use Node.js ${{ matrix.node-version }}": [
+        {
+            "command": "actions/setup-node@e33196f7422957bea03ed53f6fbb155025ffc7b8",
+            "count": 1,
+            "repos": [
+                "nodejs/node-addon-examples"
+            ]
+        },
+        {
+            "command": "actions/setup-node@v4",
+            "count": 1,
+            "repos": [
+                "nodejs/citgm"
+            ]
+        },
+        {
+            "command": "actions/setup-node@v3",
+            "count": 1,
+            "repos": [
+                "nodejs/core-validate-commit"
+            ]
+        }
+    ],
+    "Step 5": [
+        {
+            "command": "npm install",
+            "count": 1,
+            "repos": [
+                "nodejs/node-addon-examples"
+            ]
+        },
+        {
+            "command": "actions/upload-artifact@65462800fd760344b1a7b4382951275a0abb4808",
+            "count": 1,
+            "repos": [
+                "nodejs/node"
+            ]
+        },
+        {
+            "command": "gr2m/create-or-update-pull-request-action@86ec1766034c8173518f61d2075cc2a173fb8c97",
+            "count": 1,
+            "repos": [
+                "nodejs/node"
+            ]
+        },
+        {
+            "command": "actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332",
+            "count": 1,
+            "repos": [
+                "nodejs/TSC"
+            ]
+        },
+        {
+            "command": "npm run test-ci",
+            "count": 1,
+            "repos": [
+                "nodejs/core-validate-commit"
+            ]
+        }
+    ],
+    "Step 6": [
+        {
+            "command": "npm install -g cmake-js@6.3.2",
+            "count": 1,
+            "repos": [
+                "nodejs/node-addon-examples"
+            ]
+        },
+        {
+            "command": "./tools/update-timezone.mjs",
+            "count": 1,
+            "repos": [
+                "nodejs/node"
+            ]
+        },
+        {
+            "command": "bash <(curl -s https://codecov.io/bash)",
+            "count": 1,
+            "repos": [
+                "nodejs/core-validate-commit"
+            ]
+        }
+    ],
+    "Step 7": [
+        {
+            "command": "npm install",
+            "count": 1,
+            "repos": [
+                "nodejs/node-addon-examples"
+            ]
+        },
+        {
+            "command": "peter-evans/create-pull-request@6d6857d36972b65feb161a90e484f2984215f83e",
+            "count": 1,
+            "repos": [
+                "nodejs/node"
+            ]
+        }
+    ],
+    "Checkout code": [
+        {
+            "command": "actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9",
+            "count": 1,
+            "repos": [
+                "nodejs/node-addon-examples"
+            ]
+        },
+        {
+            "command": "actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29",
+            "count": 1,
+            "repos": [
+                "nodejs/node"
+            ]
+        },
+        {
+            "command": "actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744",
+            "count": 1,
+            "repos": [
+                "nodejs/diagnostics"
+            ]
+        },
+        {
+            "command": "actions/checkout@v4",
+            "count": 2,
+            "repos": [
+                "nodejs/citgm"
+            ]
+        }
+    ],
+    "Run analysis": [
+        {
+            "command": "ossf/scorecard-action@99c53751e09b9529366343771cc321ec74e9bd3d",
+            "count": 2,
+            "repos": [
+                "nodejs/node-addon-examples",
+                "nodejs/diagnostics"
+            ]
+        },
+        {
+            "command": "ossf/scorecard-action@dc50aa9510b46c811795eb24b2f1ba02a914e534",
+            "count": 1,
+            "repos": [
+                "nodejs/node"
+            ]
+        }
+    ],
+    "Upload artifact": [
+        {
+            "command": "actions/upload-artifact@0b7f8abb1508181956e8e162db84b466c27e18ce",
+            "count": 1,
+            "repos": [
+                "nodejs/node-addon-examples"
+            ]
+        },
+        {
+            "command": "actions/upload-artifact@65462800fd760344b1a7b4382951275a0abb4808",
+            "count": 1,
+            "repos": [
+                "nodejs/node"
+            ]
+        },
+        {
+            "command": "actions/upload-artifact@a8a3f3ad30e3422c9c7b888a15615d19a852ae32",
+            "count": 1,
+            "repos": [
+                "nodejs/diagnostics"
+            ]
+        }
+    ],
+    "Upload to code-scanning": [
+        {
+            "command": "github/codeql-action/upload-sarif@46ed16ded91731b2df79a2893d3aea8e9f03b5c4",
+            "count": 1,
+            "repos": [
+                "nodejs/node-addon-examples"
+            ]
+        },
+        {
+            "command": "github/codeql-action/upload-sarif@f079b8493333aace61c81488f8bd40919487bd9f",
+            "count": 1,
+            "repos": [
+                "nodejs/node"
+            ]
+        },
+        {
+            "command": "github/codeql-action/upload-sarif@fdcae64e1484d349b3366718cdfef3d404390e85",
+            "count": 1,
+            "repos": [
+                "nodejs/diagnostics"
+            ]
+        }
+    ],
+    "Build and Deploy": [
+        {
+            "command": "npm install\nnpx gatsby build --prefix-paths\n",
+            "count": 1,
+            "repos": [
+                "nodejs/node-addon-examples"
+            ]
+        },
+        {
+            "command": "npm install\nnpx gatsby build --prefix-paths\nnpx gh-pages -d public -r https://git:${TOKEN}@github.com/${REPO}.git -u \"${USER}\"\n",
+            "count": 1,
+            "repos": [
+                "nodejs/node-addon-examples"
+            ]
+        }
+    ],
+    "Use Node.js ${{ env.NODE_VERSION }}": [
+        {
+            "command": "actions/setup-node@v4",
+            "count": 1,
+            "repos": [
+                "nodejs/build"
+            ]
+        },
+        {
+            "command": "actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8",
+            "count": 7,
+            "repos": [
+                "nodejs/node"
+            ]
+        }
+    ],
+    "Get Pull Requests": [
+        {
+            "command": "numbers=$(gh pr list \\\n        --repo ${{ github.repository }} \\\n        --label 'request-ci' \\\n        --json 'number' \\\n        -t '{{ range . }}{{ .number }} {{ end }}' \\\n        --limit 5)\necho \"numbers=$numbers\" >> $GITHUB_OUTPUT\n",
+            "count": 1,
+            "repos": [
+                "nodejs/node"
+            ]
+        },
+        {
+            "command": "prs=$(gh pr list \\\n        --repo ${{ github.repository }} \\\n        --base ${{ github.ref_name }} \\\n        --label 'commit-queue' \\\n        --json 'number' \\\n        --search \"created:<=$(date --date=\"2 days ago\"  +\"%Y-%m-%dT%H:%M:%S%z\")\" \\\n        -t '{{ range . }}{{ .number }} {{ end }}' \\\n        --limit 100)\nfast_track_prs=$(gh pr list \\\n        --repo ${{ github.repository }} \\\n        --base ${{ github.ref_name }} \\\n        --label 'commit-queue' \\\n        --label 'fast-track' \\\n        --json 'number' \\\n        -t '{{ range . }}{{ .number }} {{ end }}' \\\n        --limit 100)\nnumbers=$(echo $prs' '$fast_track_prs | jq -r -s 'unique | join(\" \")')\necho \"numbers=$numbers\" >> $GITHUB_OUTPUT\n",
+            "count": 1,
+            "repos": [
+                "nodejs/node"
+            ]
+        }
+    ],
+    "Build": [
+        {
+            "command": "cd $TAR_DIR\nmake build-ci -j4 V=1\n",
+            "count": 1,
+            "repos": [
+                "nodejs/node"
+            ]
+        },
+        {
+            "command": "./vcbuild.bat",
+            "count": 2,
+            "repos": [
+                "nodejs/node"
+            ]
+        },
+        {
+            "command": "make build-ci -j4 V=1 CONFIG_FLAGS=\"--error-on-warn --coverage --without-intl\"",
+            "count": 1,
+            "repos": [
+                "nodejs/node"
+            ]
+        },
+        {
+            "command": "make build-ci -j4 V=1 CONFIG_FLAGS=\"--error-on-warn --coverage\"",
+            "count": 1,
+            "repos": [
+                "nodejs/node"
+            ]
+        },
+        {
+            "command": "NODE=$(command -v node) make doc-only",
+            "count": 1,
+            "repos": [
+                "nodejs/node"
+            ]
+        },
+        {
+            "command": "make build-ci -j4 V=1",
+            "count": 1,
+            "repos": [
+                "nodejs/node"
+            ]
+        },
+        {
+            "command": "make build-ci -j4 V=1 CONFIG_FLAGS=\"--error-on-warn\"",
+            "count": 2,
+            "repos": [
+                "nodejs/node"
+            ]
+        },
+        {
+            "command": "make build-ci -j$(getconf _NPROCESSORS_ONLN) V=1 CONFIG_FLAGS=\"--error-on-warn\"",
+            "count": 1,
+            "repos": [
+                "nodejs/node"
+            ]
+        },
+        {
+            "command": "make build-ci -j2 V=1",
+            "count": 1,
+            "repos": [
+                "nodejs/node"
+            ]
+        },
+        {
+            "command": "npm run build\n",
+            "count": 3,
+            "repos": [
+                "nodejs/changelog-maker",
+                "nodejs/commit-stream",
+                "nodejs/branch-diff"
+            ]
+        }
+    ],
+    "Compute number of commits in the PR": [
+        {
+            "command": "echo \"plusOne=$((${{ github.event.pull_request.commits }} + 1))\" >> $GITHUB_OUTPUT\necho \"minusOne=$((${{ github.event.pull_request.commits }} - 1))\" >> $GITHUB_OUTPUT\n",
+            "count": 2,
+            "repos": [
+                "nodejs/node",
+                "nodejs/TSC"
+            ]
+        },
+        {
+            "command": "NB_OF_COMMITS=$(gh pr view --json commits --jq '.commits | length' \"${{ steps.pr-url.outputs.URL }}\")\necho \"exact=$NB_OF_COMMITS\" >> $GITHUB_OUTPUT\necho \"minusOne=$(($NB_OF_COMMITS - 1))\" >> $GITHUB_OUTPUT\n",
+            "count": 1,
+            "repos": [
+                "nodejs/TSC"
+            ]
+        }
+    ],
+    "Clean tmp": [
+        {
+            "command": "rm -rf coverage/tmp && rm -rf out",
+            "count": 2,
+            "repos": [
+                "nodejs/node"
+            ]
+        },
+        {
+            "command": "npx rimraf ./coverage/tmp",
+            "count": 1,
+            "repos": [
+                "nodejs/node"
+            ]
+        }
+    ],
+    "Lint markdown files": [
+        {
+            "command": "echo \"::add-matcher::.github/workflows/remark-lint-problem-matcher.json\"\nNODE=$(command -v node) make lint-md\n",
+            "count": 1,
+            "repos": [
+                "nodejs/node"
+            ]
+        },
+        {
+            "command": "echo \"::add-matcher::.github/workflows/remark-lint-problem-matcher.json\"\nnpm test\n",
+            "count": 1,
+            "repos": [
+                "nodejs/TSC"
+            ]
+        }
+    ],
+    "npm install": [
+        {
+            "command": "npm ci",
+            "count": 2,
+            "repos": [
+                "nodejs/nodejs-ko"
+            ]
+        },
+        {
+            "command": "npm install --llnode_build_addon=true --llnode_coverage=true\n",
+            "count": 1,
+            "repos": [
+                "nodejs/llnode"
+            ]
+        }
+    ],
+    "Setup Node.js": [
+        {
+            "command": "actions/setup-node@v4.0.2",
+            "count": 2,
+            "repos": [
+                "nodejs/changelog-maker",
+                "nodejs/branch-diff"
+            ]
+        },
+        {
+            "command": "actions/setup-node@v3.6.0",
+            "count": 1,
+            "repos": [
+                "nodejs/commit-stream"
+            ]
+        }
+    ],
+    "Install npm packages": [
+        {
+            "command": "npm i --no-audit --no-fund --userconfig=/dev/null --omit=dev",
+            "count": 1,
+            "repos": [
+                "nodejs/nodejs.org"
+            ]
+        },
+        {
+            "command": "npm i --no-audit --no-fund --ignore-scripts --userconfig=/dev/null",
+            "count": 2,
+            "repos": [
+                "nodejs/nodejs.org"
+            ]
+        },
+        {
+            "command": "npm i --no-audit --no-fund --userconfig=/dev/null",
+            "count": 1,
+            "repos": [
+                "nodejs/nodejs.org"
+            ]
+        }
+    ],
+    "Install npm dependencies": [
+        {
+            "command": "npm ci",
+            "count": 1,
+            "repos": [
+                "nodejs/TSC"
+            ]
+        },
+        {
+            "command": "npm install @node-core/caritat",
+            "count": 1,
+            "repos": [
+                "nodejs/TSC"
+            ]
+        }
+    ],
+    "Step 9": [
+        {
+            "command": "npm install @node-core/caritat",
+            "count": 1,
+            "repos": [
+                "nodejs/TSC"
+            ]
+        },
+        {
+            "command": "git reset HEAD --hard",
+            "count": 1,
+            "repos": [
+                "nodejs/TSC"
+            ]
+        }
+    ],
+    "Install full-icu": [
+        {
+            "command": "docker run --rm  -v $(pwd):/usr/src/app -w /usr/src/app  ${{ matrix.container }} npm i --no-package-lock --unsafe-perm",
+            "count": 1,
+            "repos": [
+                "nodejs/full-icu-npm"
+            ]
+        },
+        {
+            "command": "docker run --rm  -v $(pwd):/usr/src/app -w /usr/src/app  ${{ matrix.container }} env FULL_ICU_PREFER_NPM=1 npm i --no-package-lock --unsafe-perm",
+            "count": 1,
+            "repos": [
+                "nodejs/full-icu-npm"
+            ]
+        }
+    ]
+}

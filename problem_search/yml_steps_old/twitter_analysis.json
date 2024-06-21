@@ -1,0 +1,833 @@
+{
+    "Step 1": [
+        {
+            "command": "actions/checkout@v2.3.4",
+            "count": 15,
+            "repos": [
+                "twitter/finagle",
+                "twitter/util",
+                "twitter/scrooge",
+                "twitter/finatra",
+                "twitter/twitter-server",
+                "twitter/dodo"
+            ]
+        },
+        {
+            "command": "actions/checkout@v2",
+            "count": 55,
+            "repos": [
+                "twitter/opensource-website",
+                "twitter/twemproxy",
+                "twitter/twitter-cldr-rb",
+                "twitter/pelikan",
+                "twitter/ccommon",
+                "twitter/rpc-perf",
+                "twitter/metrics",
+                "twitter/rezolus",
+                "twitter/rustcommon",
+                "twitter/dict_minimize",
+                "twitter/bazel-multiversion",
+                "twitter/focus"
+            ]
+        },
+        {
+            "command": "actions/setup-go@v2",
+            "count": 1,
+            "repos": [
+                "twitter/scoot"
+            ]
+        },
+        {
+            "command": "actions/checkout@main",
+            "count": 6,
+            "repos": [
+                "twitter/ios-twitter-apache-thrift"
+            ]
+        },
+        {
+            "command": "actions/checkout@v1",
+            "count": 1,
+            "repos": [
+                "twitter/dodo-build"
+            ]
+        },
+        {
+            "command": "actions/checkout@v3",
+            "count": 5,
+            "repos": [
+                "twitter/focus",
+                "twitter/the-algorithm-ml"
+            ]
+        }
+    ],
+    "Step 2": [
+        {
+            "command": "actions/setup-java@v1",
+            "count": 14,
+            "repos": [
+                "twitter/finagle",
+                "twitter/util",
+                "twitter/scrooge",
+                "twitter/finatra",
+                "twitter/twitter-server",
+                "twitter/dodo"
+            ]
+        },
+        {
+            "command": "actions/setup-python@v2",
+            "count": 2,
+            "repos": [
+                "twitter/opensource-website",
+                "twitter/metrics"
+            ]
+        },
+        {
+            "command": "actions-rs/toolchain@v1",
+            "count": 11,
+            "repos": [
+                "twitter/pelikan",
+                "twitter/rpc-perf",
+                "twitter/rustcommon"
+            ]
+        },
+        {
+            "command": "Swatinem/rust-cache@v1",
+            "count": 8,
+            "repos": [
+                "twitter/pelikan",
+                "twitter/rpc-perf",
+                "twitter/rezolus"
+            ]
+        },
+        {
+            "command": "actions-rs/clippy-check@v1",
+            "count": 2,
+            "repos": [
+                "twitter/rpc-perf",
+                "twitter/rustcommon"
+            ]
+        },
+        {
+            "command": "actions/checkout@v2",
+            "count": 1,
+            "repos": [
+                "twitter/scoot"
+            ]
+        },
+        {
+            "command": "actions/checkout@v2.3.4",
+            "count": 4,
+            "repos": [
+                "twitter/dodo"
+            ]
+        },
+        {
+            "command": "actions-rs/audit-check@v1",
+            "count": 1,
+            "repos": [
+                "twitter/rustcommon"
+            ]
+        },
+        {
+            "command": "olafurpg/setup-scala@v10",
+            "count": 2,
+            "repos": [
+                "twitter/bazel-multiversion"
+            ]
+        },
+        {
+            "command": "npm install\nnpm run all",
+            "count": 1,
+            "repos": [
+                "twitter/dodo-build"
+            ]
+        },
+        {
+            "command": "actions/setup-python@v4",
+            "count": 1,
+            "repos": [
+                "twitter/the-algorithm-ml"
+            ]
+        }
+    ],
+    "test": [
+        {
+            "command": "${{ format('./sbt ++{0} clean \"{1}/test\"', matrix.scala, matrix.project) }}",
+            "count": 2,
+            "repos": [
+                "twitter/finagle"
+            ]
+        },
+        {
+            "command": "${{ format('./sbt ++{0} clean test', matrix.scala) }}",
+            "count": 4,
+            "repos": [
+                "twitter/util",
+                "twitter/scrooge",
+                "twitter/finatra",
+                "twitter/twitter-server"
+            ]
+        },
+        {
+            "command": "actions-rs/cargo@v1",
+            "count": 3,
+            "repos": [
+                "twitter/pelikan",
+                "twitter/rpc-perf",
+                "twitter/rustcommon"
+            ]
+        },
+        {
+            "command": "${{ format('./bin/build --no-test --dry-run --scala-version {0} --all', matrix.scala) }}",
+            "count": 1,
+            "repos": [
+                "twitter/dodo"
+            ]
+        }
+    ],
+    "build": [
+        {
+            "command": "hugo",
+            "count": 1,
+            "repos": [
+                "twitter/opensource-website"
+            ]
+        },
+        {
+            "command": "actions-rs/cargo@v1",
+            "count": 4,
+            "repos": [
+                "twitter/pelikan",
+                "twitter/rpc-perf",
+                "twitter/rustcommon"
+            ]
+        },
+        {
+            "command": "cargo build --release --target x86_64-unknown-linux-musl",
+            "count": 1,
+            "repos": [
+                "twitter/rezolus"
+            ]
+        }
+    ],
+    "Step 4": [
+        {
+            "command": "pip install -r requirements.txt",
+            "count": 2,
+            "repos": [
+                "twitter/opensource-website",
+                "twitter/metrics"
+            ]
+        },
+        {
+            "command": "actions-rs/cargo@v1",
+            "count": 3,
+            "repos": [
+                "twitter/pelikan",
+                "twitter/rpc-perf",
+                "twitter/rustcommon"
+            ]
+        },
+        {
+            "command": "./pelikan/.github/actions/ca",
+            "count": 4,
+            "repos": [
+                "twitter/pelikan"
+            ]
+        },
+        {
+            "command": "./pelikan/.github/actions/pingserver",
+            "count": 1,
+            "repos": [
+                "twitter/pelikan"
+            ]
+        },
+        {
+            "command": "olafurpg/setup-gpg@v3",
+            "count": 7,
+            "repos": [
+                "twitter/dodo"
+            ]
+        },
+        {
+            "command": "olafurpg/setup-scala@v10",
+            "count": 3,
+            "repos": [
+                "twitter/dodo"
+            ]
+        },
+        {
+            "command": "yarn global add @bazel/bazelisk",
+            "count": 2,
+            "repos": [
+                "twitter/bazel-multiversion"
+            ]
+        },
+        {
+            "command": "arduino/setup-protoc@v1",
+            "count": 1,
+            "repos": [
+                "twitter/bazel-multiversion"
+            ]
+        }
+    ],
+    "Step 5": [
+        {
+            "command": "python scripts/fetch_projects.py",
+            "count": 1,
+            "repos": [
+                "twitter/opensource-website"
+            ]
+        },
+        {
+            "command": "Swatinem/rust-cache@v1",
+            "count": 4,
+            "repos": [
+                "twitter/pelikan",
+                "twitter/rpc-perf",
+                "twitter/rustcommon"
+            ]
+        },
+        {
+            "command": "./pelikan/.github/actions/pingserver",
+            "count": 4,
+            "repos": [
+                "twitter/pelikan"
+            ]
+        },
+        {
+            "command": "actions/setup-python@v2",
+            "count": 1,
+            "repos": [
+                "twitter/dodo"
+            ]
+        },
+        {
+            "command": "olafurpg/setup-gpg@v3",
+            "count": 2,
+            "repos": [
+                "twitter/dodo"
+            ]
+        },
+        {
+            "command": "./update.sh",
+            "count": 1,
+            "repos": [
+                "twitter/metrics"
+            ]
+        },
+        {
+            "command": "arduino/setup-protoc@v1",
+            "count": 2,
+            "repos": [
+                "twitter/bazel-multiversion"
+            ]
+        }
+    ],
+    "Step 6": [
+        {
+            "command": "git config user.name 'GitHub Actions'\ngit config user.email 'actions@users.noreply.github.com'\ngit add -A\ntimestamp=$(date -u)\ngit commit -m \"update data: ${timestamp}\" || exit 0\ngit push\n",
+            "count": 2,
+            "repos": [
+                "twitter/opensource-website",
+                "twitter/metrics"
+            ]
+        },
+        {
+            "command": "./pelikan/.github/actions/rpc-perf",
+            "count": 2,
+            "repos": [
+                "twitter/pelikan"
+            ]
+        },
+        {
+            "command": "./pelikan/.github/actions/pingproxy",
+            "count": 2,
+            "repos": [
+                "twitter/pelikan"
+            ]
+        },
+        {
+            "command": "sbt scalafmtCheckAll",
+            "count": 1,
+            "repos": [
+                "twitter/bazel-multiversion"
+            ]
+        }
+    ],
+    "Update cargo flags": [
+        {
+            "command": "echo 'CARGO_FLAGS=--release' >> $GITHUB_ENV",
+            "count": 4,
+            "repos": [
+                "twitter/pelikan",
+                "twitter/rpc-perf",
+                "twitter/rustcommon"
+            ]
+        },
+        {
+            "command": "echo 'CARGO_FLAGS=' >> $GITHUB_ENV",
+            "count": 4,
+            "repos": [
+                "twitter/pelikan",
+                "twitter/rpc-perf",
+                "twitter/rustcommon"
+            ]
+        }
+    ],
+    "Step 3": [
+        {
+            "command": "Swatinem/rust-cache@v1",
+            "count": 14,
+            "repos": [
+                "twitter/pelikan",
+                "twitter/rpc-perf",
+                "twitter/rezolus",
+                "twitter/rustcommon"
+            ]
+        },
+        {
+            "command": "actions-rs/cargo@v1",
+            "count": 3,
+            "repos": [
+                "twitter/pelikan",
+                "twitter/rpc-perf",
+                "twitter/rustcommon"
+            ]
+        },
+        {
+            "command": "actions-rs/clippy-check@v1",
+            "count": 1,
+            "repos": [
+                "twitter/pelikan"
+            ]
+        },
+        {
+            "command": "actions-rs/toolchain@v1",
+            "count": 5,
+            "repos": [
+                "twitter/pelikan"
+            ]
+        },
+        {
+            "command": "olafurpg/setup-scala@v10",
+            "count": 7,
+            "repos": [
+                "twitter/dodo"
+            ]
+        },
+        {
+            "command": "actions/setup-java@v1",
+            "count": 3,
+            "repos": [
+                "twitter/dodo"
+            ]
+        }
+    ],
+    "Step 7": [
+        {
+            "command": "./pelikan/.github/actions/rpc-perf",
+            "count": 2,
+            "repos": [
+                "twitter/pelikan"
+            ]
+        },
+        {
+            "command": "sbt test",
+            "count": 1,
+            "repos": [
+                "twitter/bazel-multiversion"
+            ]
+        },
+        {
+            "command": "sbt 'scalafixAll --check'",
+            "count": 1,
+            "repos": [
+                "twitter/bazel-multiversion"
+            ]
+        }
+    ],
+    "Validate": [
+        {
+            "command": "sleep 60 && curl -s http://localhost:9998/vars.json | jq '.' > /dev/null",
+            "count": 1,
+            "repos": [
+                "twitter/pelikan"
+            ]
+        },
+        {
+            "command": "sleep 60 && curl -s http://localhost:9090/vars.json | jq '.' > /dev/null",
+            "count": 1,
+            "repos": [
+                "twitter/rpc-perf"
+            ]
+        }
+    ],
+    "Build": [
+        {
+            "command": "cmake --build _build\n",
+            "count": 1,
+            "repos": [
+                "twitter/ccommon"
+            ]
+        },
+        {
+            "command": "cargo build --release",
+            "count": 5,
+            "repos": [
+                "twitter/rpc-perf",
+                "twitter/rezolus"
+            ]
+        },
+        {
+            "command": "bash build/ci.sh",
+            "count": 1,
+            "repos": [
+                "twitter/rezolus"
+            ]
+        },
+        {
+            "command": "sbt -v -Dfile.encoding=UTF8 nativeImage\nchmod +x multiversion/target/native-image/multiversion\n",
+            "count": 1,
+            "repos": [
+                "twitter/bazel-multiversion"
+            ]
+        },
+        {
+            "command": "cargo build --release --locked",
+            "count": 1,
+            "repos": [
+                "twitter/focus"
+            ]
+        }
+    ],
+    "Smoketest": [
+        {
+            "command": "target/release/rpc-perf configs/memcache.toml",
+            "count": 1,
+            "repos": [
+                "twitter/rpc-perf"
+            ]
+        },
+        {
+            "command": "target/release/rpc-perf configs/redis.toml",
+            "count": 1,
+            "repos": [
+                "twitter/rpc-perf"
+            ]
+        },
+        {
+            "command": "target/release/rpc-perf configs/redis_resp.toml",
+            "count": 1,
+            "repos": [
+                "twitter/rpc-perf"
+            ]
+        },
+        {
+            "command": "rpc-perf/target/release/rpc-perf rpc-perf/configs/ping.toml",
+            "count": 1,
+            "repos": [
+                "twitter/rpc-perf"
+            ]
+        },
+        {
+            "command": "rpc-perf/target/release/rpc-perf rpc-perf/configs/pelikan.toml",
+            "count": 3,
+            "repos": [
+                "twitter/rpc-perf"
+            ]
+        },
+        {
+            "command": "target/release/rezolus --config configs/memcache.toml & sleep 180; curl -s http://localhost:4242/vars",
+            "count": 1,
+            "repos": [
+                "twitter/rezolus"
+            ]
+        },
+        {
+            "command": "target/release/rezolus --config configs/macos.toml & sleep 180; curl -s http://localhost:4242/vars",
+            "count": 1,
+            "repos": [
+                "twitter/rezolus"
+            ]
+        }
+    ],
+    "Run Pelikan Segcache": [
+        {
+            "command": "pelikan/target/release/pelikan_segcache_rs &",
+            "count": 1,
+            "repos": [
+                "twitter/rpc-perf"
+            ]
+        },
+        {
+            "command": "pelikan/target/release/pelikan_segcache_rs pelikan/config/segcache.toml &",
+            "count": 2,
+            "repos": [
+                "twitter/rpc-perf"
+            ]
+        }
+    ],
+    "Configure rpc-perf": [
+        {
+            "command": "echo '[tls]' >> rpc-perf/configs/pelikan.toml\necho 'verify = false' >> rpc-perf/configs/pelikan.toml\necho 'certificate_chain = \"trust.chain\"' >> rpc-perf/configs/pelikan.toml\necho 'certificate = \"client.crt\"' >> rpc-perf/configs/pelikan.toml\necho 'private_key = \"client.key\"' >> rpc-perf/configs/pelikan.toml\n",
+            "count": 1,
+            "repos": [
+                "twitter/rpc-perf"
+            ]
+        },
+        {
+            "command": "echo '[tls]' >> rpc-perf/configs/pelikan.toml\necho 'verify = false' >> rpc-perf/configs/pelikan.toml\necho 'certificate_chain = \"trust.chain\"' >> rpc-perf/configs/pelikan.toml\necho 'certificate = \"client.crt\"' >> rpc-perf/configs/pelikan.toml\necho 'private_key = \"client.key\"' >> rpc-perf/configs/pelikan.toml\necho 'session_cache = 0' >> rpc-perf/configs/pelikan.toml\n",
+            "count": 1,
+            "repos": [
+                "twitter/rpc-perf"
+            ]
+        }
+    ],
+    "slack/notification-failure": [
+        {
+            "command": "${{ github.workspace }}/bin/slack --verbose --denote-dry-run ${{ github.event.client_payload.dry_run }} --message \"\ud83d\uddd1\ufe0f ${{ github.event.client_payload.version }} Snapshot cleanup \\`failed\\`.\" --color \"#DA2700\"",
+            "count": 1,
+            "repos": [
+                "twitter/dodo"
+            ]
+        },
+        {
+            "command": "${{ github.workspace }}/bin/slack --verbose --denote-dry-run ${{ github.event.client_payload.dry_run }} --message \"\ud83d\udcd3 ${{ github.event.client_payload.version }} Site publish \\`failed\\`.\" --color \"#DA2700\"",
+            "count": 1,
+            "repos": [
+                "twitter/dodo"
+            ]
+        },
+        {
+            "command": "${{ github.workspace }}/bin/slack --verbose --denote-dry-run $DRY_RUN --message \"\ud83d\udcf8 Snapshot publishing \\`failed\\`.\" --color \"#DA2700\"",
+            "count": 1,
+            "repos": [
+                "twitter/dodo"
+            ]
+        },
+        {
+            "command": "${{ github.workspace }}/bin/slack --verbose --denote-dry-run ${{ github.event.client_payload.dry_run }} --message \"\ud83d\udc23 Versioned release \\`failed\\`.\" --color \"#DA2700\"",
+            "count": 1,
+            "repos": [
+                "twitter/dodo"
+            ]
+        }
+    ],
+    "slack/notification-success": [
+        {
+            "command": "${{ github.workspace }}/bin/slack  --verbose --denote-dry-run ${{ github.event.client_payload.dry_run }} --message \"\ud83d\uddd1\ufe0f ${{ github.event.client_payload.version }} Snapshot cleanup \\`successful\\`.\" --color \"#229954\"",
+            "count": 1,
+            "repos": [
+                "twitter/dodo"
+            ]
+        },
+        {
+            "command": "${{ github.workspace }}/bin/slack --verbose --denote-dry-run ${{ github.event.client_payload.dry_run }} --message \"\ud83d\udcd3 ${{ github.event.client_payload.version }} Site publish \\`successful\\`.\" --color \"#229954\"",
+            "count": 1,
+            "repos": [
+                "twitter/dodo"
+            ]
+        },
+        {
+            "command": "${{ github.workspace }}/bin/slack --verbose --denote-dry-run $DRY_RUN --message \"\ud83d\udcf8 Snapshot publishing \\`successful\\`.\" --color \"#229954\"",
+            "count": 1,
+            "repos": [
+                "twitter/dodo"
+            ]
+        },
+        {
+            "command": "${{ github.workspace }}/bin/slack --verbose --denote-dry-run ${{ github.event.client_payload.dry_run }} --message \"\ud83d\udc23 Versioned release \\`successful\\`.\" --color \"#229954\"",
+            "count": 1,
+            "repos": [
+                "twitter/dodo"
+            ]
+        }
+    ],
+    "release/finagle": [
+        {
+            "command": "${{ github.workspace }}/bin/publish --phab-id ${{ github.event.client_payload.phab_id }} --version ${{ github.event.client_payload.version }} --dry-run ${{ github.event.client_payload.dry_run }} --verbose finagle\n",
+            "count": 2,
+            "repos": [
+                "twitter/dodo"
+            ]
+        },
+        {
+            "command": "${{ github.workspace }}/bin/publish --snapshot --dry-run $DRY_RUN --verbose finagle\n",
+            "count": 1,
+            "repos": [
+                "twitter/dodo"
+            ]
+        }
+    ],
+    "release/finatra": [
+        {
+            "command": "${{ github.workspace }}/bin/publish --phab-id ${{ github.event.client_payload.phab_id }} --version ${{ github.event.client_payload.version }}  --dry-run ${{ github.event.client_payload.dry_run }} --verbose finatra\n",
+            "count": 1,
+            "repos": [
+                "twitter/dodo"
+            ]
+        },
+        {
+            "command": "${{ github.workspace }}/bin/publish --snapshot --dry-run $DRY_RUN --verbose finatra\n",
+            "count": 1,
+            "repos": [
+                "twitter/dodo"
+            ]
+        },
+        {
+            "command": "${{ github.workspace }}/bin/publish --phab-id ${{ github.event.client_payload.phab_id }} --version ${{ github.event.client_payload.version }} --dry-run ${{ github.event.client_payload.dry_run }} --verbose finatra\n",
+            "count": 1,
+            "repos": [
+                "twitter/dodo"
+            ]
+        }
+    ],
+    "setup/git": [
+        {
+            "command": "git config --global user.email \"${API_USER}@twitter.com\"\ngit config --global user.name \"$API_USER\"\ngit config remote.origin.fetch +refs/heads/*:refs/remotes/origin/*\n",
+            "count": 1,
+            "repos": [
+                "twitter/dodo"
+            ]
+        },
+        {
+            "command": "git config --global user.email \"${API_USER}@twitter.com\"\ngit config --global user.name \"$API_USER\"\n",
+            "count": 1,
+            "repos": [
+                "twitter/dodo"
+            ]
+        }
+    ],
+    "release/util": [
+        {
+            "command": "${{ github.workspace }}/bin/publish --snapshot --dry-run $DRY_RUN --verbose util\n",
+            "count": 1,
+            "repos": [
+                "twitter/dodo"
+            ]
+        },
+        {
+            "command": "${{ github.workspace }}/bin/publish --phab-id ${{ github.event.client_payload.phab_id }} --version ${{ github.event.client_payload.version }} --dry-run ${{ github.event.client_payload.dry_run }} --verbose util\n",
+            "count": 1,
+            "repos": [
+                "twitter/dodo"
+            ]
+        },
+        {
+            "command": "${{ github.workspace }}/bin/publish --phab-id ${{ github.event.client_payload.phab_id }} --version ${{ github.event.client_payload.version }}  --dry-run ${{ github.event.client_payload.dry_run }} --verbose util\n",
+            "count": 1,
+            "repos": [
+                "twitter/dodo"
+            ]
+        }
+    ],
+    "release/scrooge": [
+        {
+            "command": "${{ github.workspace }}/bin/publish --snapshot --dry-run $DRY_RUN --verbose scrooge\n",
+            "count": 1,
+            "repos": [
+                "twitter/dodo"
+            ]
+        },
+        {
+            "command": "${{ github.workspace }}/bin/publish --phab-id ${{ github.event.client_payload.phab_id }} --version ${{ github.event.client_payload.version }} --dry-run ${{ github.event.client_payload.dry_run }} --verbose scrooge\n",
+            "count": 1,
+            "repos": [
+                "twitter/dodo"
+            ]
+        },
+        {
+            "command": "${{ github.workspace }}/bin/publish --phab-id ${{ github.event.client_payload.phab_id }} --version ${{ github.event.client_payload.version }}  --dry-run ${{ github.event.client_payload.dry_run }} --verbose scrooge\n",
+            "count": 1,
+            "repos": [
+                "twitter/dodo"
+            ]
+        }
+    ],
+    "release/scrooge-sbt-plugin": [
+        {
+            "command": "${{ github.workspace }}/bin/publish --snapshot --dry-run $DRY_RUN --verbose scrooge-sbt-plugin\n",
+            "count": 1,
+            "repos": [
+                "twitter/dodo"
+            ]
+        },
+        {
+            "command": "${{ github.workspace }}/bin/publish --phab-id ${{ github.event.client_payload.phab_id }} --version ${{ github.event.client_payload.version }} --dry-run ${{ github.event.client_payload.dry_run }} --verbose scrooge-sbt-plugin\n",
+            "count": 1,
+            "repos": [
+                "twitter/dodo"
+            ]
+        },
+        {
+            "command": "${{ github.workspace }}/bin/publish --phab-id ${{ github.event.client_payload.phab_id }} --version ${{ github.event.client_payload.version }}  --dry-run ${{ github.event.client_payload.dry_run }} --verbose scrooge-sbt-plugin\n",
+            "count": 1,
+            "repos": [
+                "twitter/dodo"
+            ]
+        }
+    ],
+    "release/scrooge-maven-plugin": [
+        {
+            "command": "${{ github.workspace }}/bin/publish --snapshot --dry-run $DRY_RUN --verbose scrooge-maven-plugin\n",
+            "count": 1,
+            "repos": [
+                "twitter/dodo"
+            ]
+        },
+        {
+            "command": "${{ github.workspace }}/bin/publish --phab-id ${{ github.event.client_payload.phab_id }} --version ${{ github.event.client_payload.version }} --dry-run ${{ github.event.client_payload.dry_run }} --verbose scrooge-maven-plugin\n",
+            "count": 1,
+            "repos": [
+                "twitter/dodo"
+            ]
+        },
+        {
+            "command": "${{ github.workspace }}/bin/publish --phab-id ${{ github.event.client_payload.phab_id }} --version ${{ github.event.client_payload.version }}  --dry-run ${{ github.event.client_payload.dry_run }} --verbose scrooge-maven-plugin\n",
+            "count": 1,
+            "repos": [
+                "twitter/dodo"
+            ]
+        }
+    ],
+    "release/twitter-server": [
+        {
+            "command": "${{ github.workspace }}/bin/publish --snapshot --dry-run $DRY_RUN --verbose twitter-server\n",
+            "count": 1,
+            "repos": [
+                "twitter/dodo"
+            ]
+        },
+        {
+            "command": "${{ github.workspace }}/bin/publish --phab-id ${{ github.event.client_payload.phab_id }} --version ${{ github.event.client_payload.version }} --dry-run ${{ github.event.client_payload.dry_run }} --verbose twitter-server\n",
+            "count": 1,
+            "repos": [
+                "twitter/dodo"
+            ]
+        },
+        {
+            "command": "${{ github.workspace }}/bin/publish --phab-id ${{ github.event.client_payload.phab_id }} --version ${{ github.event.client_payload.version }}  --dry-run ${{ github.event.client_payload.dry_run }} --verbose twitter-server\n",
+            "count": 1,
+            "repos": [
+                "twitter/dodo"
+            ]
+        }
+    ],
+    "Install dependencies": [
+        {
+            "command": "python -m pip install --upgrade pip\npip install -r requirements/base.txt\npip install -r requirements/frameworks.txt\npip install -r requirements/tests.txt\npip install -r requirements/tools.txt\npip install -e .[test]\n",
+            "count": 1,
+            "repos": [
+                "twitter/dict_minimize"
+            ]
+        },
+        {
+            "command": "npm install",
+            "count": 3,
+            "repos": [
+                "twitter/check-my-repo"
+            ]
+        }
+    ]
+}

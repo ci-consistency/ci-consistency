@@ -1,0 +1,1884 @@
+{
+    "Step 1": [
+        {
+            "command": "actions/checkout@v2",
+            "count": 88,
+            "repos": [
+                "open-mmlab/mmcv",
+                "open-mmlab/mmdetection",
+                "open-mmlab/mmagic",
+                "open-mmlab/mmselfsup",
+                "open-mmlab/mmsegmentation",
+                "open-mmlab/mmdetection3d",
+                "open-mmlab/mmpose",
+                "open-mmlab/mmpretrain",
+                "open-mmlab/mmaction2",
+                "open-mmlab/mmtracking",
+                "open-mmlab/mmocr",
+                "open-mmlab/mmgeneration",
+                "open-mmlab/mim",
+                "open-mmlab/mmflow",
+                "open-mmlab/mmfewshot",
+                "open-mmlab/mmhuman3d",
+                "open-mmlab/labelbee",
+                "open-mmlab/pre-commit-hooks",
+                "open-mmlab/mmrazor",
+                "open-mmlab/mmengine",
+                "open-mmlab/mmrotate",
+                "open-mmlab/mdformat-openmmlab",
+                "open-mmlab/ecosystem",
+                "open-mmlab/mmeval",
+                "open-mmlab/mmyolo"
+            ]
+        },
+        {
+            "command": "actions/stale@v4.1.0",
+            "count": 1,
+            "repos": [
+                "open-mmlab/OpenPCDet"
+            ]
+        },
+        {
+            "command": "actions/checkout@v3",
+            "count": 32,
+            "repos": [
+                "open-mmlab/mmaction2",
+                "open-mmlab/mmocr",
+                "open-mmlab/mmgeneration",
+                "open-mmlab/mmdeploy",
+                "open-mmlab/mmengine",
+                "open-mmlab/mdformat-openmmlab",
+                "open-mmlab/Amphion"
+            ]
+        },
+        {
+            "command": "actions/stale@v7",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmdeploy"
+            ]
+        }
+    ],
+    "Set up Python": [
+        {
+            "command": "actions/setup-python@v2",
+            "count": 2,
+            "repos": [
+                "open-mmlab/mmcv",
+                "open-mmlab/mdformat-openmmlab"
+            ]
+        },
+        {
+            "command": "actions/setup-python@v4",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmdeploy"
+            ]
+        },
+        {
+            "command": "actions/setup-python@v3",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mdformat-openmmlab"
+            ]
+        },
+        {
+            "command": "actions/setup-python@v1",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mdformat-openmmlab"
+            ]
+        }
+    ],
+    "Install PyTorch": [
+        {
+            "command": "pip install torch==${{matrix.torch}} torchvision==${{matrix.torchvision}} --no-cache-dir",
+            "count": 2,
+            "repos": [
+                "open-mmlab/mmcv",
+                "open-mmlab/mim"
+            ]
+        },
+        {
+            "command": "pip install torch==${{matrix.torch}}+cpu torchvision==${{matrix.torchvision}}+cpu -f https://download.pytorch.org/whl/torch_stable.html",
+            "count": 20,
+            "repos": [
+                "open-mmlab/mmagic",
+                "open-mmlab/mmselfsup",
+                "open-mmlab/mmdetection3d",
+                "open-mmlab/mmtracking",
+                "open-mmlab/mmocr",
+                "open-mmlab/mmgeneration",
+                "open-mmlab/mim",
+                "open-mmlab/mmflow",
+                "open-mmlab/mmfewshot",
+                "open-mmlab/mmrotate"
+            ]
+        },
+        {
+            "command": "python -m pip install torch==1.8.1+${{matrix.platform}} torchvision==0.9.1+${{matrix.platform}} -f https://download.pytorch.org/whl/lts/1.8/torch_lts.html",
+            "count": 4,
+            "repos": [
+                "open-mmlab/mmagic",
+                "open-mmlab/mmgeneration"
+            ]
+        },
+        {
+            "command": "pip install torch==${{matrix.torch}}+cpu torchvision==${{matrix.torchvision}}+cpu -f https://download.pytorch.org/whl/cpu/torch_stable.html",
+            "count": 9,
+            "repos": [
+                "open-mmlab/mmaction2",
+                "open-mmlab/mmocr",
+                "open-mmlab/mmengine"
+            ]
+        },
+        {
+            "command": "pip install torch==${{matrix.torch}}+${{matrix.platform}} torchvision==${{matrix.torchvision}}+${{matrix.platform}} -f https://download.pytorch.org/whl/${{matrix.platform}}/torch_stable.html",
+            "count": 6,
+            "repos": [
+                "open-mmlab/mmaction2",
+                "open-mmlab/mmocr",
+                "open-mmlab/mmengine"
+            ]
+        },
+        {
+            "command": "python -m pip install torch==${{matrix.torch}} torchvision==${{matrix.torchvision}} -f https://download.pytorch.org/whl/torch_stable.html",
+            "count": 10,
+            "repos": [
+                "open-mmlab/mmtracking",
+                "open-mmlab/mim",
+                "open-mmlab/mmflow",
+                "open-mmlab/mmfewshot",
+                "open-mmlab/mmdeploy",
+                "open-mmlab/mmrotate"
+            ]
+        },
+        {
+            "command": "python -m pip install torch==1.8.2+${{ matrix.platform }} torchvision==0.9.2+${{ matrix.platform }} -f https://download.pytorch.org/whl/lts/1.8/torch_lts.html",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmtracking"
+            ]
+        },
+        {
+            "command": "pip install torch==1.8.1+cpu torchvision==0.9.1+cpu -f https://download.pytorch.org/whl/torch_stable.html",
+            "count": 2,
+            "repos": [
+                "open-mmlab/mmgeneration"
+            ]
+        },
+        {
+            "command": "pip install torch==1.8.2+${{ matrix.platform }} torchvision==0.9.2+${{ matrix.platform }} -f https://download.pytorch.org/whl/lts/1.8/torch_lts.html",
+            "count": 3,
+            "repos": [
+                "open-mmlab/mmflow",
+                "open-mmlab/mmfewshot",
+                "open-mmlab/mmrotate"
+            ]
+        },
+        {
+            "command": "conda install pytorch==${{matrix.torch}} torchvision==${{matrix.torchvision}} torchaudio==${{matrix.torchaudio}} cudatoolkit=10.2 -c pytorch\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmhuman3d"
+            ]
+        },
+        {
+            "command": "pip install torch==${{matrix.torch}} torchvision==${{matrix.torchvision}} -f https://download.pytorch.org/whl/torch_stable.html",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmrazor"
+            ]
+        },
+        {
+            "command": "pip install torch==${{matrix.torch}} torchvision==${{matrix.torchvision}} -f https://download.pytorch.org/whl/lts/1.8/torch_lts.html",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmrazor"
+            ]
+        },
+        {
+            "command": "python -m pip install --upgrade pip\npython -V\npython -m pip install torch==${{matrix.torch}}+cpu torchvision==${{matrix.torchvision}}+cpu -f https://download.pytorch.org/whl/torch_stable.html\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmdeploy"
+            ]
+        }
+    ],
+    "Build and install": [
+        {
+            "command": "pip install wheel\npython setup.py bdist_wheel\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmcv"
+            ]
+        },
+        {
+            "command": "rm -rf .eggs && pip install -e .",
+            "count": 17,
+            "repos": [
+                "open-mmlab/mmagic",
+                "open-mmlab/mmaction2",
+                "open-mmlab/mmtracking",
+                "open-mmlab/mmocr",
+                "open-mmlab/mmgeneration",
+                "open-mmlab/mmflow",
+                "open-mmlab/mmfewshot",
+                "open-mmlab/mmhuman3d",
+                "open-mmlab/mmrotate"
+            ]
+        },
+        {
+            "command": "python setup.py check -m -s\nTORCH_CUDA_ARCH_LIST=7.0 pip install -e .\n",
+            "count": 2,
+            "repos": [
+                "open-mmlab/mmagic"
+            ]
+        },
+        {
+            "command": "python -m pip install -e .\n",
+            "count": 4,
+            "repos": [
+                "open-mmlab/mmagic",
+                "open-mmlab/mmgeneration"
+            ]
+        },
+        {
+            "command": "rm -rf .eggs && mim install -e .",
+            "count": 9,
+            "repos": [
+                "open-mmlab/mmagic",
+                "open-mmlab/mmselfsup",
+                "open-mmlab/mmdetection3d",
+                "open-mmlab/mmtracking",
+                "open-mmlab/mmocr",
+                "open-mmlab/mmgeneration",
+                "open-mmlab/mmflow",
+                "open-mmlab/mmfewshot",
+                "open-mmlab/mmrotate"
+            ]
+        },
+        {
+            "command": "pip install -e .\n",
+            "count": 5,
+            "repos": [
+                "open-mmlab/mmaction2",
+                "open-mmlab/mmocr",
+                "open-mmlab/mmgeneration"
+            ]
+        },
+        {
+            "command": "pip install -e . -v\n",
+            "count": 3,
+            "repos": [
+                "open-mmlab/mmaction2"
+            ]
+        },
+        {
+            "command": "rm -rf .eggs\npython setup.py check -m -s\nTORCH_CUDA_ARCH_LIST=7.0 pip install .\n",
+            "count": 4,
+            "repos": [
+                "open-mmlab/mmtracking",
+                "open-mmlab/mmfewshot"
+            ]
+        },
+        {
+            "command": "python -m pip install -e .",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmtracking"
+            ]
+        },
+        {
+            "command": "rm -rf .eggs && python -m pip install -e .",
+            "count": 2,
+            "repos": [
+                "open-mmlab/mim",
+                "open-mmlab/mmdeploy"
+            ]
+        },
+        {
+            "command": "pip install -e .",
+            "count": 5,
+            "repos": [
+                "open-mmlab/mim",
+                "open-mmlab/mmflow",
+                "open-mmlab/mmfewshot",
+                "open-mmlab/mmrotate"
+            ]
+        },
+        {
+            "command": "rm -rf .eggs\npython setup.py check -m -s\nTORCH_CUDA_ARCH_LIST=7.0 python -m pip install -e .\n",
+            "count": 2,
+            "repos": [
+                "open-mmlab/mmflow"
+            ]
+        },
+        {
+            "command": "rm -rf .eggs\npip install -e . -U\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmrazor"
+            ]
+        },
+        {
+            "command": "pip install -e . -U\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmrazor"
+            ]
+        },
+        {
+            "command": "rm -rf .eggs && python -m pip install -e .\npython tools/check_env.py\n",
+            "count": 2,
+            "repos": [
+                "open-mmlab/mmdeploy"
+            ]
+        },
+        {
+            "command": "# Some dependencies may be required for the build of pycocotools\nexport CFLAGS=`python -c 'import sysconfig;print(\"-I\"+sysconfig.get_paths()[\"include\"])'`\nrm -rf .eggs\npython setup.py check -m -s\nTORCH_CUDA_ARCH_LIST=7.0 python -m pip install -e .\n",
+            "count": 2,
+            "repos": [
+                "open-mmlab/mmrotate"
+            ]
+        }
+    ],
+    "Set up Python 3.7": [
+        {
+            "command": "actions/setup-python@v2",
+            "count": 31,
+            "repos": [
+                "open-mmlab/mmcv",
+                "open-mmlab/mmdetection",
+                "open-mmlab/mmagic",
+                "open-mmlab/mmselfsup",
+                "open-mmlab/mmsegmentation",
+                "open-mmlab/mmdetection3d",
+                "open-mmlab/mmpose",
+                "open-mmlab/mmpretrain",
+                "open-mmlab/mmaction2",
+                "open-mmlab/mmtracking",
+                "open-mmlab/mmocr",
+                "open-mmlab/mmgeneration",
+                "open-mmlab/mim",
+                "open-mmlab/mmflow",
+                "open-mmlab/mmfewshot",
+                "open-mmlab/pre-commit-hooks",
+                "open-mmlab/mmrazor",
+                "open-mmlab/mmengine",
+                "open-mmlab/mmrotate",
+                "open-mmlab/ecosystem",
+                "open-mmlab/mmeval",
+                "open-mmlab/mmyolo"
+            ]
+        },
+        {
+            "command": "actions/setup-python@v1",
+            "count": 12,
+            "repos": [
+                "open-mmlab/mmcv",
+                "open-mmlab/mmagic",
+                "open-mmlab/mmselfsup",
+                "open-mmlab/mmdetection3d",
+                "open-mmlab/mmocr",
+                "open-mmlab/mmgeneration",
+                "open-mmlab/mim",
+                "open-mmlab/mmflow",
+                "open-mmlab/mmfewshot",
+                "open-mmlab/mmhuman3d",
+                "open-mmlab/mdformat-openmmlab"
+            ]
+        },
+        {
+            "command": "actions/setup-python@v4",
+            "count": 3,
+            "repos": [
+                "open-mmlab/mmdeploy"
+            ]
+        }
+    ],
+    "Install pre-commit hook": [
+        {
+            "command": "pip install pre-commit\npre-commit install\n",
+            "count": 16,
+            "repos": [
+                "open-mmlab/mmcv",
+                "open-mmlab/mmagic",
+                "open-mmlab/mmselfsup",
+                "open-mmlab/mmpose",
+                "open-mmlab/mmpretrain",
+                "open-mmlab/mmaction2",
+                "open-mmlab/mmtracking",
+                "open-mmlab/mmocr",
+                "open-mmlab/mmgeneration",
+                "open-mmlab/mim",
+                "open-mmlab/mmflow",
+                "open-mmlab/pre-commit-hooks",
+                "open-mmlab/mmrazor",
+                "open-mmlab/mmdeploy",
+                "open-mmlab/mmengine",
+                "open-mmlab/mmrotate"
+            ]
+        },
+        {
+            "command": "# markdownlint requires ruby >= 2.7\nsudo apt-add-repository ppa:brightbox/ruby-ng -y\nsudo apt-get update\nsudo apt-get install -y ruby2.7\npip install pre-commit\npre-commit install\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmfewshot"
+            ]
+        },
+        {
+            "command": "sudo apt-add-repository ppa:brightbox/ruby-ng -y\nsudo apt-get update\nsudo apt-get install -y ruby2.7\npip install pre-commit\npre-commit install\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmhuman3d"
+            ]
+        },
+        {
+            "command": "# markdownlint requires ruby >= 2.7\npip install pre-commit\npre-commit install\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/ecosystem"
+            ]
+        }
+    ],
+    "Install wheel": [
+        {
+            "command": "pip install wheel",
+            "count": 10,
+            "repos": [
+                "open-mmlab/mmdetection",
+                "open-mmlab/mmaction2",
+                "open-mmlab/mmtracking",
+                "open-mmlab/mim",
+                "open-mmlab/mmengine",
+                "open-mmlab/mmrotate",
+                "open-mmlab/mmeval",
+                "open-mmlab/mmyolo"
+            ]
+        },
+        {
+            "command": "python -m pip install wheel",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mim"
+            ]
+        }
+    ],
+    "Check docstring coverage": [
+        {
+            "command": "pip install interrogate\ninterrogate -v --ignore-init-method --ignore-module --ignore-nested-functions --exclude mmedit/ops --ignore-regex \"__repr__\" --fail-under 50 mmedit\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmagic"
+            ]
+        },
+        {
+            "command": "pip install interrogate\ninterrogate -v --ignore-init-method --ignore-module --ignore-nested-functions --ignore-regex \"__repr__\" --fail-under 80 mmpose\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmpose"
+            ]
+        },
+        {
+            "command": "pip install interrogate\ninterrogate -v --ignore-init-method --ignore-module --ignore-nested-functions --ignore-regex \"__repr__\" --fail-under 80 mmaction\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmaction2"
+            ]
+        },
+        {
+            "command": "pip install interrogate\ninterrogate -v --ignore-init-method --ignore-module --ignore-nested-functions --ignore-regex \"__repr__\" --fail-under 80 mmtrack\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmtracking"
+            ]
+        },
+        {
+            "command": "pip install interrogate\ninterrogate -v --ignore-init-method --ignore-module --ignore-nested-functions --ignore-regex \"__repr__\" --fail-under 90 mmocr\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmocr"
+            ]
+        },
+        {
+            "command": "pip install interrogate\ninterrogate -v --ignore-init-method --ignore-module --ignore-nested-functions --exclude mmgen/ops --ignore-regex \"__repr__\" --fail-under 50 mmgen\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmgeneration"
+            ]
+        },
+        {
+            "command": "pip install interrogate\ninterrogate -v --ignore-init-method --ignore-module --ignore-nested-functions --ignore-regex \"__repr__\" --fail-under 60 mim\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mim"
+            ]
+        },
+        {
+            "command": "pip install interrogate\ninterrogate -v --ignore-init-method --ignore-module --ignore-nested-functions --ignore-regex \"__repr__\" --fail-under 90 mmflow\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmflow"
+            ]
+        },
+        {
+            "command": "pip install interrogate\ninterrogate -v --ignore-init-method --ignore-module --ignore-nested-functions --ignore-regex \"__repr__\" --fail-under 80 mmfewshot\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmfewshot"
+            ]
+        },
+        {
+            "command": "pip install interrogate\ninterrogate -vinmMI --ignore-init-method --ignore-module --ignore-nested-functions --ignore-regex \"__repr__\" -f 80 mmhuman3d/\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmhuman3d"
+            ]
+        },
+        {
+            "command": "pip install interrogate\ninterrogate -v --ignore-init-method --ignore-module --ignore-nested-functions --ignore-regex \"__repr__\" --fail-under 80 mmrazor\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmrazor"
+            ]
+        },
+        {
+            "command": "pip install interrogate\ninterrogate -v --ignore-init-method --ignore-module --ignore-private --ignore-nested-functions --ignore-nested-classes --fail-under 80 mmdeploy\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmdeploy"
+            ]
+        },
+        {
+            "command": "pip install interrogate\ninterrogate -v --ignore-init-method --ignore-magic --ignore-module --ignore-nested-functions --ignore-regex \"__repr__\" --fail-under 80 mmengine\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmengine"
+            ]
+        },
+        {
+            "command": "pip install interrogate\ninterrogate -v --ignore-init-method --ignore-module --ignore-nested-functions --ignore-regex \"__repr__\" --fail-under 95 mmrotate\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmrotate"
+            ]
+        }
+    ],
+    "Set up Python ${{ matrix.python-version }}": [
+        {
+            "command": "actions/setup-python@v2",
+            "count": 35,
+            "repos": [
+                "open-mmlab/mmagic",
+                "open-mmlab/mmselfsup",
+                "open-mmlab/mmdetection3d",
+                "open-mmlab/mmtracking",
+                "open-mmlab/mmocr",
+                "open-mmlab/mmgeneration",
+                "open-mmlab/mim",
+                "open-mmlab/mmflow",
+                "open-mmlab/mmfewshot",
+                "open-mmlab/mmrazor",
+                "open-mmlab/mmrotate",
+                "open-mmlab/mdformat-openmmlab"
+            ]
+        },
+        {
+            "command": "actions/setup-python@v4",
+            "count": 29,
+            "repos": [
+                "open-mmlab/mmaction2",
+                "open-mmlab/mmocr",
+                "open-mmlab/mmgeneration",
+                "open-mmlab/mmdeploy",
+                "open-mmlab/mmengine"
+            ]
+        }
+    ],
+    "Upgrade pip": [
+        {
+            "command": "pip install pip --upgrade",
+            "count": 32,
+            "repos": [
+                "open-mmlab/mmagic",
+                "open-mmlab/mmselfsup",
+                "open-mmlab/mmdetection3d",
+                "open-mmlab/mmaction2",
+                "open-mmlab/mmtracking",
+                "open-mmlab/mmocr",
+                "open-mmlab/mmgeneration",
+                "open-mmlab/mmflow",
+                "open-mmlab/mmfewshot",
+                "open-mmlab/mmhuman3d",
+                "open-mmlab/mmrazor",
+                "open-mmlab/mmengine",
+                "open-mmlab/mmrotate"
+            ]
+        },
+        {
+            "command": "python -m pip install pip --upgrade",
+            "count": 9,
+            "repos": [
+                "open-mmlab/mmagic",
+                "open-mmlab/mmgeneration",
+                "open-mmlab/mmengine"
+            ]
+        },
+        {
+            "command": "python -V\npython -m pip install pip --upgrade\npython -m pip install wheel\n",
+            "count": 2,
+            "repos": [
+                "open-mmlab/mmaction2"
+            ]
+        },
+        {
+            "command": "pip install pip --upgrade && pip install wheel",
+            "count": 2,
+            "repos": [
+                "open-mmlab/mmaction2"
+            ]
+        },
+        {
+            "command": "python -m pip install pip --upgrade --user",
+            "count": 3,
+            "repos": [
+                "open-mmlab/mmtracking",
+                "open-mmlab/mmrazor",
+                "open-mmlab/mmrotate"
+            ]
+        },
+        {
+            "command": "python -m pip install --upgrade pip",
+            "count": 2,
+            "repos": [
+                "open-mmlab/mmocr"
+            ]
+        },
+        {
+            "command": "pip install pip --upgrade --user",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmfewshot"
+            ]
+        }
+    ],
+    "Install MMCV": [
+        {
+            "command": "pip install mmcv-full -f https://download.openmmlab.com/mmcv/dist/cpu/torch${MMCV_TORCH}/index.html",
+            "count": 6,
+            "repos": [
+                "open-mmlab/mmagic",
+                "open-mmlab/mmgeneration"
+            ]
+        },
+        {
+            "command": "pip install -U openmim\nmim install 'mmcv >= 2.0.0'\n",
+            "count": 3,
+            "repos": [
+                "open-mmlab/mmaction2"
+            ]
+        },
+        {
+            "command": "python -m pip install mmcv-full -f https://download.openmmlab.com/mmcv/dist/cpu/torch1.8/index.html --only-binary mmcv-full\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmtracking"
+            ]
+        },
+        {
+            "command": "pip install -U openmim\nmim install 'mmcv >= 2.0.0rc1'\n",
+            "count": 3,
+            "repos": [
+                "open-mmlab/mmocr"
+            ]
+        },
+        {
+            "command": "pip install mmcv-full -f https://download.openmmlab.com/mmcv/dist/cpu/${{matrix.torch_version}}/index.html\npython -c 'import mmcv; print(mmcv.__version__)'\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmflow"
+            ]
+        },
+        {
+            "command": "python -m pip install mmcv-full -f https://download.openmmlab.com/mmcv/dist/cu101/${{matrix.torch_version}}/index.html\npython -c 'import mmcv; print(mmcv.__version__)'\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmflow"
+            ]
+        },
+        {
+            "command": "python -m pip install mmcv-full -f https://download.openmmlab.com/mmcv/dist/cu102/${{matrix.torch_version}}/index.html\npython -c 'import mmcv; print(mmcv.__version__)'\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmflow"
+            ]
+        },
+        {
+            "command": "pip install mmcv-full -f https://download.openmmlab.com/mmcv/dist/cpu/torch1.8/index.html --only-binary mmcv-full\n",
+            "count": 3,
+            "repos": [
+                "open-mmlab/mmflow",
+                "open-mmlab/mmfewshot",
+                "open-mmlab/mmrazor"
+            ]
+        },
+        {
+            "command": "pip install mmcv-full -f https://download.openmmlab.com/mmcv/dist/cpu/torch${{matrix.mmcv}}/index.html\npython -c 'import mmcv; print(mmcv.__version__)'\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmfewshot"
+            ]
+        },
+        {
+            "command": "pip install \"mmcv-full>=1.3.17,<=1.5.3\" -f https://download.openmmlab.com/mmcv/dist/cpu/torch${{matrix.torch}}/index.html\npython -c 'import mmcv; print(mmcv.__version__)'\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmhuman3d"
+            ]
+        },
+        {
+            "command": "pip install mmcv-full -f https://download.openmmlab.com/mmcv/dist/${{matrix.mmcv_link}}/index.html\npython -c 'import mmcv; print(mmcv.__version__)'\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmrazor"
+            ]
+        },
+        {
+            "command": "python -m pip install mmcv-full==${{matrix.mmcv}} -f https://download.openmmlab.com/mmcv/dist/cpu/${{matrix.torch_version}}/index.html\npython -c 'import mmcv; print(mmcv.__version__)'\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmdeploy"
+            ]
+        },
+        {
+            "command": "pip install mmcv-full -f https://download.openmmlab.com/mmcv/dist/cpu/torch${{matrix.torch}}/index.html\npython -c 'import mmcv; print(mmcv.__version__)'\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmrotate"
+            ]
+        },
+        {
+            "command": "python -m pip install mmcv-full -f https://download.openmmlab.com/mmcv/dist/cu101/torch${{matrix.torch_version}}/index.html\npython -c 'import mmcv; print(mmcv.__version__)'\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmrotate"
+            ]
+        },
+        {
+            "command": "python -m pip install mmcv-full -f https://download.openmmlab.com/mmcv/dist/cu102/torch${{matrix.torch_version}}/index.html\npython -c 'import mmcv; print(mmcv.__version__)'\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmrotate"
+            ]
+        },
+        {
+            "command": "pip install mmcv-full -f https://download.openmmlab.com/mmcv/dist/cpu/torch1.8/index.html --only-binary mmcv-full",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmrotate"
+            ]
+        }
+    ],
+    "Install other dependencies": [
+        {
+            "command": "pip install -r requirements.txt",
+            "count": 7,
+            "repos": [
+                "open-mmlab/mmagic",
+                "open-mmlab/mmgeneration",
+                "open-mmlab/mmhuman3d"
+            ]
+        },
+        {
+            "command": "pip install -r requirements/tests.txt",
+            "count": 3,
+            "repos": [
+                "open-mmlab/mmocr"
+            ]
+        }
+    ],
+    "Run unittests and generate coverage report": [
+        {
+            "command": "coverage run --branch --source mmedit -m pytest tests/\ncoverage xml\ncoverage report -m\n",
+            "count": 3,
+            "repos": [
+                "open-mmlab/mmagic"
+            ]
+        },
+        {
+            "command": "pytest tests/\n",
+            "count": 8,
+            "repos": [
+                "open-mmlab/mmagic",
+                "open-mmlab/mmaction2",
+                "open-mmlab/mmocr",
+                "open-mmlab/mmgeneration"
+            ]
+        },
+        {
+            "command": "coverage run --branch --source mmaction -m pytest tests/\ncoverage xml\ncoverage report -m\n",
+            "count": 3,
+            "repos": [
+                "open-mmlab/mmaction2"
+            ]
+        },
+        {
+            "command": "coverage run --branch --source mmaction -m pytest tests/ -k 'not timm'\ncoverage xml\ncoverage report -m\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmaction2"
+            ]
+        },
+        {
+            "command": "coverage run --branch --source mmtrack -m pytest tests/\ncoverage xml\ncoverage report -m\n",
+            "count": 3,
+            "repos": [
+                "open-mmlab/mmtracking"
+            ]
+        },
+        {
+            "command": "coverage run --branch --source mmocr -m pytest tests/\ncoverage xml\ncoverage report -m\n",
+            "count": 3,
+            "repos": [
+                "open-mmlab/mmocr"
+            ]
+        },
+        {
+            "command": "coverage run --branch --source mmgen -m pytest tests/\ncoverage xml\ncoverage report -m\n",
+            "count": 3,
+            "repos": [
+                "open-mmlab/mmgeneration"
+            ]
+        },
+        {
+            "command": "coverage run --branch --source=mim -m pytest tests/\ncoverage xml\ncoverage report -m\n",
+            "count": 2,
+            "repos": [
+                "open-mmlab/mim"
+            ]
+        },
+        {
+            "command": "coverage run --branch --source mmflow -m pytest tests/\ncoverage xml\ncoverage report -m\n",
+            "count": 3,
+            "repos": [
+                "open-mmlab/mmflow"
+            ]
+        },
+        {
+            "command": "coverage run --branch --source mmfewshot -m pytest tests/\ncoverage xml\ncoverage report -m\n",
+            "count": 2,
+            "repos": [
+                "open-mmlab/mmfewshot"
+            ]
+        },
+        {
+            "command": "coverage run --branch --source mmdet -m pytest tests/\ncoverage xml\ncoverage report -m\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmfewshot"
+            ]
+        },
+        {
+            "command": "coverage run --source mmhuman3d -m pytest tests/\ncoverage xml\ncoverage report -m\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmhuman3d"
+            ]
+        },
+        {
+            "command": "coverage run --branch --source mmrazor -m pytest tests/\ncoverage xml\ncoverage report -m --omit=\"mmrazor/apis/*\"\n",
+            "count": 2,
+            "repos": [
+                "open-mmlab/mmrazor"
+            ]
+        },
+        {
+            "command": "coverage run --branch --source mmdeploy -m pytest -rsE tests\ncoverage xml\ncoverage report -m\n",
+            "count": 2,
+            "repos": [
+                "open-mmlab/mmdeploy"
+            ]
+        },
+        {
+            "command": "coverage run --branch --source mmengine -m pytest tests/  --ignore tests/test_dist\ncoverage xml\ncoverage report -m\n",
+            "count": 3,
+            "repos": [
+                "open-mmlab/mmengine"
+            ]
+        },
+        {
+            "command": "coverage run --branch --source mmengine -m pytest tests/  --ignore tests/test_dist\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmengine"
+            ]
+        },
+        {
+            "command": "coverage run --branch --source mmengine -m pytest tests/ --ignore tests/test_dist\ncoverage xml\ncoverage report -m\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmengine"
+            ]
+        },
+        {
+            "command": "coverage run --branch --source mmengine -m pytest tests/  --ignore tests/test_dist/\ncoverage xml\ncoverage report -m\n",
+            "count": 3,
+            "repos": [
+                "open-mmlab/mmengine"
+            ]
+        },
+        {
+            "command": "coverage run --branch --source mmrotate -m pytest tests/\ncoverage xml\ncoverage report -m\n",
+            "count": 3,
+            "repos": [
+                "open-mmlab/mmrotate"
+            ]
+        }
+    ],
+    "Upload coverage to Codecov": [
+        {
+            "command": "codecov/codecov-action@v1.0.14",
+            "count": 8,
+            "repos": [
+                "open-mmlab/mmagic",
+                "open-mmlab/mmaction2",
+                "open-mmlab/mmocr",
+                "open-mmlab/mmgeneration"
+            ]
+        },
+        {
+            "command": "codecov/codecov-action@v1.0.10",
+            "count": 4,
+            "repos": [
+                "open-mmlab/mmtracking",
+                "open-mmlab/mim",
+                "open-mmlab/mmfewshot"
+            ]
+        },
+        {
+            "command": "codecov/codecov-action@v2",
+            "count": 9,
+            "repos": [
+                "open-mmlab/mmtracking",
+                "open-mmlab/mmflow",
+                "open-mmlab/mmfewshot",
+                "open-mmlab/mmhuman3d",
+                "open-mmlab/mmrazor",
+                "open-mmlab/mmdeploy",
+                "open-mmlab/mmrotate"
+            ]
+        },
+        {
+            "command": "codecov/codecov-action@v3",
+            "count": 2,
+            "repos": [
+                "open-mmlab/mmengine"
+            ]
+        }
+    ],
+    "Install system dependencies": [
+        {
+            "command": "apt-get update && apt-get install -y ffmpeg libsm6 libxext6 git ninja-build libglib2.0-0 libsm6 libxrender-dev libxext6\n",
+            "count": 2,
+            "repos": [
+                "open-mmlab/mmagic",
+                "open-mmlab/mmgeneration"
+            ]
+        },
+        {
+            "command": "apt-get update\napt-get install -y ffmpeg libsm6 libxext6 git ninja-build libglib2.0-0 libxrender-dev\n",
+            "count": 2,
+            "repos": [
+                "open-mmlab/mmagic",
+                "open-mmlab/mmgeneration"
+            ]
+        },
+        {
+            "command": "apt-get update && apt-get install -y ffmpeg libsm6 libxext6 git ninja-build libglib2.0-0 libturbojpeg libsndfile1 libsm6 libxrender-dev libxext6\n",
+            "count": 2,
+            "repos": [
+                "open-mmlab/mmaction2"
+            ]
+        },
+        {
+            "command": "apt-get update && apt-get install -y ffmpeg libsm6 libxext6 git ninja-build libglib2.0-0 libsm6 libxrender-dev libxext6\napt-get clean\nrm -rf /var/lib/apt/lists/*\n",
+            "count": 3,
+            "repos": [
+                "open-mmlab/mmtracking",
+                "open-mmlab/mmfewshot"
+            ]
+        },
+        {
+            "command": "apt-get install -y git libgl1 libglib2.0-0",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mim"
+            ]
+        },
+        {
+            "command": "apt-get update && apt-get install -y libgl1-mesa-glx libglib2.0-0 libsm6 libxrender-dev libxext6",
+            "count": 2,
+            "repos": [
+                "open-mmlab/mmflow",
+                "open-mmlab/mmfewshot"
+            ]
+        },
+        {
+            "command": "apt-get update && apt-get install -y libgl1-mesa-glx libglib2.0-0 libsm6 libxrender-dev libxext6 git",
+            "count": 3,
+            "repos": [
+                "open-mmlab/mmflow",
+                "open-mmlab/mmrotate"
+            ]
+        },
+        {
+            "command": "apt-key adv --keyserver keyserver.ubuntu.com --recv-keys A4B469963BF863CC\napt-get update && apt-get install -y git\n",
+            "count": 2,
+            "repos": [
+                "open-mmlab/mmdeploy"
+            ]
+        },
+        {
+            "command": "apt-get update && apt-get install -y ffmpeg libsm6 libxext6 git ninja-build libglib2.0-0 libsm6 libxrender-dev libxext6",
+            "count": 2,
+            "repos": [
+                "open-mmlab/mmengine"
+            ]
+        },
+        {
+            "command": "apt-get update && apt-get install -y git ffmpeg libturbojpeg",
+            "count": 3,
+            "repos": [
+                "open-mmlab/mmengine"
+            ]
+        }
+    ],
+    "Install mmediting dependencies": [
+        {
+            "command": "pip install mmcv-full -f https://download.openmmlab.com/mmcv/dist/cpu/torch${MMCV_TORCH}/index.html\npip install -r requirements.txt\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmagic"
+            ]
+        },
+        {
+            "command": "python -m pip install mmcv-full -f https://download.openmmlab.com/mmcv/dist/cpu/torch1.8/index.html --only-binary mmcv-full\npython -m pip install -r requirements.txt\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmagic"
+            ]
+        }
+    ],
+    "Install lmdb": [
+        {
+            "command": "python -m pip install lmdb",
+            "count": 2,
+            "repos": [
+                "open-mmlab/mmagic"
+            ]
+        },
+        {
+            "command": "pip install lmdb",
+            "count": 9,
+            "repos": [
+                "open-mmlab/mmaction2",
+                "open-mmlab/mmocr"
+            ]
+        }
+    ],
+    "Install mmedit dependencies": [
+        {
+            "command": "python -m pip install mmcv-full -f https://download.openmmlab.com/mmcv/dist/${MMCV_CUDA}/torch${MMCV_TORCH}/index.html\npython -m pip install -r requirements.txt\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmagic"
+            ]
+        },
+        {
+            "command": "python -m pip install mmcv-full -f https://download.openmmlab.com/mmcv/dist/cpu/torch1.8/index.html --only-binary mmcv-full\npython -m pip install -r requirements.txt\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmagic"
+            ]
+        }
+    ],
+    "test commands of mim": [
+        {
+            "command": "mim search mmedit",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmagic"
+            ]
+        },
+        {
+            "command": "mim search mmselfsup",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmselfsup"
+            ]
+        },
+        {
+            "command": "mim search mmdet3d",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmdetection3d"
+            ]
+        },
+        {
+            "command": "mim search mmtrack",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmtracking"
+            ]
+        },
+        {
+            "command": "mim search mmocr",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmocr"
+            ]
+        },
+        {
+            "command": "mim search mmgen",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmgeneration"
+            ]
+        },
+        {
+            "command": "mim search mmflow",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmflow"
+            ]
+        },
+        {
+            "command": "mim search mmfewshot",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmfewshot"
+            ]
+        },
+        {
+            "command": "mim search mmrotate",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmrotate"
+            ]
+        }
+    ],
+    "Install librosa and soundfile": [
+        {
+            "command": "pip install librosa soundfile",
+            "count": 5,
+            "repos": [
+                "open-mmlab/mmaction2"
+            ]
+        },
+        {
+            "command": "python -m pip install librosa soundfile",
+            "count": 2,
+            "repos": [
+                "open-mmlab/mmaction2"
+            ]
+        }
+    ],
+    "Install unittest dependencies": [
+        {
+            "command": "pip install -r requirements.txt",
+            "count": 3,
+            "repos": [
+                "open-mmlab/mmaction2"
+            ]
+        },
+        {
+            "command": "python -m pip install -r requirements/tests.txt -r requirements/runtime.txt\npython -m pip install git+https://github.com/JonathonLuiten/TrackEval.git\npython -m pip install git+https://github.com/lvis-dataset/lvis-api.git\npython -m pip install git+https://github.com/TAO-Dataset/tao.git\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmtracking"
+            ]
+        },
+        {
+            "command": "python -m pip install -r requirements/tests.txt",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mim"
+            ]
+        },
+        {
+            "command": "pip install -r requirements/tests.txt",
+            "count": 2,
+            "repos": [
+                "open-mmlab/mim"
+            ]
+        },
+        {
+            "command": "pip install -r requirements/tests.txt -r requirements/optional.txt",
+            "count": 5,
+            "repos": [
+                "open-mmlab/mmflow",
+                "open-mmlab/mmfewshot",
+                "open-mmlab/mmrotate"
+            ]
+        },
+        {
+            "command": "python -m pip install -r requirements/tests.txt -r requirements/optional.txt",
+            "count": 5,
+            "repos": [
+                "open-mmlab/mmflow",
+                "open-mmlab/mmrotate"
+            ]
+        },
+        {
+            "command": "pip install -r requirements.txt\n",
+            "count": 2,
+            "repos": [
+                "open-mmlab/mmrazor"
+            ]
+        },
+        {
+            "command": "pip install cmake onnx\n",
+            "count": 2,
+            "repos": [
+                "open-mmlab/mmdeploy"
+            ]
+        },
+        {
+            "command": "python -m pip install -U numpy\npython -m pip install rapidfuzz==2.15.1\npython -m pip install -r requirements.txt\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmdeploy"
+            ]
+        }
+    ],
+    "Install PytorchVideo": [
+        {
+            "command": "pip install pytorchvideo",
+            "count": 5,
+            "repos": [
+                "open-mmlab/mmaction2"
+            ]
+        },
+        {
+            "command": "python -m pip install pytorchvideo",
+            "count": 2,
+            "repos": [
+                "open-mmlab/mmaction2"
+            ]
+        }
+    ],
+    "Install timm": [
+        {
+            "command": "pip install timm",
+            "count": 2,
+            "repos": [
+                "open-mmlab/mmaction2"
+            ]
+        },
+        {
+            "command": "python -m pip install timm",
+            "count": 3,
+            "repos": [
+                "open-mmlab/mmaction2"
+            ]
+        }
+    ],
+    "Install transformers": [
+        {
+            "command": "pip install transformers",
+            "count": 3,
+            "repos": [
+                "open-mmlab/mmaction2"
+            ]
+        },
+        {
+            "command": "python -m pip install transformers",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmaction2"
+            ]
+        }
+    ],
+    "Set up Python ${{ matrix.python }}": [
+        {
+            "command": "actions/setup-python@v4",
+            "count": 2,
+            "repos": [
+                "open-mmlab/mmaction2",
+                "open-mmlab/mmocr"
+            ]
+        },
+        {
+            "command": "actions/setup-python@v2",
+            "count": 5,
+            "repos": [
+                "open-mmlab/mmtracking",
+                "open-mmlab/mmocr",
+                "open-mmlab/mmflow",
+                "open-mmlab/mmfewshot",
+                "open-mmlab/mmrotate"
+            ]
+        }
+    ],
+    "Install mmtrack dependencies": [
+        {
+            "command": "# Some dependencies may be required for the build of pycocotools\nexport CFLAGS=`python -c 'import sysconfig;print(\"-I\"+sysconfig.get_paths()[\"include\"])'`\npip install git+https://github.com/votchallenge/toolkit.git\npip install mmcv-full -f https://download.openmmlab.com/mmcv/dist/cpu/${{matrix.torch_version}}/index.html\npip install mmdet\npip install -r requirements.txt\npip install git+https://github.com/JonathonLuiten/TrackEval.git\npip install git+https://github.com/lvis-dataset/lvis-api.git\npip install git+https://github.com/TAO-Dataset/tao.git\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmtracking"
+            ]
+        },
+        {
+            "command": "# Some dependencies may be required for the build of pycocotools\nexport CFLAGS=`python -c 'import sysconfig;print(\"-I\"+sysconfig.get_paths()[\"include\"])'`\npython -m pip install git+https://github.com/votchallenge/toolkit.git\npython -m pip install mmcv-full -f https://download.openmmlab.com/mmcv/dist/cu101/${{matrix.torch_version}}/index.html\npython -m pip install mmdet\npython -m pip install -r requirements.txt\npython -m pip install git+https://github.com/JonathonLuiten/TrackEval.git\npython -m pip install git+https://github.com/lvis-dataset/lvis-api.git\npython -m pip install git+https://github.com/TAO-Dataset/tao.git\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmtracking"
+            ]
+        },
+        {
+            "command": "# Some dependencies may be required for the build of pycocotools\nexport CFLAGS=`python -c 'import sysconfig;print(\"-I\"+sysconfig.get_paths()[\"include\"])'`\npython -m pip install git+https://github.com/votchallenge/toolkit.git\npython -m pip install mmcv-full -f https://download.openmmlab.com/mmcv/dist/cu102/${{matrix.torch_version}}/index.html\npython -m pip install mmdet\npython -m pip install -r requirements.txt\npython -m pip install git+https://github.com/JonathonLuiten/TrackEval.git\npython -m pip install git+https://github.com/lvis-dataset/lvis-api.git\npython -m pip install git+https://github.com/TAO-Dataset/tao.git\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmtracking"
+            ]
+        }
+    ],
+    "Install python-dev": [
+        {
+            "command": "apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends python${{matrix.python-version}}-dev",
+            "count": 3,
+            "repos": [
+                "open-mmlab/mmtracking",
+                "open-mmlab/mmfewshot"
+            ]
+        },
+        {
+            "command": "apt-get update && apt-get install -y python${{matrix.python-version}}-dev",
+            "count": 6,
+            "repos": [
+                "open-mmlab/mim",
+                "open-mmlab/mmflow",
+                "open-mmlab/mmfewshot",
+                "open-mmlab/mmrotate"
+            ]
+        }
+    ],
+    "Run unittests": [
+        {
+            "command": "coverage run --branch --source mmtrack -m pytest tests/\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmtracking"
+            ]
+        },
+        {
+            "command": "pytest tests/",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mim"
+            ]
+        },
+        {
+            "command": "coverage run --branch --source mmflow -m pytest tests/\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmflow"
+            ]
+        },
+        {
+            "command": "python -m pip install timm\ncoverage run --branch --source mmfewshot -m pytest tests/\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmfewshot"
+            ]
+        },
+        {
+            "command": "coverage run --branch --source mmrotate -m pytest tests",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmrotate"
+            ]
+        }
+    ],
+    "Install mmgeneration dependencies": [
+        {
+            "command": "pip install mmcv-full -f https://download.openmmlab.com/mmcv/dist/cpu/torch${MMCV_TORCH}/index.html\npip install -r requirements.txt\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmgeneration"
+            ]
+        },
+        {
+            "command": "python -m pip install mmcv-full -f https://download.openmmlab.com/mmcv/dist/cpu/torch1.8/index.html --only-binary mmcv-full\npython -m pip install -r requirements.txt\npython -m pip install opencv-python>=3\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmgeneration"
+            ]
+        }
+    ],
+    "Install mmgen dependencies": [
+        {
+            "command": "pip install mmcv-full -f https://download.openmmlab.com/mmcv/dist/${MMCV_CUDA}/torch${MMCV_TORCH}/index.html\npip install -r requirements.txt\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmgeneration"
+            ]
+        },
+        {
+            "command": "python -m pip install mmcv-full -f https://download.openmmlab.com/mmcv/dist/cpu/torch1.8/index.html --only-binary mmcv-full\npython -m pip install -r requirements.txt\npython -m pip install opencv-python>=3\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmgeneration"
+            ]
+        }
+    ],
+    "Validate the installation": [
+        {
+            "command": "python -c \"import mim\"\nmim --help\npython -m mim --help\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mim"
+            ]
+        },
+        {
+            "command": "python -c \"import mim\"",
+            "count": 2,
+            "repos": [
+                "open-mmlab/mim"
+            ]
+        }
+    ],
+    "Install OpenCV": [
+        {
+            "command": "pip install opencv-python>=3",
+            "count": 2,
+            "repos": [
+                "open-mmlab/mmflow",
+                "open-mmlab/mmfewshot"
+            ]
+        },
+        {
+            "command": "pip install opencv-python>=3\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmrazor"
+            ]
+        }
+    ],
+    "Install mmfewshot dependencies": [
+        {
+            "command": "python -V\npython -m pip install mmcv-full -f https://download.openmmlab.com/mmcv/dist/cu101/torch${{matrix.mmcv}}/index.html\npython -m pip install -r requirements.txt\npython -c 'import mmcv; print(mmcv.__version__)'\npython -m pip install mmcls mmdet\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmfewshot"
+            ]
+        },
+        {
+            "command": "python -V\npython -m pip install mmcv-full -f https://download.openmmlab.com/mmcv/dist/cu102/torch${{matrix.mmcv}}/index.html\npython -m pip install -r requirements.txt\npython -c 'import mmcv; print(mmcv.__version__)'\npython -m pip install mmcls mmdet\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmfewshot"
+            ]
+        }
+    ],
+    "Step 2": [
+        {
+            "command": "conda-incubator/setup-miniconda@v2",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmhuman3d"
+            ]
+        },
+        {
+            "command": "psf/black@stable",
+            "count": 1,
+            "repos": [
+                "open-mmlab/Amphion"
+            ]
+        }
+    ],
+    "Install dependencies": [
+        {
+            "command": "sudo apt update\nsudo apt install -y ffmpeg libsm6 libxext6 git ninja-build libglib2.0-0 libxrender-dev libc++1-9 libc++abi1-9\nsudo apt install libopencv-dev\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmdeploy"
+            ]
+        },
+        {
+            "command": "sudo apt install wget libprotobuf-dev protobuf-compiler\nsudo apt update\nsudo apt install -y ffmpeg libsm6 libxext6 git ninja-build libglib2.0-0 libxrender-dev libc++1-9 libc++abi1-9\nsudo apt install libopencv-dev\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmdeploy"
+            ]
+        },
+        {
+            "command": "python -V\npython -m pip install -U pip\npython -m pip install mmcv-full==${{matrix.mmcv}} -f https://download.openmmlab.com/mmcv/dist/cu102/${{matrix.torch_version}}/index.html\npython -m pip install -r requirements.txt\npython -m pip install rapidfuzz==2.15.1\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmdeploy"
+            ]
+        },
+        {
+            "command": "python -V\npython -m pip install -U pip\npython -m pip install mmcv-full==${{matrix.mmcv}} -f https://download.openmmlab.com/mmcv/dist/cu111/${{matrix.torch_version}}/index.html\npython -m pip install -r requirements.txt\npython -m pip install rapidfuzz==2.15.1\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmdeploy"
+            ]
+        },
+        {
+            "command": "sudo apt install llvm-dev libclang-dev clang git-lfs",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmdeploy"
+            ]
+        },
+        {
+            "command": "python -m pip install --upgrade pip\npip install build\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mdformat-openmmlab"
+            ]
+        }
+    ],
+    "install opencv": [
+        {
+            "command": "wget https://github.com/irexyc/mmdeploy-ci-resource/releases/download/opencv/opencv-osx-arm64-4.6.0.tar.gz\nmkdir $GITHUB_WORKSPACE/opencv-install\ntar xf opencv-osx-arm64-4.6.0.tar.gz -C $GITHUB_WORKSPACE/opencv-install\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmdeploy"
+            ]
+        },
+        {
+            "command": "mkdir $GITHUB_WORKSPACE/opencv-install\nwget https://github.com/irexyc/mmdeploy-ci-resource/raw/opencv/opencv_4.6.0_linux_riscv64.tar.gz\ntar xf opencv_4.6.0_linux_riscv64.tar.gz -C $GITHUB_WORKSPACE/opencv-install\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmdeploy"
+            ]
+        }
+    ],
+    "gcc-multilib": [
+        {
+            "command": "sudo apt install gcc-multilib g++-multilib wget libprotobuf-dev protobuf-compiler",
+            "count": 2,
+            "repos": [
+                "open-mmlab/mmdeploy"
+            ]
+        },
+        {
+            "command": "sudo apt update\nsudo apt install libopencv-dev lcov wget -y\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmdeploy"
+            ]
+        },
+        {
+            "command": "sh -x tools/scripts/ubuntu_cross_build_aarch64.sh\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmdeploy"
+            ]
+        }
+    ],
+    "Install mmdeploy": [
+        {
+            "command": "python3 -m pip install torch==1.8.2 torchvision==0.9.2 --extra-index-url https://download.pytorch.org/whl/lts/1.8/cpu\npython3 -m pip install mmcv-full==1.5.1  -f https://download.openmmlab.com/mmcv/dist/cpu/torch1.8.0/index.html\npython3 tools/scripts/build_ubuntu_x64_ncnn.py 8\npython3 -c 'import mmdeploy.apis.ncnn as ncnn_api; assert ncnn_api.is_available(with_custom_ops=True)'\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmdeploy"
+            ]
+        },
+        {
+            "command": "python3 -m pip install torch==1.8.2 torchvision==0.9.2 --extra-index-url https://download.pytorch.org/whl/lts/1.8/cpu\npython3 -m pip install mmcv-full==1.5.1  -f https://download.openmmlab.com/mmcv/dist/cpu/torch1.8.0/index.html\npython3 tools/scripts/build_ubuntu_x64_ort.py 8\npython3 -c 'import mmdeploy.apis.onnxruntime as ort_api; assert ort_api.is_available(with_custom_ops=True)'\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmdeploy"
+            ]
+        },
+        {
+            "command": "python3 -m pip install torch==1.8.2 torchvision==0.9.2 --extra-index-url https://download.pytorch.org/whl/lts/1.8/cpu\npython3 -m pip install mmcv-full==1.5.1  -f https://download.openmmlab.com/mmcv/dist/cpu/torch1.8.0/index.html\npython3 tools/scripts/build_ubuntu_x64_pplnn.py 8\npython3 -c 'import mmdeploy.apis.pplnn as pplnn_api; assert pplnn_api.is_available()'\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmdeploy"
+            ]
+        },
+        {
+            "command": "python3 tools/scripts/build_ubuntu_x64_torchscript.py 8\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmdeploy"
+            ]
+        }
+    ],
+    "cross compile": [
+        {
+            "command": "sh -x tools/scripts/ubuntu_cross_build_rknn.sh rk3588\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmdeploy"
+            ]
+        },
+        {
+            "command": "sh -x tools/scripts/ubuntu_cross_build_rknn.sh rv1126\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmdeploy"
+            ]
+        }
+    ],
+    "Install onnxruntime": [
+        {
+            "command": "wget https://github.com/microsoft/onnxruntime/releases/download/v1.8.1/onnxruntime-linux-x64-1.8.1.tgz\ntar -zxvf onnxruntime-linux-x64-1.8.1.tgz\npushd onnxruntime-linux-x64-1.8.1\nexport ONNXRUNTIME_DIR=${PWD}\nexport LD_LIBRARY_PATH=$ONNXRUNTIME_DIR/lib:$LD_LIBRARY_PATH\npopd\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmdeploy"
+            ]
+        },
+        {
+            "command": "wget https://github.com/microsoft/onnxruntime/releases/download/v1.8.1/onnxruntime-linux-x64-1.8.1.tgz\ntar -zxvf onnxruntime-linux-x64-1.8.1.tgz\npushd onnxruntime-linux-x64-1.8.1\npopd\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmdeploy"
+            ]
+        }
+    ],
+    "Install opencv": [
+        {
+            "command": "sudo apt-get install libopencv-dev\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmdeploy"
+            ]
+        },
+        {
+            "command": "sudo apt-get install libopencv-dev",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmdeploy"
+            ]
+        }
+    ],
+    "Get mmdeploy version": [
+        {
+            "command": "export MMDEPLOY_VERSION=$(python3 -c \"import sys; sys.path.append('mmdeploy');from version import __version__;print(__version__)\")\necho $MMDEPLOY_VERSION\necho \"MMDEPLOY_VERSION=$MMDEPLOY_VERSION\"  >> $GITHUB_ENV\necho \"OUTPUT_DIR=$MMDEPLOY_VERSION-$GITHUB_RUN_ID\" >> $GITHUB_ENV\n",
+            "count": 4,
+            "repos": [
+                "open-mmlab/mmdeploy"
+            ]
+        },
+        {
+            "command": "conda activate mmdeploy-3.8\n$env:MMDEPLOY_VERSION=(python -c \"import sys; sys.path.append('mmdeploy');from version import __version__;print(__version__)\")\necho $env:MMDEPLOY_VERSION\necho \"MMDEPLOY_VERSION=$env:MMDEPLOY_VERSION\"  >> $env:GITHUB_ENV\necho \"OUTPUT_DIR=$env:MMDEPLOY_VERSION-$env:GITHUB_RUN_ID\" >> $env:GITHUB_ENV\n",
+            "count": 3,
+            "repos": [
+                "open-mmlab/mmdeploy"
+            ]
+        }
+    ],
+    "Build MMDeploy": [
+        {
+            "command": "source activate mmdeploy-3.6\npip install pyyaml packaging setuptools wheel\nmkdir pack; cd pack\npython ../tools/package_tools/generate_build_config.py --backend 'trt;ort' \\\n  --system linux --output config.yml --build-mmdeploy\npython ../tools/package_tools/mmdeploy_builder.py --config config.yml\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmdeploy"
+            ]
+        },
+        {
+            "command": ". D:\\DEPS\\cienv\\prebuild_gpu_env.ps1\nconda activate mmdeploy-3.6\nmkdir pack; cd pack\npython ../tools/package_tools/generate_build_config.py --backend 'trt;ort' `\n  --system windows --output config.yml --build-mmdeploy\npython ../tools/package_tools/mmdeploy_builder.py --config config.yml\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmdeploy"
+            ]
+        }
+    ],
+    "Build sdk cpu backend": [
+        {
+            "command": "source activate mmdeploy-3.6\ncd pack\npython ../tools/package_tools/generate_build_config.py --backend 'ort' \\\n  --system linux --output config.yml --device cpu --build-sdk --build-sdk-monolithic \\\n  --build-sdk-python --sdk-dynamic-net\npython ../tools/package_tools/mmdeploy_builder.py --config config.yml\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmdeploy"
+            ]
+        },
+        {
+            "command": "mkdir pack; cd pack\npython ../tools/package_tools/generate_build_config.py --backend 'ort' \\\n  --system linux --output config.yml --device cpu --build-sdk --build-sdk-monolithic \\\n  --sdk-dynamic-net --cxx11abi\npython ../tools/package_tools/mmdeploy_builder.py --config config.yml\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmdeploy"
+            ]
+        },
+        {
+            "command": ". D:\\DEPS\\cienv\\prebuild_cpu_env.ps1\nconda activate mmdeploy-3.6\ncd pack\npython ../tools/package_tools/generate_build_config.py --backend 'ort' `\n  --system windows --output config.yml --device cpu --build-sdk --build-sdk-monolithic `\n  --build-sdk-python --sdk-dynamic-net\npython ../tools/package_tools/mmdeploy_builder.py --config config.yml\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmdeploy"
+            ]
+        }
+    ],
+    "Build sdk cuda backend": [
+        {
+            "command": "source activate mmdeploy-3.6\ncd pack\npython ../tools/package_tools/generate_build_config.py --backend 'ort;trt' \\\n  --system linux --output config.yml --device cuda --build-sdk --build-sdk-monolithic \\\n  --build-sdk-python --sdk-dynamic-net --onnxruntime-dir=$ONNXRUNTIME_GPU_DIR\npython ../tools/package_tools/mmdeploy_builder.py --config config.yml\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmdeploy"
+            ]
+        },
+        {
+            "command": "cd pack\npython ../tools/package_tools/generate_build_config.py --backend 'ort;trt' \\\n  --system linux --output config.yml --device cuda --build-sdk --build-sdk-monolithic \\\n  --sdk-dynamic-net --cxx11abi --onnxruntime-dir=$ONNXRUNTIME_GPU_DIR --cudnn-dir /usr\npython ../tools/package_tools/mmdeploy_builder.py --config config.yml\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmdeploy"
+            ]
+        },
+        {
+            "command": ". D:\\DEPS\\cienv\\prebuild_gpu_env.ps1\nconda activate mmdeploy-3.6\ncd pack\npython ../tools/package_tools/generate_build_config.py --backend 'ort;trt' `\n  --system windows --output config.yml --device cuda --build-sdk --build-sdk-monolithic `\n  --build-sdk-python --sdk-dynamic-net\npython ../tools/package_tools/mmdeploy_builder.py --config config.yml\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmdeploy"
+            ]
+        }
+    ],
+    "Move artifact": [
+        {
+            "command": "mkdir -p /__w/mmdeploy/prebuild/$OUTPUT_DIR\ncp -r pack/* /__w/mmdeploy/prebuild/$OUTPUT_DIR\n",
+            "count": 2,
+            "repos": [
+                "open-mmlab/mmdeploy"
+            ]
+        },
+        {
+            "command": "New-Item \"D:/DEPS/ciartifact/$env:OUTPUT_DIR\" -ItemType Directory -Force\nMove-Item pack/* \"D:/DEPS/ciartifact/$env:OUTPUT_DIR\"\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmdeploy"
+            ]
+        }
+    ],
+    "Test python": [
+        {
+            "command": "cd /__w/mmdeploy/prebuild/$OUTPUT_DIR\nbash $GITHUB_WORKSPACE/tools/package_tools/test/test_sdk_python.sh\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmdeploy"
+            ]
+        },
+        {
+            "command": "cd \"D:/DEPS/ciartifact/$env:OUTPUT_DIR\"\n. D:\\DEPS\\cienv\\prebuild_cpu_env.ps1\nconda activate ci-test\n& \"$env:GITHUB_WORKSPACE/tools/package_tools/test/test_sdk_python.ps1\"\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmdeploy"
+            ]
+        }
+    ],
+    "Test c/cpp": [
+        {
+            "command": "cd /__w/mmdeploy/prebuild/$OUTPUT_DIR\nbash $GITHUB_WORKSPACE/tools/package_tools/test/test_sdk.sh\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmdeploy"
+            ]
+        },
+        {
+            "command": "cd \"D:/DEPS/ciartifact/$env:OUTPUT_DIR\"\n. D:\\DEPS\\cienv\\prebuild_cpu_env.ps1\n& \"$env:GITHUB_WORKSPACE/tools/package_tools/test/test_sdk.ps1\"\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmdeploy"
+            ]
+        }
+    ],
+    "Upload mmdeploy": [
+        {
+            "command": "cd $PREBUILD_DIR/$OUTPUT_DIR/mmdeploy\npip install twine\n# twine upload * --repository testpypi -u __token__ -p ${{ secrets.test_pypi_password }}\ntwine upload * -u __token__ -p ${{ secrets.pypi_password }}\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmdeploy"
+            ]
+        },
+        {
+            "command": "cd \"D:/DEPS/ciartifact/$env:OUTPUT_DIR/mmdeploy\"\nconda activate mmdeploy-3.8\n# twine upload * --repository testpypi -u __token__ -p ${{ secrets.test_pypi_password }}\ntwine upload * -u __token__ -p ${{ secrets.pypi_password }}\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmdeploy"
+            ]
+        }
+    ],
+    "Upload mmdeploy_runtime": [
+        {
+            "command": "cd $PREBUILD_DIR/$OUTPUT_DIR/mmdeploy_runtime\n# twine upload * --repository testpypi -u __token__ -p ${{ secrets.test_pypi_password }}\ntwine upload * -u __token__ -p ${{ secrets.pypi_password }}\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmdeploy"
+            ]
+        },
+        {
+            "command": "cd \"D:/DEPS/ciartifact/$env:OUTPUT_DIR/mmdeploy_runtime\"\nconda activate mmdeploy-3.8\n# twine upload * --repository testpypi -u __token__ -p ${{ secrets.test_pypi_password }}\ntwine upload * -u __token__ -p ${{ secrets.pypi_password }}\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmdeploy"
+            ]
+        }
+    ],
+    "Zip mmdeploy sdk": [
+        {
+            "command": "cd $PREBUILD_DIR/$OUTPUT_DIR/sdk\nfor folder in *\ndo\n  tar czf $folder.tar.gz $folder\ndone\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmdeploy"
+            ]
+        },
+        {
+            "command": "cd \"D:/DEPS/ciartifact/$env:OUTPUT_DIR/sdk\"\n$folders = $(ls).Name\nforeach ($folder in $folders) {\n  Compress-Archive -Path $folder -DestinationPath \"$folder.zip\"\n}\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmdeploy"
+            ]
+        }
+    ],
+    "Install unit tests dependencies": [
+        {
+            "command": "pip install -r requirements/tests.txt\npip install openmim\nmim install mmcv\n",
+            "count": 9,
+            "repos": [
+                "open-mmlab/mmengine"
+            ]
+        },
+        {
+            "command": "pip install -r requirements/tests.txt\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmengine"
+            ]
+        }
+    ],
+    "Run GPU unittests": [
+        {
+            "command": "pytest tests/ --ignore tests/test_dist --ignore tests/test_optim/test_optimizer/test_optimizer_wrapper.py --ignore tests/test_model/test_wrappers/test_model_wrapper.py",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmengine"
+            ]
+        },
+        {
+            "command": "pytest tests/ --ignore tests/test_dist --ignore tests/test_optim/test_optimizer/test_optimizer_wrapper.py --ignore tests/test_model/test_wrappers/test_model_wrapper.py --ignore tests/test_hooks/test_sync_buffers_hook.py",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mmengine"
+            ]
+        }
+    ],
+    "Installation (deps and package)": [
+        {
+            "command": "pip install flit\nflit install --deps=production --extras=test --pth-file\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mdformat-openmmlab"
+            ]
+        },
+        {
+            "command": "pip install pre-commit\npip install .\n",
+            "count": 1,
+            "repos": [
+                "open-mmlab/mdformat-openmmlab"
+            ]
+        }
+    ]
+}

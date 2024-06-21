@@ -1,0 +1,130 @@
+{
+    "Step 1": [
+        {
+            "command": "actions/checkout@v4",
+            "count": 3,
+            "repos": [
+                "apache/xmlgraphics-fop",
+                "apache/xmlgraphics-commons",
+                "apache/xmlgraphics-batik"
+            ]
+        },
+        {
+            "command": "actions/checkout@v3",
+            "count": 2,
+            "repos": [
+                "apache/xmlgraphics-commons",
+                "apache/servicemix-maven-plugins"
+            ]
+        },
+        {
+            "command": "actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332",
+            "count": 2,
+            "repos": [
+                "apache/commons-cli"
+            ]
+        }
+    ],
+    "Build with Maven": [
+        {
+            "command": "mvn -B package checkstyle:check spotbugs:check --file pom.xml",
+            "count": 2,
+            "repos": [
+                "apache/xmlgraphics-fop",
+                "apache/xmlgraphics-commons"
+            ]
+        },
+        {
+            "command": "mvn -B package checkstyle:check --file pom.xml",
+            "count": 1,
+            "repos": [
+                "apache/xmlgraphics-batik"
+            ]
+        },
+        {
+            "command": "mvn --show-version --batch-mode --no-transfer-progress test jacoco:report",
+            "count": 1,
+            "repos": [
+                "apache/commons-cli"
+            ]
+        },
+        {
+            "command": "mvn --errors --show-version --batch-mode --no-transfer-progress",
+            "count": 1,
+            "repos": [
+                "apache/commons-cli"
+            ]
+        },
+        {
+            "command": "mvn -B package --file pom.xml",
+            "count": 1,
+            "repos": [
+                "apache/servicemix-maven-plugins"
+            ]
+        }
+    ],
+    "Checkout repository": [
+        {
+            "command": "actions/checkout@v3",
+            "count": 1,
+            "repos": [
+                "apache/xmlgraphics-commons"
+            ]
+        },
+        {
+            "command": "actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332",
+            "count": 1,
+            "repos": [
+                "apache/commons-cli"
+            ]
+        }
+    ],
+    "Initialize CodeQL": [
+        {
+            "command": "github/codeql-action/init@v2",
+            "count": 1,
+            "repos": [
+                "apache/xmlgraphics-commons"
+            ]
+        },
+        {
+            "command": "github/codeql-action/init@23acc5c183826b7a8a97bce3cecc52db901f8251",
+            "count": 1,
+            "repos": [
+                "apache/commons-cli"
+            ]
+        }
+    ],
+    "Autobuild": [
+        {
+            "command": "github/codeql-action/autobuild@v2",
+            "count": 1,
+            "repos": [
+                "apache/xmlgraphics-commons"
+            ]
+        },
+        {
+            "command": "github/codeql-action/autobuild@23acc5c183826b7a8a97bce3cecc52db901f8251",
+            "count": 1,
+            "repos": [
+                "apache/commons-cli"
+            ]
+        }
+    ],
+    "Perform CodeQL Analysis": [
+        {
+            "command": "github/codeql-action/analyze@v2",
+            "count": 1,
+            "repos": [
+                "apache/xmlgraphics-commons"
+            ]
+        },
+        {
+            "command": "github/codeql-action/analyze@23acc5c183826b7a8a97bce3cecc52db901f8251",
+            "count": 1,
+            "repos": [
+                "apache/commons-cli"
+            ]
+        }
+    ]
+}

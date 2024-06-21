@@ -1,0 +1,1221 @@
+{
+    "Step 1": [
+        {
+            "command": "actions/checkout@v1",
+            "count": 2,
+            "repos": [
+                "dotnet/cecil"
+            ]
+        },
+        {
+            "command": "actions/checkout@v4",
+            "count": 31,
+            "repos": [
+                "dotnet/aspnetcore",
+                "dotnet/Open-XML-SDK",
+                "dotnet/ClangSharp",
+                "dotnet/LLVMSharp",
+                "dotnet/docfx",
+                "dotnet/roslynator"
+            ]
+        },
+        {
+            "command": "imjohnbo/gh-polls-bot-action@master",
+            "count": 1,
+            "repos": [
+                "dotnet/Open-XML-SDK"
+            ]
+        },
+        {
+            "command": "actions/checkout@v3",
+            "count": 4,
+            "repos": [
+                "dotnet/Docker.DotNet",
+                "dotnet/core",
+                "dotnet/AspNetCore.Docs"
+            ]
+        },
+        {
+            "command": "actions/stale@v9",
+            "count": 2,
+            "repos": [
+                "dotnet/core",
+                "dotnet/sdk"
+            ]
+        },
+        {
+            "command": "actions/checkout@v2",
+            "count": 13,
+            "repos": [
+                "dotnet/orleans",
+                "dotnet/AspNetCore.Docs",
+                "dotnet/EntityFramework.Docs",
+                "dotnet/csharp-tmLanguage"
+            ]
+        },
+        {
+            "command": "actions/github-script@v6",
+            "count": 6,
+            "repos": [
+                "dotnet/AspNetCore.Docs",
+                "dotnet/fsharp"
+            ]
+        },
+        {
+            "command": "actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c",
+            "count": 1,
+            "repos": [
+                "dotnet/AspNetCore.Docs"
+            ]
+        },
+        {
+            "command": "actions/download-artifact@v4",
+            "count": 9,
+            "repos": [
+                "dotnet/ClangSharp",
+                "dotnet/LLVMSharp",
+                "dotnet/roslynator"
+            ]
+        },
+        {
+            "command": "actions/checkout@v4.1.5",
+            "count": 5,
+            "repos": [
+                "dotnet/docs"
+            ]
+        },
+        {
+            "command": "actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea",
+            "count": 2,
+            "repos": [
+                "dotnet/docs"
+            ]
+        },
+        {
+            "command": "lee-dohm/no-response@9bb0a4b5e6a45046f00353d5de7d90fb8bd773bb",
+            "count": 1,
+            "repos": [
+                "dotnet/docs"
+            ]
+        },
+        {
+            "command": "actions/stale@28ca1036281a5e5922ead5184a1bbf96e5fc984e",
+            "count": 1,
+            "repos": [
+                "dotnet/docs"
+            ]
+        },
+        {
+            "command": "actions/deploy-pages@v4",
+            "count": 1,
+            "repos": [
+                "dotnet/docfx"
+            ]
+        },
+        {
+            "command": "gh pr review --approve \"$PR_URL\"",
+            "count": 1,
+            "repos": [
+                "dotnet/docfx"
+            ]
+        },
+        {
+            "command": "actions/setup-dotnet@v4",
+            "count": 3,
+            "repos": [
+                "dotnet/docfx"
+            ]
+        }
+    ],
+    "Build": [
+        {
+            "command": "dotnet build -c Debug Mono.Cecil.sln",
+            "count": 2,
+            "repos": [
+                "dotnet/cecil"
+            ]
+        },
+        {
+            "command": "dotnet build --no-restore --verbosity normal",
+            "count": 4,
+            "repos": [
+                "dotnet/Open-XML-SDK"
+            ]
+        },
+        {
+            "command": "dotnet build -c Release",
+            "count": 1,
+            "repos": [
+                "dotnet/Docker.DotNet"
+            ]
+        },
+        {
+            "command": "dotnet build",
+            "count": 1,
+            "repos": [
+                "dotnet/orleans"
+            ]
+        }
+    ],
+    "Test": [
+        {
+            "command": "dotnet test --no-build -c Debug Mono.Cecil.sln",
+            "count": 1,
+            "repos": [
+                "dotnet/cecil"
+            ]
+        },
+        {
+            "command": "dotnet test --no-restore --verbosity normal --logger trx --results-directory test-results/",
+            "count": 1,
+            "repos": [
+                "dotnet/Open-XML-SDK"
+            ]
+        },
+        {
+            "command": "dotnet test --no-restore --verbosity normal --collect:\"XPlat Code Coverage\" --results-directory coverage",
+            "count": 1,
+            "repos": [
+                "dotnet/Open-XML-SDK"
+            ]
+        },
+        {
+            "command": "dotnet test -c Release --no-build",
+            "count": 1,
+            "repos": [
+                "dotnet/Docker.DotNet"
+            ]
+        },
+        {
+            "command": "dotnet test --filter \"Category=${{ matrix.provider }}&(Category=BVT|Category=SlowBVT|Category=Functional)\" --blame-hang-timeout 10m --logger \"trx\" -- -parallel none -noshadow",
+            "count": 7,
+            "repos": [
+                "dotnet/orleans"
+            ]
+        },
+        {
+            "command": "dotnet test --filter \"Category=${{ matrix.provider }}&Category=${{ matrix.suite }}\" --framework ${{ matrix.framework }} --blame-hang-timeout 10m --logger \"trx\" -- -parallel none -noshadow",
+            "count": 1,
+            "repos": [
+                "dotnet/orleans"
+            ]
+        },
+        {
+            "command": "dotnet test --filter \"Category=${{ matrix.provider }}&(Category=BVT|Category=SlowBVT|Category=Functional)\" --framework ${{ matrix.framework }} --blame-hang-timeout 10m --logger \"trx\" -- -parallel none -noshadow",
+            "count": 1,
+            "repos": [
+                "dotnet/orleans"
+            ]
+        }
+    ],
+    "Use Node.js": [
+        {
+            "command": "actions/setup-node@v4",
+            "count": 1,
+            "repos": [
+                "dotnet/aspnetcore"
+            ]
+        },
+        {
+            "command": "actions/setup-node@eff380dfbcf941bf8832e4acb788cebe13dfd758",
+            "count": 1,
+            "repos": [
+                "dotnet/docs"
+            ]
+        },
+        {
+            "command": "actions/setup-node@v1",
+            "count": 1,
+            "repos": [
+                "dotnet/EntityFramework.Docs"
+            ]
+        }
+    ],
+    "Run Markdownlint": [
+        {
+            "command": "echo \"::add-matcher::.github/workflows/markdownlint-problem-matcher.json\"\nnpm i -g markdownlint-cli\nmarkdownlint \"docs/**/*.md\"\n",
+            "count": 1,
+            "repos": [
+                "dotnet/aspnetcore"
+            ]
+        },
+        {
+            "command": "echo \"::add-matcher::.github/workflows/markdownlint-problem-matcher.json\"\nnpm i -g markdownlint-cli2\nmarkdownlint-cli2 \"**/*.md\"\n",
+            "count": 1,
+            "repos": [
+                "dotnet/docs"
+            ]
+        },
+        {
+            "command": "echo \"::add-matcher::.github/workflows/markdownlint-problem-matcher.json\"\nnpm i -g markdownlint-cli\nmarkdownlint \"**/*.md\" -i \"entity-framework/ef6/\"\n",
+            "count": 1,
+            "repos": [
+                "dotnet/EntityFramework.Docs"
+            ]
+        }
+    ],
+    "Step 5": [
+        {
+            "command": "actions/upload-artifact@v4",
+            "count": 4,
+            "repos": [
+                "dotnet/aspnetcore",
+                "dotnet/docfx",
+                "dotnet/roslynator"
+            ]
+        },
+        {
+            "command": "./artifacts/tools/sign code azure-key-vault \"**/*.nupkg\" --timestamp-url \"http://timestamp.digicert.com\" --base-directory \"${{ github.workspace }}/artifacts/pkg\" --file-list \"${{ github.workspace }}/scripts/SignClientFileList.txt\" --publisher-name \".NET Foundation\" --description \"ClangSharp\" --description-url \"https://github.com/dotnet/clangsharp\" --azure-key-vault-certificate \"${{ secrets.SC_KEY_VAULT_CERTIFICATE_ID }}\" --azure-key-vault-client-id \"${{ secrets.SC_AZURE_CLIENT_ID }}\" --azure-key-vault-client-secret \"${{ secrets.SC_AZURE_CLIENT_SECRET }}\" --azure-key-vault-tenant-id \"${{ secrets.SC_AZURE_TENANT_ID }}\" --azure-key-vault-url \"${{ secrets.SC_KEY_VAULT_URL }}\"",
+            "count": 2,
+            "repos": [
+                "dotnet/ClangSharp"
+            ]
+        },
+        {
+            "command": "./artifacts/tools/sign code azure-key-vault \"**/*.nupkg\" --timestamp-url \"http://timestamp.digicert.com\" --base-directory \"${{ github.workspace }}/artifacts/pkg\" --file-list \"${{ github.workspace }}/scripts/SignClientFileList.txt\" --publisher-name \".NET Foundation\" --description \"LLVMSharp\" --description-url \"https://github.com/dotnet/llvmsharp\" --azure-key-vault-certificate \"${{ secrets.SC_KEY_VAULT_CERTIFICATE_ID }}\" --azure-key-vault-client-id \"${{ secrets.SC_AZURE_CLIENT_ID }}\" --azure-key-vault-client-secret \"${{ secrets.SC_AZURE_CLIENT_SECRET }}\" --azure-key-vault-tenant-id \"${{ secrets.SC_AZURE_TENANT_ID }}\" --azure-key-vault-url \"${{ secrets.SC_KEY_VAULT_URL }}\"",
+            "count": 2,
+            "repos": [
+                "dotnet/LLVMSharp"
+            ]
+        },
+        {
+            "command": "dotnet test -c Release -f net8.0 --no-build --collect:\"XPlat Code Coverage\"",
+            "count": 1,
+            "repos": [
+                "dotnet/docfx"
+            ]
+        },
+        {
+            "command": "npm install\nnpm run build\n",
+            "count": 1,
+            "repos": [
+                "dotnet/docfx"
+            ]
+        },
+        {
+            "command": "zip -r ../../bin/docfx-win-x64-${GITHUB_REF_NAME}.zip .",
+            "count": 1,
+            "repos": [
+                "dotnet/docfx"
+            ]
+        },
+        {
+            "command": "stefanzweifel/git-auto-commit-action@v5",
+            "count": 1,
+            "repos": [
+                "dotnet/docfx"
+            ]
+        },
+        {
+            "command": "dotnet restore Roslynator.sln",
+            "count": 1,
+            "repos": [
+                "dotnet/roslynator"
+            ]
+        },
+        {
+            "command": "dotnet build --no-restore /p:Roslynator${{ matrix.component.propertyName }}NuGet=true /p:RoslynVersion=roslyn4.7",
+            "count": 1,
+            "repos": [
+                "dotnet/roslynator"
+            ]
+        },
+        {
+            "command": "dotnet build --no-restore /p:RoslynatorRefactoringsNuGet=true /p:RoslynVersion=roslyn4.7",
+            "count": 1,
+            "repos": [
+                "dotnet/roslynator"
+            ]
+        },
+        {
+            "command": "dotnet build --no-restore /p:RoslynatorCodeFixesNuGet=true /p:RoslynVersion=roslyn4.7",
+            "count": 1,
+            "repos": [
+                "dotnet/roslynator"
+            ]
+        },
+        {
+            "command": "msbuild -m",
+            "count": 1,
+            "repos": [
+                "dotnet/roslynator"
+            ]
+        },
+        {
+            "command": "sed -i 's/\"version\": \"1.0.0\"/\"version\": \"${{ needs.pre_build.outputs.version3 }}\"/' package/package.json\n",
+            "count": 1,
+            "repos": [
+                "dotnet/roslynator"
+            ]
+        },
+        {
+            "command": "dotnet pack --no-build",
+            "count": 1,
+            "repos": [
+                "dotnet/roslynator"
+            ]
+        }
+    ],
+    "Step 2": [
+        {
+            "command": "martincostello/update-dotnet-sdk@67d6e2b14939c06978a7f80444157296c3defe14",
+            "count": 1,
+            "repos": [
+                "dotnet/aspnetcore"
+            ]
+        },
+        {
+            "command": "actions/setup-dotnet@v4",
+            "count": 6,
+            "repos": [
+                "dotnet/Open-XML-SDK",
+                "dotnet/ClangSharp",
+                "dotnet/LLVMSharp"
+            ]
+        },
+        {
+            "command": "gaurav-nelson/github-action-markdown-link-check@v1",
+            "count": 1,
+            "repos": [
+                "dotnet/core"
+            ]
+        },
+        {
+            "command": "dotnet/docs-actions/actions/status-checker@main",
+            "count": 1,
+            "repos": [
+                "dotnet/AspNetCore.Docs"
+            ]
+        },
+        {
+            "command": "if [ \"$(gh pr list --base $DOTNET_DOCS_BASE --head $DOTNET_DOCS_HEAD --json id --jq \". | length\")\" -ne \"0\" ]; then\n  echo \"::notice title=Skipping Workflow::A pull request for branch \\\"$DOTNET_DOCS_HEAD\\\" into branch \\\"$DOTNET_DOCS_BASE\\\" already exists.\"\nelse\n  gh pr create --base $DOTNET_DOCS_BASE --head $DOTNET_DOCS_HEAD --title \"Merge to Live\" --body \"[AUTOMATED]\"\nfi\n",
+            "count": 1,
+            "repos": [
+                "dotnet/AspNetCore.Docs"
+            ]
+        },
+        {
+            "command": "./scripts/cibuild.cmd -configuration ${{ matrix.configuration }} -architecture ${{ matrix.architecture }}",
+            "count": 2,
+            "repos": [
+                "dotnet/ClangSharp",
+                "dotnet/LLVMSharp"
+            ]
+        },
+        {
+            "command": "./scripts/cibuild.sh --configuration ${{ matrix.configuration }} --architecture ${{ matrix.architecture }}",
+            "count": 4,
+            "repos": [
+                "dotnet/ClangSharp",
+                "dotnet/LLVMSharp"
+            ]
+        },
+        {
+            "command": "./scripts/cibuild.cmd -configuration release -architecture x64",
+            "count": 4,
+            "repos": [
+                "dotnet/ClangSharp",
+                "dotnet/LLVMSharp"
+            ]
+        },
+        {
+            "command": "actions/download-artifact@v4",
+            "count": 6,
+            "repos": [
+                "dotnet/ClangSharp",
+                "dotnet/LLVMSharp",
+                "dotnet/docfx"
+            ]
+        },
+        {
+            "command": "dotnet/docs-tools/actions/status-checker@main",
+            "count": 1,
+            "repos": [
+                "dotnet/docs"
+            ]
+        },
+        {
+            "command": "./.github/actions/build",
+            "count": 3,
+            "repos": [
+                "dotnet/docfx"
+            ]
+        },
+        {
+            "command": "actions/setup-node@v4",
+            "count": 1,
+            "repos": [
+                "dotnet/docfx"
+            ]
+        },
+        {
+            "command": "gh pr merge --auto --squash \"$PR_URL\"",
+            "count": 1,
+            "repos": [
+                "dotnet/docfx"
+            ]
+        },
+        {
+            "command": "actions/checkout@v4",
+            "count": 1,
+            "repos": [
+                "dotnet/docfx"
+            ]
+        },
+        {
+            "command": "dotnet tool install -g GitVersion.Tool --version 5.11.1",
+            "count": 1,
+            "repos": [
+                "dotnet/roslynator"
+            ]
+        },
+        {
+            "command": "dotnet restore Roslynator.CoreAndTesting.slnf",
+            "count": 1,
+            "repos": [
+                "dotnet/roslynator"
+            ]
+        },
+        {
+            "command": "dotnet restore --force /p:RoslynVersion=roslyn3.8",
+            "count": 3,
+            "repos": [
+                "dotnet/roslynator"
+            ]
+        },
+        {
+            "command": "(Get-Content source.extension.vsixmanifest) -replace 'Version=\"1.0.0\"', 'Version=\"${{ needs.pre_build.outputs.version3 }}\"' | Set-Content source.extension.vsixmanifest",
+            "count": 1,
+            "repos": [
+                "dotnet/roslynator"
+            ]
+        },
+        {
+            "command": "dotnet restore",
+            "count": 3,
+            "repos": [
+                "dotnet/roslynator"
+            ]
+        },
+        {
+            "command": "dotnet nuget push \"*.nupkg\" -k ${{ secrets.NUGET_API_KEY }} -s \"https://api.nuget.org/v3/index.json\" --skip-duplicate",
+            "count": 2,
+            "repos": [
+                "dotnet/roslynator"
+            ]
+        },
+        {
+            "command": "npm install -g @vscode/vsce",
+            "count": 1,
+            "repos": [
+                "dotnet/roslynator"
+            ]
+        },
+        {
+            "command": "npm install -g ovsx",
+            "count": 1,
+            "repos": [
+                "dotnet/roslynator"
+            ]
+        }
+    ],
+    "Checkout repository": [
+        {
+            "command": "actions/checkout@v4",
+            "count": 2,
+            "repos": [
+                "dotnet/aspnetcore",
+                "dotnet/Open-XML-SDK"
+            ]
+        },
+        {
+            "command": "actions/checkout@44c2b7a8a4ea60a981eaca3cf939b5f4305c123b",
+            "count": 1,
+            "repos": [
+                "dotnet/docs"
+            ]
+        },
+        {
+            "command": "actions/checkout@v3",
+            "count": 2,
+            "repos": [
+                "dotnet/Nerdbank.Streams"
+            ]
+        },
+        {
+            "command": "actions/checkout@v2",
+            "count": 1,
+            "repos": [
+                "dotnet/aspnet-api-versioning"
+            ]
+        }
+    ],
+    "Write summary": [
+        {
+            "command": "cd $GITHUB_WORKSPACE/summary\nfor FILE in *.summary.md\ndo\n  cat ${FILE} >> $GITHUB_STEP_SUMMARY\ndone\n",
+            "count": 1,
+            "repos": [
+                "dotnet/Open-XML-SDK"
+            ]
+        },
+        {
+            "command": "$files = gci test/DocumentFormat.OpenXml.Benchmarks/BenchmarkDotNet.Artifacts/results/*-report-github.md\n\nforeach ($file in $files){\n  $name = $file.Name.Replace(\"-report-github.md\", \"\").Replace(\"DocumentFormat.OpenXml.Benchmarks.\", \"\")\n  \"## $name\" >> $env:GITHUB_STEP_SUMMARY\n  gc $file >> $env:GITHUB_STEP_SUMMARY\n}",
+            "count": 1,
+            "repos": [
+                "dotnet/Open-XML-SDK"
+            ]
+        }
+    ],
+    "Checkout": [
+        {
+            "command": "actions/checkout@v4",
+            "count": 5,
+            "repos": [
+                "dotnet/Open-XML-SDK",
+                "dotnet/runtime-assets"
+            ]
+        },
+        {
+            "command": "actions/checkout@v2",
+            "count": 1,
+            "repos": [
+                "dotnet/EntityFramework.Docs"
+            ]
+        }
+    ],
+    "Setup .NET": [
+        {
+            "command": "actions/setup-dotnet@v4",
+            "count": 1,
+            "repos": [
+                "dotnet/Open-XML-SDK"
+            ]
+        },
+        {
+            "command": "actions/setup-dotnet@v3",
+            "count": 10,
+            "repos": [
+                "dotnet/orleans"
+            ]
+        },
+        {
+            "command": "actions/setup-dotnet@4d6c8fcf3c8f7a60068d26b594648e99df24cee3",
+            "count": 1,
+            "repos": [
+                "dotnet/docs"
+            ]
+        }
+    ],
+    "Initialize CodeQL": [
+        {
+            "command": "github/codeql-action/init@v3",
+            "count": 1,
+            "repos": [
+                "dotnet/Open-XML-SDK"
+            ]
+        },
+        {
+            "command": "github/codeql-action/init@v1",
+            "count": 1,
+            "repos": [
+                "dotnet/aspnet-api-versioning"
+            ]
+        }
+    ],
+    "Perform CodeQL Analysis": [
+        {
+            "command": "github/codeql-action/analyze@v3",
+            "count": 1,
+            "repos": [
+                "dotnet/Open-XML-SDK"
+            ]
+        },
+        {
+            "command": "github/codeql-action/analyze@v1",
+            "count": 1,
+            "repos": [
+                "dotnet/aspnet-api-versioning"
+            ]
+        }
+    ],
+    "Step 9": [
+        {
+            "command": "actions/upload-artifact@v4",
+            "count": 3,
+            "repos": [
+                "dotnet/Open-XML-SDK",
+                "dotnet/docfx",
+                "dotnet/roslynator"
+            ]
+        },
+        {
+            "command": "codecov/codecov-action@v4",
+            "count": 1,
+            "repos": [
+                "dotnet/docfx"
+            ]
+        },
+        {
+            "command": "actions/checkout@v4",
+            "count": 1,
+            "repos": [
+                "dotnet/roslynator"
+            ]
+        },
+        {
+            "command": "actions/upload-artifact/merge@v4",
+            "count": 1,
+            "repos": [
+                "dotnet/roslynator"
+            ]
+        }
+    ],
+    "Setup .NET Core": [
+        {
+            "command": "actions/setup-dotnet@v4",
+            "count": 1,
+            "repos": [
+                "dotnet/Open-XML-SDK"
+            ]
+        },
+        {
+            "command": "actions/setup-dotnet@v2",
+            "count": 2,
+            "repos": [
+                "dotnet/Docker.DotNet"
+            ]
+        }
+    ],
+    "Step 4": [
+        {
+            "command": "actions/upload-artifact@v3",
+            "count": 1,
+            "repos": [
+                "dotnet/orleans"
+            ]
+        },
+        {
+            "command": "dotnet/docs-tools/WhatsNew.Cli@main",
+            "count": 2,
+            "repos": [
+                "dotnet/AspNetCore.Docs",
+                "dotnet/docs"
+            ]
+        },
+        {
+            "command": "dotnet tool install --tool-path ./artifacts/tools sign --version 0.9.1-beta.24170.3",
+            "count": 4,
+            "repos": [
+                "dotnet/ClangSharp",
+                "dotnet/LLVMSharp"
+            ]
+        },
+        {
+            "command": "npm test",
+            "count": 1,
+            "repos": [
+                "dotnet/docfx"
+            ]
+        },
+        {
+            "command": "github/codeql-action/init@v3",
+            "count": 1,
+            "repos": [
+                "dotnet/docfx"
+            ]
+        },
+        {
+            "command": "./.github/actions/build",
+            "count": 1,
+            "repos": [
+                "dotnet/docfx"
+            ]
+        },
+        {
+            "command": "./sign code azure-key-vault drop/nuget/**/*.* --description \"Docfx code sign\" --description-url \"https://dotnet.github.io/docfx\" --timestamp-url http://timestamp.digicert.com --azure-key-vault-url \"${{ secrets.SIGN_KEY_VAULT_URL }}\" --azure-key-vault-certificate \"${{ secrets.SIGN_KEY_VAULT_CERTIFICATE }}\" --azure-key-vault-tenant-id \"${{ secrets.SIGN_KEY_VAULT_TENANT_ID }}\" --azure-key-vault-client-id \"${{ secrets.SIGN_KEY_VAULT_CLIENT_ID }}\" --azure-key-vault-client-secret \"${{ secrets.SIGN_KEY_VAULT_CLIENT_SECRET }}\"\n",
+            "count": 1,
+            "repos": [
+                "dotnet/docfx"
+            ]
+        },
+        {
+            "command": "dotnet pack Roslynator.CoreAndTesting.slnf --no-build -o _nupkg",
+            "count": 1,
+            "repos": [
+                "dotnet/roslynator"
+            ]
+        },
+        {
+            "command": "dotnet restore --force /p:RoslynVersion=roslyn4.7",
+            "count": 3,
+            "repos": [
+                "dotnet/roslynator"
+            ]
+        },
+        {
+            "command": "microsoft/setup-msbuild@v2",
+            "count": 1,
+            "repos": [
+                "dotnet/roslynator"
+            ]
+        },
+        {
+            "command": "dotnet pack --no-build",
+            "count": 1,
+            "repos": [
+                "dotnet/roslynator"
+            ]
+        },
+        {
+            "command": "dotnet publish --no-build",
+            "count": 1,
+            "repos": [
+                "dotnet/roslynator"
+            ]
+        }
+    ],
+    "Print manual run reason": [
+        {
+            "command": "echo \"Reason: ${{ github.event.inputs.reason }}\"\necho \"Issue number: ${{ github.event.inputs.issue }}\"\n",
+            "count": 2,
+            "repos": [
+                "dotnet/AspNetCore.Docs",
+                "dotnet/docs"
+            ]
+        },
+        {
+            "command": "echo \"Reason: ${{ github.event.inputs.reason }}\"\n",
+            "count": 3,
+            "repos": [
+                "dotnet/AspNetCore.Docs",
+                "dotnet/docs"
+            ]
+        }
+    ],
+    "create-pull-request": [
+        {
+            "command": "peter-evans/create-pull-request@2b011faafdcbc9ceb11414d64d0573f37c774b04",
+            "count": 1,
+            "repos": [
+                "dotnet/AspNetCore.Docs"
+            ]
+        },
+        {
+            "command": "peter-evans/create-pull-request@c5a7806660adbe173f04e3e038b0ccdcd758773c",
+            "count": 2,
+            "repos": [
+                "dotnet/docs"
+            ]
+        }
+    ],
+    "Delete old workflow runs": [
+        {
+            "command": "_UrlPath=\"/repos/$GITHUB_REPOSITORY/actions/workflows\"\n_CurrentWorkflowID=\"$(gh api -X GET \"$_UrlPath\" | jq '.workflows[] | select(.name == '\\\"\"$GITHUB_WORKFLOW\"\\\"') | .id')\"\ngh api -X GET \"$_UrlPath/$_CurrentWorkflowID/runs\" --paginate \\\n  | jq '.workflow_runs[] | select(.status == \"completed\") | .id' \\\n  | xargs -I{} gh api -X DELETE \"/repos/$GITHUB_REPOSITORY/actions/runs\"/{}\n",
+            "count": 1,
+            "repos": [
+                "dotnet/fsharp"
+            ]
+        },
+        {
+            "command": "_UrlPath=\"/repos/$GITHUB_REPOSITORY/actions/workflows\"\n_CurrentWorkflowID=\"$(gh api -X GET \"$_UrlPath\" | jq '.workflows[] | select(.name == '\\\"\"$GITHUB_WORKFLOW\"\\\"') | .id')\"\n\n# delete workitems which are 'completed'. (other candidate values of status field are: 'queued' and 'in_progress')\n\ngh api -X GET \"$_UrlPath/$_CurrentWorkflowID/runs\" --paginate \\\n  | jq '.workflow_runs[] | select(.status == \"completed\") | .id' \\\n  | xargs -I{} gh api -X DELETE \"/repos/$GITHUB_REPOSITORY/actions/runs\"/{}\n",
+            "count": 1,
+            "repos": [
+                "dotnet/fsharp"
+            ]
+        }
+    ],
+    "Process fantomas command": [
+        {
+            "command": "dotnet fantomas . -r",
+            "count": 1,
+            "repos": [
+                "dotnet/fsharp"
+            ]
+        },
+        {
+            "command": "dotnet build src/Compiler /t:UpdateXlf",
+            "count": 1,
+            "repos": [
+                "dotnet/fsharp"
+            ]
+        }
+    ],
+    "Step 3": [
+        {
+            "command": "actions/upload-artifact@v4",
+            "count": 10,
+            "repos": [
+                "dotnet/ClangSharp",
+                "dotnet/LLVMSharp"
+            ]
+        },
+        {
+            "command": "actions/setup-dotnet@v4",
+            "count": 5,
+            "repos": [
+                "dotnet/ClangSharp",
+                "dotnet/LLVMSharp",
+                "dotnet/docfx"
+            ]
+        },
+        {
+            "command": "dotnet nuget push \"./artifacts/pkg/Release/*.nupkg\" --api-key AzureDevOps --skip-duplicate",
+            "count": 2,
+            "repos": [
+                "dotnet/ClangSharp",
+                "dotnet/LLVMSharp"
+            ]
+        },
+        {
+            "command": "dotnet nuget push \"./artifacts/pkg/Release/*.nupkg\" --source https://nuget.pkg.github.com/dotnet/index.json --api-key ${{ secrets.GITHUB_TOKEN }} --skip-duplicate",
+            "count": 2,
+            "repos": [
+                "dotnet/ClangSharp",
+                "dotnet/LLVMSharp"
+            ]
+        },
+        {
+            "command": "npm run lint",
+            "count": 1,
+            "repos": [
+                "dotnet/docfx"
+            ]
+        },
+        {
+            "command": "paulhatch/semantic-version@v5.4.0",
+            "count": 1,
+            "repos": [
+                "dotnet/docfx"
+            ]
+        },
+        {
+            "command": "dotnet tool install --tool-path . sign --version 0.9.1-beta.24170.3",
+            "count": 1,
+            "repos": [
+                "dotnet/docfx"
+            ]
+        },
+        {
+            "command": "actions/download-artifact@v4",
+            "count": 1,
+            "repos": [
+                "dotnet/docfx"
+            ]
+        },
+        {
+            "command": "dotnet test -c Release -f net8.0 --no-build --filter Stage=Snapshot",
+            "count": 1,
+            "repos": [
+                "dotnet/docfx"
+            ]
+        },
+        {
+            "command": "dotnet build Roslynator.CoreAndTesting.slnf --no-restore",
+            "count": 1,
+            "repos": [
+                "dotnet/roslynator"
+            ]
+        },
+        {
+            "command": "dotnet build --no-restore /p:Roslynator${{ matrix.component.propertyName }}NuGet=true /p:RoslynVersion=roslyn3.8",
+            "count": 1,
+            "repos": [
+                "dotnet/roslynator"
+            ]
+        },
+        {
+            "command": "dotnet build --no-restore /p:RoslynatorRefactoringsNuGet=true /p:RoslynVersion=roslyn3.8",
+            "count": 1,
+            "repos": [
+                "dotnet/roslynator"
+            ]
+        },
+        {
+            "command": "dotnet build --no-restore /p:RoslynatorCodeFixesNuGet=true /p:RoslynVersion=roslyn3.8",
+            "count": 1,
+            "repos": [
+                "dotnet/roslynator"
+            ]
+        },
+        {
+            "command": "dotnet restore",
+            "count": 1,
+            "repos": [
+                "dotnet/roslynator"
+            ]
+        },
+        {
+            "command": "dotnet build --no-restore",
+            "count": 3,
+            "repos": [
+                "dotnet/roslynator"
+            ]
+        },
+        {
+            "command": "vsce publish -p ${{ secrets.VS_MARKETPLACE_TOKEN }} -i \"roslynator-${{ needs.pre_build.outputs.version3 }}.vsix\"",
+            "count": 1,
+            "repos": [
+                "dotnet/roslynator"
+            ]
+        },
+        {
+            "command": "ovsx publish -p ${{ secrets.OPEN_VSX_TOKEN }} -i \"roslynator-${{ needs.pre_build.outputs.version3 }}.vsix\"",
+            "count": 1,
+            "repos": [
+                "dotnet/roslynator"
+            ]
+        },
+        {
+            "command": "npm ci",
+            "count": 1,
+            "repos": [
+                "dotnet/csharp-tmLanguage"
+            ]
+        }
+    ],
+    "Step 6": [
+        {
+            "command": "actions/upload-artifact@v4",
+            "count": 6,
+            "repos": [
+                "dotnet/ClangSharp",
+                "dotnet/LLVMSharp",
+                "dotnet/roslynator"
+            ]
+        },
+        {
+            "command": "dotnet test -c Release -f net6.0 --no-build --collect:\"XPlat Code Coverage\"",
+            "count": 1,
+            "repos": [
+                "dotnet/docfx"
+            ]
+        },
+        {
+            "command": "dotnet build -c Release",
+            "count": 1,
+            "repos": [
+                "dotnet/docfx"
+            ]
+        },
+        {
+            "command": "zip -r ../../bin/docfx-linux-x64-${GITHUB_REF_NAME}.zip .",
+            "count": 1,
+            "repos": [
+                "dotnet/docfx"
+            ]
+        },
+        {
+            "command": "actions/github-script@v7",
+            "count": 1,
+            "repos": [
+                "dotnet/docfx"
+            ]
+        },
+        {
+            "command": "dotnet build Roslynator.sln --no-restore",
+            "count": 1,
+            "repos": [
+                "dotnet/roslynator"
+            ]
+        },
+        {
+            "command": "dotnet pack --no-build",
+            "count": 3,
+            "repos": [
+                "dotnet/roslynator"
+            ]
+        },
+        {
+            "command": "npm install",
+            "count": 1,
+            "repos": [
+                "dotnet/roslynator"
+            ]
+        }
+    ],
+    "Step 7": [
+        {
+            "command": "npm i -g @percy/cli",
+            "count": 1,
+            "repos": [
+                "dotnet/docfx"
+            ]
+        },
+        {
+            "command": "github/codeql-action/analyze@v3",
+            "count": 1,
+            "repos": [
+                "dotnet/docfx"
+            ]
+        },
+        {
+            "command": "zip -r ../../bin/docfx-osx-x64-${GITHUB_REF_NAME}.zip .",
+            "count": 1,
+            "repos": [
+                "dotnet/docfx"
+            ]
+        },
+        {
+            "command": "dotnet format Roslynator.sln --no-restore --verify-no-changes --severity info\n",
+            "count": 1,
+            "repos": [
+                "dotnet/roslynator"
+            ]
+        },
+        {
+            "command": "actions/upload-artifact@v4",
+            "count": 4,
+            "repos": [
+                "dotnet/roslynator"
+            ]
+        },
+        {
+            "command": "npm install -g @vscode/vsce",
+            "count": 1,
+            "repos": [
+                "dotnet/roslynator"
+            ]
+        }
+    ],
+    "Step 8": [
+        {
+            "command": "percy exec -- dotnet test -c Release -f net8.0 --filter Stage=Percy --no-build --collect:\"XPlat Code Coverage\"",
+            "count": 1,
+            "repos": [
+                "dotnet/docfx"
+            ]
+        },
+        {
+            "command": "actions/upload-artifact@v4",
+            "count": 2,
+            "repos": [
+                "dotnet/docfx",
+                "dotnet/roslynator"
+            ]
+        },
+        {
+            "command": "dotnet test Roslynator.sln --no-build",
+            "count": 1,
+            "repos": [
+                "dotnet/roslynator"
+            ]
+        },
+        {
+            "command": "vsce package",
+            "count": 1,
+            "repos": [
+                "dotnet/roslynator"
+            ]
+        }
+    ],
+    "Step 10": [
+        {
+            "command": "echo \"DOTNET_DbgEnableMiniDump=1\" >> $GITHUB_ENV",
+            "count": 1,
+            "repos": [
+                "dotnet/docfx"
+            ]
+        },
+        {
+            "command": "dotnet tool install -g Roslynator.DotNet.Cli --version 0.8.3",
+            "count": 1,
+            "repos": [
+                "dotnet/roslynator"
+            ]
+        },
+        {
+            "command": "rm package/*.vsix",
+            "count": 1,
+            "repos": [
+                "dotnet/roslynator"
+            ]
+        }
+    ],
+    "Step 11": [
+        {
+            "command": "dotnet run -c Release --no-build -f net8.0 --project src/docfx -- docs/docfx.json",
+            "count": 1,
+            "repos": [
+                "dotnet/docfx"
+            ]
+        },
+        {
+            "command": "roslynator spellcheck Roslynator.sln --dry-run --scope all --words \\\n  spellcheck \\\n  ../wordb/data/en \\\n  ../wordb/data/en-us \\\n  ../wordb/data/names.txt \\\n  ../wordb/data/tech.names.txt \\\n  ../wordb/data/tech.acronyms.txt\n",
+            "count": 1,
+            "repos": [
+                "dotnet/roslynator"
+            ]
+        },
+        {
+            "command": "sed -i s/ms-dotnettools.csharp/muhammad-sammy.csharp/ package/package.json",
+            "count": 1,
+            "repos": [
+                "dotnet/roslynator"
+            ]
+        }
+    ],
+    "Step 12": [
+        {
+            "command": "dotnet run -c Release --no-build -f net8.0 --project src/docfx -- samples/seed/docfx.json --output docs/_site/seed",
+            "count": 1,
+            "repos": [
+                "dotnet/docfx"
+            ]
+        },
+        {
+            "command": "vsce package",
+            "count": 1,
+            "repos": [
+                "dotnet/roslynator"
+            ]
+        }
+    ],
+    "Step 13": [
+        {
+            "command": "actions/upload-pages-artifact@v3",
+            "count": 1,
+            "repos": [
+                "dotnet/docfx"
+            ]
+        },
+        {
+            "command": "actions/upload-artifact@v4",
+            "count": 1,
+            "repos": [
+                "dotnet/roslynator"
+            ]
+        }
+    ],
+    "dotnet pack": [
+        {
+            "command": "dotnet pack -c Release /p:Version=${{ steps.version.outputs.version }} /p:ApiCompatGenerateSuppressionFile=true -o drop/nuget",
+            "count": 1,
+            "repos": [
+                "dotnet/docfx"
+            ]
+        },
+        {
+            "command": "dotnet pack -c Release /p:Version=${GITHUB_REF_NAME#v} -o drop/nuget",
+            "count": 1,
+            "repos": [
+                "dotnet/docfx"
+            ]
+        }
+    ],
+    "Build solution": [
+        {
+            "command": "$start = (Get-Location).Path.Length + 1\n$sln = Join-Path '..' 'ApiVersioning.sln'\n$projects = Get-ChildItem src -Include *.csproj -Recurse | `\n            ForEach-Object { $_.FullName.Substring($start) }\n$json = ConvertTo-Json(New-Object PSObject -Property @{solution=@{path=$sln;projects=$projects}})\n$obj = New-Item -Path 'obj' -ItemType Directory -Force\n$slnf = New-Item -Path (Join-Path $obj 'codeql.slnf') -ItemType File -Value $json -Force\n\ndotnet build $slnf.FullName --configuration Release\n",
+            "count": 1,
+            "repos": [
+                "dotnet/aspnet-api-versioning"
+            ]
+        },
+        {
+            "command": "msbuild MQTTnet.sln /t:Build /p:Configuration=\"Release\" /verbosity:m /p:FileVersion=${{ env.VERSION }} /p:AssemblyVersion=${{ env.VERSION }} /p:PackageVersion=${{ env.VERSION }} /p:SignAssembly=true /p:AssemblyOriginatorKeyFile=${{ github.workspace }}\\certificate.snk",
+            "count": 1,
+            "repos": [
+                "dotnet/MQTTnet"
+            ]
+        }
+    ]
+}

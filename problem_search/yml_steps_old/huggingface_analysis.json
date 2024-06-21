@@ -1,0 +1,4167 @@
+{
+    "Step 1": [
+        {
+            "command": "actions/checkout@v4",
+            "count": 15,
+            "repos": [
+                "huggingface/transformers",
+                "huggingface/datasets",
+                "huggingface/dataset-viewer",
+                "huggingface/optimum-intel"
+            ]
+        },
+        {
+            "command": "if [ \"${{ github.event_name }}\" == \"push\" ]; then\n  echo \"depth=$(($(jq length <<< '${{ toJson(github.event.commits) }}') + 2))\" >> $GITHUB_ENV\n  echo \"branch=${{ github.ref_name }}\" >> $GITHUB_ENV\nfi\nif [ \"${{ github.event_name }}\" == \"pull_request\" ]; then\n  echo \"depth=$((${{ github.event.pull_request.commits }}+2))\" >> $GITHUB_ENV\n  echo \"branch=${{ github.event.pull_request.head.ref }}\" >> $GITHUB_ENV\nfi\n",
+            "count": 2,
+            "repos": [
+                "huggingface/transformers",
+                "huggingface/optimum-intel"
+            ]
+        },
+        {
+            "command": "actions/checkout@v2",
+            "count": 69,
+            "repos": [
+                "huggingface/pytorch-image-models",
+                "huggingface/trl",
+                "huggingface/autotrain-advanced",
+                "huggingface/huggingface_hub",
+                "huggingface/collaborative-training-auth",
+                "huggingface/optimum",
+                "huggingface/course",
+                "huggingface/doc-builder",
+                "huggingface/huggingface_sb3",
+                "huggingface/optimum-habana",
+                "huggingface/evaluate",
+                "huggingface/model-evaluator",
+                "huggingface/ml-agents",
+                "huggingface/simulate",
+                "huggingface/optimum-intel",
+                "huggingface/diffusers",
+                "huggingface/safetensors"
+            ]
+        },
+        {
+            "command": "actions/checkout@v3",
+            "count": 45,
+            "repos": [
+                "huggingface/tokenizers",
+                "huggingface/blog",
+                "huggingface/trl",
+                "huggingface/doc-builder",
+                "huggingface/optimum-graphcore",
+                "huggingface/evaluate",
+                "huggingface/simulate",
+                "huggingface/diffusers",
+                "huggingface/hffs",
+                "huggingface/safetensors"
+            ]
+        },
+        {
+            "command": "actions/stale@v8",
+            "count": 2,
+            "repos": [
+                "huggingface/tokenizers",
+                "huggingface/safetensors"
+            ]
+        },
+        {
+            "command": "actions/checkout@v1",
+            "count": 1,
+            "repos": [
+                "huggingface/widgets-server"
+            ]
+        },
+        {
+            "command": "actions/checkout@v3.1.0",
+            "count": 6,
+            "repos": [
+                "huggingface/accelerate"
+            ]
+        },
+        {
+            "command": "actions/stale@v5",
+            "count": 1,
+            "repos": [
+                "huggingface/autotrain-advanced"
+            ]
+        },
+        {
+            "command": "actions/setup-node@v3",
+            "count": 1,
+            "repos": [
+                "huggingface/doc-builder"
+            ]
+        },
+        {
+            "command": "dessant/lock-threads@v2",
+            "count": 1,
+            "repos": [
+                "huggingface/ml-agents"
+            ]
+        },
+        {
+            "command": "actions/setup-python@v4",
+            "count": 2,
+            "repos": [
+                "huggingface/simulate"
+            ]
+        }
+    ],
+    "Install dependencies": [
+        {
+            "command": "sudo apt -y update && sudo apt install -y libsndfile1-dev\n",
+            "count": 1,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        },
+        {
+            "command": "pip install sphinx sphinx_rtd_theme setuptools-rust",
+            "count": 1,
+            "repos": [
+                "huggingface/tokenizers"
+            ]
+        },
+        {
+            "command": "yarn install",
+            "count": 2,
+            "repos": [
+                "huggingface/tokenizers"
+            ]
+        },
+        {
+            "command": "python -m pip install --upgrade pip\npip install .[quality]\n",
+            "count": 7,
+            "repos": [
+                "huggingface/datasets",
+                "huggingface/evaluate",
+                "huggingface/diffusers",
+                "huggingface/hffs"
+            ]
+        },
+        {
+            "command": "uv pip install --system \"datasets[tests,metrics-tests] @ .\"",
+            "count": 1,
+            "repos": [
+                "huggingface/datasets"
+            ]
+        },
+        {
+            "command": "uv pip install --system \"datasets[tests] @ .\"",
+            "count": 1,
+            "repos": [
+                "huggingface/datasets"
+            ]
+        },
+        {
+            "command": "pip install .[test,benchmark]\n",
+            "count": 1,
+            "repos": [
+                "huggingface/trl"
+            ]
+        },
+        {
+            "command": "python -m pip install --upgrade pip\n# install PEFT & transformers from source\npip install -U git+https://github.com/huggingface/peft.git\npip install -U git+https://github.com/huggingface/transformers.git \n# cpu version of pytorch\npip install \".[test, diffusers]\"\n",
+            "count": 1,
+            "repos": [
+                "huggingface/trl"
+            ]
+        },
+        {
+            "command": "python -m pip install --upgrade pip\n# cpu version of pytorch\npip install \".[test, peft, diffusers]\"\n",
+            "count": 1,
+            "repos": [
+                "huggingface/trl"
+            ]
+        },
+        {
+            "command": "python -m pip install --upgrade pip\n# cpu version of pytorch\npip install .[test]\n",
+            "count": 1,
+            "repos": [
+                "huggingface/trl"
+            ]
+        },
+        {
+            "command": "python -m pip install --upgrade pip\npython -m pip install flake8 black isort\n",
+            "count": 1,
+            "repos": [
+                "huggingface/autotrain-advanced"
+            ]
+        },
+        {
+            "command": "python -m pip install --upgrade pip\npython -m pip install .[dev]\n",
+            "count": 1,
+            "repos": [
+                "huggingface/autotrain-advanced"
+            ]
+        },
+        {
+            "command": "uv pip install \"huggingface_hub[dev] @ .\"",
+            "count": 1,
+            "repos": [
+                "huggingface/huggingface_hub"
+            ]
+        },
+        {
+            "command": "pip install --upgrade pip\npip install setuptools wheel\n",
+            "count": 3,
+            "repos": [
+                "huggingface/huggingface_hub",
+                "huggingface/huggingface_sb3",
+                "huggingface/evaluate"
+            ]
+        },
+        {
+            "command": "uv pip install \"huggingface_hub[testing] @ .\"\n\ncase \"${{ matrix.test_name }}\" in\n\n  \"Repository only\" | \"Everything else\")\n    sudo apt update\n    sudo apt install -y libsndfile1-dev\n    ;;\n\n  lfs)\n    git config --global user.email \"ci@dummy.com\"\n    git config --global user.name \"ci\"\n    ;;\n\n  fastai | torch)\n    uv pip install \"huggingface_hub[${{ matrix.test_name }}] @ .\"\n    ;;\n\n  tensorflow)\n    sudo apt update\n    sudo apt install -y graphviz\n    uv pip install \"huggingface_hub[tensorflow-testing] @ .\"\n    ;;\n\nesac\n",
+            "count": 1,
+            "repos": [
+                "huggingface/huggingface_hub"
+            ]
+        },
+        {
+            "command": "uv pip install \"huggingface_hub[testing] @ .\"",
+            "count": 1,
+            "repos": [
+                "huggingface/huggingface_hub"
+            ]
+        },
+        {
+            "command": "cd backend\npython -m pip install --upgrade pip\npython -m pip install flake8 black isort\n",
+            "count": 1,
+            "repos": [
+                "huggingface/collaborative-training-auth"
+            ]
+        },
+        {
+            "command": "source venv/bin/activate\npip install --upgrade pip\npip install .[quality]\n",
+            "count": 2,
+            "repos": [
+                "huggingface/optimum",
+                "huggingface/optimum-intel"
+            ]
+        },
+        {
+            "command": "pip install wheel\npip install .[tests,onnxruntime,benchmark]\npip install -U git+https://github.com/huggingface/evaluate\npip install -U git+https://github.com/huggingface/diffusers\npip install -U git+https://github.com/huggingface/transformers\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum"
+            ]
+        },
+        {
+            "command": "pip install .[tests]\npip3 install --upgrade torch torchvision torchaudio\npip install accelerate\npip install -U git+https://github.com/huggingface/evaluate\npip install -U git+https://github.com/huggingface/diffusers\npip install -U git+https://github.com/huggingface/transformers\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum"
+            ]
+        },
+        {
+            "command": "python -m pip install --upgrade pip\npip install .[tests]\npip install -U git+https://github.com/huggingface/evaluate\npip install -U git+https://github.com/huggingface/diffusers\npip install -U git+https://github.com/huggingface/transformers\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum"
+            ]
+        },
+        {
+            "command": "pip install .[tests,exporters-tf]\npip install -U git+https://github.com/huggingface/evaluate\npip install -U git+https://github.com/huggingface/diffusers\npip install -U git+https://github.com/huggingface/transformers\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum"
+            ]
+        },
+        {
+            "command": "pip install .[tests]\npip install git+https://github.com/huggingface/transformers.git\npip install -U git+https://github.com/huggingface/evaluate\npip install -U git+https://github.com/huggingface/diffusers\npip install -U git+https://github.com/huggingface/transformers\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum"
+            ]
+        },
+        {
+            "command": "pip install .[tests,onnxruntime] tensorflow tf2onnx\npip install -U git+https://github.com/huggingface/evaluate\npip install -U git+https://github.com/huggingface/diffusers\npip install -U git+https://github.com/huggingface/transformers\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum"
+            ]
+        },
+        {
+            "command": "pip install .[tests,onnxruntime]\npip install -U git+https://github.com/huggingface/evaluate\npip install -U git+https://github.com/huggingface/diffusers\npip install -U git+https://github.com/huggingface/transformers\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum"
+            ]
+        },
+        {
+            "command": "python -m pip install --upgrade pip\npip install .[tests]\nls -l optimum/\npip install -U git+https://github.com/huggingface/evaluate\npip install -U git+https://github.com/huggingface/diffusers\npip install -U git+https://github.com/huggingface/transformers\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum"
+            ]
+        },
+        {
+            "command": "pip install wheel\npip install .[tests,onnxruntime,benchmark]\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum"
+            ]
+        },
+        {
+            "command": "pip install .[tests]\npip install --no-cache-dir --upgrade torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu\npip install accelerate\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum"
+            ]
+        },
+        {
+            "command": "pip install --upgrade pip\npip install --no-cache-dir torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu\npip install .[tests,exporters,exporters-tf]\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum"
+            ]
+        },
+        {
+            "command": "pip install .[tests,exporters-tf]\n",
+            "count": 9,
+            "repos": [
+                "huggingface/optimum"
+            ]
+        },
+        {
+            "command": "pip install .[tests]\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum"
+            ]
+        },
+        {
+            "command": "pip install .[tests,onnxruntime,exporters-tf]\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum"
+            ]
+        },
+        {
+            "command": "pip install --upgrade pip\npip install --no-cache-dir torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu\npip install .[tests,onnxruntime]\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum"
+            ]
+        },
+        {
+            "command": "python -m pip install --upgrade pip\npip install .[tests]\nls -l optimum/\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum"
+            ]
+        },
+        {
+            "command": "python -m pip install --upgrade pip\npip install --no-cache-dir torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu\npip install .[tests]\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum"
+            ]
+        },
+        {
+            "command": "poetry env use \"${{ env.python-version }}\"\npoetry install\n",
+            "count": 3,
+            "repos": [
+                "huggingface/dataset-viewer"
+            ]
+        },
+        {
+            "command": "npm install ci",
+            "count": 1,
+            "repos": [
+                "huggingface/doc-builder"
+            ]
+        },
+        {
+            "command": "source code_quality_venv/bin/activate\npip install --upgrade pip\npip install .[quality]\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum-graphcore"
+            ]
+        },
+        {
+            "command": "source examples_venv/bin/activate\npip install --upgrade pip\nexport SDK_PATH=/opt/gc/poplar_sdk-ubuntu_20_04-3.3*\npip install ${SDK_PATH}/poptorch-*.whl\npip install .[testing]\npip install memory-profiler matplotlib\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum-graphcore"
+            ]
+        },
+        {
+            "command": "source general_venv/bin/activate\npip install --upgrade pip\nexport SDK_PATH=/opt/gc/poplar_sdk-ubuntu_20_04-3.3*\npip install ${SDK_PATH}/poptorch-*.whl\npip install .[testing]\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum-graphcore"
+            ]
+        },
+        {
+            "command": "source pipelines_venv/bin/activate\npip install --upgrade pip\nexport SDK_PATH=/opt/gc/poplar_sdk-ubuntu_20_04-3.3*\npip install ${SDK_PATH}/poptorch-*.whl\npip install .[testing]\npip install memory-profiler matplotlib\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum-graphcore"
+            ]
+        },
+        {
+            "command": "source venv/bin/activate\npip install --upgrade pip\npip install ruff\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum-habana"
+            ]
+        },
+        {
+            "command": "pip install .[tests]\npip install -r additional-tests-requirements.txt --no-deps\n",
+            "count": 1,
+            "repos": [
+                "huggingface/evaluate"
+            ]
+        },
+        {
+            "command": "python -m pip install --upgrade pip\npip install -r requirements.txt\n",
+            "count": 1,
+            "repos": [
+                "huggingface/evaluate"
+            ]
+        },
+        {
+            "command": "python -m pip install --upgrade pip\npython -m pip install black isort flake8\n",
+            "count": 1,
+            "repos": [
+                "huggingface/model-evaluator"
+            ]
+        },
+        {
+            "command": "python -m pip install --upgrade pip\npython -m pip install --upgrade setuptools\n# Install the local checkouts of ml-agents. This will prevent the colab notebooks from installing a released version.\npython -m pip install --progress-bar=off -e ./ml-agents-envs\npython -m pip install --progress-bar=off -e ./ml-agents\npython -m pip install --progress-bar=off -r colab_requirements.txt\n",
+            "count": 1,
+            "repos": [
+                "huggingface/ml-agents"
+            ]
+        },
+        {
+            "command": "python -m pip install --upgrade pip\npython -m pip install --upgrade setuptools\npython -m pip install --progress-bar=off -e ./ml-agents-envs -c ${{ matrix.pip_constraints }}\npython -m pip install --progress-bar=off -e ./ml-agents -c ${{ matrix.pip_constraints }}\npython -m pip install --progress-bar=off -r test_requirements.txt -c ${{ matrix.pip_constraints }}\npython -m pip install --progress-bar=off -e ./gym-unity -c ${{ matrix.pip_constraints }}\npython -m pip install --progress-bar=off -e ./ml-agents-plugin-examples -c ${{ matrix.pip_constraints }}\n",
+            "count": 1,
+            "repos": [
+                "huggingface/ml-agents"
+            ]
+        },
+        {
+            "command": "python -m pip install --upgrade pip\npip install optimum[exporters]\npip install .[tests]\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum-intel"
+            ]
+        },
+        {
+            "command": "python -m pip install --upgrade pip\npip install cmake\npip install py-cpuinfo\npip install torch==2.3.0 torchaudio==2.3.0 torchvision==0.18 --index-url https://download.pytorch.org/whl/cpu\npip install .[neural-compressor,diffusers,tests]\npip install intel-extension-for-transformers\npip install peft\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum-intel"
+            ]
+        },
+        {
+            "command": "python -m pip install --upgrade pip\npip install torch torchaudio torchvision --extra-index-url https://download.pytorch.org/whl/cpu\npip install .[ipex,tests]\npip install transformers==${{ matrix.transformers-version }}\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum-intel"
+            ]
+        },
+        {
+            "command": "python -m pip install --upgrade pip\n# install PyTorch CPU version to avoid installing CUDA packages on GitHub runner without GPU\npip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu\npip install transformers==${{ matrix.transformers-version }}\npip install .[openvino,openvino-tokenizers,tests,diffusers] onnxruntime\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum-intel"
+            ]
+        },
+        {
+            "command": "# Install openvino manually to prevent dependency conflicts when .[openvino] pins\n# optimum or transformers to a specific version\n# Install PyTorch CPU to prevent unnecessary downloading/installing of CUDA packages\npip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu\npip install .[tests] openvino onnxruntime ${{ matrix.optimum}}\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum-intel"
+            ]
+        },
+        {
+            "command": "pip install .[openvino] jstyleson pytest\npip install -r examples/openvino/audio-classification/requirements.txt --extra-index-url https://download.pytorch.org/whl/cpu\npip install -r examples/openvino/image-classification/requirements.txt --extra-index-url https://download.pytorch.org/whl/cpu\npip install -r examples/openvino/question-answering/requirements.txt --extra-index-url https://download.pytorch.org/whl/cpu\npip install -r examples/openvino/text-classification/requirements.txt --extra-index-url https://download.pytorch.org/whl/cpu\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum-intel"
+            ]
+        },
+        {
+            "command": "# Install PyTorch CPU to prevent unnecessary downloading/installing of CUDA packages\n# ffmpeg, torchaudio and pillow are required for image classification and audio classification pipelines\nsudo apt-get install ffmpeg\npip install torch torchaudio --extra-index-url https://download.pytorch.org/whl/cpu\npip install \".[tests, openvino]\" nbval\npip install -r notebooks/openvino/requirements.txt\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum-intel"
+            ]
+        },
+        {
+            "command": "python -m venv /opt/venv && export PATH=\"/opt/venv/bin:$PATH\"\npython -m uv pip install -e [quality,test]\npython -m uv pip install pandas peft\n",
+            "count": 1,
+            "repos": [
+                "huggingface/diffusers"
+            ]
+        },
+        {
+            "command": "python -m pip install --upgrade pip\npip install --upgrade huggingface_hub\n",
+            "count": 1,
+            "repos": [
+                "huggingface/diffusers"
+            ]
+        },
+        {
+            "command": "pip install -e .\npip install huggingface_hub\n",
+            "count": 1,
+            "repos": [
+                "huggingface/diffusers"
+            ]
+        },
+        {
+            "command": "python -m venv /opt/venv && export PATH=\"/opt/venv/bin:$PATH\"\npython -m uv pip install -e [quality,test]\npython -m uv pip install accelerate@git+https://github.com/huggingface/accelerate.git\npython -m uv pip install pytest-reportlog\n",
+            "count": 4,
+            "repos": [
+                "huggingface/diffusers"
+            ]
+        },
+        {
+            "command": "python -m venv /opt/venv && export PATH=\"/opt/venv/bin:$PATH\"\npython -m uv pip install -e [quality,test]\npython -m uv pip install accelerate@git+https://github.com/huggingface/accelerate.git\npython -m uv pip install peft@git+https://github.com/huggingface/peft.git\npython -m uv pip install pytest-reportlog\n",
+            "count": 1,
+            "repos": [
+                "huggingface/diffusers"
+            ]
+        },
+        {
+            "command": "${CONDA_RUN} python -m pip install --upgrade pip uv\n${CONDA_RUN} python -m uv pip install -e [quality,test]\n${CONDA_RUN} python -m uv pip install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cpu\n${CONDA_RUN} python -m uv pip install accelerate@git+https://github.com/huggingface/accelerate\n${CONDA_RUN} python -m uv pip install pytest-reportlog\n",
+            "count": 1,
+            "repos": [
+                "huggingface/diffusers"
+            ]
+        },
+        {
+            "command": "python -m venv /opt/venv && export PATH=\"/opt/venv/bin:$PATH\"\npython -m pip install --upgrade pip uv\npython -m uv pip install -e .\npython -m uv pip install pytest\n",
+            "count": 1,
+            "repos": [
+                "huggingface/diffusers"
+            ]
+        },
+        {
+            "command": "python -m venv /opt/venv && export PATH=\"/opt/venv/bin:$PATH\"\npython -m pip install --upgrade pip uv\npython -m uv pip install -e .\npython -m uv pip install \"jax[cpu]>=0.2.16,!=0.3.2\"\npython -m uv pip install \"flax>=0.4.1\"\npython -m uv pip install \"jaxlib>=0.1.65\"\npython -m uv pip install pytest\n",
+            "count": 1,
+            "repos": [
+                "huggingface/diffusers"
+            ]
+        },
+        {
+            "command": "python -m venv /opt/venv && export PATH=\"/opt/venv/bin:$PATH\"\npython -m uv pip install -e [quality,test]\n",
+            "count": 4,
+            "repos": [
+                "huggingface/diffusers"
+            ]
+        },
+        {
+            "command": "python -m venv /opt/venv && export PATH=\"/opt/venv/bin:$PATH\"\npython -m pip install -e [quality,test]\npython -m pip install accelerate\n",
+            "count": 1,
+            "repos": [
+                "huggingface/diffusers"
+            ]
+        },
+        {
+            "command": "python -m venv /opt/venv && export PATH=\"/opt/venv/bin:$PATH\"\npython -m pip install -e [quality,test]\n",
+            "count": 1,
+            "repos": [
+                "huggingface/diffusers"
+            ]
+        },
+        {
+            "command": "python -m venv /opt/venv && export PATH=\"/opt/venv/bin:$PATH\"\npython -m uv pip install -e [quality,test]\nif [ \"${{ matrix.lib-versions }}\" == \"main\" ]; then\n    python -m pip install -U peft@git+https://github.com/huggingface/peft.git\n    python -m uv pip install -U transformers@git+https://github.com/huggingface/transformers.git\n    python -m uv pip install -U accelerate@git+https://github.com/huggingface/accelerate.git\nelse\n    python -m uv pip install -U peft transformers accelerate\nfi\n",
+            "count": 1,
+            "repos": [
+                "huggingface/diffusers"
+            ]
+        },
+        {
+            "command": "python -m venv /opt/venv && export PATH=\"/opt/venv/bin:$PATH\"\npython -m uv pip install -e [quality,test]\npython -m uv pip install accelerate\n",
+            "count": 1,
+            "repos": [
+                "huggingface/diffusers"
+            ]
+        },
+        {
+            "command": "python -m venv /opt/venv && export PATH=\"/opt/venv/bin:$PATH\"\npython -m pip install --upgrade pip uv\npython -m uv pip install -e .\npython -m uv pip install torch torchvision torchaudio\npython -m uv pip install pytest\n",
+            "count": 1,
+            "repos": [
+                "huggingface/diffusers"
+            ]
+        },
+        {
+            "command": "python -m venv /opt/venv && export PATH=\"/opt/venv/bin:$PATH\"\npython -m uv pip install -e [quality,test]\npython -m uv pip install accelerate@git+https://github.com/huggingface/accelerate.git\n",
+            "count": 4,
+            "repos": [
+                "huggingface/diffusers"
+            ]
+        },
+        {
+            "command": "python -m venv /opt/venv && export PATH=\"/opt/venv/bin:$PATH\"\npython -m uv pip install -e [quality,test]\npython -m uv pip install accelerate@git+https://github.com/huggingface/accelerate.git\npython -m pip install -U peft@git+https://github.com/huggingface/peft.git\n",
+            "count": 1,
+            "repos": [
+                "huggingface/diffusers"
+            ]
+        },
+        {
+            "command": "python -m venv /opt/venv && export PATH=\"/opt/venv/bin:$PATH\"\npython -m uv pip install -e [quality,test,training]\n",
+            "count": 3,
+            "repos": [
+                "huggingface/diffusers"
+            ]
+        },
+        {
+            "command": "${CONDA_RUN} python -m pip install --upgrade pip uv\n${CONDA_RUN} python -m uv pip install -e [quality,test]\n${CONDA_RUN} python -m uv pip install torch torchvision torchaudio\n${CONDA_RUN} python -m uv pip install accelerate@git+https://github.com/huggingface/accelerate.git\n${CONDA_RUN} python -m uv pip install transformers --upgrade\n",
+            "count": 1,
+            "repos": [
+                "huggingface/diffusers"
+            ]
+        },
+        {
+            "command": "python -m pip install --upgrade pip\npython -m pip install \".[quality]\"\n",
+            "count": 1,
+            "repos": [
+                "huggingface/setfit"
+            ]
+        },
+        {
+            "command": "pip install .[tests]",
+            "count": 1,
+            "repos": [
+                "huggingface/hffs"
+            ]
+        }
+    ],
+    "Failure short reports": [
+        {
+            "command": "cat reports/tests_new_models/failures_short.txt",
+            "count": 1,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        },
+        {
+            "command": "cat /transformers/reports/doc_tests_gpu_${{ env.split_keys }}/failures_short.txt",
+            "count": 1,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        },
+        {
+            "command": "cat /transformers/reports/${{ inputs.machine_type }}_run_models_gpu_${{ matrix.folders }}_test_reports/failures_short.txt",
+            "count": 1,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        },
+        {
+            "command": "cat /transformers/reports/${{ matrix.machine_type }}_tests_gpu_${{ matrix.folders }}/failures_short.txt",
+            "count": 6,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        },
+        {
+            "command": "cat /workspace/transformers/reports/${{ matrix.machine_type }}_run_torch_cuda_extensions_gpu_test_reports/failures_short.txt",
+            "count": 4,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        },
+        {
+            "command": "cat /transformers/reports/${{ matrix.machine_type }}_run_torch_cuda_extensions_gpu_test_reports/failures_short.txt",
+            "count": 2,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        },
+        {
+            "command": "cat /transformers/reports/${{ matrix.machine_type }}_run_models_gpu_${{ matrix.folders }}_test_reports/failures_short.txt",
+            "count": 4,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        },
+        {
+            "command": "cat /transformers/reports/${{ matrix.machine_type }}_run_examples_gpu_test_reports/failures_short.txt",
+            "count": 2,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        },
+        {
+            "command": "cat /transformers/reports/${{ matrix.machine_type }}_run_pipelines_torch_gpu_test_reports/failures_short.txt",
+            "count": 2,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        },
+        {
+            "command": "cat /transformers/reports/${{ matrix.machine_type }}_run_pipelines_tf_gpu_test_reports/failures_short.txt\n",
+            "count": 1,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        },
+        {
+            "command": "cat /transformers/reports/${{ matrix.machine_type }}_run_quantization_torch_gpu_${{ matrix.folders }}_test_reports/failures_short.txt",
+            "count": 1,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        },
+        {
+            "command": "cat reports/tests_pipeline_${{ matrix.module }}_cuda_stats.txt\ncat reports/tests_pipeline_${{ matrix.module }}_cuda_failures_short.txt\n",
+            "count": 2,
+            "repos": [
+                "huggingface/diffusers"
+            ]
+        },
+        {
+            "command": "cat reports/tests_torch_${{ matrix.module }}_cuda_stats.txt\ncat reports/tests_torch_${{ matrix.module }}_cuda_failures_short.txt\n",
+            "count": 1,
+            "repos": [
+                "huggingface/diffusers"
+            ]
+        },
+        {
+            "command": "cat reports/tests_torch_lora_cuda_stats.txt\ncat reports/tests_torch_lora_cuda_failures_short.txt\n",
+            "count": 1,
+            "repos": [
+                "huggingface/diffusers"
+            ]
+        },
+        {
+            "command": "cat reports/tests_flax_tpu_stats.txt\ncat reports/tests_flax_tpu_failures_short.txt\n",
+            "count": 2,
+            "repos": [
+                "huggingface/diffusers"
+            ]
+        },
+        {
+            "command": "cat reports/tests_onnx_cuda_stats.txt\ncat reports/tests_onnx_cuda_failures_short.txt\n",
+            "count": 2,
+            "repos": [
+                "huggingface/diffusers"
+            ]
+        },
+        {
+            "command": "cat reports/tests_torch_mps_failures_short.txt",
+            "count": 2,
+            "repos": [
+                "huggingface/diffusers"
+            ]
+        },
+        {
+            "command": "cat reports/${{ matrix.modules }}_tests_cpu_stats.txt\ncat reports/${{ matrix.modules }}_tests_cpu_failures_short.txt\n",
+            "count": 1,
+            "repos": [
+                "huggingface/diffusers"
+            ]
+        },
+        {
+            "command": "cat reports/tests_${{ matrix.config.report }}_failures_short.txt",
+            "count": 4,
+            "repos": [
+                "huggingface/diffusers"
+            ]
+        },
+        {
+            "command": "cat reports/tests_${{ matrix.config.report }}_failures_short.txt\ncat reports/tests_models_lora_${{ matrix.config.report }}_failures_short.txt\n",
+            "count": 1,
+            "repos": [
+                "huggingface/diffusers"
+            ]
+        },
+        {
+            "command": "cat reports/tests_torch_cuda_stats.txt\ncat reports/tests_torch_cuda_failures_short.txt\n",
+            "count": 1,
+            "repos": [
+                "huggingface/diffusers"
+            ]
+        },
+        {
+            "command": "cat reports/tests_peft_cuda_stats.txt\ncat reports/tests_peft_cuda_failures_short.txt\ncat reports/tests_peft_cuda_models_lora_failures_short.txt\n",
+            "count": 1,
+            "repos": [
+                "huggingface/diffusers"
+            ]
+        },
+        {
+            "command": "cat reports/tests_torch_compile_cuda_failures_short.txt",
+            "count": 1,
+            "repos": [
+                "huggingface/diffusers"
+            ]
+        },
+        {
+            "command": "cat reports/tests_torch_xformers_cuda_failures_short.txt",
+            "count": 1,
+            "repos": [
+                "huggingface/diffusers"
+            ]
+        },
+        {
+            "command": "cat reports/examples_torch_cuda_stats.txt\ncat reports/examples_torch_cuda_failures_short.txt\n",
+            "count": 1,
+            "repos": [
+                "huggingface/diffusers"
+            ]
+        }
+    ],
+    "Test suite reports artifacts": [
+        {
+            "command": "actions/upload-artifact@v4",
+            "count": 2,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        },
+        {
+            "command": "actions/upload-artifact@v2",
+            "count": 21,
+            "repos": [
+                "huggingface/diffusers"
+            ]
+        },
+        {
+            "command": "actions/upload-artifact@v3",
+            "count": 1,
+            "repos": [
+                "huggingface/diffusers"
+            ]
+        }
+    ],
+    "Update clone": [
+        {
+            "command": "git fetch && git checkout ${{ github.sha }}\n",
+            "count": 7,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        },
+        {
+            "command": "git fetch && git checkout ${{ github.sha }}",
+            "count": 15,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        },
+        {
+            "command": "git fetch && git checkout ${{ inputs.sha }}",
+            "count": 3,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        },
+        {
+            "command": "git fetch && git fetch origin pull/${{ github.event.pull_request.number }}/head:pull/${{ github.event.pull_request.number }}/merge && git checkout pull/${{ github.event.pull_request.number }}/merge",
+            "count": 1,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        },
+        {
+            "command": "source activate accelerate\ngit clone https://github.com/huggingface/accelerate;\ncd accelerate;\ngit checkout ${{ github.sha }};\npip install -e . --no-deps\npip install pytest-reportlog tabulate\n",
+            "count": 2,
+            "repos": [
+                "huggingface/accelerate"
+            ]
+        },
+        {
+            "command": "source activate accelerate;\ngit clone https://github.com/huggingface/accelerate;\ncd accelerate;\ngit checkout ${{ github.sha }};\npip install -e .[testing,test_trackers] -U;\npip install pytest-reportlog tabulate\n",
+            "count": 1,
+            "repos": [
+                "huggingface/accelerate"
+            ]
+        }
+    ],
+    "Reinstall transformers in edit mode (remove the one installed during docker image build)": [
+        {
+            "command": "python3 -m pip uninstall -y transformers && python3 -m pip install -e .",
+            "count": 25,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        },
+        {
+            "command": "python3 -m pip uninstall -y transformers && python3 -m pip install -e .[flax]",
+            "count": 1,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        }
+    ],
+    "Set up Docker Buildx": [
+        {
+            "command": "docker/setup-buildx-action@v3",
+            "count": 11,
+            "repos": [
+                "huggingface/transformers",
+                "huggingface/dataset-viewer"
+            ]
+        },
+        {
+            "command": "docker/setup-buildx-action@v2",
+            "count": 11,
+            "repos": [
+                "huggingface/transformers",
+                "huggingface/accelerate",
+                "huggingface/safetensors"
+            ]
+        },
+        {
+            "command": "docker/setup-buildx-action@v1",
+            "count": 6,
+            "repos": [
+                "huggingface/trl",
+                "huggingface/autotrain-advanced",
+                "huggingface/diffusers"
+            ]
+        }
+    ],
+    "Check out code": [
+        {
+            "command": "actions/checkout@v4",
+            "count": 16,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        },
+        {
+            "command": "actions/checkout@v3",
+            "count": 4,
+            "repos": [
+                "huggingface/trl",
+                "huggingface/diffusers"
+            ]
+        }
+    ],
+    "Login to DockerHub": [
+        {
+            "command": "docker/login-action@v3",
+            "count": 10,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        },
+        {
+            "command": "docker/login-action@v2",
+            "count": 10,
+            "repos": [
+                "huggingface/transformers",
+                "huggingface/accelerate"
+            ]
+        },
+        {
+            "command": "docker/login-action@v1",
+            "count": 2,
+            "repos": [
+                "huggingface/trl"
+            ]
+        }
+    ],
+    "Build and push": [
+        {
+            "command": "docker/build-push-action@v5",
+            "count": 8,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        },
+        {
+            "command": "docker/build-push-action@v3",
+            "count": 5,
+            "repos": [
+                "huggingface/transformers",
+                "huggingface/diffusers"
+            ]
+        }
+    ],
+    "Get Base Image": [
+        {
+            "command": "echo \"base_image=$(python3 -c 'import os; from utils.past_ci_versions import past_versions_testing; base_image = past_versions_testing[\"pytorch\"][os.environ[\"framework_version\"]][\"base_image\"]; print(base_image)')\" >> $GITHUB_OUTPUT\n",
+            "count": 1,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        },
+        {
+            "command": "echo \"base_image=$(python3 -c 'import os; from utils.past_ci_versions import past_versions_testing; base_image = past_versions_testing[\"tensorflow\"][os.environ[\"framework_version\"]][\"base_image\"]; print(base_image)')\" >> $GITHUB_OUTPUT\n",
+            "count": 1,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        }
+    ],
+    "Step 2": [
+        {
+            "command": "actions/checkout@v4",
+            "count": 5,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        },
+        {
+            "command": "actions/download-artifact@v4",
+            "count": 1,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        },
+        {
+            "command": "PyO3/maturin-action@v1",
+            "count": 2,
+            "repos": [
+                "huggingface/tokenizers",
+                "huggingface/safetensors"
+            ]
+        },
+        {
+            "command": "denoland/setup-deno@v1",
+            "count": 2,
+            "repos": [
+                "huggingface/blog",
+                "huggingface/doc-builder"
+            ]
+        },
+        {
+            "command": "echo \"version=$(python setup.py --version)\" >> $GITHUB_OUTPUT",
+            "count": 1,
+            "repos": [
+                "huggingface/accelerate"
+            ]
+        },
+        {
+            "command": "actions/checkout@v2",
+            "count": 7,
+            "repos": [
+                "huggingface/optimum",
+                "huggingface/doc-builder",
+                "huggingface/optimum-habana",
+                "huggingface/optimum-intel"
+            ]
+        },
+        {
+            "command": "stoplightio/spectral-action@latest",
+            "count": 1,
+            "repos": [
+                "huggingface/dataset-viewer"
+            ]
+        },
+        {
+            "command": "actions/setup-node@v3",
+            "count": 1,
+            "repos": [
+                "huggingface/doc-builder"
+            ]
+        },
+        {
+            "command": "actions/checkout@v3",
+            "count": 2,
+            "repos": [
+                "huggingface/optimum-graphcore",
+                "huggingface/hffs"
+            ]
+        },
+        {
+            "command": "actions/setup-python@v1",
+            "count": 3,
+            "repos": [
+                "huggingface/ml-agents"
+            ]
+        },
+        {
+            "command": "actions/setup-python@v2",
+            "count": 1,
+            "repos": [
+                "huggingface/ml-agents"
+            ]
+        },
+        {
+            "command": "actions/download-artifact@v3",
+            "count": 2,
+            "repos": [
+                "huggingface/simulate"
+            ]
+        },
+        {
+            "command": "actions/setup-python@v4",
+            "count": 1,
+            "repos": [
+                "huggingface/simulate"
+            ]
+        },
+        {
+            "command": "pypa/cibuildwheel@v2.10.1",
+            "count": 1,
+            "repos": [
+                "huggingface/simulate"
+            ]
+        }
+    ],
+    "Set up Python 3.8": [
+        {
+            "command": "actions/setup-python@v4",
+            "count": 2,
+            "repos": [
+                "huggingface/transformers",
+                "huggingface/evaluate"
+            ]
+        },
+        {
+            "command": "actions/setup-python@v5",
+            "count": 1,
+            "repos": [
+                "huggingface/datasets"
+            ]
+        },
+        {
+            "command": "actions/setup-python@v3",
+            "count": 2,
+            "repos": [
+                "huggingface/accelerate",
+                "huggingface/simulate"
+            ]
+        },
+        {
+            "command": "actions/setup-python@v2",
+            "count": 3,
+            "repos": [
+                "huggingface/huggingface_hub",
+                "huggingface/collaborative-training-auth",
+                "huggingface/course"
+            ]
+        }
+    ],
+    "Install": [
+        {
+            "command": "sudo apt-get -y update && sudo apt-get install -y libsndfile1-dev espeak-ng cmake\npip install --upgrade pip\npython -m pip install -U .[sklearn,torch,testing,sentencepiece,torch-speech,vision,timm,video,tf-cpu]\npip install tensorflow_probability\npython -m pip install -U 'natten<0.15.0'\n",
+            "count": 1,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        },
+        {
+            "command": "python3 -m pip install --no-cache-dir git+https://github.com/huggingface/accelerate@main#egg=accelerate\n",
+            "count": 3,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        },
+        {
+            "command": "python -m venv .env\nsource .env/bin/activate\npip install -U pip\npip install pytest requests setuptools_rust numpy pyarrow datasets\npip install -e .[dev]\n",
+            "count": 1,
+            "repos": [
+                "huggingface/tokenizers"
+            ]
+        },
+        {
+            "command": "pip install -U pip\npip install .[dev]\n",
+            "count": 1,
+            "repos": [
+                "huggingface/safetensors"
+            ]
+        },
+        {
+            "command": "pip install -U pip\npip install .[numpy,tensorflow]\npip install ${{ matrix.version.torch }}\n",
+            "count": 1,
+            "repos": [
+                "huggingface/safetensors"
+            ]
+        }
+    ],
+    "Send message to Slack": [
+        {
+            "command": "pip install slack_sdk\npython utils/notification_service_doc_tests.py\n",
+            "count": 1,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        },
+        {
+            "command": "pip install slack_sdk\npip show slack_sdk\npython utils/notification_service.py \"${{ needs.setup.outputs.matrix }}\"\n",
+            "count": 3,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        },
+        {
+            "command": "pip install slack_sdk\npip show slack_sdk\npython utils/notification_service.py \"${{ needs.setup_gpu.outputs.matrix }}\"\n",
+            "count": 1,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        },
+        {
+            "command": "sudo apt-get install -y curl\npip install slack_sdk\npip show slack_sdk\npython utils/notification_service.py \"${{ needs.setup.outputs.matrix }}\"\n",
+            "count": 1,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        },
+        {
+            "command": "sudo apt-get install -y curl\npip install huggingface_hub\npip install slack_sdk\npip show slack_sdk\npython utils/notification_service.py \"${{ inputs.folder_slices }}\"\n",
+            "count": 1,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        }
+    ],
+    "Echo input and matrix info": [
+        {
+            "command": "echo \"${{ inputs.folder_slices }}\"\necho \"${{ matrix.folders }}\"\necho \"${{ toJson(fromJson(inputs.folder_slices)[inputs.slice_id]) }}\"\n",
+            "count": 1,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        },
+        {
+            "command": "echo \"${{ matrix.folders }}\"\n",
+            "count": 1,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        }
+    ],
+    "Echo folder ${{ matrix.folders }}": [
+        {
+            "command": "echo \"${{ matrix.folders }}\"\nmatrix_folders=${{ matrix.folders }}\nmatrix_folders=${matrix_folders/'models/'/'models_'}\necho \"$matrix_folders\"\necho \"matrix_folders=$matrix_folders\" >> $GITHUB_ENV\n",
+            "count": 8,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        },
+        {
+            "command": "echo \"${{ matrix.folders }}\"\necho \"${{ fromJson(needs.setup_gpu.outputs.test_map)[matrix.folders] }}\"\nmatrix_folders=${{ matrix.folders }}\nmatrix_folders=${matrix_folders/'models/'/'models_'}\necho \"$matrix_folders\"\necho \"matrix_folders=$matrix_folders\" >> $GITHUB_ENV\n",
+            "count": 1,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        },
+        {
+            "command": "echo \"${{ matrix.folders }}\"\necho \"${{ fromJson(needs.setup.outputs.test_map)[matrix.folders] }}\"\nmatrix_folders=${{ matrix.folders }}\nmatrix_folders=${matrix_folders/'models/'/'models_'}\necho \"$matrix_folders\"\necho \"matrix_folders=$matrix_folders\" >> $GITHUB_ENV\n",
+            "count": 2,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        },
+        {
+            "command": "echo \"${{ matrix.folders }}\"\nmatrix_folders=${{ matrix.folders }}\nmatrix_folders=${matrix_folders/'quantization/'/'quantization_'}\necho \"$matrix_folders\"\necho \"matrix_folders=$matrix_folders\" >> $GITHUB_ENV\n",
+            "count": 1,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        }
+    ],
+    "NVIDIA-SMI": [
+        {
+            "command": "nvidia-smi\n",
+            "count": 27,
+            "repos": [
+                "huggingface/transformers",
+                "huggingface/diffusers"
+            ]
+        },
+        {
+            "command": "nvidia-smi",
+            "count": 2,
+            "repos": [
+                "huggingface/diffusers"
+            ]
+        }
+    ],
+    "Environment": [
+        {
+            "command": "python3 utils/print_env.py\n",
+            "count": 20,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        },
+        {
+            "command": "python utils/print_env.py\n",
+            "count": 14,
+            "repos": [
+                "huggingface/transformers",
+                "huggingface/diffusers"
+            ]
+        },
+        {
+            "command": "python utils/print_env.py",
+            "count": 4,
+            "repos": [
+                "huggingface/diffusers"
+            ]
+        },
+        {
+            "command": "${CONDA_RUN} python utils/print_env.py\n",
+            "count": 2,
+            "repos": [
+                "huggingface/diffusers"
+            ]
+        },
+        {
+            "command": "python utils/print_env.py\necho $(git --version)\n",
+            "count": 1,
+            "repos": [
+                "huggingface/diffusers"
+            ]
+        },
+        {
+            "command": "python -m venv /opt/venv && export PATH=\"/opt/venv/bin:$PATH\"\npython utils/print_env.py\n",
+            "count": 7,
+            "repos": [
+                "huggingface/diffusers"
+            ]
+        }
+    ],
+    "Run all tests on GPU": [
+        {
+            "command": "python3 -m pytest -rsfE -v --make-reports=${{ inputs.machine_type }}_run_models_gpu_${{ matrix.folders }}_test_reports tests/${{ matrix.folders }}",
+            "count": 1,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        },
+        {
+            "command": "python3 -m pytest -v --make-reports=${{ matrix.machine_type }}_tests_gpu_${{ matrix.folders }} tests/${{ matrix.folders }}",
+            "count": 4,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        },
+        {
+            "command": "python -m pytest -v --make-reports=${{ matrix.machine_type }}_run_torch_cuda_extensions_gpu_test_reports tests/deepspeed tests/extended\n",
+            "count": 2,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        },
+        {
+            "command": "python3 -m pytest -v --make-reports=${{ matrix.machine_type }}_run_torch_cuda_extensions_gpu_test_reports tests/deepspeed tests/extended\n",
+            "count": 1,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        },
+        {
+            "command": "export CUDA_VISIBLE_DEVICES=\"$(python3 utils/set_cuda_devices_for_ci.py --test_folder ${{ matrix.folders }})\"\necho $CUDA_VISIBLE_DEVICES\npython3 -m pytest -v -rsfE --make-reports=${{ matrix.machine_type }}_run_models_gpu_${{ matrix.folders }}_test_reports tests/${{ matrix.folders }}\n",
+            "count": 1,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        },
+        {
+            "command": "python3 -m pytest -v --make-reports=${{ matrix.machine_type }}_run_models_gpu_${{ matrix.folders }}_test_reports tests/${{ matrix.folders }} -m \"not not_device_test\"",
+            "count": 2,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        },
+        {
+            "command": "python3 -m pytest -v --make-reports=${{ matrix.machine_type }}_run_torch_cuda_extensions_gpu_test_reports tests/deepspeed tests/extended -m \"not not_device_test\"",
+            "count": 1,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        }
+    ],
+    "Run test": [
+        {
+            "command": "mkdir -p /transformers/reports/${{ inputs.machine_type }}_run_models_gpu_${{ matrix.folders }}_test_reports\necho \"hello\" > /transformers/reports/${{ inputs.machine_type }}_run_models_gpu_${{ matrix.folders }}_test_reports/hello.txt\necho \"${{ inputs.machine_type }}_run_models_gpu_${{ matrix.folders }}_test_reports\"\n",
+            "count": 1,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        },
+        {
+            "command": "docker run \\\n-v $PWD:/root/workspace \\\n--workdir=/root/workspace \\\n--runtime=habana \\\n-e HABANA_VISIBLE_DEVICES=all \\\n-e OMPI_MCA_btl_vader_single_copy_mechanism=none \\\n--cap-add=sys_nice \\\n--net=host \\\n--ipc=host \\\nvault.habana.ai/gaudi-docker/1.16.0/ubuntu22.04/habanalabs/pytorch-installer-2.2.2:latest \\\n/bin/bash tests/ci/albert_xxl_1x.sh\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum-habana"
+            ]
+        }
+    ],
+    "Get changed files": [
+        {
+            "command": "tj-actions/changed-files@3f54ebb830831fc121d3263c1857cfbdc310cdb9",
+            "count": 1,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        },
+        {
+            "command": "tj-actions/changed-files@v41",
+            "count": 2,
+            "repos": [
+                "huggingface/transformers",
+                "huggingface/accelerate"
+            ]
+        }
+    ],
+    "Tailscale": [
+        {
+            "command": "huggingface/tailscale-action@v1",
+            "count": 1,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        },
+        {
+            "command": "huggingface/tailscale-action@main",
+            "count": 2,
+            "repos": [
+                "huggingface/transformers",
+                "huggingface/diffusers"
+            ]
+        },
+        {
+            "command": "tailscale/github-action@main",
+            "count": 1,
+            "repos": [
+                "huggingface/dataset-viewer"
+            ]
+        }
+    ],
+    "Checkout repository": [
+        {
+            "command": "actions/checkout@v1",
+            "count": 4,
+            "repos": [
+                "huggingface/transformers",
+                "huggingface/tokenizers",
+                "huggingface/huggingface_hub"
+            ]
+        },
+        {
+            "command": "actions/checkout@v3",
+            "count": 8,
+            "repos": [
+                "huggingface/tokenizers",
+                "huggingface/diffusers",
+                "huggingface/safetensors"
+            ]
+        },
+        {
+            "command": "actions/checkout@v2",
+            "count": 4,
+            "repos": [
+                "huggingface/tokenizers",
+                "huggingface/evaluate",
+                "huggingface/safetensors"
+            ]
+        },
+        {
+            "command": "actions/checkout@v4",
+            "count": 4,
+            "repos": [
+                "huggingface/datasets",
+                "huggingface/dataset-viewer"
+            ]
+        }
+    ],
+    "Install miniconda": [
+        {
+            "command": "conda-incubator/setup-miniconda@v2",
+            "count": 4,
+            "repos": [
+                "huggingface/transformers",
+                "huggingface/tokenizers",
+                "huggingface/huggingface_hub",
+                "huggingface/safetensors"
+            ]
+        },
+        {
+            "command": "yum install -y wget openssl-devel\nexport FILENAME=Miniconda3-py${{ matrix.python }}_23.5.2-0-Linux-x86_64.sh\nwget https://repo.anaconda.com/miniconda/$FILENAME\nsha256sum $FILENAME | awk '$1==\"${{ matrix.checksum}}\"{print\"good to go\"}'\nbash $FILENAME -b -p $HOME/miniconda\nsource $HOME/miniconda/bin/activate\n",
+            "count": 2,
+            "repos": [
+                "huggingface/tokenizers",
+                "huggingface/safetensors"
+            ]
+        },
+        {
+            "command": "conda-incubator/setup-miniconda@v3",
+            "count": 1,
+            "repos": [
+                "huggingface/datasets"
+            ]
+        }
+    ],
+    "Setup conda env": [
+        {
+            "command": "conda install -c defaults anaconda-client conda-build\n",
+            "count": 3,
+            "repos": [
+                "huggingface/transformers",
+                "huggingface/datasets",
+                "huggingface/huggingface_hub"
+            ]
+        },
+        {
+            "command": "conda install setuptools-rust\nconda install -c defaults anaconda-client conda-build\n",
+            "count": 2,
+            "repos": [
+                "huggingface/tokenizers",
+                "huggingface/safetensors"
+            ]
+        },
+        {
+            "command": "source $HOME/miniconda/bin/activate\nconda install setuptools-rust\nconda install -c defaults anaconda-client conda-build\n",
+            "count": 2,
+            "repos": [
+                "huggingface/tokenizers",
+                "huggingface/safetensors"
+            ]
+        }
+    ],
+    "Extract version": [
+        {
+            "command": "echo \"TRANSFORMERS_VERSION=`python setup.py --version`\" >> $GITHUB_ENV",
+            "count": 1,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        },
+        {
+            "command": "echo \"TOKENIZERS_VERSION=`grep -m 1 version Cargo.toml | grep -e '\".*\"' -o | tr -d '\"' | sed s/-/./ `\" >> $GITHUB_ENV",
+            "count": 1,
+            "repos": [
+                "huggingface/tokenizers"
+            ]
+        },
+        {
+            "command": "source $HOME/miniconda/bin/activate\necho \"TOKENIZERS_VERSION=`grep -m 1 version Cargo.toml | grep -e '\".*\"' -o | tr -d '\"' | sed s/-/./ `\" >> $GITHUB_ENV\n",
+            "count": 1,
+            "repos": [
+                "huggingface/tokenizers"
+            ]
+        },
+        {
+            "command": "echo \"DATASETS_VERSION=`python setup.py --version`\" >> $GITHUB_ENV",
+            "count": 1,
+            "repos": [
+                "huggingface/datasets"
+            ]
+        },
+        {
+            "command": "echo \"HUB_VERSION=`python setup.py --version`\" >> $GITHUB_ENV",
+            "count": 1,
+            "repos": [
+                "huggingface/huggingface_hub"
+            ]
+        },
+        {
+            "command": "echo \"SAFETENSORS_VERSION=`grep -m 1 version Cargo.toml | grep -e '\".*\"' -o | tr -d '\"' | sed s/-/./ `\" >> $GITHUB_ENV",
+            "count": 1,
+            "repos": [
+                "huggingface/safetensors"
+            ]
+        },
+        {
+            "command": "source $HOME/miniconda/bin/activate\necho \"SAFETENSORS_VERSION=`grep -m 1 version Cargo.toml | grep -e '\".*\"' -o | tr -d '\"' | sed s/-/./ `\" >> $GITHUB_ENV\n",
+            "count": 1,
+            "repos": [
+                "huggingface/safetensors"
+            ]
+        }
+    ],
+    "Build conda packages": [
+        {
+            "command": "conda info\nconda list\nconda-build .github/conda\n",
+            "count": 1,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        },
+        {
+            "command": "conda info\nconda list\nconda-build .github/conda --python=${{ matrix.python }}\n",
+            "count": 2,
+            "repos": [
+                "huggingface/tokenizers",
+                "huggingface/safetensors"
+            ]
+        },
+        {
+            "command": "source $HOME/miniconda/bin/activate\nconda info\nconda list\nconda-build .github/conda --python=${{ matrix.python }}\n",
+            "count": 2,
+            "repos": [
+                "huggingface/tokenizers",
+                "huggingface/safetensors"
+            ]
+        },
+        {
+            "command": "conda info\nconda build .github/conda\n",
+            "count": 1,
+            "repos": [
+                "huggingface/datasets"
+            ]
+        },
+        {
+            "command": "conda info\nconda-build .github/conda\n",
+            "count": 1,
+            "repos": [
+                "huggingface/huggingface_hub"
+            ]
+        }
+    ],
+    "Upload to Anaconda": [
+        {
+            "command": "anaconda upload `conda-build .github/conda --output` --force",
+            "count": 1,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        },
+        {
+            "command": "anaconda upload `conda-build .github/conda --output` --force\n",
+            "count": 3,
+            "repos": [
+                "huggingface/tokenizers",
+                "huggingface/huggingface_hub",
+                "huggingface/safetensors"
+            ]
+        },
+        {
+            "command": "source $HOME/miniconda/bin/activate\nanaconda upload `conda-build .github/conda --output` --force\n",
+            "count": 2,
+            "repos": [
+                "huggingface/tokenizers",
+                "huggingface/safetensors"
+            ]
+        },
+        {
+            "command": "anaconda upload `conda build .github/conda --output -c conda-forge` --force\n",
+            "count": 1,
+            "repos": [
+                "huggingface/datasets"
+            ]
+        }
+    ],
+    "Cleanup": [
+        {
+            "command": "rm -rf tests/__pycache__\nrm -rf tests/models/__pycache__\nrm -rf reports\n",
+            "count": 7,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        },
+        {
+            "command": "gh extension install actions/gh-actions-cache\n\nREPO=${{ github.repository }}\n\necho \"Fetching list of cache key\"\ncacheKeysForPR=$(gh actions-cache list -R $REPO | cut -f 1 )\n\n## Setting this to not fail the workflow while deleting cache keys. \nset +e\necho \"Deleting caches...\"\nfor cacheKey in $cacheKeysForPR\ndo\n    gh actions-cache delete $cacheKey -R $REPO --confirm\ndone\necho \"Done\"\n",
+            "count": 1,
+            "repos": [
+                "huggingface/trl"
+            ]
+        }
+    ],
+    "Identify models to test": [
+        {
+            "command": "echo \"matrix=$(python3 -c 'import os; tests = os.getcwd(); model_tests = os.listdir(os.path.join(tests, \"models\")); d1 = sorted(list(filter(os.path.isdir, os.listdir(tests)))); d2 = sorted(list(filter(os.path.isdir, [f\"models/{x}\" for x in model_tests]))); d1.remove(\"models\"); d = d2 + d1; print(d)')\" >> $GITHUB_OUTPUT\n",
+            "count": 2,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        },
+        {
+            "command": "cd tests\necho \"matrix=$(python3 -c 'import os; tests = os.getcwd(); model_tests = os.listdir(os.path.join(tests, \"models\")); d1 = sorted(list(filter(os.path.isdir, os.listdir(tests)))); d2 = sorted(list(filter(os.path.isdir, [f\"models/{x}\" for x in model_tests]))); d1.remove(\"models\"); d = d2 + d1; print(d)')\" >> $GITHUB_OUTPUT\n",
+            "count": 1,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        },
+        {
+            "command": "echo \"folder_slices=$(python3 ../utils/split_model_tests.py --num_splits ${{ env.NUM_SLICES }})\" >> $GITHUB_OUTPUT\necho \"slice_ids=$(python3 -c 'd = list(range(${{ env.NUM_SLICES }})); print(d)')\" >> $GITHUB_OUTPUT\n",
+            "count": 1,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        }
+    ],
+    "Pre build DeepSpeed *again*": [
+        {
+            "command": "python3 -m pip uninstall -y deepspeed\nrm -rf DeepSpeed\ngit clone https://github.com/microsoft/DeepSpeed && cd DeepSpeed && rm -rf build\nDS_BUILD_CPU_ADAM=1 DS_BUILD_FUSED_ADAM=1 python3 -m pip install . --global-option=\"build_ext\" --global-option=\"-j8\" --no-cache -v --disable-pip-version-check\n",
+            "count": 2,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        },
+        {
+            "command": "python3 -m pip uninstall -y deepspeed\nDS_BUILD_CPU_ADAM=1 DS_BUILD_FUSED_ADAM=1 python3 -m pip install deepspeed --global-option=\"build_ext\" --global-option=\"-j8\" --no-cache -v --disable-pip-version-check\n",
+            "count": 2,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        },
+        {
+            "command": "python3 -m pip uninstall -y deepspeed\nDS_DISABLE_NINJA=1 DS_BUILD_CPU_ADAM=1 DS_BUILD_FUSED_ADAM=1 python3 -m pip install deepspeed --global-option=\"build_ext\" --global-option=\"-j8\" --no-cache -v --disable-pip-version-check\n",
+            "count": 1,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        }
+    ],
+    "Preliminary job status": [
+        {
+            "command": "echo \"Setup status: ${{ needs.setup.result }}\"\n",
+            "count": 3,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        },
+        {
+            "command": "echo \"Runner availability: ${{ needs.check_runner_status.result }}\"\necho \"Setup status: ${{ needs.setup_gpu.result }}\"\necho \"Runner status: ${{ needs.check_runners.result }}\"\n",
+            "count": 1,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        },
+        {
+            "command": "echo \"Runner availability: ${{ needs.check_runner_status.result }}\"\necho \"Runner status: ${{ needs.check_runners.result }}\"\necho \"Setup status: ${{ needs.setup.result }}\"\n",
+            "count": 1,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        },
+        {
+            "command": "echo \"Setup status: ${{ inputs.setup_status }}\"\n",
+            "count": 1,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        }
+    ],
+    "Step 3": [
+        {
+            "command": "actions/download-artifact@v4",
+            "count": 4,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        },
+        {
+            "command": "sudo chown -R $(whoami):$(id -ng) ~/.cargo/",
+            "count": 3,
+            "repos": [
+                "huggingface/tokenizers"
+            ]
+        },
+        {
+            "command": "pip install -U twine",
+            "count": 2,
+            "repos": [
+                "huggingface/tokenizers",
+                "huggingface/safetensors"
+            ]
+        },
+        {
+            "command": "deno run --allow-net --allow-read ./validate-yaml.ts",
+            "count": 1,
+            "repos": [
+                "huggingface/blog"
+            ]
+        },
+        {
+            "command": "pre-commit/action@v2.0.3",
+            "count": 1,
+            "repos": [
+                "huggingface/trl"
+            ]
+        },
+        {
+            "command": "sudo npm i -g typescript@4.0.3",
+            "count": 1,
+            "repos": [
+                "huggingface/widgets-server"
+            ]
+        },
+        {
+            "command": "actions/checkout@v2",
+            "count": 4,
+            "repos": [
+                "huggingface/optimum",
+                "huggingface/doc-builder"
+            ]
+        },
+        {
+            "command": "actions/setup-node@v3",
+            "count": 1,
+            "repos": [
+                "huggingface/doc-builder"
+            ]
+        },
+        {
+            "command": "deno run --allow-env --allow-net --allow-run --allow-read ./delete-old-prs.ts",
+            "count": 1,
+            "repos": [
+                "huggingface/doc-builder"
+            ]
+        },
+        {
+            "command": "actions/setup-dotnet@v1",
+            "count": 1,
+            "repos": [
+                "huggingface/ml-agents"
+            ]
+        },
+        {
+            "command": "actions/setup-node@v2-beta",
+            "count": 2,
+            "repos": [
+                "huggingface/ml-agents"
+            ]
+        },
+        {
+            "command": "actions/setup-ruby@v1",
+            "count": 1,
+            "repos": [
+                "huggingface/ml-agents"
+            ]
+        },
+        {
+            "command": "python utils/validate_meta_files.py",
+            "count": 1,
+            "repos": [
+                "huggingface/ml-agents"
+            ]
+        },
+        {
+            "command": "actions/cache@v3",
+            "count": 2,
+            "repos": [
+                "huggingface/simulate"
+            ]
+        },
+        {
+            "command": "pypa/gh-action-pypi-publish@v1.5.1",
+            "count": 1,
+            "repos": [
+                "huggingface/simulate"
+            ]
+        },
+        {
+            "command": "actions/checkout@v3",
+            "count": 1,
+            "repos": [
+                "huggingface/diffusers"
+            ]
+        },
+        {
+            "command": "Swatinem/rust-cache@v2",
+            "count": 3,
+            "repos": [
+                "huggingface/safetensors"
+            ]
+        }
+    ],
+    "Step 5": [
+        {
+            "command": "geekyeggo/delete-artifact@v2",
+            "count": 1,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        },
+        {
+            "command": "actions/download-artifact@v4",
+            "count": 2,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        },
+        {
+            "command": "${{ matrix.ls || 'ls -lh' }} dist/",
+            "count": 2,
+            "repos": [
+                "huggingface/tokenizers",
+                "huggingface/safetensors"
+            ]
+        },
+        {
+            "command": "tsc --version",
+            "count": 1,
+            "repos": [
+                "huggingface/widgets-server"
+            ]
+        },
+        {
+            "command": ".venv/bin/ruff check tests src contrib",
+            "count": 1,
+            "repos": [
+                "huggingface/huggingface_hub"
+            ]
+        },
+        {
+            "command": "pip install twine\n",
+            "count": 3,
+            "repos": [
+                "huggingface/huggingface_hub",
+                "huggingface/huggingface_sb3",
+                "huggingface/evaluate"
+            ]
+        },
+        {
+            "command": "actions/checkout@v2",
+            "count": 2,
+            "repos": [
+                "huggingface/optimum"
+            ]
+        },
+        {
+            "command": "pre-commit/action@v2.0.0",
+            "count": 3,
+            "repos": [
+                "huggingface/ml-agents"
+            ]
+        },
+        {
+            "command": "actions/upload-artifact@v2",
+            "count": 1,
+            "repos": [
+                "huggingface/simulate"
+            ]
+        },
+        {
+            "command": "lscpu",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum-intel"
+            ]
+        }
+    ],
+    "Step 7": [
+        {
+            "command": "geekyeggo/delete-artifact@v2",
+            "count": 1,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        },
+        {
+            "command": "actions/download-artifact@v4",
+            "count": 1,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        },
+        {
+            "command": ".venv/bin/python utils/check_contrib_list.py",
+            "count": 1,
+            "repos": [
+                "huggingface/huggingface_hub"
+            ]
+        },
+        {
+            "command": "actions/checkout@v2",
+            "count": 2,
+            "repos": [
+                "huggingface/optimum"
+            ]
+        }
+    ],
+    "Check Runner Status": [
+        {
+            "command": "python utils/check_self_hosted_runner.py --target_runners amd-mi210-single-gpu-ci-runner-docker --token ${{ secrets.ACCESS_REPO_INFO_TOKEN }}",
+            "count": 1,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        },
+        {
+            "command": "python utils/check_self_hosted_runner.py --target_runners hf-amd-mi210-ci-1gpu-1,hf-amd-mi250-ci-1gpu-1,hf-amd-mi300-ci-1gpu-1 --token ${{ secrets.ACCESS_REPO_INFO_TOKEN }}",
+            "count": 1,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        }
+    ],
+    "Report fetched tests": [
+        {
+            "command": "actions/upload-artifact@v4",
+            "count": 2,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        },
+        {
+            "command": "actions/upload-artifact@v3",
+            "count": 1,
+            "repos": [
+                "huggingface/diffusers"
+            ]
+        }
+    ],
+    "Run all non-slow selected tests on GPU": [
+        {
+            "command": "python3 -m pytest -n 2 --dist=loadfile -v --make-reports=${{ matrix.machine_type }}_run_models_gpu_${{ matrix.folders }}_test_reports ${{ fromJson(needs.setup_gpu.outputs.test_map)[matrix.folders] }} -m \"not not_device_test\"\n",
+            "count": 1,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        },
+        {
+            "command": "python3 -m pytest -n 2 --dist=loadfile -v --make-reports=${{ matrix.machine_type }}_tests_gpu_${{ matrix.folders }} ${{ fromJson(needs.setup.outputs.test_map)[matrix.folders] }}\n",
+            "count": 2,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        },
+        {
+            "command": "python -m pytest -n 1 --dist=loadfile -v --make-reports=${{ matrix.machine_type }}_run_torch_cuda_extensions_gpu_test_reports tests/deepspeed tests/extended\n",
+            "count": 2,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        }
+    ],
+    "Step 4": [
+        {
+            "command": "actions/checkout@v4",
+            "count": 2,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        },
+        {
+            "command": "node --version",
+            "count": 1,
+            "repos": [
+                "huggingface/widgets-server"
+            ]
+        },
+        {
+            "command": "python setup.py sdist bdist_wheel",
+            "count": 3,
+            "repos": [
+                "huggingface/huggingface_hub",
+                "huggingface/huggingface_sb3",
+                "huggingface/evaluate"
+            ]
+        },
+        {
+            "command": "actions/checkout@v2",
+            "count": 2,
+            "repos": [
+                "huggingface/optimum"
+            ]
+        },
+        {
+            "command": "actions/setup-node@v3",
+            "count": 1,
+            "repos": [
+                "huggingface/doc-builder"
+            ]
+        },
+        {
+            "command": "mkdir build_dir\nunzip doc-build-artifact.zip -d build_dir\n",
+            "count": 1,
+            "repos": [
+                "huggingface/doc-builder"
+            ]
+        },
+        {
+            "command": "sudo npm install -g markdown-link-check",
+            "count": 2,
+            "repos": [
+                "huggingface/ml-agents"
+            ]
+        },
+        {
+            "command": "actions/setup-dotnet@v1",
+            "count": 1,
+            "repos": [
+                "huggingface/ml-agents"
+            ]
+        },
+        {
+            "command": "actions/upload-artifact@v3",
+            "count": 1,
+            "repos": [
+                "huggingface/simulate"
+            ]
+        },
+        {
+            "command": "free -h",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum-intel"
+            ]
+        },
+        {
+            "command": "tailscale/github-action@v1",
+            "count": 1,
+            "repos": [
+                "huggingface/safetensors"
+            ]
+        }
+    ],
+    "Step 6": [
+        {
+            "command": "actions/download-artifact@v4",
+            "count": 2,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        },
+        {
+            "command": "actions/checkout@v4",
+            "count": 1,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        },
+        {
+            "command": "twine check --strict dist/*",
+            "count": 2,
+            "repos": [
+                "huggingface/tokenizers",
+                "huggingface/safetensors"
+            ]
+        },
+        {
+            "command": ".venv/bin/ruff format --check tests src contrib",
+            "count": 1,
+            "repos": [
+                "huggingface/huggingface_hub"
+            ]
+        },
+        {
+            "command": "actions/checkout@v2",
+            "count": 2,
+            "repos": [
+                "huggingface/optimum"
+            ]
+        },
+        {
+            "command": "actions/upload-artifact@v3",
+            "count": 3,
+            "repos": [
+                "huggingface/optimum-graphcore",
+                "huggingface/optimum-habana",
+                "huggingface/optimum-intel"
+            ]
+        },
+        {
+            "command": "pip freeze",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum-intel"
+            ]
+        }
+    ],
+    "Was setup changed": [
+        {
+            "command": "for file in ${{ steps.changed-files.outputs.all_changed_files }}; do\n  if [ `basename \"${file}\"` = \"setup.py\" ]; then\n    echo \"changed=1\" >> $GITHUB_OUTPUT\n  fi\ndone\n",
+            "count": 1,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        },
+        {
+            "command": "for file in ${{ steps.changed-files.outputs.all_changed_files }}; do\n  if [ `basename \"${file}\"` == \"setup.py\" ]; then\n    echo \"changed=1\" >> $GITHUB_OUTPUT\n  fi\ndone\n",
+            "count": 1,
+            "repos": [
+                "huggingface/accelerate"
+            ]
+        }
+    ],
+    "Run examples tests on GPU": [
+        {
+            "command": "pip install -r examples/pytorch/_tests_requirements.txt\npython3 -m pytest -v --make-reports=${{ matrix.machine_type }}_run_examples_gpu_test_reports examples/pytorch -m \"not not_device_test\"\n",
+            "count": 1,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        },
+        {
+            "command": "pip install -r examples/pytorch/_tests_requirements.txt\npython3 -m pytest -v --make-reports=${{ matrix.machine_type }}_run_examples_gpu_test_reports examples/pytorch\n",
+            "count": 1,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        }
+    ],
+    "Run all pipeline tests on GPU": [
+        {
+            "command": "python3 -m pytest -n 1 -v --dist=loadfile --make-reports=${{ matrix.machine_type }}_run_pipelines_torch_gpu_test_reports tests/pipelines -m \"not not_device_test\"\n",
+            "count": 1,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        },
+        {
+            "command": "python3 -m pytest -n 1 -v --dist=loadfile --make-reports=${{ matrix.machine_type }}_run_pipelines_torch_gpu_test_reports tests/pipelines\n",
+            "count": 1,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        },
+        {
+            "command": "python3 -m pytest -n 1 -v --dist=loadfile --make-reports=${{ matrix.machine_type }}_run_pipelines_tf_gpu_test_reports tests/pipelines\n",
+            "count": 1,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        }
+    ],
+    "Install transformers": [
+        {
+            "command": "pip install transformers",
+            "count": 2,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        },
+        {
+            "command": "source activate accelerate;\ngit clone https://github.com/huggingface/transformers --depth 1;\ncd transformers;\npip install .[torch,deepspeed-testing];\ncd ..;\n",
+            "count": 1,
+            "repos": [
+                "huggingface/accelerate"
+            ]
+        }
+    ],
+    "Upload artifact": [
+        {
+            "command": "actions/upload-artifact@v4",
+            "count": 2,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        },
+        {
+            "command": "actions/upload-artifact@v3",
+            "count": 1,
+            "repos": [
+                "huggingface/tokenizers"
+            ]
+        }
+    ],
+    "Setup Python": [
+        {
+            "command": "actions/setup-python@v4",
+            "count": 3,
+            "repos": [
+                "huggingface/transformers",
+                "huggingface/trl",
+                "huggingface/diffusers"
+            ]
+        },
+        {
+            "command": "actions/setup-python@v3",
+            "count": 1,
+            "repos": [
+                "huggingface/accelerate"
+            ]
+        },
+        {
+            "command": "actions/setup-python@v5",
+            "count": 1,
+            "repos": [
+                "huggingface/dataset-viewer"
+            ]
+        },
+        {
+            "command": "actions/setup-python@v1",
+            "count": 1,
+            "repos": [
+                "huggingface/diffusers"
+            ]
+        }
+    ],
+    "Install requirements": [
+        {
+            "command": "pip install PyGithub\n",
+            "count": 5,
+            "repos": [
+                "huggingface/transformers",
+                "huggingface/trl",
+                "huggingface/accelerate",
+                "huggingface/dataset-viewer",
+                "huggingface/diffusers"
+            ]
+        },
+        {
+            "command": "pip install -r requirements.txt\n",
+            "count": 1,
+            "repos": [
+                "huggingface/pytorch-image-models"
+            ]
+        },
+        {
+            "command": "pip install '.[cron]'",
+            "count": 1,
+            "repos": [
+                "huggingface/hf_benchmarks"
+            ]
+        },
+        {
+            "command": "pip install -r requirements.txt",
+            "count": 1,
+            "repos": [
+                "huggingface/model-evaluator"
+            ]
+        }
+    ],
+    "Close stale issues": [
+        {
+            "command": "python scripts/stale.py\n",
+            "count": 1,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        },
+        {
+            "command": "python scripts/stale.py",
+            "count": 1,
+            "repos": [
+                "huggingface/trl"
+            ]
+        },
+        {
+            "command": "python utils/stale.py",
+            "count": 1,
+            "repos": [
+                "huggingface/accelerate"
+            ]
+        },
+        {
+            "command": "python tools/stale.py\n",
+            "count": 1,
+            "repos": [
+                "huggingface/dataset-viewer"
+            ]
+        },
+        {
+            "command": "python utils/stale.py\n",
+            "count": 1,
+            "repos": [
+                "huggingface/diffusers"
+            ]
+        }
+    ],
+    "Checkout code": [
+        {
+            "command": "actions/checkout@v4",
+            "count": 18,
+            "repos": [
+                "huggingface/transformers",
+                "huggingface/pytorch-image-models",
+                "huggingface/tokenizers",
+                "huggingface/datasets",
+                "huggingface/trl",
+                "huggingface/accelerate",
+                "huggingface/huggingface_hub",
+                "huggingface/optimum",
+                "huggingface/dataset-viewer",
+                "huggingface/optimum-habana",
+                "huggingface/evaluate",
+                "huggingface/optimum-intel",
+                "huggingface/diffusers"
+            ]
+        },
+        {
+            "command": "actions/checkout@v2",
+            "count": 4,
+            "repos": [
+                "huggingface/hf_benchmarks",
+                "huggingface/model-evaluator",
+                "huggingface/setfit"
+            ]
+        },
+        {
+            "command": "actions/checkout@v3",
+            "count": 1,
+            "repos": [
+                "huggingface/setfit"
+            ]
+        }
+    ],
+    "Setup environment": [
+        {
+            "command": "pip install --upgrade pip\npip install datasets pandas==2.0.3\npip install .[torch,tf,flax]\n",
+            "count": 1,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        },
+        {
+            "command": "pip uninstall -y doc-builder\ncd doc-builder\ngit pull origin main\npip install .\npip install black\ncd ..\n",
+            "count": 3,
+            "repos": [
+                "huggingface/optimum",
+                "huggingface/optimum-intel"
+            ]
+        },
+        {
+            "command": "cd doc-builder\npip install .\ncd ..\n\ncd accelerate\npip install .[dev]\ncd ..\n",
+            "count": 1,
+            "repos": [
+                "huggingface/doc-builder"
+            ]
+        },
+        {
+            "command": "source .venv/bin/activate\n$PIP_OR_UV uninstall doc-builder\ncd doc-builder\ngit pull origin main\n$PIP_OR_UV install .\ncd ..\n\nif [[ -n \"${{ inputs.package_path }}\" ]]\nthen\n  cd ${{ inputs.package_path }}\n  $PIP_OR_UV install .[dev]\nelif [[ \"${{ inputs.additional_args }}\" != *\"--not_python_module\"* ]];\nthen\n  cd ${{ inputs.package }}\n  $PIP_OR_UV install .[dev]\nfi\ncd ..\n",
+            "count": 1,
+            "repos": [
+                "huggingface/doc-builder"
+            ]
+        },
+        {
+            "command": "source .venv/bin/activate\n$PIP_OR_UV uninstall doc-builder\ncd doc-builder\ngit pull origin ${{ inputs.doc_builder_revision }}\n$PIP_OR_UV install .\ncd ..\n\nif [[ -n \"${{ inputs.package_path }}\" ]]\nthen\n  cd ${{ inputs.package_path }}\n  $PIP_OR_UV install .[dev]\nelif [[ \"${{ inputs.additional_args }}\" != *\"--not_python_module\"* ]];\nthen\n  cd ${{ inputs.package }}\n  $PIP_OR_UV install .[dev]\nfi\ncd ..\n",
+            "count": 1,
+            "repos": [
+                "huggingface/doc-builder"
+            ]
+        },
+        {
+            "command": "pip install black\ncd doc-builder\npip install .\ncd ..\necho \"current_work_dir=$(pwd)\" >> $GITHUB_OUTPUT\n",
+            "count": 1,
+            "repos": [
+                "huggingface/doc-builder"
+            ]
+        },
+        {
+            "command": "python -m venv doc_builder_venv --clear\nsource doc_builder_venv/bin/activate\npip uninstall -y doc-builder\ncd doc-builder\ngit pull origin main\npip install .\npip install .[quality]\ncd ..\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum-graphcore"
+            ]
+        },
+        {
+            "command": "pip uninstall -y doc-builder\ncd doc-builder\ngit pull origin main\npip install .\ncd ..\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum-habana"
+            ]
+        },
+        {
+            "command": "pip install --upgrade pip\npip install datasets pandas\npip install .[torch]\n",
+            "count": 1,
+            "repos": [
+                "huggingface/diffusers"
+            ]
+        }
+    ],
+    "Update metadata": [
+        {
+            "command": "python utils/update_metadata.py --token ${{ secrets.LYSANDRE_HF_TOKEN }} --commit_sha ${{ github.sha }}\n",
+            "count": 1,
+            "repos": [
+                "huggingface/transformers"
+            ]
+        },
+        {
+            "command": "python utils/update_metadata.py --commit_sha ${{ github.sha }}\n",
+            "count": 1,
+            "repos": [
+                "huggingface/diffusers"
+            ]
+        }
+    ],
+    "Install Python": [
+        {
+            "command": "actions/setup-python@v1",
+            "count": 2,
+            "repos": [
+                "huggingface/tokenizers"
+            ]
+        },
+        {
+            "command": "actions/setup-python@v4",
+            "count": 3,
+            "repos": [
+                "huggingface/tokenizers",
+                "huggingface/safetensors"
+            ]
+        },
+        {
+            "command": "actions/setup-python@v2",
+            "count": 3,
+            "repos": [
+                "huggingface/tokenizers",
+                "huggingface/safetensors"
+            ]
+        }
+    ],
+    "Conda info": [
+        {
+            "command": "conda info",
+            "count": 2,
+            "repos": [
+                "huggingface/tokenizers",
+                "huggingface/safetensors"
+            ]
+        },
+        {
+            "command": "source $HOME/miniconda/bin/activate\nconda info\n",
+            "count": 2,
+            "repos": [
+                "huggingface/tokenizers",
+                "huggingface/safetensors"
+            ]
+        }
+    ],
+    "Upload wheels": [
+        {
+            "command": "pip install awscli\naws s3 sync --exact-timestamps ./bindings/python/dist \"s3://tokenizers-releases/python/$DIST_DIR\"\n\n# - uses: actions/upload-artifact@v3\n#   working-directory: ./bindings/python/\n#   with:\n#     name: pypi_files\n#     path: dist\n",
+            "count": 1,
+            "repos": [
+                "huggingface/tokenizers"
+            ]
+        },
+        {
+            "command": "pip install awscli\naws s3 sync --exact-timestamps ./bindings/python/dist \"s3://tokenizers-releases/python/$DIST_DIR\"\n",
+            "count": 1,
+            "repos": [
+                "huggingface/tokenizers"
+            ]
+        },
+        {
+            "command": "actions/upload-artifact@v3",
+            "count": 1,
+            "repos": [
+                "huggingface/simulate"
+            ]
+        },
+        {
+            "command": "pip install awscli\naws s3 sync --exact-timestamps ./bindings/python/dist \"s3://safetensors-releases/python/$DIST_DIR\"\n\n# - uses: actions/upload-artifact@v3\n#   working-directory: ./bindings/python/\n#   with:\n#     name: pypi_files\n#     path: dist\n",
+            "count": 1,
+            "repos": [
+                "huggingface/safetensors"
+            ]
+        },
+        {
+            "command": "pip install awscli\naws s3 sync --exact-timestamps ./bindings/python/dist \"s3://safetensors-releases/python/$DIST_DIR\"\n",
+            "count": 1,
+            "repos": [
+                "huggingface/safetensors"
+            ]
+        }
+    ],
+    "Retrieve all wheels": [
+        {
+            "command": "pip install awscli\naws s3 sync \"s3://tokenizers-releases/python/$DIST_DIR\" ./bindings/python/dist\n",
+            "count": 1,
+            "repos": [
+                "huggingface/tokenizers"
+            ]
+        },
+        {
+            "command": "pip install awscli\naws s3 sync \"s3://safetensors-releases/python/$DIST_DIR\" ./bindings/python/dist\n",
+            "count": 1,
+            "repos": [
+                "huggingface/safetensors"
+            ]
+        }
+    ],
+    "Upload to PyPi": [
+        {
+            "command": "pip install twine\ntwine upload dist/* -u __token__ -p \"$PYPI_TOKEN\"\n",
+            "count": 2,
+            "repos": [
+                "huggingface/tokenizers",
+                "huggingface/safetensors"
+            ]
+        },
+        {
+            "command": "twine upload dist/* -u __token__ -p \"$PYPI_TOKEN\"\n",
+            "count": 2,
+            "repos": [
+                "huggingface/huggingface_hub",
+                "huggingface/evaluate"
+            ]
+        },
+        {
+            "command": "twine upload dist/* -u __token__ -p \"$PYPI_TOKEN\"",
+            "count": 1,
+            "repos": [
+                "huggingface/huggingface_sb3"
+            ]
+        }
+    ],
+    "Build": [
+        {
+            "command": "actions-rs/cargo@v1",
+            "count": 2,
+            "repos": [
+                "huggingface/tokenizers"
+            ]
+        },
+        {
+            "command": "cargo build --all-targets --verbose",
+            "count": 1,
+            "repos": [
+                "huggingface/safetensors"
+            ]
+        }
+    ],
+    "Lint with RustFmt": [
+        {
+            "command": "actions-rs/cargo@v1",
+            "count": 2,
+            "repos": [
+                "huggingface/tokenizers"
+            ]
+        },
+        {
+            "command": "cargo fmt -- --check",
+            "count": 1,
+            "repos": [
+                "huggingface/safetensors"
+            ]
+        }
+    ],
+    "Lint with Clippy": [
+        {
+            "command": "actions-rs/cargo@v1",
+            "count": 2,
+            "repos": [
+                "huggingface/tokenizers"
+            ]
+        },
+        {
+            "command": "cargo clippy --all-targets --all-features -- -D warnings",
+            "count": 2,
+            "repos": [
+                "huggingface/safetensors"
+            ]
+        }
+    ],
+    "Run Audit": [
+        {
+            "command": "actions-rs/cargo@v1",
+            "count": 2,
+            "repos": [
+                "huggingface/tokenizers"
+            ]
+        },
+        {
+            "command": "cargo audit -D warnings",
+            "count": 1,
+            "repos": [
+                "huggingface/safetensors"
+            ]
+        },
+        {
+            "command": "cargo audit -D warnings --ignore RUSTSEC-2021-0145",
+            "count": 1,
+            "repos": [
+                "huggingface/safetensors"
+            ]
+        }
+    ],
+    "Check style": [
+        {
+            "command": "source .env/bin/activate\nmake check-style\n",
+            "count": 1,
+            "repos": [
+                "huggingface/tokenizers"
+            ]
+        },
+        {
+            "command": "pip install .[quality]\nblack --check --line-length 119 --target-version py35 py_src/safetensors tests\n",
+            "count": 1,
+            "repos": [
+                "huggingface/safetensors"
+            ]
+        }
+    ],
+    "Run tests": [
+        {
+            "command": "source .env/bin/activate\nmake test\n",
+            "count": 1,
+            "repos": [
+                "huggingface/tokenizers"
+            ]
+        },
+        {
+            "command": "pytest contrib/${{ matrix.contrib }}",
+            "count": 1,
+            "repos": [
+                "huggingface/huggingface_hub"
+            ]
+        },
+        {
+            "command": "source ../.venv/bin/activate\nPYTEST=\"python -m pytest --cov=./huggingface_hub --cov-report=xml:../coverage.xml --vcr-record=none --reruns 5 --reruns-delay 1 --only-rerun '(OSError|Timeout|HTTPError.*502|HTTPError.*504||not less than or equal to 0.01)'\"\n\ncase \"${{ matrix.test_name }}\" in\n\n  \"Repository only\")\n    # Run repo tests concurrently\n    PYTEST=\"$PYTEST ../tests -k 'TestRepository' -n 4\"\n    echo $PYTEST\n    eval $PYTEST\n  ;;\n\n  \"Everything else\")\n    PYTEST=\"$PYTEST ../tests -k 'not TestRepository' -n 4\"\n    echo $PYTEST\n    eval $PYTEST\n  ;;\n\n  lfs)\n    eval \"RUN_GIT_LFS_TESTS=1 $PYTEST ../tests -k 'HfLargefilesTest'\"\n  ;;\n\n\n  fastai)\n    eval \"$PYTEST ../tests/test_fastai*\"\n  ;;\n\n  tensorflow)\n    # Cannot be on same line since '_tf*' checks if tensorflow is NOT imported by default\n    eval \"$PYTEST ../tests/test_tf*\"\n    eval \"$PYTEST ../tests/test_keras*\"\n    eval \"$PYTEST ../tests/test_serialization.py\"\n  ;;\n\n  torch)\n  eval \"$PYTEST ../tests/test_hub_mixin*\"\n  eval \"$PYTEST ../tests/test_serialization.py\"\n  ;;\n\nesac\n",
+            "count": 1,
+            "repos": [
+                "huggingface/huggingface_hub"
+            ]
+        },
+        {
+            "command": "..\\.venv\\Scripts\\activate\npython -m pytest -n 4 --cov=./huggingface_hub --cov-report=xml:../coverage.xml --vcr-record=none --reruns 5 --reruns-delay 1 --only-rerun '(OSError|Timeout|HTTPError.*502|HTTPError.*504|not less than or equal to 0.01)' ../tests\n",
+            "count": 1,
+            "repos": [
+                "huggingface/huggingface_hub"
+            ]
+        },
+        {
+            "command": "docker run \\\n-v $PWD:/root/workspace \\\n--workdir=/root/workspace \\\n--runtime=habana \\\n-e HABANA_VISIBLE_DEVICES=all \\\n-e OMPI_MCA_btl_vader_single_copy_mechanism=none \\\n--cap-add=sys_nice \\\n--net=host \\\n--ipc=host \\\nvault.habana.ai/gaudi-docker/1.16.0/ubuntu22.04/habanalabs/pytorch-installer-2.2.2:latest \\\n/bin/bash tests/ci/fast_tests.sh\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum-habana"
+            ]
+        },
+        {
+            "command": "docker run \\\n-v $PWD:/root/workspace \\\n--workdir=/root/workspace \\\n--runtime=habana \\\n-e HABANA_VISIBLE_DEVICES=all \\\n-e OMPI_MCA_btl_vader_single_copy_mechanism=none \\\n--cap-add=sys_nice \\\n--net=host \\\n--ipc=host \\\nvault.habana.ai/gaudi-docker/1.16.0/ubuntu22.04/habanalabs/pytorch-installer-2.2.2:latest \\\n/bin/bash tests/ci/fast_tests_diffusers.sh\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum-habana"
+            ]
+        },
+        {
+            "command": "docker run \\\n-v $PWD:/root/workspace \\\n--workdir=/root/workspace \\\n--runtime=habana \\\n-e HABANA_VISIBLE_DEVICES=all \\\n-e OMPI_MCA_btl_vader_single_copy_mechanism=none \\\n--cap-add=sys_nice \\\n--net=host \\\n--ipc=host \\\nvault.habana.ai/gaudi-docker/1.16.0/ubuntu22.04/habanalabs/pytorch-installer-2.2.2:latest \\\n/bin/bash tests/ci/example_diff_tests.sh\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum-habana"
+            ]
+        },
+        {
+            "command": "docker run \\\n-v $PWD:/root/workspace \\\n--workdir=/root/workspace \\\n--runtime=habana \\\n-e HABANA_VISIBLE_DEVICES=all \\\n-e OMPI_MCA_btl_vader_single_copy_mechanism=none \\\n--cap-add=sys_nice \\\n--net=host \\\n--ipc=host \\\nvault.habana.ai/gaudi-docker/1.16.0/ubuntu22.04/habanalabs/pytorch-installer-2.2.2:latest \\\n/bin/bash tests/ci/slow_tests_diffusers.sh\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum-habana"
+            ]
+        },
+        {
+            "command": "docker run \\\n-v $PWD:/root/workspace \\\n--workdir=/root/workspace \\\n--runtime=habana \\\n-e HABANA_VISIBLE_DEVICES=all \\\n-e OMPI_MCA_btl_vader_single_copy_mechanism=none \\\n--cap-add=sys_nice \\\n--net=host \\\n--ipc=host \\\nvault.habana.ai/gaudi-docker/1.16.0/ubuntu22.04/habanalabs/pytorch-installer-2.2.2:latest \\\n/bin/bash tests/ci/slow_tests_deepspeed.sh\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum-habana"
+            ]
+        },
+        {
+            "command": "docker run \\\n-v $PWD:/root/workspace \\\n--workdir=/root/workspace \\\n--runtime=habana \\\n-e HABANA_VISIBLE_DEVICES=all \\\n-e OMPI_MCA_btl_vader_single_copy_mechanism=none \\\n--cap-add=sys_nice \\\n--net=host \\\n--ipc=host \\\nvault.habana.ai/gaudi-docker/1.16.0/ubuntu22.04/habanalabs/pytorch-installer-2.2.2:latest \\\n/bin/bash tests/ci/slow_tests_8x.sh\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum-habana"
+            ]
+        },
+        {
+            "command": "docker run \\\n-v $PWD:/root/workspace \\\n--workdir=/root/workspace \\\n--runtime=habana \\\n-e HABANA_VISIBLE_DEVICES=all \\\n-e OMPI_MCA_btl_vader_single_copy_mechanism=none \\\n--cap-add=sys_nice \\\n--net=host \\\n--ipc=host \\\nvault.habana.ai/gaudi-docker/1.16.0/ubuntu22.04/habanalabs/pytorch-installer-2.2.2:latest \\\n/bin/bash tests/ci/slow_tests_1x.sh\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum-habana"
+            ]
+        },
+        {
+            "command": "docker run \\\n-v $PWD:/root/workspace \\\n--workdir=/root/workspace \\\n--runtime=habana \\\n-e HABANA_VISIBLE_DEVICES=all \\\n-e OMPI_MCA_btl_vader_single_copy_mechanism=none \\\n--cap-add=sys_nice \\\n--net=host \\\n--ipc=host \\\nvault.habana.ai/gaudi-docker/1.16.0/ubuntu22.04/habanalabs/pytorch-installer-2.2.2:latest \\\nmake slow_tests_text_generation_example TOKEN=${{ secrets.TEXT_GENERATION_CI_HUB_TOKEN }}\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum-habana"
+            ]
+        },
+        {
+            "command": "docker run \\\n-v $PWD:/root/workspace \\\n--workdir=/root/workspace \\\n--runtime=habana \\\n-e HABANA_VISIBLE_DEVICES=all \\\n-e OMPI_MCA_btl_vader_single_copy_mechanism=none \\\n--cap-add=sys_nice \\\n--net=host \\\n--ipc=host \\\nvault.habana.ai/gaudi-docker/1.16.0/ubuntu22.04/habanalabs/pytorch-installer-2.2.2:latest \\\n/bin/bash tests/ci/slow_tests_trl.sh\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum-habana"
+            ]
+        },
+        {
+            "command": "docker run \\\n-v $PWD:/root/workspace \\\n--workdir=/root/workspace \\\n--runtime=habana \\\n-e HABANA_VISIBLE_DEVICES=all \\\n-e OMPI_MCA_btl_vader_single_copy_mechanism=none \\\n--cap-add=sys_nice \\\n--net=host \\\n--ipc=host \\\nvault.habana.ai/gaudi-docker/1.16.0/ubuntu22.04/habanalabs/pytorch-installer-2.2.2:latest \\\n/bin/bash optimum-habana/tests/ci/sentence_transformers.sh\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum-habana"
+            ]
+        },
+        {
+            "command": "docker run \\\n-v $PWD:/root/workspace \\\n--workdir=/root/workspace \\\n--runtime=habana \\\n-e HABANA_VISIBLE_DEVICES=all \\\n-e OMPI_MCA_btl_vader_single_copy_mechanism=none \\\n-e GAUDI2_CI=1 \\\n--cap-add=sys_nice \\\n--net=host \\\n--ipc=host \\\nvault.habana.ai/gaudi-docker/1.16.0/ubuntu22.04/habanalabs/pytorch-installer-2.2.2:latest \\\n/bin/bash tests/ci/slow_tests_diffusers.sh\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum-habana"
+            ]
+        },
+        {
+            "command": "docker run \\\n-v $PWD:/root/workspace \\\n--workdir=/root/workspace \\\n--runtime=habana \\\n-e HABANA_VISIBLE_DEVICES=all \\\n-e OMPI_MCA_btl_vader_single_copy_mechanism=none \\\n-e GAUDI2_CI=1 \\\n--cap-add=sys_nice \\\n--net=host \\\n--ipc=host \\\nvault.habana.ai/gaudi-docker/1.16.0/ubuntu22.04/habanalabs/pytorch-installer-2.2.2:latest \\\n/bin/bash tests/ci/slow_tests_deepspeed.sh\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum-habana"
+            ]
+        },
+        {
+            "command": "docker run \\\n-v $PWD:/root/workspace \\\n--workdir=/root/workspace \\\n--runtime=habana \\\n-e HABANA_VISIBLE_DEVICES=all \\\n-e OMPI_MCA_btl_vader_single_copy_mechanism=none \\\n-e GAUDI2_CI=1 \\\n--cap-add=sys_nice \\\n--net=host \\\n--ipc=host \\\nvault.habana.ai/gaudi-docker/1.16.0/ubuntu22.04/habanalabs/pytorch-installer-2.2.2:latest \\\nmake slow_tests_fsdp TOKEN=${{ secrets.TEXT_GENERATION_CI_HUB_TOKEN }}\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum-habana"
+            ]
+        },
+        {
+            "command": "docker run \\\n-v $PWD:/root/workspace \\\n--workdir=/root/workspace \\\n--runtime=habana \\\n-e HABANA_VISIBLE_DEVICES=all \\\n-e OMPI_MCA_btl_vader_single_copy_mechanism=none \\\n-e GAUDI2_CI=1 \\\n--cap-add=sys_nice \\\n--net=host \\\n--ipc=host \\\nvault.habana.ai/gaudi-docker/1.16.0/ubuntu22.04/habanalabs/pytorch-installer-2.2.2:latest \\\n/bin/bash tests/ci/slow_tests_8x.sh\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum-habana"
+            ]
+        },
+        {
+            "command": "docker run \\\n-v $PWD:/root/workspace \\\n--workdir=/root/workspace \\\n--runtime=habana \\\n-e HABANA_VISIBLE_DEVICES=all \\\n-e OMPI_MCA_btl_vader_single_copy_mechanism=none \\\n-e GAUDI2_CI=1 \\\n-e RUN_ALBERT_XXL_1X=1 \\\n--cap-add=sys_nice \\\n--net=host \\\n--ipc=host \\\nvault.habana.ai/gaudi-docker/1.16.0/ubuntu22.04/habanalabs/pytorch-installer-2.2.2:latest \\\n/bin/bash tests/ci/slow_tests_1x.sh\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum-habana"
+            ]
+        },
+        {
+            "command": "docker run \\\n-v $PWD:/root/workspace \\\n--workdir=/root/workspace \\\n--runtime=habana \\\n-e HABANA_VISIBLE_DEVICES=all \\\n-e OMPI_MCA_btl_vader_single_copy_mechanism=none \\\n-e GAUDI2_CI=1 \\\n--cap-add=sys_nice \\\n--net=host \\\n--ipc=host \\\nvault.habana.ai/gaudi-docker/1.16.0/ubuntu22.04/habanalabs/pytorch-installer-2.2.2:latest \\\nmake slow_tests_text_generation_example TOKEN=${{ secrets.TEXT_GENERATION_CI_HUB_TOKEN }}\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum-habana"
+            ]
+        },
+        {
+            "command": "docker run \\\n-v $PWD:/root/workspace \\\n--workdir=/root/workspace \\\n--runtime=habana \\\n-e HABANA_VISIBLE_DEVICES=all \\\n-e OMPI_MCA_btl_vader_single_copy_mechanism=none \\\n-e GAUDI2_CI=1 \\\n--cap-add=sys_nice \\\n--net=host \\\n--ipc=host \\\nvault.habana.ai/gaudi-docker/1.16.0/ubuntu22.04/habanalabs/pytorch-installer-2.2.2:latest \\\n/bin/bash tests/ci/slow_tests_trl.sh\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum-habana"
+            ]
+        },
+        {
+            "command": "docker run \\\n-v $PWD:/root/workspace \\\n--workdir=/root/workspace \\\n--runtime=habana \\\n-e HABANA_VISIBLE_DEVICES=all \\\n-e GAUDI2_CI=1 \\\n-e OMPI_MCA_btl_vader_single_copy_mechanism=none \\\n--cap-add=sys_nice \\\n--net=host \\\n--ipc=host \\\nvault.habana.ai/gaudi-docker/1.16.0/ubuntu22.04/habanalabs/pytorch-installer-2.2.2:latest \\\n/bin/bash optimum-habana/tests/ci/sentence_transformers.sh\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum-habana"
+            ]
+        },
+        {
+            "command": "pytest \"$PY_TEST\"",
+            "count": 1,
+            "repos": [
+                "huggingface/diffusers"
+            ]
+        },
+        {
+            "command": "cargo test\npytest --benchmark-json output.json benches/\n",
+            "count": 1,
+            "repos": [
+                "huggingface/safetensors"
+            ]
+        },
+        {
+            "command": "cargo test\npip install .[testing]\npytest -sv tests/\n",
+            "count": 1,
+            "repos": [
+                "huggingface/safetensors"
+            ]
+        }
+    ],
+    "Run Tests": [
+        {
+            "command": "make test",
+            "count": 1,
+            "repos": [
+                "huggingface/tokenizers"
+            ]
+        },
+        {
+            "command": "make ${{ matrix.test-kind }}\n",
+            "count": 1,
+            "repos": [
+                "huggingface/accelerate"
+            ]
+        },
+        {
+            "command": "python -m pytest -n 1 --dist=loadfile -s -v ./tests/",
+            "count": 1,
+            "repos": [
+                "huggingface/doc-builder"
+            ]
+        },
+        {
+            "command": "make test\n",
+            "count": 1,
+            "repos": [
+                "huggingface/simulate"
+            ]
+        },
+        {
+            "command": "cargo test --verbose",
+            "count": 1,
+            "repos": [
+                "huggingface/safetensors"
+            ]
+        }
+    ],
+    "Set up Python": [
+        {
+            "command": "actions/setup-python@v5",
+            "count": 1,
+            "repos": [
+                "huggingface/datasets"
+            ]
+        },
+        {
+            "command": "actions/setup-python@v2",
+            "count": 7,
+            "repos": [
+                "huggingface/huggingface_hub",
+                "huggingface/huggingface_sb3",
+                "huggingface/evaluate",
+                "huggingface/ml-agents"
+            ]
+        },
+        {
+            "command": "actions/setup-python@v4",
+            "count": 11,
+            "repos": [
+                "huggingface/evaluate",
+                "huggingface/diffusers",
+                "huggingface/hffs"
+            ]
+        }
+    ],
+    "Check quality": [
+        {
+            "command": "ruff check tests src benchmarks metrics utils setup.py # linter\nruff format --check tests src benchmarks metrics utils setup.py # formatter\n",
+            "count": 1,
+            "repos": [
+                "huggingface/datasets"
+            ]
+        },
+        {
+            "command": "black --check --line-length 119 --target-version py36 tests src metrics comparisons measurements\nisort --check-only tests src metrics comparisons measurements\nflake8 tests src metrics\n",
+            "count": 1,
+            "repos": [
+                "huggingface/evaluate"
+            ]
+        },
+        {
+            "command": "make quality",
+            "count": 2,
+            "repos": [
+                "huggingface/diffusers"
+            ]
+        },
+        {
+            "command": "black --check tests src\nruff tests src\n",
+            "count": 1,
+            "repos": [
+                "huggingface/hffs"
+            ]
+        }
+    ],
+    "Install uv": [
+        {
+            "command": "pip install --upgrade uv",
+            "count": 2,
+            "repos": [
+                "huggingface/datasets"
+            ]
+        },
+        {
+            "command": "pip install -U uv\nuv venv\n",
+            "count": 2,
+            "repos": [
+                "huggingface/doc-builder"
+            ]
+        }
+    ],
+    "Install dependencies (latest versions)": [
+        {
+            "command": "uv pip install --system -r additional-tests-requirements.txt --no-deps",
+            "count": 1,
+            "repos": [
+                "huggingface/datasets"
+            ]
+        },
+        {
+            "command": "uv pip install --system --upgrade pyarrow huggingface-hub dill",
+            "count": 1,
+            "repos": [
+                "huggingface/datasets"
+            ]
+        }
+    ],
+    "Test with pytest": [
+        {
+            "command": "python -m pytest -rfExX -m ${{ matrix.test }} -n 2 --dist loadfile -sv ./tests/\n",
+            "count": 2,
+            "repos": [
+                "huggingface/datasets"
+            ]
+        },
+        {
+            "command": "make test\n",
+            "count": 3,
+            "repos": [
+                "huggingface/trl"
+            ]
+        },
+        {
+            "command": "python -m pytest -n auto -m \"not run_in_series\" onnxruntime\npython -m pytest -m \"run_in_series\" onnxruntime\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum"
+            ]
+        },
+        {
+            "command": "pytest tests/cli -s -vvvv --durations=0\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum"
+            ]
+        },
+        {
+            "command": "python -m pytest -s -v -x fx/optimization\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum"
+            ]
+        },
+        {
+            "command": "python -m pytest -s -vvvv utils\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum"
+            ]
+        },
+        {
+            "command": "python -m pytest -n 2 --dist loadfile -sv ./tests/ --ignore=./tests/test_trainer_evaluator_parity.py\n",
+            "count": 1,
+            "repos": [
+                "huggingface/evaluate"
+            ]
+        },
+        {
+            "command": "python -m pytest -rfExX -sv ./tests/\n",
+            "count": 1,
+            "repos": [
+                "huggingface/hffs"
+            ]
+        }
+    ],
+    "Checkout PR branch": [
+        {
+            "command": "gh pr checkout $PR_NUMBER",
+            "count": 1,
+            "repos": [
+                "huggingface/trl"
+            ]
+        },
+        {
+            "command": "actions/checkout@v4",
+            "count": 1,
+            "repos": [
+                "huggingface/diffusers"
+            ]
+        }
+    ],
+    "Set up Python ${{ matrix.python-version }}": [
+        {
+            "command": "actions/setup-python@v4",
+            "count": 5,
+            "repos": [
+                "huggingface/trl",
+                "huggingface/simulate"
+            ]
+        },
+        {
+            "command": "actions/setup-python@v2",
+            "count": 3,
+            "repos": [
+                "huggingface/trl",
+                "huggingface/huggingface_hub"
+            ]
+        }
+    ],
+    "Generate Report": [
+        {
+            "command": "pip install slack_sdk tabulate\npython scripts/log_reports.py >> $GITHUB_STEP_SUMMARY\n",
+            "count": 1,
+            "repos": [
+                "huggingface/trl"
+            ]
+        },
+        {
+            "command": "pip install slack_sdk tabulate\npython utils/log_reports.py >> $GITHUB_STEP_SUMMARY\n",
+            "count": 4,
+            "repos": [
+                "huggingface/accelerate"
+            ]
+        },
+        {
+            "command": "pip install tabulate;\npython utils/log_reports.py >> $GITHUB_STEP_SUMMARY\n",
+            "count": 2,
+            "repos": [
+                "huggingface/accelerate"
+            ]
+        },
+        {
+            "command": "source activate accelerate;\npython utils/log_reports.py >> $GITHUB_STEP_SUMMARY\n",
+            "count": 1,
+            "repos": [
+                "huggingface/accelerate"
+            ]
+        },
+        {
+            "command": "pip install tabulate;\npython utils/log_reports.py >> $GITHUB_STEP_SUMMARY",
+            "count": 1,
+            "repos": [
+                "huggingface/accelerate"
+            ]
+        },
+        {
+            "command": "python utils/log_reports.py >> $GITHUB_STEP_SUMMARY",
+            "count": 1,
+            "repos": [
+                "huggingface/accelerate"
+            ]
+        }
+    ],
+    "Set up Python 3.9": [
+        {
+            "command": "actions/setup-python@v4",
+            "count": 1,
+            "repos": [
+                "huggingface/trl"
+            ]
+        },
+        {
+            "command": "actions/setup-python@v2",
+            "count": 2,
+            "repos": [
+                "huggingface/autotrain-advanced"
+            ]
+        }
+    ],
+    "Show installed libraries": [
+        {
+            "command": "pip freeze\n",
+            "count": 2,
+            "repos": [
+                "huggingface/accelerate"
+            ]
+        },
+        {
+            "command": "source activate accelerate;\npip freeze\n",
+            "count": 10,
+            "repos": [
+                "huggingface/accelerate"
+            ]
+        }
+    ],
+    "Run test on GPUs": [
+        {
+            "command": "source activate accelerate\nmake test\n",
+            "count": 1,
+            "repos": [
+                "huggingface/accelerate"
+            ]
+        },
+        {
+            "command": "source activate accelerate\nmake test_deepspeed\n",
+            "count": 1,
+            "repos": [
+                "huggingface/accelerate"
+            ]
+        },
+        {
+            "command": "source activate accelerate;\nmake test\n",
+            "count": 2,
+            "repos": [
+                "huggingface/accelerate"
+            ]
+        },
+        {
+            "command": "source activate accelerate;\nmake test_deepspeed\n",
+            "count": 2,
+            "repos": [
+                "huggingface/accelerate"
+            ]
+        }
+    ],
+    "Run examples on GPUs": [
+        {
+            "command": "source activate accelerate\npip uninstall comet_ml -y\nmake test_examples\n",
+            "count": 4,
+            "repos": [
+                "huggingface/accelerate"
+            ]
+        },
+        {
+            "command": "source activate accelerate;\npip uninstall comet_ml -y;\nmake test_examples\n",
+            "count": 2,
+            "repos": [
+                "huggingface/accelerate"
+            ]
+        }
+    ],
+    "Install Python dependencies": [
+        {
+            "command": "pip install -e .[quality]",
+            "count": 3,
+            "repos": [
+                "huggingface/accelerate",
+                "huggingface/doc-builder",
+                "huggingface/simulate"
+            ]
+        },
+        {
+            "command": "pip install black",
+            "count": 1,
+            "repos": [
+                "huggingface/course"
+            ]
+        },
+        {
+            "command": "pip install -e \".[all]\"\npip install git+https://github.com/huggingface/transformers\n",
+            "count": 1,
+            "repos": [
+                "huggingface/doc-builder"
+            ]
+        }
+    ],
+    "Check if failure": [
+        {
+            "command": "echo \"Quality check failed. Please ensure the right dependency versions are installed with 'pip install -e .[quality]' and rerun 'make style; make quality;'\" >> $GITHUB_STEP_SUMMARY\n",
+            "count": 1,
+            "repos": [
+                "huggingface/accelerate"
+            ]
+        },
+        {
+            "command": "echo \"Quality check failed. Please ensure the right dependency versions are installed with 'pip install -e .[quality]' and run 'make style && make quality'\" >> $GITHUB_STEP_SUMMARY\n",
+            "count": 2,
+            "repos": [
+                "huggingface/diffusers"
+            ]
+        },
+        {
+            "command": "echo \"Repo consistency check failed. Please ensure the right dependency versions are installed with 'pip install -e .[quality]' and run 'make fix-copies'\" >> $GITHUB_STEP_SUMMARY\n",
+            "count": 2,
+            "repos": [
+                "huggingface/diffusers"
+            ]
+        }
+    ],
+    "Install accelerate": [
+        {
+            "command": "source activate accelerate;\ngit clone https://github.com/huggingface/accelerate;\ncd accelerate;\ngit checkout ${{ github.sha }};\npip install -e .[testing,test_trackers] -U;\npip install pytest-reportlog tabulate  ;\n",
+            "count": 3,
+            "repos": [
+                "huggingface/accelerate"
+            ]
+        },
+        {
+            "command": "source activate accelerate;\ngit clone https://github.com/huggingface/accelerate;\ncd accelerate;\ngit checkout ${{ github.sha }} ;\npip install -e .[testing];\npip uninstall comet_ml wandb dvclive -y\ncd ..;\n",
+            "count": 1,
+            "repos": [
+                "huggingface/accelerate"
+            ]
+        },
+        {
+            "command": "source activate accelerate; git clone https://github.com/huggingface/accelerate; cd accelerate; git checkout ${{ github.sha }}; pip install -e .[testing]; cd ..",
+            "count": 1,
+            "repos": [
+                "huggingface/accelerate"
+            ]
+        }
+    ],
+    "Install the library": [
+        {
+            "command": "if [[ ${{ matrix.test-kind }} = test_prod ]]; then pip install -e .[test_prod]; fi\nif [[ ${{ matrix.test-kind }} != test_prod ]]; then pip install -e .[testing,test_trackers]; fi\nif [[ ${{ matrix.test-kind }} = test_rest ]]; then pip uninstall comet_ml -y; fi\nif [[ ${{ matrix.test-kind }} = minimum ]]; then pip install torch==1.10.0; fi\npip install pytest-reportlog tabulate setuptools\n",
+            "count": 1,
+            "repos": [
+                "huggingface/accelerate"
+            ]
+        },
+        {
+            "command": "pip install --upgrade pip\npip install .\n",
+            "count": 1,
+            "repos": [
+                "huggingface/simulate"
+            ]
+        },
+        {
+            "command": "pip install --upgrade pip\npip install .[test]\n",
+            "count": 1,
+            "repos": [
+                "huggingface/simulate"
+            ]
+        }
+    ],
+    "Make quality": [
+        {
+            "command": "make quality\n",
+            "count": 1,
+            "repos": [
+                "huggingface/autotrain-advanced"
+            ]
+        },
+        {
+            "command": "cd backend\nmake quality\n",
+            "count": 1,
+            "repos": [
+                "huggingface/collaborative-training-auth"
+            ]
+        }
+    ],
+    "Checkout": [
+        {
+            "command": "actions/checkout@v4",
+            "count": 2,
+            "repos": [
+                "huggingface/autotrain-advanced",
+                "huggingface/dataset-viewer"
+            ]
+        },
+        {
+            "command": "actions/checkout@v2",
+            "count": 23,
+            "repos": [
+                "huggingface/optimum",
+                "huggingface/optimum-habana"
+            ]
+        }
+    ],
+    "Step 8": [
+        {
+            "command": ".venv/bin/python utils/check_inference_input_params.py",
+            "count": 1,
+            "repos": [
+                "huggingface/huggingface_hub"
+            ]
+        },
+        {
+            "command": "actions/checkout@v2",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum"
+            ]
+        }
+    ],
+    "Execute scoring script": [
+        {
+            "command": "HF_GEM_TOKEN=$HF_GEM_TOKEN python scripts/run_gem_scoring.py",
+            "count": 1,
+            "repos": [
+                "huggingface/hf_benchmarks"
+            ]
+        },
+        {
+            "command": "HF_TOKEN=$HF_TOKEN AUTOTRAIN_USERNAME=$AUTOTRAIN_USERNAME AUTOTRAIN_BACKEND_API=$AUTOTRAIN_BACKEND_API python run_evaluation_jobs.py",
+            "count": 1,
+            "repos": [
+                "huggingface/model-evaluator"
+            ]
+        }
+    ],
+    "Make Habana documentation": [
+        {
+            "command": "sudo docker system prune -a -f\ncd optimum-habana\nmake doc BUILD_DIR=habana-doc-build VERSION=${{ env.VERSION }}\nsudo mv habana-doc-build ../optimum\ncd ..\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum"
+            ]
+        },
+        {
+            "command": "sudo docker system prune -a -f\ncd optimum-habana\nmake doc BUILD_DIR=habana-doc-build VERSION=pr_$PR_NUMBER\nsudo mv habana-doc-build ../optimum\ncd ..\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum"
+            ]
+        }
+    ],
+    "Make Intel documentation": [
+        {
+            "command": "sudo docker system prune -a -f\ncd optimum-intel\nmake doc BUILD_DIR=intel-doc-build VERSION=${{ env.VERSION }}\nsudo mv intel-doc-build ../optimum\ncd ..\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum"
+            ]
+        },
+        {
+            "command": "sudo docker system prune -a -f\ncd optimum-intel\nmake doc BUILD_DIR=intel-doc-build VERSION=pr_$PR_NUMBER\nsudo mv intel-doc-build ../optimum\ncd ..\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum"
+            ]
+        }
+    ],
+    "Make Furiosa documentation": [
+        {
+            "command": "cd optimum-furiosa\npip install .\nsudo apt install software-properties-common\nsudo add-apt-repository --remove https://packages.microsoft.com/ubuntu/22.04/prod\nsudo apt update\nsudo apt install -y ca-certificates apt-transport-https gnupg\nsudo apt-key adv --keyserver keyserver.ubuntu.com --recv-key 5F03AFA423A751913F249259814F888B20B09A7E\nsudo tee -a /etc/apt/auth.conf.d/furiosa.conf > /dev/null <<EOT\n  machine archive.furiosa.ai\n  login ${{ secrets.FURIOSA_ACCESS_KEY }}\n  password ${{ secrets.FURIOSA_SECRET_ACCESS_KEY }}\nEOT\nsudo chmod 400 /etc/apt/auth.conf.d/furiosa.conf\nsudo tee -a /etc/apt/sources.list.d/furiosa.list <<EOT\n  deb [arch=amd64] https://archive.furiosa.ai/ubuntu jammy restricted\nEOT\nsudo apt update && sudo apt install -y furiosa-libnux\ndoc-builder build optimum.furiosa docs/source/ --build_dir furiosa-doc-build --version pr_$PR_NUMBER --version_tag_suffix \"\" --html --clean\nmv furiosa-doc-build ../optimum\ncd ..\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum"
+            ]
+        },
+        {
+            "command": "echo \"For PRs we don't build Furiosa doc\"\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum"
+            ]
+        }
+    ],
+    "Make AMD documentation": [
+        {
+            "command": "sudo docker system prune -a -f\ncd optimum-amd\nmake doc BUILD_DIR=amd-doc-build VERSION=${{ env.VERSION }}\nsudo mv amd-doc-build ../optimum\ncd ..\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum"
+            ]
+        },
+        {
+            "command": "sudo docker system prune -a -f\ncd optimum-amd\nmake doc BUILD_DIR=amd-doc-build VERSION=pr_$PR_NUMBER\nsudo mv amd-doc-build ../optimum\ncd ..\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum"
+            ]
+        }
+    ],
+    "Make Optimum documentation": [
+        {
+            "command": "sudo docker system prune -a -f\ncd optimum\nmkdir -p optimum-doc-build/optimum && cd optimum-doc-build/optimum\nwget https://huggingface.co/datasets/hf-doc-build/doc-build/raw/main/optimum/_versions.yml\ncd ../..\nmake doc BUILD_DIR=optimum-doc-build VERSION=${{ env.VERSION }} COMMIT_SHA_OPTIMUM=${{ env.VERSION }}\ncd ..\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum"
+            ]
+        },
+        {
+            "command": "sudo docker system prune -a -f\ncd optimum\nmake doc BUILD_DIR=optimum-doc-build VERSION=pr_$PR_NUMBER COMMIT_SHA_OPTIMUM=$COMMIT_SHA CLONE_URL=$PR_CLONE_URL\ncd ..\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum"
+            ]
+        }
+    ],
+    "Combine subpackage documentation": [
+        {
+            "command": "cd optimum\nsudo python docs/combine_docs.py --subpackages nvidia amd intel neuron tpu habana furiosa --version ${{ env.VERSION }}\ncd ..\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum"
+            ]
+        },
+        {
+            "command": "cd optimum\nsudo python docs/combine_docs.py --subpackages nvidia amd intel neuron tpu habana furiosa --version pr_$PR_NUMBER\nsudo mv optimum-doc-build ../\ncd ..\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum"
+            ]
+        }
+    ],
+    "Push to repositories": [
+        {
+            "command": "cd optimum/optimum-doc-build\nsudo chmod -R ugo+rwx optimum\ndoc-builder push optimum --doc_build_repo_id \"hf-doc-build/doc-build\" --token \"${{ secrets.HF_DOC_BUILD_PUSH }}\" --commit_msg \"Updated with commit ${{ github.sha }} See: https://github.com/huggingface/optimum/commit/${{ github.sha }}\" --n_retries 5 --upload_version_yml\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum"
+            ]
+        },
+        {
+            "command": "source .venv/bin/activate\ncd build_dir\ndoc-builder push ${{ env.package_name }} --doc_build_repo_id \"hf-doc-build/doc-build\" --token \"${{ secrets.hf_token }}\" --commit_msg \"Updated with commit ${{ inputs.commit_sha }} See: https://github.com/${{ inputs.repo_owner }}/${{ inputs.package }}/commit/${{ inputs.commit_sha }}\" --n_retries 5 --upload_version_yml\ncd ..\n\nif [ -d \"notebook_dir\" ]\nthen\n  cd notebooks\n  git pull\n  cp -r ../notebook_dir/. ${{ inputs.notebook_folder }}\n  git status\n  if [[ `git status --porcelain` ]]; then\n    git add ${{ inputs.notebook_folder }}\n    git commit -m \"Updated ${{ inputs.package }} doc notebooks with commit ${{ inputs.commit_sha }} \\n\\nSee: https://github.com/huggingface/${{ inputs.package }}/commit/${{ inputs.commit_sha }}\"\n    git push origin main ||\n    (echo \"Failed on the first try, rebasing and pushing again\" && git pull --rebase && git push origin main) ||\n    (echo \"Failed on the second try, rebasing and pushing again\" && git pull --rebase && git push origin main)\n  else\n    echo \"No diff in the notebooks.\"\n  fi\n  cd ..\nelse\n  echo \"Notebooks creation was not enabled.\"\nfi\n",
+            "count": 1,
+            "repos": [
+                "huggingface/doc-builder"
+            ]
+        },
+        {
+            "command": "cd build_dir\ndoc-builder push ${{ inputs.package_name }} --doc_build_repo_id \"hf-doc-build/doc-build-dev\" --token \"${{ secrets.hf_token }}\" --commit_msg \"Updated with commit ${{ steps.github-context.outputs.commit_sha }} See: https://github.com/${{ inputs.repo_owner }}/${{ inputs.package_name }}/commit/${{ steps.github-context.outputs.commit_sha }}\"\n",
+            "count": 1,
+            "repos": [
+                "huggingface/doc-builder"
+            ]
+        }
+    ],
+    "Save commit_sha & pr_number": [
+        {
+            "command": "sudo chmod -R ugo+rwx optimum-doc-build\ncd optimum-doc-build\necho ${{ env.COMMIT_SHA }} > ./commit_sha\necho ${{ env.PR_NUMBER }} > ./pr_number\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum"
+            ]
+        },
+        {
+            "command": "echo ${{ inputs.commit_sha }} > ./build_dir/commit_sha\necho ${{ inputs.pr_number }} > ./build_dir/pr_number\n",
+            "count": 1,
+            "repos": [
+                "huggingface/doc-builder"
+            ]
+        },
+        {
+            "command": "source doc_builder_venv/bin/activate\ncd optimum-graphcore\nsudo chmod -R ugo+rwx graphcore-doc-build\ncd graphcore-doc-build\nsudo mv optimum.graphcore optimum-graphcore\necho ${{ env.COMMIT_SHA }} > ./commit_sha\necho ${{ env.PR_NUMBER }} > ./pr_number\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum-graphcore"
+            ]
+        },
+        {
+            "command": "cd optimum-habana\nsudo chmod -R ugo+rwx habana-doc-build\ncd habana-doc-build\nsudo mv optimum.habana optimum-habana\necho ${{ env.COMMIT_SHA }} > ./commit_sha\necho ${{ env.PR_NUMBER }} > ./pr_number\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum-habana"
+            ]
+        },
+        {
+            "command": "cd optimum-intel\nsudo chmod -R ugo+rwx intel-doc-build\ncd intel-doc-build\nsudo mv optimum.intel optimum-intel\necho ${{ env.COMMIT_SHA }} > ./commit_sha\necho ${{ env.PR_NUMBER }} > ./pr_number\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum-intel"
+            ]
+        }
+    ],
+    "Setup Python ${{ matrix.python-version }}": [
+        {
+            "command": "actions/setup-python@v2",
+            "count": 35,
+            "repos": [
+                "huggingface/optimum",
+                "huggingface/optimum-habana",
+                "huggingface/optimum-intel"
+            ]
+        },
+        {
+            "command": "actions/setup-python@v3",
+            "count": 7,
+            "repos": [
+                "huggingface/optimum",
+                "huggingface/optimum-graphcore"
+            ]
+        },
+        {
+            "command": "actions/setup-python@v5",
+            "count": 4,
+            "repos": [
+                "huggingface/optimum",
+                "huggingface/optimum-intel"
+            ]
+        }
+    ],
+    "Create and start a virtual environment": [
+        {
+            "command": "python -m venv venv\nsource venv/bin/activate\n",
+            "count": 3,
+            "repos": [
+                "huggingface/optimum",
+                "huggingface/optimum-habana",
+                "huggingface/optimum-intel"
+            ]
+        },
+        {
+            "command": "python -m venv code_quality_venv --clear\nsource code_quality_venv/bin/activate\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum-graphcore"
+            ]
+        },
+        {
+            "command": "python -m venv examples_venv --clear\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum-graphcore"
+            ]
+        },
+        {
+            "command": "python -m venv general_venv --clear \nsource general_venv/bin/activate\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum-graphcore"
+            ]
+        },
+        {
+            "command": "python -m venv pipelines_venv --clear \n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum-graphcore"
+            ]
+        }
+    ],
+    "Check style with black": [
+        {
+            "command": "source venv/bin/activate\nblack --check .\n",
+            "count": 2,
+            "repos": [
+                "huggingface/optimum",
+                "huggingface/optimum-intel"
+            ]
+        },
+        {
+            "command": "source code_quality_venv/bin/activate\nblack --check examples tests optimum\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum-graphcore"
+            ]
+        }
+    ],
+    "Check style with ruff": [
+        {
+            "command": "source venv/bin/activate\nruff .\n",
+            "count": 2,
+            "repos": [
+                "huggingface/optimum",
+                "huggingface/optimum-intel"
+            ]
+        },
+        {
+            "command": "source code_quality_venv/bin/activate\nruff examples tests optimum\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum-graphcore"
+            ]
+        },
+        {
+            "command": "source venv/bin/activate\nruff check . setup.py\nruff format --check . setup.py\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum-habana"
+            ]
+        }
+    ],
+    "Test with unittest": [
+        {
+            "command": "python -m unittest discover --start-directory tests/benchmark --pattern\ntest_*.py",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum"
+            ]
+        },
+        {
+            "command": "python -m unittest discover -s bettertransformer -p test_*.py\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum"
+            ]
+        },
+        {
+            "command": "python -m unittest discover -s utils -p test_*.py\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum"
+            ]
+        },
+        {
+            "command": "pytest exporters -s --durations=0",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum"
+            ]
+        },
+        {
+            "command": "python -m pytest fx/optimization/test_transformations.py --exitfirst\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum"
+            ]
+        },
+        {
+            "command": "python -m unittest discover -s onnx -p test_*.py\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum"
+            ]
+        },
+        {
+            "command": "# Setting HUGGINGFACE_CO_STAGING to true for only one job of the matrix\nas the staging tests cannot run in parallel.\nexport HUGGINGFACE_CO_STAGING=${{ matrix.python-version == 3.8 && matrix.os\n== ubuntu-20.04 }}\npython -m unittest discover -s tests -p test_*.py\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum"
+            ]
+        },
+        {
+            "command": "python -m unittest discover --start-directory tests/benchmark --pattern 'test_*.py'\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum"
+            ]
+        },
+        {
+            "command": "pytest exporters/onnx/test_onnx_*.py -s -n auto -m \"not tensorflow_test and not timm_test\" --durations=0\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum"
+            ]
+        },
+        {
+            "command": "pytest exporters/onnx/test_onnx_*.py -n auto -m \"tensorflow_test\" -s --durations=0\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum"
+            ]
+        },
+        {
+            "command": "pytest exporters/onnx/test_exporters_onnx_cli.py -n auto -m \"not tensorflow_test and not timm_test\" -s --durations=0\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum"
+            ]
+        },
+        {
+            "command": "RUN_SLOW=1 pytest exporters/onnx/test_exporters_onnx_cli.py -n auto -k \"timm\" -s --durations=0\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum"
+            ]
+        },
+        {
+            "command": "RUN_SLOW=1 pytest exporters/onnx/ -s -n auto -k \"timm\" --durations=0\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum"
+            ]
+        },
+        {
+            "command": "pytest exporters/tflite/test_tflite_*.py -s --durations=0\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum"
+            ]
+        },
+        {
+            "command": "pytest exporters/tflite/test_exporters_tflite_cli.py -m \"not quantization\" -s --durations=0\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum"
+            ]
+        },
+        {
+            "command": "pytest exporters/tflite/test_exporters_tflite_cli.py -k \"int8_dynamic_quantization\" -s --durations=0\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum"
+            ]
+        },
+        {
+            "command": "pytest exporters/tflite/test_exporters_tflite_cli.py -k \"float16_quantization\" -s --durations=0\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum"
+            ]
+        },
+        {
+            "command": "pytest exporters/tflite/test_exporters_tflite_cli.py -k \"full_int8_quantization_with_default_dataset\" -s --durations=0\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum"
+            ]
+        },
+        {
+            "command": "pytest exporters/tflite/test_exporters_tflite_cli.py -k \"tflite_int8_quantization_with_custom_dataset\" -s --durations=0\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum"
+            ]
+        },
+        {
+            "command": "pytest exporters/tflite/test_exporters_tflite_cli.py -k \"tflite_int8_quantization_with_default_dataset\" -s --durations=0\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum"
+            ]
+        },
+        {
+            "command": "pytest exporters/tflite/test_exporters_tflite_cli.py -k \"tflite_int8x16_quantization_with_default_dataset\" -s --durations=0\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum"
+            ]
+        },
+        {
+            "command": "pytest exporters/common/ -s --durations=0\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum"
+            ]
+        },
+        {
+            "command": "RUN_SLOW=1 pytest exporters -s -m \"not tensorflow_test and run_slow\" --durations=0\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum"
+            ]
+        },
+        {
+            "command": "RUN_SLOW=1 pytest exporters -s -m \"tensorflow_test and run_slow\" --durations=0\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum"
+            ]
+        },
+        {
+            "command": "HF_HOME=/tmp/ huggingface-cli download hf-internal-testing/tiny-random-gpt2\n\nHF_HOME=/tmp/ HF_HUB_OFFLINE=1 optimum-cli export onnx --model hf-internal-testing/tiny-random-gpt2 gpt2_onnx --task text-generation\n\nhuggingface-cli download hf-internal-testing/tiny-random-gpt2\n\nHF_HUB_OFFLINE=1 optimum-cli export onnx --model hf-internal-testing/tiny-random-gpt2 gpt2_onnx --task text-generation\n\npytest tests/onnxruntime/test_modeling.py -k \"test_load_model_from_hub and not from_hub_onnx\" -s -vvvvv\n\nHF_HUB_OFFLINE=1 pytest tests/onnxruntime/test_modeling.py -k \"test_load_model_from_hub and not from_hub_onnx\" -s -vvvvv",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum"
+            ]
+        },
+        {
+            "command": "python -m unittest discover -s onnx -p 'test_*.py'\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum"
+            ]
+        },
+        {
+            "command": "RUN_SLOW=1 pytest onnxruntime -s -m \"run_slow\" --durations=0\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum"
+            ]
+        },
+        {
+            "command": "# Setting HUGGINGFACE_CO_STAGING to true for only one job of the matrix as the staging tests cannot run in parallel.\nexport HUGGINGFACE_CO_STAGING=${{ matrix.python-version == '3.8' && matrix.os == 'ubuntu-20.04' }}\npytest tests/test_*.py\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum"
+            ]
+        }
+    ],
+    "Build image": [
+        {
+            "command": "docker build -f tests/onnxruntime/Dockerfile_onnxruntime_gpu -t onnxruntime-gpu .\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum"
+            ]
+        },
+        {
+            "command": "docker build -f tests/bettertransformer/Dockerfile_bettertransformer_gpu -t bettertransformer-gpu .\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum"
+            ]
+        },
+        {
+            "command": "docker build -f tests/exporters/Dockerfile_exporters_gpu -t exporters-gpu .\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum"
+            ]
+        },
+        {
+            "command": "docker build -f tests/gptq/Dockerfile_quantization_gpu -t gptq-gpu .\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum"
+            ]
+        },
+        {
+            "command": "docker build -f tests/onnxruntime/docker/Dockerfile_onnxruntime_gpu -t onnxruntime-gpu .\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum"
+            ]
+        },
+        {
+            "command": "docker build -f tests/onnxruntime/docker/Dockerfile_onnxruntime_trainer -t onnxruntime/train .\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum"
+            ]
+        }
+    ],
+    "Test with unittest within docker container": [
+        {
+            "command": "docker run --rm --gpus all --workdir=/workspace/optimum/ onnxruntime-gpu:latest /bin/bash tests/run_doctest.sh\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum"
+            ]
+        },
+        {
+            "command": "docker run --rm --gpus all --workdir=/workspace/optimum/tests bettertransformer-gpu:latest\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum"
+            ]
+        },
+        {
+            "command": "docker run --rm --gpus all -v /mnt/cache/.cache/huggingface:/root/.cache/huggingface --workdir=/workspace/optimum/tests exporters-gpu:latest\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum"
+            ]
+        },
+        {
+            "command": "docker run --rm --gpus all -v $(pwd)/hf_cache:/root/.cache/huggingface --workdir=/workspace/optimum/tests gptq-gpu:latest\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum"
+            ]
+        },
+        {
+            "command": "docker run --rm --gpus all -v /mnt/cache/.cache/huggingface:/root/.cache/huggingface --workdir=/workspace/optimum/tests onnxruntime-gpu:latest\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum"
+            ]
+        }
+    ],
+    "Install dependencies for pytorch export": [
+        {
+            "command": "pip install .[tests,exporters]\n",
+            "count": 5,
+            "repos": [
+                "huggingface/optimum"
+            ]
+        },
+        {
+            "command": "pip install .[tests,exporters,onnxruntime]\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum"
+            ]
+        }
+    ],
+    "Run unit tests": [
+        {
+            "command": "poetry run python -m pytest -s",
+            "count": 1,
+            "repos": [
+                "huggingface/dataset-viewer"
+            ]
+        },
+        {
+            "command": "echo \"OLD_HF_CACHE_HASH=$(find ~/.cache/huggingface/hub ~/.cache/torch -type f -exec sha256sum {} + | LC_ALL=C sort | sha256sum | cut -d ' ' -f 1)\" >> $GITHUB_ENV\npytest -sv tests/\necho \"NEW_HF_CACHE_HASH=$(find ~/.cache/huggingface/hub ~/.cache/torch -type f -exec sha256sum {} + | LC_ALL=C sort | sha256sum | cut -d ' ' -f 1)\" >> $GITHUB_ENV\n",
+            "count": 1,
+            "repos": [
+                "huggingface/setfit"
+            ]
+        }
+    ],
+    "Login to Docker Hub": [
+        {
+            "command": "docker/login-action@v3",
+            "count": 1,
+            "repos": [
+                "huggingface/dataset-viewer"
+            ]
+        },
+        {
+            "command": "docker/login-action@v2",
+            "count": 1,
+            "repos": [
+                "huggingface/diffusers"
+            ]
+        }
+    ],
+    "Make documentation": [
+        {
+            "command": "cd doc-builder &&\ndoc-builder build accelerate ../accelerate/docs/source --build_dir ../build_dir --clean --html &&\ncd ..\n",
+            "count": 1,
+            "repos": [
+                "huggingface/doc-builder"
+            ]
+        },
+        {
+            "command": "source .venv/bin/activate\necho \"doc_folder has been set to ${{ env.doc_folder }}\"\ncd doc-builder\nargs=\"--build_dir ../build_dir --clean --html ${{ inputs.additional_args }} --repo_owner ${{ inputs.repo_owner }} --repo_name ${{ inputs.package }} --version_tag_suffix=${{ inputs.version_tag_suffix }}\"\n\nif [ ! -z \"${{ inputs.notebook_folder }}\" ];\nthen\n  args=\"$args --notebook_dir ../notebook_dir\"\nfi\n\nif [ -z \"${{ inputs.languages }}\" ];\nthen\n  echo \"languages not provided, defaulting to English\"\n  doc-builder build ${{ env.package_name }} ../${{ env.doc_folder }} $args\nelse\n  IFS=', ' read -r -a langs <<< \"${{ inputs.languages }}\"\n  for lang in \"${langs[@]}\"\n  do\n      echo \"Generating docs for language $lang\"\n      doc-builder build ${{ env.package_name }} ../${{ env.doc_folder }}/$lang $args --language $lang\n  done\nfi\n\ncd ..\n",
+            "count": 1,
+            "repos": [
+                "huggingface/doc-builder"
+            ]
+        },
+        {
+            "command": "source .venv/bin/activate\necho \"doc_folder has been set to ${{ env.doc_folder }}\"\ncd doc-builder\nargs=\"--build_dir ../build_dir --clean --version pr_${{ inputs.pr_number }} --html ${{ inputs.additional_args }} --repo_owner ${{ inputs.repo_owner }} --repo_name ${{ inputs.package }} --version_tag_suffix=${{ inputs.version_tag_suffix }}\"\n\nif [ -z \"${{ inputs.languages }}\" ];\nthen\n  echo \"languages not provided, defaulting to English\"\n  doc-builder build ${{ env.package_name }} ../${{ env.doc_folder }} $args\nelse\n  IFS=', ' read -r -a langs <<< \"${{ inputs.languages }}\"\n  for lang in \"${langs[@]}\"\n  do\n      echo \"Generating docs for language $lang\"\n      doc-builder build ${{ env.package_name }} ../${{ env.doc_folder }}/$lang $args --language $lang\n  done\nfi\ncd ..\n",
+            "count": 1,
+            "repos": [
+                "huggingface/doc-builder"
+            ]
+        },
+        {
+            "command": "source doc_builder_venv/bin/activate\ncd optimum-graphcore\nmake doc BUILD_DIR=graphcore-doc-build VERSION=pr_$PR_NUMBER COMMIT_SHA_SUBPACKAGE=$COMMIT_SHA CLONE_URL=$PR_CLONE_URL CLONE_NAME=$PR_CLONE_NAME\ncd ..\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum-graphcore"
+            ]
+        },
+        {
+            "command": "cd optimum-habana\nmake doc BUILD_DIR=habana-doc-build VERSION=pr_$PR_NUMBER COMMIT_SHA_SUBPACKAGE=$COMMIT_SHA CLONE_URL=$PR_CLONE_URL\ncd ..\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum-habana"
+            ]
+        },
+        {
+            "command": "cd optimum-intel\nmake doc BUILD_DIR=intel-doc-build VERSION=pr_$PR_NUMBER COMMIT_SHA_SUBPACKAGE=$COMMIT_SHA CLONE_URL=$PR_CLONE_URL\ncd ..\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum-intel"
+            ]
+        }
+    ],
+    "Set env variables": [
+        {
+            "command": "if [ -z \"${{ inputs.path_to_docs }}\" ]\nthen\n  echo \"doc_folder=${{ inputs.package }}/docs/source\" >> $GITHUB_ENV\n  echo \"path_to_docs not provided, defaulting to ${{ inputs.package }}/docs/source\"\nelse\n  echo \"doc_folder=${{ inputs.path_to_docs }}\" >> $GITHUB_ENV\nfi\n\nif [ -z \"${{ inputs.package_name }}\" ];\nthen\n  echo \"package_name=${{ inputs.package }}\" >> $GITHUB_ENV\nelse\n  echo \"package_name=${{ inputs.package_name }}\" >> $GITHUB_ENV\nfi\n",
+            "count": 1,
+            "repos": [
+                "huggingface/doc-builder"
+            ]
+        },
+        {
+            "command": "if [ -z \"${{ inputs.path_to_docs }}\" ]\nthen\n  echo \"doc_folder=${{ inputs.package }}/docs/source\" >> $GITHUB_ENV\n  echo \"path_to_docs not provided, defaulting to ${{ inputs.package }}/docs/source\"\nelse\n  echo \"doc_folder=${{ inputs.path_to_docs }}\" >> $GITHUB_ENV\nfi\n\nif [ -z \"${{ inputs.package_name }}\" ];\nthen\n  package_name=${{ inputs.package }}\nelse\n  package_name=${{ inputs.package_name }}\nfi\n\nif [ -z \"${{ inputs.package_name }}\" ];\nthen\n  echo \"package_name=${{ inputs.package }}\" >> $GITHUB_ENV\nelse\n  echo \"package_name=${{ inputs.package_name }}\" >> $GITHUB_ENV\nfi\n",
+            "count": 1,
+            "repos": [
+                "huggingface/doc-builder"
+            ]
+        }
+    ],
+    "Set up Python 3.7": [
+        {
+            "command": "actions/setup-python@v2",
+            "count": 2,
+            "repos": [
+                "huggingface/doc-builder"
+            ]
+        },
+        {
+            "command": "actions/setup-python@v4",
+            "count": 1,
+            "repos": [
+                "huggingface/hffs"
+            ]
+        }
+    ],
+    "Test with Pytest": [
+        {
+            "command": "source examples_venv/bin/activate\nexport SDK_PATH=/opt/gc/poplar_sdk-ubuntu_20_04-3.3*\n. ${SDK_PATH}/poplar-ubuntu_20_04*/enable.sh\n. ${SDK_PATH}/popart-ubuntu_20_04*/enable.sh\npytest tests/test_examples_match_transformers.py -v --durations=0\nmprof run --exit-code --interval 1 --include-children --multiprocess \\\n  pytest tests/test_examples.py -v -n 4 --durations=0\nmprof plot -o memory_profile.png\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum-graphcore"
+            ]
+        },
+        {
+            "command": "source general_venv/bin/activate\nexport SDK_PATH=/opt/gc/poplar_sdk-ubuntu_20_04-3.3*\n. ${SDK_PATH}/poplar-ubuntu_20_04*/enable.sh\n. ${SDK_PATH}/popart-ubuntu_20_04*/enable.sh\npytest tests/ -v -n 16 --ignore=tests/pipelines/ --ignore=tests/test_examples_match_transformers.py\npytest tests/test_examples_match_transformers.py -v\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum-graphcore"
+            ]
+        },
+        {
+            "command": "source pipelines_venv/bin/activate\nexport SDK_PATH=/opt/gc/poplar_sdk-ubuntu_20_04-3.3*\n. ${SDK_PATH}/poplar-ubuntu_20_04*/enable.sh\n. ${SDK_PATH}/popart-ubuntu_20_04*/enable.sh\nmprof run --exit-code --interval 1 --include-children --multiprocess \\\n  pytest tests/pipelines/ -v -n 4\nmprof plot -o memory_profile.png\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum-graphcore"
+            ]
+        },
+        {
+            "command": "pytest tests/generation/\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum-intel"
+            ]
+        },
+        {
+            "command": "pytest tests/neural_compressor/ --ignore tests/neural_compressor/test_ipex.py --durations=0\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum-intel"
+            ]
+        },
+        {
+            "command": "pytest tests/ipex/\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum-intel"
+            ]
+        },
+        {
+            "command": "pytest tests/openvino/ --ignore tests/openvino/test_modeling_basic.py --durations=0\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum-intel"
+            ]
+        },
+        {
+            "command": "pytest tests/openvino/test_modeling_basic.py\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum-intel"
+            ]
+        },
+        {
+            "command": "sed -i 's/NUM_TRAIN_ITEMS = 600/NUM_TRAIN_ITEMS = 10/' notebooks/openvino/question_answering_quantization.ipynb\nsed -i 's/# %pip install/%pip install/' notebooks/openvino/optimum_openvino_inference.ipynb\npython -m pytest --nbval-lax notebooks/openvino/optimum_openvino_inference.ipynb  notebooks/openvino/question_answering_quantization.ipynb\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum-intel"
+            ]
+        }
+    ],
+    "Pull image": [
+        {
+            "command": "docker pull vault.habana.ai/gaudi-docker/1.16.0/ubuntu22.04/habanalabs/pytorch-installer-2.2.2:latest\n",
+            "count": 18,
+            "repos": [
+                "huggingface/optimum-habana"
+            ]
+        },
+        {
+            "command": "docker pull vault.habana.ai/gaudi-docker/1.16.0/ubuntu22.04/habanalabs/pytorch-installer-2.2.2:latest:latest\n",
+            "count": 1,
+            "repos": [
+                "huggingface/optimum-habana"
+            ]
+        }
+    ],
+    "Setup Python environment": [
+        {
+            "command": "actions/setup-python@v2",
+            "count": 2,
+            "repos": [
+                "huggingface/model-evaluator",
+                "huggingface/setfit"
+            ]
+        },
+        {
+            "command": "actions/setup-python@v4",
+            "count": 1,
+            "repos": [
+                "huggingface/setfit"
+            ]
+        }
+    ],
+    "Code quality": [
+        {
+            "command": "make quality",
+            "count": 1,
+            "repos": [
+                "huggingface/model-evaluator"
+            ]
+        },
+        {
+            "command": "make quality\n",
+            "count": 1,
+            "repos": [
+                "huggingface/setfit"
+            ]
+        }
+    ],
+    "Run fast Flax TPU tests": [
+        {
+            "command": "python -m venv /opt/venv && export PATH=\"/opt/venv/bin:$PATH\"\npython -m pytest -n 4 --max-worker-restart=0 --dist=loadfile \\\n  -s -v -k \"Flax\" \\\n  --make-reports=tests_${{ matrix.config.report }} \\\n  tests\n",
+            "count": 1,
+            "repos": [
+                "huggingface/diffusers"
+            ]
+        },
+        {
+            "command": "python -m venv /opt/venv && export PATH=\"/opt/venv/bin:$PATH\"\npython -m pytest -n 4 --max-worker-restart=0 --dist=loadfile \\\n  -s -v -k \"Flax\" \\\n  --make-reports=tests_${{ matrix.config.report }} \\\n  tests/\n",
+            "count": 1,
+            "repos": [
+                "huggingface/diffusers"
+            ]
+        }
+    ],
+    "Run example tests on GPU": [
+        {
+            "command": "python -m pytest -n 1 --max-worker-restart=0 --dist=loadfile -s -v -k \"compile\" --make-reports=tests_torch_compile_cuda tests/\n",
+            "count": 1,
+            "repos": [
+                "huggingface/diffusers"
+            ]
+        },
+        {
+            "command": "python -m pytest -n 1 --max-worker-restart=0 --dist=loadfile -s -v -k \"xformers\" --make-reports=tests_torch_xformers_cuda tests/\n",
+            "count": 1,
+            "repos": [
+                "huggingface/diffusers"
+            ]
+        },
+        {
+            "command": "python -m venv /opt/venv && export PATH=\"/opt/venv/bin:$PATH\"\npython -m uv pip install timm\npython -m pytest -n 1 --max-worker-restart=0 --dist=loadfile -s -v --make-reports=examples_torch_cuda examples/\n",
+            "count": 1,
+            "repos": [
+                "huggingface/diffusers"
+            ]
+        }
+    ]
+}

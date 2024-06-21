@@ -1,0 +1,1789 @@
+{
+    "Checkout": [
+        {
+            "command": "actions/checkout@v2",
+            "count": 5,
+            "repos": [
+                "vercel/ms",
+                "vercel/pkg-fetch"
+            ]
+        },
+        {
+            "command": "actions/checkout@v4",
+            "count": 17,
+            "repos": [
+                "vercel/hyper",
+                "vercel/vercel",
+                "vercel/next.js",
+                "vercel/swr"
+            ]
+        },
+        {
+            "command": "actions/checkout@v3",
+            "count": 32,
+            "repos": [
+                "vercel/pkg-fetch",
+                "vercel/fetch",
+                "vercel/async-listen",
+                "vercel/turbo",
+                "vercel/examples"
+            ]
+        }
+    ],
+    "Setup pnpm": [
+        {
+            "command": "pnpm/action-setup@v2.2.2",
+            "count": 5,
+            "repos": [
+                "vercel/ms",
+                "vercel/fetch"
+            ]
+        },
+        {
+            "command": "pnpm/action-setup@v3",
+            "count": 1,
+            "repos": [
+                "vercel/next-learn"
+            ]
+        }
+    ],
+    "Use Node.js ${{ matrix.node-version }}": [
+        {
+            "command": "actions/setup-node@v2",
+            "count": 1,
+            "repos": [
+                "vercel/ms"
+            ]
+        },
+        {
+            "command": "actions/setup-node@v2.1.5",
+            "count": 1,
+            "repos": [
+                "vercel/pkg-fetch"
+            ]
+        },
+        {
+            "command": "actions/setup-node@v1",
+            "count": 3,
+            "repos": [
+                "vercel/fetch-retry",
+                "vercel/fetch-cached-dns",
+                "vercel/gatsby-plugin-vercel"
+            ]
+        }
+    ],
+    "Install dependencies": [
+        {
+            "command": "pnpm install",
+            "count": 6,
+            "repos": [
+                "vercel/ms",
+                "vercel/async-listen",
+                "vercel/next-learn"
+            ]
+        },
+        {
+            "command": "wget https://github.com/sharkdp/hyperfine/releases/download/v1.16.1/hyperfine_1.16.1_amd64.deb\nsudo dpkg -i hyperfine_1.16.1_amd64.deb\ncorepack enable\npnpm install --loglevel error\n",
+            "count": 1,
+            "repos": [
+                "vercel/next.js"
+            ]
+        },
+        {
+            "command": "pnpm i",
+            "count": 4,
+            "repos": [
+                "vercel/next.js"
+            ]
+        },
+        {
+            "command": "yarn install --frozen-lockfile",
+            "count": 1,
+            "repos": [
+                "vercel/styled-jsx"
+            ]
+        },
+        {
+            "command": "pnpm install --no-frozen-lockfile",
+            "count": 1,
+            "repos": [
+                "vercel/commerce"
+            ]
+        },
+        {
+            "command": "pnpm install -r --side-effects-cache false",
+            "count": 1,
+            "repos": [
+                "vercel/turbo"
+            ]
+        },
+        {
+            "command": "pnpm i --frozen-lockfile --ignore-scripts",
+            "count": 1,
+            "repos": [
+                "vercel/examples"
+            ]
+        }
+    ],
+    "Run tests": [
+        {
+            "command": "pnpm test",
+            "count": 4,
+            "repos": [
+                "vercel/ms",
+                "vercel/async-listen",
+                "vercel/next-learn",
+                "vercel/commerce"
+            ]
+        },
+        {
+            "command": "npm test",
+            "count": 3,
+            "repos": [
+                "vercel/fetch-retry",
+                "vercel/fetch-cached-dns",
+                "vercel/fun"
+            ]
+        },
+        {
+            "command": "TURBO_API= turbo run check-types test --filter=\"!turborepo-repository\" --filter={./packages/*}...[${{ github.event.pull_request.base.sha || 'HEAD^1' }}] --color --env-mode=strict\n",
+            "count": 1,
+            "repos": [
+                "vercel/turbo"
+            ]
+        },
+        {
+            "command": "TURBO_API= turbo run test --filter \"turborepo-repository\" --color --env-mode=strict\n",
+            "count": 1,
+            "repos": [
+                "vercel/turbo"
+            ]
+        },
+        {
+            "command": "cargo groups test turborepo-libraries\n",
+            "count": 1,
+            "repos": [
+                "vercel/turbo"
+            ]
+        }
+    ],
+    "Step 1": [
+        {
+            "command": "actions/checkout@v3",
+            "count": 12,
+            "repos": [
+                "vercel/test-listen",
+                "vercel/pkg",
+                "vercel/cosmosdb-server",
+                "vercel/turbo"
+            ]
+        },
+        {
+            "command": "actions/checkout@v2",
+            "count": 10,
+            "repos": [
+                "vercel/async-retry",
+                "vercel/react-keyframes",
+                "vercel/pkg-fetch",
+                "vercel/arg",
+                "vercel/fetch"
+            ]
+        },
+        {
+            "command": "actions/cache@v1",
+            "count": 2,
+            "repos": [
+                "vercel/react-keyframes"
+            ]
+        },
+        {
+            "command": "actions/stale@v3",
+            "count": 1,
+            "repos": [
+                "vercel/pkg"
+            ]
+        },
+        {
+            "command": "echo Is making new release? '${{ inputs.newRelease }}'",
+            "count": 1,
+            "repos": [
+                "vercel/pkg-fetch"
+            ]
+        },
+        {
+            "command": "actions/checkout@v4",
+            "count": 19,
+            "repos": [
+                "vercel/vercel",
+                "vercel/next.js",
+                "vercel/ncc",
+                "vercel/webpack-asset-relocator-loader",
+                "vercel/nft",
+                "vercel/turbo"
+            ]
+        },
+        {
+            "command": "exit 1",
+            "count": 1,
+            "repos": [
+                "vercel/next.js"
+            ]
+        },
+        {
+            "command": "styfle/cancel-workflow-action@0.12.1",
+            "count": 1,
+            "repos": [
+                "vercel/next.js"
+            ]
+        },
+        {
+            "command": "dessant/lock-threads@v5",
+            "count": 1,
+            "repos": [
+                "vercel/next.js"
+            ]
+        },
+        {
+            "command": "actions/github-script@v7",
+            "count": 1,
+            "repos": [
+                "vercel/next.js"
+            ]
+        },
+        {
+            "command": "balazsorban44/nissuer@1.10.0",
+            "count": 1,
+            "repos": [
+                "vercel/next.js"
+            ]
+        },
+        {
+            "command": "actions/cache/restore@v3",
+            "count": 4,
+            "repos": [
+                "vercel/next.js"
+            ]
+        },
+        {
+            "command": "amannn/action-semantic-pull-request@v2.1.0",
+            "count": 2,
+            "repos": [
+                "vercel/styled-jsx",
+                "vercel/webpack-asset-relocator-loader"
+            ]
+        },
+        {
+            "command": "actions/checkout@v1",
+            "count": 4,
+            "repos": [
+                "vercel/fetch-retry",
+                "vercel/fetch-cached-dns",
+                "vercel/fun",
+                "vercel/gatsby-plugin-vercel"
+            ]
+        },
+        {
+            "command": "amannn/action-semantic-pull-request@47b15d52c5c30e94a17ec87eb8dd51ff5221fed9",
+            "count": 1,
+            "repos": [
+                "vercel/ncc"
+            ]
+        },
+        {
+            "command": "amannn/action-semantic-pull-request@00282d63cda40a6eaf3e9d0cbb1ac4384de896e8",
+            "count": 1,
+            "repos": [
+                "vercel/async-listen"
+            ]
+        },
+        {
+            "command": "amannn/action-semantic-pull-request@0b14f54ac155d88e12522156e52cb6e397745cfd",
+            "count": 1,
+            "repos": [
+                "vercel/nft"
+            ]
+        }
+    ],
+    "Step 3": [
+        {
+            "command": "npm ci",
+            "count": 1,
+            "repos": [
+                "vercel/test-listen"
+            ]
+        },
+        {
+            "command": "npm install",
+            "count": 2,
+            "repos": [
+                "vercel/async-retry",
+                "vercel/arg"
+            ]
+        },
+        {
+            "command": "yarn install --frozen-lockfile --check-files",
+            "count": 1,
+            "repos": [
+                "vercel/react-keyframes"
+            ]
+        },
+        {
+            "command": "actions/cache@v3",
+            "count": 1,
+            "repos": [
+                "vercel/pkg"
+            ]
+        },
+        {
+            "command": "actions/download-artifact@v3",
+            "count": 1,
+            "repos": [
+                "vercel/pkg-fetch"
+            ]
+        },
+        {
+            "command": "yarn install",
+            "count": 1,
+            "repos": [
+                "vercel/pkg-fetch"
+            ]
+        },
+        {
+            "command": "actions/cache@v2",
+            "count": 1,
+            "repos": [
+                "vercel/pkg-fetch"
+            ]
+        },
+        {
+            "command": "git checkout pr-${{ github.event.pull_request.number }}",
+            "count": 1,
+            "repos": [
+                "vercel/vercel"
+            ]
+        },
+        {
+            "command": "actions/checkout@v4",
+            "count": 1,
+            "repos": [
+                "vercel/next.js"
+            ]
+        },
+        {
+            "command": "corepack enable",
+            "count": 9,
+            "repos": [
+                "vercel/next.js",
+                "vercel/turbo"
+            ]
+        },
+        {
+            "command": "cp -r packages/next-swc/native .github/actions/next-stats-action/native",
+            "count": 1,
+            "repos": [
+                "vercel/next.js"
+            ]
+        },
+        {
+            "command": "node -v",
+            "count": 1,
+            "repos": [
+                "vercel/next.js"
+            ]
+        },
+        {
+            "command": "git clone https://github.com/vercel/next.js.git --depth=1 .",
+            "count": 1,
+            "repos": [
+                "vercel/next.js"
+            ]
+        },
+        {
+            "command": "actions/download-artifact@v4",
+            "count": 1,
+            "repos": [
+                "vercel/next.js"
+            ]
+        },
+        {
+            "command": "actions/setup-node@v2",
+            "count": 1,
+            "repos": [
+                "vercel/fetch"
+            ]
+        },
+        {
+            "command": "actions/setup-node@v3",
+            "count": 1,
+            "repos": [
+                "vercel/cosmosdb-server"
+            ]
+        },
+        {
+            "command": "actions/setup-python@v5",
+            "count": 1,
+            "repos": [
+                "vercel/nft"
+            ]
+        },
+        {
+            "command": "pnpm clean\npnpm build\npnpm run-all-checks\npnpm test:build\n",
+            "count": 1,
+            "repos": [
+                "vercel/swr"
+            ]
+        },
+        {
+            "command": "./.github/actions/setup-rust",
+            "count": 3,
+            "repos": [
+                "vercel/turbo"
+            ]
+        },
+        {
+            "command": "git fetch origin --tags",
+            "count": 1,
+            "repos": [
+                "vercel/turbo"
+            ]
+        }
+    ],
+    "Step 4": [
+        {
+            "command": "npm test",
+            "count": 3,
+            "repos": [
+                "vercel/test-listen",
+                "vercel/async-retry",
+                "vercel/arg"
+            ]
+        },
+        {
+            "command": "actions/cache@v1",
+            "count": 1,
+            "repos": [
+                "vercel/react-keyframes"
+            ]
+        },
+        {
+            "command": "yarn install",
+            "count": 2,
+            "repos": [
+                "vercel/pkg",
+                "vercel/pkg-fetch"
+            ]
+        },
+        {
+            "command": "choco install nasm",
+            "count": 1,
+            "repos": [
+                "vercel/pkg-fetch"
+            ]
+        },
+        {
+            "command": "pnpm install",
+            "count": 4,
+            "repos": [
+                "vercel/vercel",
+                "vercel/turbo"
+            ]
+        },
+        {
+            "command": "echo STORE_PATH=$(pnpm store path) >> $GITHUB_OUTPUT",
+            "count": 1,
+            "repos": [
+                "vercel/next.js"
+            ]
+        },
+        {
+            "command": "actions/cache@v4",
+            "count": 2,
+            "repos": [
+                "vercel/next.js"
+            ]
+        },
+        {
+            "command": "./scripts/release-stats.sh",
+            "count": 1,
+            "repos": [
+                "vercel/next.js"
+            ]
+        },
+        {
+            "command": "corepack enable",
+            "count": 2,
+            "repos": [
+                "vercel/next.js"
+            ]
+        },
+        {
+            "command": "cp -r packages/next-swc/native .github/actions/next-stats-action/native",
+            "count": 1,
+            "repos": [
+                "vercel/next.js"
+            ]
+        },
+        {
+            "command": "./.github/actions/setup-node",
+            "count": 1,
+            "repos": [
+                "vercel/turbo"
+            ]
+        }
+    ],
+    "Step 2": [
+        {
+            "command": "actions/setup-node@v1",
+            "count": 2,
+            "repos": [
+                "vercel/async-retry",
+                "vercel/arg"
+            ]
+        },
+        {
+            "command": "git fetch --depth=1 origin +refs/tags/*:refs/tags/*",
+            "count": 1,
+            "repos": [
+                "vercel/react-keyframes"
+            ]
+        },
+        {
+            "command": "npm run test",
+            "count": 1,
+            "repos": [
+                "vercel/react-keyframes"
+            ]
+        },
+        {
+            "command": "./publish-release.sh",
+            "count": 1,
+            "repos": [
+                "vercel/react-keyframes"
+            ]
+        },
+        {
+            "command": "actions/setup-node@v3",
+            "count": 2,
+            "repos": [
+                "vercel/pkg",
+                "vercel/cosmosdb-server"
+            ]
+        },
+        {
+            "command": "maxim-lobanov/setup-xcode@v1",
+            "count": 1,
+            "repos": [
+                "vercel/pkg-fetch"
+            ]
+        },
+        {
+            "command": "actions/setup-node@v4",
+            "count": 10,
+            "repos": [
+                "vercel/vercel",
+                "vercel/next.js",
+                "vercel/turbo"
+            ]
+        },
+        {
+            "command": "git fetch origin ${{ github.event.pull_request.head.sha }}:pr-${{ github.event.pull_request.number }}",
+            "count": 1,
+            "repos": [
+                "vercel/vercel"
+            ]
+        },
+        {
+            "command": "corepack enable",
+            "count": 4,
+            "repos": [
+                "vercel/next.js"
+            ]
+        },
+        {
+            "command": "actions/download-artifact@v4",
+            "count": 1,
+            "repos": [
+                "vercel/next.js"
+            ]
+        },
+        {
+            "command": "fnm use --install-if-missing ${{ inputs.nodeVersion || env.NODE_LTS_VERSION }}",
+            "count": 1,
+            "repos": [
+                "vercel/next.js"
+            ]
+        },
+        {
+            "command": "pnpm/action-setup@v2.2.2",
+            "count": 1,
+            "repos": [
+                "vercel/fetch"
+            ]
+        },
+        {
+            "command": "actions/setup-go@v2",
+            "count": 1,
+            "repos": [
+                "vercel/fun"
+            ]
+        },
+        {
+            "command": "./.github/actions/setup-node",
+            "count": 5,
+            "repos": [
+                "vercel/turbo"
+            ]
+        },
+        {
+            "command": "actions/checkout@v3",
+            "count": 4,
+            "repos": [
+                "vercel/turbo"
+            ]
+        },
+        {
+            "command": "actions/checkout@1.0.0",
+            "count": 1,
+            "repos": [
+                "vercel/turbo"
+            ]
+        }
+    ],
+    "Download Artifacts": [
+        {
+            "command": "dawidd6/action-download-artifact@v2.24.2",
+            "count": 1,
+            "repos": [
+                "vercel/hyper"
+            ]
+        },
+        {
+            "command": "actions/download-artifact@v3",
+            "count": 1,
+            "repos": [
+                "vercel/turbo"
+            ]
+        }
+    ],
+    "Step 5": [
+        {
+            "command": "actions/cache/restore@v3",
+            "count": 2,
+            "repos": [
+                "vercel/hyper"
+            ]
+        },
+        {
+            "command": "yarn lint",
+            "count": 1,
+            "repos": [
+                "vercel/pkg"
+            ]
+        },
+        {
+            "command": "yarn start --node-range node${{ matrix.target-node }} --output dist",
+            "count": 1,
+            "repos": [
+                "vercel/pkg-fetch"
+            ]
+        },
+        {
+            "command": "yarn start --node-range node${{ matrix.target-node }} --arch ${{ matrix.target-arch }} --output dist",
+            "count": 1,
+            "repos": [
+                "vercel/pkg-fetch"
+            ]
+        },
+        {
+            "command": "TESTS_ARRAY=$(node utils/chunk-tests-18.js $SCRIPT_NAME)\necho \"Files to test:\"\necho \"$TESTS_ARRAY\"\necho \"tests=$TESTS_ARRAY\" >> $GITHUB_OUTPUT\n",
+            "count": 1,
+            "repos": [
+                "vercel/vercel"
+            ]
+        },
+        {
+            "command": "pnpm install",
+            "count": 4,
+            "repos": [
+                "vercel/vercel",
+                "vercel/next.js"
+            ]
+        },
+        {
+            "command": "pnpm run lint",
+            "count": 1,
+            "repos": [
+                "vercel/vercel"
+            ]
+        },
+        {
+            "command": "TESTS_ARRAY=$(node utils/chunk-tests.js $SCRIPT_NAME)\necho \"Files to test:\"\necho \"$TESTS_ARRAY\"\necho \"tests=$TESTS_ARRAY\" >> $GITHUB_OUTPUT\n",
+            "count": 1,
+            "repos": [
+                "vercel/vercel"
+            ]
+        },
+        {
+            "command": "actions/cache@v4",
+            "count": 1,
+            "repos": [
+                "vercel/next.js"
+            ]
+        },
+        {
+            "command": "actions/checkout@v4",
+            "count": 1,
+            "repos": [
+                "vercel/next.js"
+            ]
+        },
+        {
+            "command": "npm i -g turbo@${{ env.TURBO_VERSION }}",
+            "count": 1,
+            "repos": [
+                "vercel/next.js"
+            ]
+        },
+        {
+            "command": "actions/download-artifact@v4",
+            "count": 2,
+            "repos": [
+                "vercel/next.js"
+            ]
+        },
+        {
+            "command": "./.github/actions/next-stats-action",
+            "count": 2,
+            "repos": [
+                "vercel/next.js"
+            ]
+        },
+        {
+            "command": "pwd",
+            "count": 1,
+            "repos": [
+                "vercel/next.js"
+            ]
+        },
+        {
+            "command": "node ./scripts/code-freeze.js --type ${{ github.event.inputs.type }}",
+            "count": 1,
+            "repos": [
+                "vercel/next.js"
+            ]
+        },
+        {
+            "command": "if [ -z \"${RUSTC_WRAPPER}\" ]; then\n  unset RUSTC_WRAPPER\nfi\nTURBO_API= turbo run build --filter=cli --color --env-mode=strict --token=${{ secrets.TURBO_TOKEN }} --team=${{ vars.TURBO_TEAM }}\n",
+            "count": 1,
+            "repos": [
+                "vercel/turbo"
+            ]
+        }
+    ],
+    "Install": [
+        {
+            "command": "yarn install",
+            "count": 1,
+            "repos": [
+                "vercel/hyper"
+            ]
+        },
+        {
+            "command": "yarn install\nsudo apt update\nsudo apt install libarchive-tools\n",
+            "count": 1,
+            "repos": [
+                "vercel/hyper"
+            ]
+        },
+        {
+            "command": "./.github/workflows/install",
+            "count": 6,
+            "repos": [
+                "vercel/swr"
+            ]
+        }
+    ],
+    "Build": [
+        {
+            "command": "if [ -z \"$CSC_LINK\" ] ; then unset CSC_LINK ; fi\nif [ -z \"$CSC_KEY_PASSWORD\" ] ; then unset CSC_KEY_PASSWORD ; fi\nif [ -z \"$WIN_CSC_LINK\" ] ; then unset WIN_CSC_LINK ; fi\nif [ -z \"$WIN_CSC_KEY_PASSWORD\" ] ; then unset WIN_CSC_KEY_PASSWORD ; fi\nif [ -z \"$APPLE_ID\" ] ; then unset APPLE_ID ; fi\nif [ -z \"$APPLE_APP_SPECIFIC_PASSWORD\" ] ; then unset APPLE_APP_SPECIFIC_PASSWORD ; fi\nyarn run dist\n",
+            "count": 1,
+            "repos": [
+                "vercel/hyper"
+            ]
+        },
+        {
+            "command": "yarn run electron-builder -l deb rpm AppImage pacman --${{ matrix.name }} -c electron-builder-linux-ci.json",
+            "count": 1,
+            "repos": [
+                "vercel/hyper"
+            ]
+        },
+        {
+            "command": "docker/build-push-action@v2",
+            "count": 4,
+            "repos": [
+                "vercel/pkg-fetch"
+            ]
+        },
+        {
+            "command": "yarn build",
+            "count": 5,
+            "repos": [
+                "vercel/pkg-fetch",
+                "vercel/styled-jsx",
+                "vercel/cosmosdb-server",
+                "vercel/ncc"
+            ]
+        },
+        {
+            "command": "${{ matrix.settings.build }}",
+            "count": 1,
+            "repos": [
+                "vercel/next.js"
+            ]
+        },
+        {
+            "command": "turbo run build-wasm -vvv --remote-cache-timeout 90 --summarize -- --target ${{ matrix.target }}",
+            "count": 1,
+            "repos": [
+                "vercel/next.js"
+            ]
+        },
+        {
+            "command": "npm run build",
+            "count": 1,
+            "repos": [
+                "vercel/nft"
+            ]
+        },
+        {
+            "command": "pnpm -F cli build:release",
+            "count": 1,
+            "repos": [
+                "vercel/turbo"
+            ]
+        },
+        {
+            "command": "${{ matrix.settings.rust-build-env }} cargo build --profile release-turborepo-lsp -p turborepo-lsp --target ${{ matrix.settings.target }}",
+            "count": 1,
+            "repos": [
+                "vercel/turbo"
+            ]
+        },
+        {
+            "command": "${{ matrix.settings.rust-build-env }} cargo build --profile release-turborepo -p turbo --target ${{ matrix.settings.target }}",
+            "count": 1,
+            "repos": [
+                "vercel/turbo"
+            ]
+        }
+    ],
+    "Step 6": [
+        {
+            "command": "yarn build",
+            "count": 1,
+            "repos": [
+                "vercel/pkg"
+            ]
+        },
+        {
+            "command": "actions/upload-artifact@v2",
+            "count": 4,
+            "repos": [
+                "vercel/pkg-fetch"
+            ]
+        },
+        {
+            "command": "patrickedqvist/wait-for-vercel-preview@bfdff514ff78a669f2536e9f4dd4ef5813a704a2",
+            "count": 2,
+            "repos": [
+                "vercel/vercel"
+            ]
+        },
+        {
+            "command": "pnpm exec changeset status --since=main",
+            "count": 1,
+            "repos": [
+                "vercel/vercel"
+            ]
+        },
+        {
+            "command": "pnpm run prettier-check",
+            "count": 1,
+            "repos": [
+                "vercel/vercel"
+            ]
+        },
+        {
+            "command": "pnpm install",
+            "count": 1,
+            "repos": [
+                "vercel/next.js"
+            ]
+        },
+        {
+            "command": "actions/download-artifact@v4",
+            "count": 2,
+            "repos": [
+                "vercel/next.js"
+            ]
+        },
+        {
+            "command": "rm -rf .git",
+            "count": 1,
+            "repos": [
+                "vercel/next.js"
+            ]
+        },
+        {
+            "command": "pnpm build",
+            "count": 1,
+            "repos": [
+                "vercel/next.js"
+            ]
+        }
+    ],
+    "Step 7": [
+        {
+            "command": "yarn test",
+            "count": 1,
+            "repos": [
+                "vercel/pkg"
+            ]
+        },
+        {
+            "command": "actions/upload-artifact@v2",
+            "count": 2,
+            "repos": [
+                "vercel/pkg-fetch"
+            ]
+        },
+        {
+            "command": "pnpm run build",
+            "count": 2,
+            "repos": [
+                "vercel/vercel",
+                "vercel/next.js"
+            ]
+        },
+        {
+            "command": "corepack enable",
+            "count": 1,
+            "repos": [
+                "vercel/next.js"
+            ]
+        },
+        {
+            "command": "npm i -g vercel@latest",
+            "count": 1,
+            "repos": [
+                "vercel/next.js"
+            ]
+        },
+        {
+            "command": "npm i -g npm@10.4.0",
+            "count": 1,
+            "repos": [
+                "vercel/next.js"
+            ]
+        },
+        {
+            "command": "actions/checkout@v4",
+            "count": 1,
+            "repos": [
+                "vercel/next.js"
+            ]
+        }
+    ],
+    "Check if binary is compiled": [
+        {
+            "command": "(test -f root/pkg-fetch/dist/*.sha256sum && echo ::set-output name=EXISTS::true) || echo ::set-output name=EXISTS::false\n",
+            "count": 4,
+            "repos": [
+                "vercel/pkg-fetch"
+            ]
+        },
+        {
+            "command": "(test -f dist/*.sha256sum && echo ::set-output name=EXISTS::true) || echo ::set-output name=EXISTS::false\n",
+            "count": 1,
+            "repos": [
+                "vercel/pkg-fetch"
+            ]
+        },
+        {
+            "command": "if (Test-Path -Path dist\\\\*.sha256sum -PathType Leaf) { echo \"::set-output name=EXISTS::true\" } else { echo \"::set-output name=EXISTS::false\" }\n",
+            "count": 1,
+            "repos": [
+                "vercel/pkg-fetch"
+            ]
+        }
+    ],
+    "Lint": [
+        {
+            "command": "yarn lint",
+            "count": 3,
+            "repos": [
+                "vercel/pkg-fetch",
+                "vercel/styled-jsx",
+                "vercel/cosmosdb-server"
+            ]
+        },
+        {
+            "command": "turbo run lint \\\n--filter=!@vercel/devlow-bench \\\n--filter=!@vercel/experimental-nft-next-plugin \\\n--filter=!@vercel/experimental-nft-next-plugin \\\n--filter=!turbopack-bump-action \\\n--filter=!next-integration-stat \\\n--env-mode=strict\n",
+            "count": 1,
+            "repos": [
+                "vercel/turbo"
+            ]
+        }
+    ],
+    "Enable corepack": [
+        {
+            "command": "corepack enable pnpm",
+            "count": 4,
+            "repos": [
+                "vercel/vercel"
+            ]
+        },
+        {
+            "command": "corepack enable pnpm && pnpm --version",
+            "count": 1,
+            "repos": [
+                "vercel/async-listen"
+            ]
+        }
+    ],
+    "Create Pull Request": [
+        {
+            "command": "actions/github-script@v7",
+            "count": 2,
+            "repos": [
+                "vercel/vercel"
+            ]
+        },
+        {
+            "command": "node scripts/automated-update-workflow.js",
+            "count": 3,
+            "repos": [
+                "vercel/next.js"
+            ]
+        }
+    ],
+    "Add comment": [
+        {
+            "command": "peter-evans/create-or-update-comment@5adcb0bb0f9fb3f95ef05400558bdb3f329ee808",
+            "count": 2,
+            "repos": [
+                "vercel/vercel"
+            ]
+        },
+        {
+            "command": "peter-evans/close-issue@v2",
+            "count": 1,
+            "repos": [
+                "vercel/vercel"
+            ]
+        }
+    ],
+    "Checkout Repo": [
+        {
+            "command": "actions/checkout@v4",
+            "count": 1,
+            "repos": [
+                "vercel/vercel"
+            ]
+        },
+        {
+            "command": "actions/checkout@v3",
+            "count": 1,
+            "repos": [
+                "vercel/turbo"
+            ]
+        }
+    ],
+    "Setup Node": [
+        {
+            "command": "actions/setup-node@v4",
+            "count": 1,
+            "repos": [
+                "vercel/vercel"
+            ]
+        },
+        {
+            "command": "actions/setup-node@v2",
+            "count": 1,
+            "repos": [
+                "vercel/fetch"
+            ]
+        },
+        {
+            "command": "./.github/actions/setup-node",
+            "count": 4,
+            "repos": [
+                "vercel/turbo"
+            ]
+        }
+    ],
+    "Install Dependencies": [
+        {
+            "command": "pnpm install --frozen-lockfile",
+            "count": 1,
+            "repos": [
+                "vercel/vercel"
+            ]
+        },
+        {
+            "command": "npm install",
+            "count": 4,
+            "repos": [
+                "vercel/fetch-retry",
+                "vercel/fetch-cached-dns",
+                "vercel/fun",
+                "vercel/nft"
+            ]
+        },
+        {
+            "command": "pnpm install",
+            "count": 2,
+            "repos": [
+                "vercel/fetch"
+            ]
+        },
+        {
+            "command": "yarn install --frozen-lockfile",
+            "count": 2,
+            "repos": [
+                "vercel/cosmosdb-server"
+            ]
+        },
+        {
+            "command": "yarn global add node-gyp && yarn install --frozen-lockfile",
+            "count": 1,
+            "repos": [
+                "vercel/ncc"
+            ]
+        },
+        {
+            "command": "yarn install",
+            "count": 1,
+            "repos": [
+                "vercel/webpack-asset-relocator-loader"
+            ]
+        },
+        {
+            "command": "pnpm i --frozen-lockfile --ignore-scripts",
+            "count": 1,
+            "repos": [
+                "vercel/examples"
+            ]
+        }
+    ],
+    "Check All": [
+        {
+            "command": "echo OK",
+            "count": 1,
+            "repos": [
+                "vercel/vercel"
+            ]
+        },
+        {
+            "command": "for status in ${{ join(needs.*.result, ' ') }}\ndo\n  if [ \"$status\" != \"success\" ] && [ \"$status\" != \"skipped\" ]\n  then\n    echo \"Some checks failed\"\n    exit 1\n  fi\ndone",
+            "count": 2,
+            "repos": [
+                "vercel/vercel"
+            ]
+        }
+    ],
+    "Upload Test Report to Datadog": [
+        {
+            "command": "npx @datadog/datadog-ci@2.18.1 junit upload --service vercel-cli .junit-reports",
+            "count": 1,
+            "repos": [
+                "vercel/vercel"
+            ]
+        },
+        {
+            "command": "npx @datadog/datadog-ci@2.36.0 junit upload --service vercel-cli .junit-reports",
+            "count": 1,
+            "repos": [
+                "vercel/vercel"
+            ]
+        }
+    ],
+    "Step 8": [
+        {
+            "command": "pnpm run type-check",
+            "count": 1,
+            "repos": [
+                "vercel/vercel"
+            ]
+        },
+        {
+            "command": "if [[ $(node ./scripts/check-is-release.js 2> /dev/null || :) = v* ]];\n  then\n    echo \"IS_RELEASE=true\" >> $GITHUB_OUTPUT\n  else\n    echo \"IS_RELEASE=false\" >> $GITHUB_OUTPUT\nfi\n",
+            "count": 1,
+            "repos": [
+                "vercel/next.js"
+            ]
+        },
+        {
+            "command": "node ./scripts/deploy-tarball.js",
+            "count": 1,
+            "repos": [
+                "vercel/next.js"
+            ]
+        },
+        {
+            "command": "echo \"//registry.npmjs.org/:_authToken=$NPM_TOKEN\" >> ~/.npmrc",
+            "count": 1,
+            "repos": [
+                "vercel/next.js"
+            ]
+        },
+        {
+            "command": "corepack enable && pnpm --version",
+            "count": 1,
+            "repos": [
+                "vercel/next.js"
+            ]
+        }
+    ],
+    "Step 9": [
+        {
+            "command": "actions/cache@v4",
+            "count": 1,
+            "repos": [
+                "vercel/next.js"
+            ]
+        },
+        {
+            "command": "./scripts/publish-native.js",
+            "count": 1,
+            "repos": [
+                "vercel/next.js"
+            ]
+        },
+        {
+            "command": "echo STORE_PATH=$(pnpm store path) >> $GITHUB_OUTPUT",
+            "count": 1,
+            "repos": [
+                "vercel/next.js"
+            ]
+        }
+    ],
+    "Step 10": [
+        {
+            "command": "./scripts/publish-release.js",
+            "count": 1,
+            "repos": [
+                "vercel/next.js"
+            ]
+        },
+        {
+            "command": "actions/cache@v4",
+            "count": 1,
+            "repos": [
+                "vercel/next.js"
+            ]
+        }
+    ],
+    "Install nextest": [
+        {
+            "command": "taiki-e/install-action@nextest",
+            "count": 1,
+            "repos": [
+                "vercel/next.js"
+            ]
+        },
+        {
+            "command": "taiki-e/install-action@v2",
+            "count": 3,
+            "repos": [
+                "vercel/turbo"
+            ]
+        }
+    ],
+    "Step 11": [
+        {
+            "command": "rustc --version",
+            "count": 1,
+            "repos": [
+                "vercel/next.js"
+            ]
+        },
+        {
+            "command": "actions/cache/restore@v3",
+            "count": 1,
+            "repos": [
+                "vercel/next.js"
+            ]
+        },
+        {
+            "command": "pnpm install",
+            "count": 1,
+            "repos": [
+                "vercel/next.js"
+            ]
+        }
+    ],
+    "Step 12": [
+        {
+            "command": "corepack prepare --activate yarn@1.22.19 && npm i -g \"turbo@${TURBO_VERSION}\" \"@napi-rs/cli@${NAPI_CLI_VERSION}\"",
+            "count": 1,
+            "repos": [
+                "vercel/next.js"
+            ]
+        },
+        {
+            "command": "pnpm run build",
+            "count": 1,
+            "repos": [
+                "vercel/next.js"
+            ]
+        }
+    ],
+    "Checkout Next.js": [
+        {
+            "command": "actions/checkout@v4",
+            "count": 1,
+            "repos": [
+                "vercel/next.js"
+            ]
+        },
+        {
+            "command": "actions/checkout@v3",
+            "count": 1,
+            "repos": [
+                "vercel/turbo"
+            ]
+        }
+    ],
+    "Build next-swc": [
+        {
+            "command": "hyperfine --min-runs 1 --show-output 'pnpm run --filter=@next/swc build-native --features plugin --release'\necho \"Successfully built next-swc with published turbopack\"\n",
+            "count": 1,
+            "repos": [
+                "vercel/next.js"
+            ]
+        },
+        {
+            "command": "export TURBOPACK_REMOTE=\"https://github.com/vercel/turbo\"\n\n# patch the turbo git dependency with the commit of the current PR.\nexport BINDING=$(printf 'patch.\"%s\".%s.git=\"%s?rev=%s\"' \"$TURBOPACK_REMOTE\" \"turbopack-binding\" \"$TURBOPACK_REMOTE\" \"$GITHUB_SHA\")\nexport TASKS=$(printf 'patch.\"%s\".%s.git=\"%s?rev=%s\"' \"$TURBOPACK_REMOTE\" \"turbo-tasks\" \"$TURBOPACK_REMOTE\" \"$GITHUB_SHA\")\nexport TASKS_FS=$(printf 'patch.\"%s\".%s.git=\"%s?rev=%s\"' \"$TURBOPACK_REMOTE\" \"turbo-tasks-fs\" \"$TURBOPACK_REMOTE\" \"$GITHUB_SHA\")\n\n# set pipefail so the exit code of `cargo check` gets preserved\n(set -o pipefail && \\\ncargo check \\\n  --config $BINDING --config $TASKS --config $TASKS_FS \\\n  --all -p next-swc-api \\\n  --no-default-features --features rustls-tls \\\n  --message-format short --quiet \\\n2>&1 | tee cargo_output.log)\n",
+            "count": 1,
+            "repos": [
+                "vercel/turbo"
+            ]
+        }
+    ],
+    "Run test/integration": [
+        {
+            "command": "TURBOPACK=1 TURBOPACK_BUILD=1 node run-tests.js -g ${{ matrix.group }}/12 -c ${TEST_CONCURRENCY} --type integration\n",
+            "count": 1,
+            "repos": [
+                "vercel/next.js"
+            ]
+        },
+        {
+            "command": "TURBOPACK=1 TURBOPACK_DEV=1 node run-tests.js -g ${{ matrix.group }}/12 -c ${TEST_CONCURRENCY} --type integration\n",
+            "count": 1,
+            "repos": [
+                "vercel/next.js"
+            ]
+        }
+    ],
+    "Upload to datadog": [
+        {
+            "command": "# We'll tag this to the \"Turbopack\" datadog service, not \"nextjs\"\nnpx @datadog/datadog-ci@2.23.1 junit upload --tags test.type:turbopack-build.daily --service Turbopack-build ./test/reports\n",
+            "count": 1,
+            "repos": [
+                "vercel/next.js"
+            ]
+        },
+        {
+            "command": "# We'll tag this to the \"Turbopack\" datadog service, not \"nextjs\"\nnpx @datadog/datadog-ci@2.23.1 junit upload --tags test.type:turbopack.daily --service Turbopack ./test/reports\n",
+            "count": 1,
+            "repos": [
+                "vercel/next.js"
+            ]
+        }
+    ],
+    "Test": [
+        {
+            "command": "yarn test",
+            "count": 2,
+            "repos": [
+                "vercel/styled-jsx",
+                "vercel/cosmosdb-server"
+            ]
+        },
+        {
+            "command": "pnpm clean\npnpm build\npnpm test\npnpm test:build\n",
+            "count": 1,
+            "repos": [
+                "vercel/swr"
+            ]
+        }
+    ],
+    "Run Tests": [
+        {
+            "command": "pnpm test",
+            "count": 1,
+            "repos": [
+                "vercel/fetch"
+            ]
+        },
+        {
+            "command": "yarn test",
+            "count": 2,
+            "repos": [
+                "vercel/ncc",
+                "vercel/webpack-asset-relocator-loader"
+            ]
+        },
+        {
+            "command": "npm run ${{ (matrix.os == 'ubuntu-latest') && 'test-verbose' || 'test' }}",
+            "count": 1,
+            "repos": [
+                "vercel/nft"
+            ]
+        }
+    ],
+    "Publish": [
+        {
+            "command": "npm publish --access public",
+            "count": 1,
+            "repos": [
+                "vercel/cosmosdb-server"
+            ]
+        },
+        {
+            "command": "cargo xtask workspace --publish",
+            "count": 1,
+            "repos": [
+                "vercel/turbo"
+            ]
+        }
+    ],
+    "Use Node.js ${{ matrix.node }}": [
+        {
+            "command": "actions/setup-node@v4",
+            "count": 3,
+            "repos": [
+                "vercel/ncc",
+                "vercel/webpack-asset-relocator-loader",
+                "vercel/nft"
+            ]
+        },
+        {
+            "command": "actions/setup-node@v3",
+            "count": 1,
+            "repos": [
+                "vercel/fun"
+            ]
+        }
+    ],
+    "Maybe Release": [
+        {
+            "command": "npx semantic-release@19.0.5",
+            "count": 2,
+            "repos": [
+                "vercel/ncc",
+                "vercel/nft"
+            ]
+        },
+        {
+            "command": "pnpm dlx semantic-release@21.1.1",
+            "count": 1,
+            "repos": [
+                "vercel/fun"
+            ]
+        },
+        {
+            "command": "pnpm dlx semantic-release@19.0.5",
+            "count": 1,
+            "repos": [
+                "vercel/async-listen"
+            ]
+        }
+    ],
+    "Lint and test": [
+        {
+            "command": "pnpm clean\npnpm build\npnpm test\npnpm test:build\n",
+            "count": 1,
+            "repos": [
+                "vercel/swr"
+            ]
+        },
+        {
+            "command": "pnpm clean\npnpm build\npnpm run-all-checks\nnpm pack\npnpm attw\npnpm test\npnpm test:build\n",
+            "count": 1,
+            "repos": [
+                "vercel/swr"
+            ]
+        }
+    ],
+    "Configure git": [
+        {
+            "command": "git config user.name \"vercel-release-bot\"\ngit config user.email \"infra+release@vercel.com\"\n",
+            "count": 1,
+            "repos": [
+                "vercel/swr"
+            ]
+        },
+        {
+            "command": "git config --global user.name 'Turbobot'\ngit config --global user.email 'turbobot@vercel.com'\n",
+            "count": 3,
+            "repos": [
+                "vercel/turbo"
+            ]
+        }
+    ],
+    "Checkout repo": [
+        {
+            "command": "actions/checkout@v4",
+            "count": 2,
+            "repos": [
+                "vercel/next-learn",
+                "vercel/commerce"
+            ]
+        },
+        {
+            "command": "actions/checkout@v3",
+            "count": 2,
+            "repos": [
+                "vercel/turbo"
+            ]
+        }
+    ],
+    "Cache node_modules": [
+        {
+            "command": "actions/cache@v4",
+            "count": 1,
+            "repos": [
+                "vercel/next-learn"
+            ]
+        },
+        {
+            "command": "actions/cache@v3",
+            "count": 1,
+            "repos": [
+                "vercel/commerce"
+            ]
+        }
+    ],
+    "Run cargo bench": [
+        {
+            "command": "cargo bench -p turbopack-bench -p turbopack-cli -- ${{ matrix.bench.run_args }}",
+            "count": 1,
+            "repos": [
+                "vercel/turbo"
+            ]
+        },
+        {
+            "command": "cargo bench ${{ matrix.bench.args }}",
+            "count": 1,
+            "repos": [
+                "vercel/turbo"
+            ]
+        }
+    ],
+    "Setup Node.js": [
+        {
+            "command": "./.github/actions/setup-node",
+            "count": 6,
+            "repos": [
+                "vercel/turbo"
+            ]
+        },
+        {
+            "command": "actions/setup-node@v3.6.0",
+            "count": 1,
+            "repos": [
+                "vercel/turbo"
+            ]
+        },
+        {
+            "command": "actions/setup-node@v3",
+            "count": 2,
+            "repos": [
+                "vercel/turbo"
+            ]
+        }
+    ],
+    "Compute info": [
+        {
+            "command": "cancelled=false\nfailure=false\nsubjob () {\n  local result=$1\n  local name=$2\n  echo \"$name: $result\"\n  if [ \"$result\" = \"cancelled\" ]; then\n    cancelled=true\n  elif [ \"$result\" != \"success\" ] && [ \"$result\" != \"skipped\" ]; then\n    echo \"- $name\" >> failures.md\n    failure=true\n  fi\n}\nsubjob ${{needs.determine_jobs.result}} \"Determining jobs\"\nsubjob ${{needs.turbopack_rust_check.result}} \"Turbopack Rust checks\"\nsubjob ${{needs.turbopack_rust_bench.result}} \"Turbopack Rust benchmarks (non-blocking)\"\nif [ \"$cancelled\" = \"true\" ]; then\n   echo \"cancelled=true\" >> $GITHUB_OUTPUT\nelif [ \"$failure\" = \"true\" ]; then\n  echo \"failure=true\" >> $GITHUB_OUTPUT\nelse\n  echo \"success=true\" >> $GITHUB_OUTPUT\nfi\n",
+            "count": 1,
+            "repos": [
+                "vercel/turbo"
+            ]
+        },
+        {
+            "command": "cancelled=false\nfailure=false\n\nsubjob () {\n  local result=$1\n  if [ \"$result\" = \"cancelled\" ]; then\n    cancelled=true\n  elif [ \"$result\" != \"success\" ] && [ \"$result\" != \"skipped\" ]; then\n    failure=true\n  fi\n}\n\nsubjob ${{needs.determine_jobs.result}}\nsubjob ${{needs.js_packages.result}}\n\nif [ \"$cancelled\" = \"true\" ]; then\n    echo \"cancelled=true\" >> $GITHUB_OUTPUT\nelif [ \"$failure\" = \"true\" ]; then\n  echo \"failure=true\" >> $GITHUB_OUTPUT\nelse\n  echo \"success=true\" >> $GITHUB_OUTPUT\nfi\n",
+            "count": 1,
+            "repos": [
+                "vercel/turbo"
+            ]
+        },
+        {
+            "command": "cancelled=false\nfailure=false\nsubjob () {\n  local result=$1\n  local name=$2\n  if [ \"$result\" = \"cancelled\" ]; then\n    cancelled=true\n  elif [ \"$result\" != \"success\" ] && [ \"$result\" != \"skipped\" ]; then\n    echo \"- $name\" >> failures.md\n    failure=true\n  fi\n}\nsubjob ${{needs.determine_jobs.result}} \"Determining jobs\"\nsubjob ${{needs.turbopack_rust_check.result}} \"Turbopack Rust checks\"\nsubjob ${{needs.turbopack_rust_clippy.result}} \"Turbopack Rust clippy\"\nsubjob ${{needs.turbopack_rust_test1.result}} \"Turbopack Rust tests (linux)\"\nsubjob ${{needs.turbopack_rust_test_bench1.result}} \"Turbopack Rust benchmark tests (linux)\"\nsubjob ${{needs.turbopack_typescript.result}} \"Turbopack Typescript checks\"\nif [ \"$cancelled\" = \"true\" ]; then\n   echo \"cancelled=true\" >> $GITHUB_OUTPUT\nelif [ \"$failure\" = \"true\" ]; then\n  echo \"failure=true\" >> $GITHUB_OUTPUT\nelse\n  echo \"success=true\" >> $GITHUB_OUTPUT\nfi\n",
+            "count": 1,
+            "repos": [
+                "vercel/turbo"
+            ]
+        },
+        {
+            "command": "cancelled=false\nfailure=false\nsubjob () {\n  local result=$1\n  local name=$2\n  echo \"$name: $result\"\n  if [ \"$result\" = \"cancelled\" ]; then\n    cancelled=true\n  elif [ \"$result\" != \"success\" ] && [ \"$result\" != \"skipped\" ]; then\n    echo \"- $name\" >> failures.md\n    failure=true\n  fi\n}\nsubjob ${{needs.determine_jobs.result}} \"Determining jobs\"\nsubjob ${{needs.turbopack_rust_check.result}} \"Turbopack Rust checks\"\nsubjob ${{needs.turbopack_rust_clippy.result}} \"Turbopack Rust clippy\"\nsubjob ${{needs.turbopack_rust_test1.result}} \"Turbopack Rust tests (linux)\"\nsubjob ${{needs.turbopack_rust_test2.result}} \"Turbopack Rust tests (mac/win, non-blocking)\"\nsubjob ${{needs.turbopack_rust_test_bench1.result}} \"Turbopack Rust benchmark tests (linux)\"\nsubjob ${{needs.turbopack_rust_test_bench2.result}} \"Turbopack Rust benchmark tests (mac/win, non-blocking)\"\nsubjob ${{needs.turbopack_typescript.result}} \"Turbopack Typescript checks\"\nif [ \"$cancelled\" = \"true\" ]; then\n   echo \"cancelled=true\" >> $GITHUB_OUTPUT\nelif [ \"$failure\" = \"true\" ]; then\n  echo \"failure=true\" >> $GITHUB_OUTPUT\nelse\n  echo \"success=true\" >> $GITHUB_OUTPUT\nfi\n",
+            "count": 1,
+            "repos": [
+                "vercel/turbo"
+            ]
+        },
+        {
+            "command": "cancelled=false\nfailure=false\n\nsubjob () {\n  local result=$1\n  if [ \"$result\" = \"cancelled\" ]; then\n    cancelled=true\n  elif [ \"$result\" != \"success\" ] && [ \"$result\" != \"skipped\" ]; then\n    failure=true\n  fi\n}\n\nsubjob ${{needs.determine_jobs.result}}\nsubjob ${{needs.build_turborepo.result}}\nsubjob ${{needs.integration.result}}\nsubjob ${{needs.examples.result}}\nsubjob ${{needs.rust_lint.result}}\nsubjob ${{needs.rust_check.result}}\nsubjob ${{needs.rust_clippy.result}}\nsubjob ${{needs.rust_test.result}}\n\nif [ \"$cancelled\" = \"true\" ]; then\n    echo \"cancelled=true\" >> $GITHUB_OUTPUT\nelif [ \"$failure\" = \"true\" ]; then\n  echo \"failure=true\" >> $GITHUB_OUTPUT\nelse\n  echo \"success=true\" >> $GITHUB_OUTPUT\nfi\n",
+            "count": 1,
+            "repos": [
+                "vercel/turbo"
+            ]
+        }
+    ],
+    "Add failure prose text": [
+        {
+            "command": "echo \"## \u26a0\ufe0f Turbopack Benchmark CI failed \u26a0\ufe0f\" > comment.md\necho >> comment.md\necho \"The following steps have failed in CI:\" >> comment.md\necho >> comment.md\ncat failures.md >> comment.md\necho >> comment.md\necho \"See [workflow summary](https://github.com/vercel/turbo/actions/runs/${{ github.run_id }}) for details\">> comment.md\necho >> comment.md\necho \"<!-- CI TURBOPACK BENCH COMMENT -->\" >> comment.md\n",
+            "count": 1,
+            "repos": [
+                "vercel/turbo"
+            ]
+        },
+        {
+            "command": "echo \"## \u26a0 CI failed \u26a0\" > comment.md\necho >> comment.md\necho \"The following steps have failed in CI:\" >> comment.md\necho >> comment.md\ncat failures.md >> comment.md\necho >> comment.md\necho \"See [workflow summary](https://github.com/vercel/turbo/actions/runs/${{ github.run_id }}) for details\">> comment.md\necho >> comment.md\necho \"<!-- CI COMMENT -->\" >> comment.md\n",
+            "count": 1,
+            "repos": [
+                "vercel/turbo"
+            ]
+        },
+        {
+            "command": "echo \"## \u26a0\ufe0f CI failed \u26a0\ufe0f\" > comment.md\necho >> comment.md\necho \"The following steps have failed in CI:\" >> comment.md\necho >> comment.md\ncat failures.md >> comment.md\necho >> comment.md\necho \"See [workflow summary](https://github.com/vercel/turbo/actions/runs/${{ github.run_id }}) for details\">> comment.md\necho >> comment.md\necho \"<!-- CI COMMENT -->\" >> comment.md\n",
+            "count": 1,
+            "repos": [
+                "vercel/turbo"
+            ]
+        }
+    ],
+    "Add success prose text": [
+        {
+            "command": "echo \"## \ud83d\udfe2 Turbopack Benchmark CI successful \ud83d\udfe2\" > comment.md\necho >> comment.md\necho \"Thanks\" >> comment.md\necho >> comment.md\necho \"<!-- CI TURBOPACK BENCH COMMENT -->\" >> comment.md\n",
+            "count": 1,
+            "repos": [
+                "vercel/turbo"
+            ]
+        },
+        {
+            "command": "echo \"## \ud83d\udfe2 CI likely successful \ud83d\udfe2\" > comment.md\necho >> comment.md\necho \"A few longer running steps are still running, but they should not be considered as blocking.\" >> comment.md\necho >> comment.md\necho \"See [workflow summary](https://github.com/vercel/turbo/actions/runs/${{ github.run_id }}) for details\">> comment.md\necho >> comment.md\necho \"<!-- CI COMMENT -->\" >> comment.md\n",
+            "count": 1,
+            "repos": [
+                "vercel/turbo"
+            ]
+        },
+        {
+            "command": "echo \"## \ud83d\udfe2 CI successful \ud83d\udfe2\" > comment.md\necho >> comment.md\necho \"Thanks\" >> comment.md\necho >> comment.md\necho \"<!-- CI COMMENT -->\" >> comment.md\n",
+            "count": 1,
+            "repos": [
+                "vercel/turbo"
+            ]
+        }
+    ],
+    "Run benchmarks": [
+        {
+            "command": "pnpm -F @turbo/benchmark benchmark",
+            "count": 1,
+            "repos": [
+                "vercel/turbo"
+            ]
+        },
+        {
+            "command": "pnpm -F @turbo/benchmark ttft \"${{ steps.filename.outputs.filename }}\"",
+            "count": 1,
+            "repos": [
+                "vercel/turbo"
+            ]
+        }
+    ],
+    "Setup Protoc": [
+        {
+            "command": "arduino/setup-protoc@v1.2.0",
+            "count": 1,
+            "repos": [
+                "vercel/turbo"
+            ]
+        },
+        {
+            "command": "arduino/setup-protoc@v2.1.0",
+            "count": 1,
+            "repos": [
+                "vercel/turbo"
+            ]
+        }
+    ],
+    "Rust Setup": [
+        {
+            "command": "actions-rs/toolchain@v1",
+            "count": 1,
+            "repos": [
+                "vercel/turbo"
+            ]
+        },
+        {
+            "command": "actions-rust-lang/setup-rust-toolchain@v1",
+            "count": 1,
+            "repos": [
+                "vercel/turbo"
+            ]
+        }
+    ],
+    "Run cargo clippy": [
+        {
+            "command": "RUSTFLAGS=\"-D warnings -A deprecated\" cargo groups clippy turbopack --features rustls-tls\n",
+            "count": 1,
+            "repos": [
+                "vercel/turbo"
+            ]
+        },
+        {
+            "command": "cargo groups clippy turborepo-libraries --features rustls-tls -- --deny clippy::all\n",
+            "count": 1,
+            "repos": [
+                "vercel/turbo"
+            ]
+        }
+    ],
+    "Run ast-grep lints": [
+        {
+            "command": "npx --package @ast-grep/cli -- ast-grep scan $(cargo groups list turbopack | awk '{ print $2 }' | tr '\\n' ' ')\n",
+            "count": 1,
+            "repos": [
+                "vercel/turbo"
+            ]
+        },
+        {
+            "command": "npx --package @ast-grep/cli -- ast-grep scan $(cargo groups list turborepo-libraries | awk '{ print $2 }' | tr '\\n' ' ')\n",
+            "count": 1,
+            "repos": [
+                "vercel/turbo"
+            ]
+        }
+    ],
+    "Show Stage Commit": [
+        {
+            "command": "echo \"${{ steps.stage.outputs.STAGE_BRANCH }}\"",
+            "count": 1,
+            "repos": [
+                "vercel/turbo"
+            ]
+        },
+        {
+            "command": "echo \"${{ needs.stage.outputs.stage-branch }}\"",
+            "count": 5,
+            "repos": [
+                "vercel/turbo"
+            ]
+        }
+    ]
+}

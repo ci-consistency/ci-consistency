@@ -1,0 +1,631 @@
+{
+    "Step 1": [
+        {
+            "command": "actions/checkout@v2",
+            "count": 13,
+            "repos": [
+                "vuejs/vue",
+                "vuejs/vue-loader",
+                "vuejs/awesome-vue",
+                "vuejs/apollo",
+                "vuejs/vetur",
+                "vuejs/vue-jest",
+                "vuejs/vuepress"
+            ]
+        },
+        {
+            "command": "amannn/action-semantic-pull-request@v3.4.2",
+            "count": 1,
+            "repos": [
+                "vuejs/apollo"
+            ]
+        },
+        {
+            "command": "actions/checkout@v4",
+            "count": 11,
+            "repos": [
+                "vuejs/core",
+                "vuejs/eslint-config-typescript",
+                "vuejs/pinia"
+            ]
+        },
+        {
+            "command": "actions/github-script@v7",
+            "count": 1,
+            "repos": [
+                "vuejs/core"
+            ]
+        },
+        {
+            "command": "dessant/lock-threads@v5",
+            "count": 1,
+            "repos": [
+                "vuejs/core"
+            ]
+        },
+        {
+            "command": "actions/checkout@v3",
+            "count": 3,
+            "repos": [
+                "vuejs/router",
+                "vuejs/composition-api"
+            ]
+        },
+        {
+            "command": "actions/stale@v3",
+            "count": 1,
+            "repos": [
+                "vuejs/composition-api"
+            ]
+        }
+    ],
+    "Install pnpm": [
+        {
+            "command": "pnpm/action-setup@v2",
+            "count": 6,
+            "repos": [
+                "vuejs/vue",
+                "vuejs/vue-loader",
+                "vuejs/composition-api"
+            ]
+        },
+        {
+            "command": "pnpm/action-setup@v2.0.1",
+            "count": 4,
+            "repos": [
+                "vuejs/apollo"
+            ]
+        },
+        {
+            "command": "pnpm/action-setup@v4.0.0",
+            "count": 9,
+            "repos": [
+                "vuejs/core"
+            ]
+        }
+    ],
+    "Step 4": [
+        {
+            "command": "pnpm install",
+            "count": 13,
+            "repos": [
+                "vuejs/vue",
+                "vuejs/vue-loader",
+                "vuejs/core",
+                "vuejs/eslint-config-typescript",
+                "vuejs/pinia"
+            ]
+        },
+        {
+            "command": "actions/cache@v2",
+            "count": 1,
+            "repos": [
+                "vuejs/vuepress"
+            ]
+        }
+    ],
+    "Run unit tests": [
+        {
+            "command": "pnpm run test:unit",
+            "count": 1,
+            "repos": [
+                "vuejs/vue"
+            ]
+        },
+        {
+            "command": "pnpm run test",
+            "count": 1,
+            "repos": [
+                "vuejs/vue-loader"
+            ]
+        },
+        {
+            "command": "yarn test",
+            "count": 1,
+            "repos": [
+                "vuejs/vuepress"
+            ]
+        },
+        {
+            "command": "pnpm run test-unit",
+            "count": 1,
+            "repos": [
+                "vuejs/core"
+            ]
+        }
+    ],
+    "Run e2e tests": [
+        {
+            "command": "pnpm run test:e2e",
+            "count": 1,
+            "repos": [
+                "vuejs/vue"
+            ]
+        },
+        {
+            "command": "pnpm run test-e2e",
+            "count": 1,
+            "repos": [
+                "vuejs/core"
+            ]
+        }
+    ],
+    "Run type declaration tests": [
+        {
+            "command": "pnpm run test:types",
+            "count": 1,
+            "repos": [
+                "vuejs/vue"
+            ]
+        },
+        {
+            "command": "pnpm run test-dts",
+            "count": 1,
+            "repos": [
+                "vuejs/core"
+            ]
+        }
+    ],
+    "Create Release for Tag": [
+        {
+            "command": "yyx990803/release-tag@master",
+            "count": 4,
+            "repos": [
+                "vuejs/vue",
+                "vuejs/core",
+                "vuejs/router",
+                "vuejs/pinia"
+            ]
+        },
+        {
+            "command": "Akryum/release-tag@v4.0.7",
+            "count": 2,
+            "repos": [
+                "vuejs/devtools",
+                "vuejs/apollo"
+            ]
+        }
+    ],
+    "Step 2": [
+        {
+            "command": "Scrum/awesome-readme-lint-double-link-action@v0.1.13",
+            "count": 1,
+            "repos": [
+                "vuejs/awesome-vue"
+            ]
+        },
+        {
+            "command": "actions/setup-node@v2",
+            "count": 1,
+            "repos": [
+                "vuejs/vuepress"
+            ]
+        },
+        {
+            "command": "actions/github-script@v7",
+            "count": 1,
+            "repos": [
+                "vuejs/core"
+            ]
+        },
+        {
+            "command": "pnpm/action-setup@v2",
+            "count": 1,
+            "repos": [
+                "vuejs/router"
+            ]
+        },
+        {
+            "command": "actions/setup-node@v3",
+            "count": 1,
+            "repos": [
+                "vuejs/composition-api"
+            ]
+        },
+        {
+            "command": "pnpm/action-setup@v3",
+            "count": 1,
+            "repos": [
+                "vuejs/eslint-config-typescript"
+            ]
+        },
+        {
+            "command": "pnpm/action-setup@v4",
+            "count": 1,
+            "repos": [
+                "vuejs/pinia"
+            ]
+        }
+    ],
+    "Install Node.js": [
+        {
+            "command": "actions/setup-node@v3",
+            "count": 4,
+            "repos": [
+                "vuejs/eslint-plugin-vue",
+                "vuejs/vue-eslint-parser"
+            ]
+        },
+        {
+            "command": "actions/setup-node@v4",
+            "count": 9,
+            "repos": [
+                "vuejs/core"
+            ]
+        }
+    ],
+    "Install Packages": [
+        {
+            "command": "npm install --legacy-peer-deps",
+            "count": 5,
+            "repos": [
+                "vuejs/eslint-plugin-vue",
+                "vuejs/vue-eslint-parser"
+            ]
+        },
+        {
+            "command": "npm install && cd test/fixtures/eslint && npm install",
+            "count": 1,
+            "repos": [
+                "vuejs/vue-eslint-parser"
+            ]
+        },
+        {
+            "command": "npm install",
+            "count": 1,
+            "repos": [
+                "vuejs/vue-eslint-parser"
+            ]
+        }
+    ],
+    "Lint": [
+        {
+            "command": "npm run lint",
+            "count": 1,
+            "repos": [
+                "vuejs/eslint-plugin-vue"
+            ]
+        },
+        {
+            "command": "pnpm run lint",
+            "count": 1,
+            "repos": [
+                "vuejs/apollo"
+            ]
+        },
+        {
+            "command": "npm run -s lint",
+            "count": 1,
+            "repos": [
+                "vuejs/vue-eslint-parser"
+            ]
+        }
+    ],
+    "Install ESLint v${{ matrix.eslint }}": [
+        {
+            "command": "npm install --save-dev eslint@${{ matrix.eslint }} --legacy-peer-deps",
+            "count": 1,
+            "repos": [
+                "vuejs/eslint-plugin-vue"
+            ]
+        },
+        {
+            "command": "node scripts/ci-install-eslint ${{ matrix.eslint }}",
+            "count": 1,
+            "repos": [
+                "vuejs/vue-eslint-parser"
+            ]
+        }
+    ],
+    "Test": [
+        {
+            "command": "npm test",
+            "count": 3,
+            "repos": [
+                "vuejs/eslint-plugin-vue"
+            ]
+        },
+        {
+            "command": "npm run -s test:mocha",
+            "count": 1,
+            "repos": [
+                "vuejs/vue-eslint-parser"
+            ]
+        },
+        {
+            "command": "npm run -s test:cover",
+            "count": 1,
+            "repos": [
+                "vuejs/vue-eslint-parser"
+            ]
+        },
+        {
+            "command": "yarn test",
+            "count": 1,
+            "repos": [
+                "vuejs/vue-jest"
+            ]
+        }
+    ],
+    "Install dependencies": [
+        {
+            "command": "pnpm install",
+            "count": 6,
+            "repos": [
+                "vuejs/apollo",
+                "vuejs/core"
+            ]
+        },
+        {
+            "command": "yarn",
+            "count": 1,
+            "repos": [
+                "vuejs/vuepress"
+            ]
+        }
+    ],
+    "Build": [
+        {
+            "command": "pnpm run build",
+            "count": 4,
+            "repos": [
+                "vuejs/apollo"
+            ]
+        },
+        {
+            "command": "npm run -s build",
+            "count": 2,
+            "repos": [
+                "vuejs/vue-eslint-parser"
+            ]
+        }
+    ],
+    "Step 10": [
+        {
+            "command": "actions/upload-artifact@v2",
+            "count": 3,
+            "repos": [
+                "vuejs/apollo"
+            ]
+        },
+        {
+            "command": "pnpm run -r build:dts",
+            "count": 1,
+            "repos": [
+                "vuejs/router"
+            ]
+        },
+        {
+            "command": "pnpm run build:dts",
+            "count": 1,
+            "repos": [
+                "vuejs/pinia"
+            ]
+        }
+    ],
+    "Step 11": [
+        {
+            "command": "actions/upload-artifact@v2",
+            "count": 1,
+            "repos": [
+                "vuejs/apollo"
+            ]
+        },
+        {
+            "command": "pnpm run -r test:dts",
+            "count": 1,
+            "repos": [
+                "vuejs/router"
+            ]
+        },
+        {
+            "command": "pnpm run test:dts",
+            "count": 1,
+            "repos": [
+                "vuejs/pinia"
+            ]
+        }
+    ],
+    "Step 9": [
+        {
+            "command": "actions/upload-artifact@v2",
+            "count": 2,
+            "repos": [
+                "vuejs/apollo"
+            ]
+        },
+        {
+            "command": "pnpm run -r build",
+            "count": 1,
+            "repos": [
+                "vuejs/router"
+            ]
+        },
+        {
+            "command": "pnpm run build",
+            "count": 1,
+            "repos": [
+                "vuejs/pinia"
+            ]
+        }
+    ],
+    "Run eslint": [
+        {
+            "command": "pnpm run lint --fix",
+            "count": 1,
+            "repos": [
+                "vuejs/core"
+            ]
+        },
+        {
+            "command": "pnpm run lint",
+            "count": 1,
+            "repos": [
+                "vuejs/core"
+            ]
+        }
+    ],
+    "Run prettier": [
+        {
+            "command": "pnpm run format",
+            "count": 1,
+            "repos": [
+                "vuejs/core"
+            ]
+        },
+        {
+            "command": "pnpm run format-check",
+            "count": 1,
+            "repos": [
+                "vuejs/core"
+            ]
+        }
+    ],
+    "Step 7": [
+        {
+            "command": "autofix-ci/action@ea32e3a12414e6d3183163c3424a7d7a8631ad84",
+            "count": 1,
+            "repos": [
+                "vuejs/core"
+            ]
+        },
+        {
+            "command": "pnpm run -r test:types",
+            "count": 1,
+            "repos": [
+                "vuejs/router"
+            ]
+        },
+        {
+            "command": "pnpm run -r dev:prepare",
+            "count": 1,
+            "repos": [
+                "vuejs/pinia"
+            ]
+        }
+    ],
+    "Step 5": [
+        {
+            "command": "pnpm release --canary --tag minor",
+            "count": 1,
+            "repos": [
+                "vuejs/core"
+            ]
+        },
+        {
+            "command": "pnpm release --canary",
+            "count": 1,
+            "repos": [
+                "vuejs/core"
+            ]
+        },
+        {
+            "command": "pnpm install",
+            "count": 2,
+            "repos": [
+                "vuejs/core",
+                "vuejs/router"
+            ]
+        },
+        {
+            "command": "pnpm run size",
+            "count": 1,
+            "repos": [
+                "vuejs/core"
+            ]
+        },
+        {
+            "command": "pnpm test",
+            "count": 1,
+            "repos": [
+                "vuejs/eslint-config-typescript"
+            ]
+        },
+        {
+            "command": "pnpm run lint",
+            "count": 1,
+            "repos": [
+                "vuejs/pinia"
+            ]
+        }
+    ],
+    "Step 6": [
+        {
+            "command": "node node_modules/puppeteer/install.mjs",
+            "count": 1,
+            "repos": [
+                "vuejs/core"
+            ]
+        },
+        {
+            "command": "pnpm run lint",
+            "count": 1,
+            "repos": [
+                "vuejs/router"
+            ]
+        },
+        {
+            "command": "pnpm run test:types",
+            "count": 1,
+            "repos": [
+                "vuejs/pinia"
+            ]
+        }
+    ],
+    "Step 3": [
+        {
+            "command": "actions/github-script@v7",
+            "count": 1,
+            "repos": [
+                "vuejs/core"
+            ]
+        },
+        {
+            "command": "actions/setup-node@v3",
+            "count": 1,
+            "repos": [
+                "vuejs/router"
+            ]
+        },
+        {
+            "command": "actions/setup-node@v4",
+            "count": 2,
+            "repos": [
+                "vuejs/eslint-config-typescript",
+                "vuejs/pinia"
+            ]
+        }
+    ],
+    "Step 8": [
+        {
+            "command": "pnpm run -r test:unit",
+            "count": 1,
+            "repos": [
+                "vuejs/router"
+            ]
+        },
+        {
+            "command": "pnpm run test:vitest",
+            "count": 1,
+            "repos": [
+                "vuejs/pinia"
+            ]
+        }
+    ],
+    "Step 12": [
+        {
+            "command": "pnpm run -r test:e2e:ci",
+            "count": 1,
+            "repos": [
+                "vuejs/router"
+            ]
+        },
+        {
+            "command": "pnpm run size",
+            "count": 1,
+            "repos": [
+                "vuejs/pinia"
+            ]
+        }
+    ]
+}

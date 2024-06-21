@@ -1,0 +1,1065 @@
+{
+    "Step 1": [
+        {
+            "command": "actions/checkout@v2",
+            "count": 6,
+            "repos": [
+                "github/version_sorter",
+                "github/government.github.com"
+            ]
+        },
+        {
+            "command": "actions/stale@f7176fd3007623b69d27091f9b9d4ab7995f0a06",
+            "count": 1,
+            "repos": [
+                "github/markup"
+            ]
+        },
+        {
+            "command": "actions/checkout@v3",
+            "count": 2,
+            "repos": [
+                "github/gemoji",
+                "github/secure_headers"
+            ]
+        },
+        {
+            "command": "ruby/setup-ruby@v1",
+            "count": 1,
+            "repos": [
+                "github/elastomer-client"
+            ]
+        },
+        {
+            "command": "actions/checkout@v4",
+            "count": 4,
+            "repos": [
+                "github/elastomer-client",
+                "github/choosealicense.com",
+                "github/pages-gem",
+                "github/scientist"
+            ]
+        },
+        {
+            "command": "id",
+            "count": 2,
+            "repos": [
+                "github/ruby"
+            ]
+        },
+        {
+            "command": "ruby/setup-ruby@ff740bc00a01b3a50fffc55a1071b1060eeae9dc",
+            "count": 1,
+            "repos": [
+                "github/ruby"
+            ]
+        },
+        {
+            "command": "actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332",
+            "count": 14,
+            "repos": [
+                "github/ruby"
+            ]
+        },
+        {
+            "command": "exit 1",
+            "count": 4,
+            "repos": [
+                "github/ruby"
+            ]
+        },
+        {
+            "command": "actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea",
+            "count": 1,
+            "repos": [
+                "github/ruby"
+            ]
+        },
+        {
+            "command": "md build",
+            "count": 1,
+            "repos": [
+                "github/ruby"
+            ]
+        }
+    ],
+    "Step 2": [
+        {
+            "command": "ruby/setup-ruby@v1",
+            "count": 3,
+            "repos": [
+                "github/version_sorter",
+                "github/elastomer-client",
+                "github/scientist"
+            ]
+        },
+        {
+            "command": "ruby/setup-ruby@ff740bc00a01b3a50fffc55a1071b1060eeae9dc",
+            "count": 2,
+            "repos": [
+                "github/markup",
+                "github/ruby"
+            ]
+        },
+        {
+            "command": "actions/checkout@v4",
+            "count": 1,
+            "repos": [
+                "github/elastomer-client"
+            ]
+        },
+        {
+            "command": "actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332",
+            "count": 4,
+            "repos": [
+                "github/ruby"
+            ]
+        },
+        {
+            "command": "./.github/actions/setup/directories",
+            "count": 3,
+            "repos": [
+                "github/ruby"
+            ]
+        },
+        {
+            "command": "./.github/actions/setup/ubuntu",
+            "count": 5,
+            "repos": [
+                "github/ruby"
+            ]
+        },
+        {
+            "command": "RUST_BACKTRACE=1 cargo test",
+            "count": 2,
+            "repos": [
+                "github/ruby"
+            ]
+        },
+        {
+            "command": "cargo clippy --all-targets --all-features",
+            "count": 1,
+            "repos": [
+                "github/ruby"
+            ]
+        }
+    ],
+    "Run tests": [
+        {
+            "command": "bundle exec rake",
+            "count": 2,
+            "repos": [
+                "github/version_sorter",
+                "github/gemoji"
+            ]
+        },
+        {
+            "command": "./script/cibuild",
+            "count": 1,
+            "repos": [
+                "github/choosealicense.com"
+            ]
+        }
+    ],
+    "Checkout": [
+        {
+            "command": "actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332",
+            "count": 1,
+            "repos": [
+                "github/markup"
+            ]
+        },
+        {
+            "command": "actions/checkout@v4",
+            "count": 1,
+            "repos": [
+                "github/pages-gem"
+            ]
+        },
+        {
+            "command": "actions/checkout@v3",
+            "count": 1,
+            "repos": [
+                "github/training-kit"
+            ]
+        }
+    ],
+    "Step 3": [
+        {
+            "command": "actions/setup-python@82c7e631bb3cdc910f68e0081d67478d79c6982d",
+            "count": 1,
+            "repos": [
+                "github/markup"
+            ]
+        },
+        {
+            "command": "bundle exec rubocop",
+            "count": 1,
+            "repos": [
+                "github/elastomer-client"
+            ]
+        },
+        {
+            "command": "./.github/actions/setup/directories",
+            "count": 6,
+            "repos": [
+                "github/ruby"
+            ]
+        },
+        {
+            "command": "./.github/actions/setup/ubuntu",
+            "count": 2,
+            "repos": [
+                "github/ruby"
+            ]
+        },
+        {
+            "command": "./.github/actions/setup/macos",
+            "count": 1,
+            "repos": [
+                "github/ruby"
+            ]
+        },
+        {
+            "command": "gem install webrick",
+            "count": 1,
+            "repos": [
+                "github/ruby"
+            ]
+        },
+        {
+            "command": "ruby/setup-ruby@ff740bc00a01b3a50fffc55a1071b1060eeae9dc",
+            "count": 2,
+            "repos": [
+                "github/ruby"
+            ]
+        },
+        {
+            "command": "msys2/setup-msys2@d40200dc2db4c351366b048a9565ad82919e1c24",
+            "count": 1,
+            "repos": [
+                "github/ruby"
+            ]
+        },
+        {
+            "command": "RUST_BACKTRACE=1 cargo test --all-features",
+            "count": 2,
+            "repos": [
+                "github/ruby"
+            ]
+        },
+        {
+            "command": "bundle exec rake",
+            "count": 1,
+            "repos": [
+                "github/scientist"
+            ]
+        }
+    ],
+    "Step 4": [
+        {
+            "command": "actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9",
+            "count": 1,
+            "repos": [
+                "github/markup"
+            ]
+        },
+        {
+            "command": "ruby/setup-ruby@ff740bc00a01b3a50fffc55a1071b1060eeae9dc",
+            "count": 2,
+            "repos": [
+                "github/ruby"
+            ]
+        },
+        {
+            "command": "./.github/actions/setup/directories",
+            "count": 6,
+            "repos": [
+                "github/ruby"
+            ]
+        },
+        {
+            "command": "actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332",
+            "count": 1,
+            "repos": [
+                "github/ruby"
+            ]
+        },
+        {
+            "command": "ruby ../mspec/bin/mspec",
+            "count": 1,
+            "repos": [
+                "github/ruby"
+            ]
+        },
+        {
+            "command": "cargo build --release",
+            "count": 2,
+            "repos": [
+                "github/ruby"
+            ]
+        }
+    ],
+    "Checkout repository": [
+        {
+            "command": "actions/checkout@v3",
+            "count": 3,
+            "repos": [
+                "github/email_reply_parser",
+                "github/platform-samples",
+                "github/training-kit"
+            ]
+        },
+        {
+            "command": "actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332",
+            "count": 1,
+            "repos": [
+                "github/ruby"
+            ]
+        }
+    ],
+    "Initialize CodeQL": [
+        {
+            "command": "github/codeql-action/init@v2",
+            "count": 3,
+            "repos": [
+                "github/email_reply_parser",
+                "github/platform-samples",
+                "github/training-kit"
+            ]
+        },
+        {
+            "command": "github/codeql-action/init@23acc5c183826b7a8a97bce3cecc52db901f8251",
+            "count": 1,
+            "repos": [
+                "github/ruby"
+            ]
+        }
+    ],
+    "Autobuild": [
+        {
+            "command": "github/codeql-action/autobuild@v2",
+            "count": 3,
+            "repos": [
+                "github/email_reply_parser",
+                "github/platform-samples",
+                "github/training-kit"
+            ]
+        },
+        {
+            "command": "github/codeql-action/autobuild@23acc5c183826b7a8a97bce3cecc52db901f8251",
+            "count": 1,
+            "repos": [
+                "github/ruby"
+            ]
+        }
+    ],
+    "Perform CodeQL Analysis": [
+        {
+            "command": "github/codeql-action/analyze@v2",
+            "count": 3,
+            "repos": [
+                "github/email_reply_parser",
+                "github/platform-samples",
+                "github/training-kit"
+            ]
+        },
+        {
+            "command": "github/codeql-action/analyze@23acc5c183826b7a8a97bce3cecc52db901f8251",
+            "count": 1,
+            "repos": [
+                "github/ruby"
+            ]
+        }
+    ],
+    "Set up Ruby": [
+        {
+            "command": "ruby/setup-ruby@v1",
+            "count": 7,
+            "repos": [
+                "github/gemoji",
+                "github/choosealicense.com",
+                "github/government.github.com"
+            ]
+        },
+        {
+            "command": "ruby/setup-ruby@ff740bc00a01b3a50fffc55a1071b1060eeae9dc",
+            "count": 1,
+            "repos": [
+                "github/ruby"
+            ]
+        },
+        {
+            "command": "ruby/setup-ruby@ece82769428359c077b5a5eaff268902a303c101",
+            "count": 1,
+            "repos": [
+                "github/training-kit"
+            ]
+        }
+    ],
+    "Run Elasticsearch": [
+        {
+            "command": "./elasticsearch-${{ matrix.ES_VERSION }}/bin/elasticsearch -d",
+            "count": 1,
+            "repos": [
+                "github/elastomer-client"
+            ]
+        },
+        {
+            "command": "./elasticsearch-${{ matrix.ES_VERSION }}/bin/elasticsearch -d -Expack.security.enabled=false",
+            "count": 1,
+            "repos": [
+                "github/elastomer-client"
+            ]
+        }
+    ],
+    "Step 7": [
+        {
+            "command": "gem install bundler",
+            "count": 1,
+            "repos": [
+                "github/elastomer-client"
+            ]
+        },
+        {
+            "command": "make",
+            "count": 2,
+            "repos": [
+                "github/ruby"
+            ]
+        },
+        {
+            "command": "make test",
+            "count": 1,
+            "repos": [
+                "github/ruby"
+            ]
+        },
+        {
+            "command": "make all golf",
+            "count": 1,
+            "repos": [
+                "github/ruby"
+            ]
+        },
+        {
+            "command": true,
+            "count": 1,
+            "repos": [
+                "github/ruby"
+            ]
+        },
+        {
+            "command": "make showflags",
+            "count": 1,
+            "repos": [
+                "github/ruby"
+            ]
+        },
+        {
+            "command": "./.github/actions/slack",
+            "count": 1,
+            "repos": [
+                "github/ruby"
+            ]
+        },
+        {
+            "command": "make install",
+            "count": 1,
+            "repos": [
+                "github/ruby"
+            ]
+        },
+        {
+            "command": "$SETARCH make",
+            "count": 1,
+            "repos": [
+                "github/ruby"
+            ]
+        },
+        {
+            "command": "make incs",
+            "count": 1,
+            "repos": [
+                "github/ruby"
+            ]
+        }
+    ],
+    "Step 8": [
+        {
+            "command": "bundle install",
+            "count": 1,
+            "repos": [
+                "github/elastomer-client"
+            ]
+        },
+        {
+            "command": "make test-annocheck",
+            "count": 1,
+            "repos": [
+                "github/ruby"
+            ]
+        },
+        {
+            "command": "./.github/actions/slack",
+            "count": 1,
+            "repos": [
+                "github/ruby"
+            ]
+        },
+        {
+            "command": "ruby tool/update-deps --fix",
+            "count": 1,
+            "repos": [
+                "github/ruby"
+            ]
+        },
+        {
+            "command": "make",
+            "count": 1,
+            "repos": [
+                "github/ruby"
+            ]
+        },
+        {
+            "command": "make ${{ matrix.task }}",
+            "count": 1,
+            "repos": [
+                "github/ruby"
+            ]
+        },
+        {
+            "command": "make mini ruby",
+            "count": 1,
+            "repos": [
+                "github/ruby"
+            ]
+        },
+        {
+            "command": "make prepare-gems",
+            "count": 1,
+            "repos": [
+                "github/ruby"
+            ]
+        }
+    ],
+    "Step 9": [
+        {
+            "command": "script/poll-for-es",
+            "count": 1,
+            "repos": [
+                "github/elastomer-client"
+            ]
+        },
+        {
+            "command": "./.github/actions/slack",
+            "count": 2,
+            "repos": [
+                "github/ruby"
+            ]
+        },
+        {
+            "command": "git diff --no-ext-diff --ignore-submodules --exit-code",
+            "count": 1,
+            "repos": [
+                "github/ruby"
+            ]
+        },
+        {
+            "command": "make test",
+            "count": 1,
+            "repos": [
+                "github/ruby"
+            ]
+        },
+        {
+            "command": "git diff --exit-code",
+            "count": 1,
+            "repos": [
+                "github/ruby"
+            ]
+        },
+        {
+            "command": "make install DESTDIR=$PWD/../install",
+            "count": 1,
+            "repos": [
+                "github/ruby"
+            ]
+        },
+        {
+            "command": "actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332",
+            "count": 1,
+            "repos": [
+                "github/ruby"
+            ]
+        },
+        {
+            "command": "make",
+            "count": 1,
+            "repos": [
+                "github/ruby"
+            ]
+        }
+    ],
+    "Step 10": [
+        {
+            "command": "bundle exec rake test",
+            "count": 1,
+            "repos": [
+                "github/elastomer-client"
+            ]
+        },
+        {
+            "command": "./.github/actions/slack",
+            "count": 2,
+            "repos": [
+                "github/ruby"
+            ]
+        },
+        {
+            "command": "make install",
+            "count": 1,
+            "repos": [
+                "github/ruby"
+            ]
+        },
+        {
+            "command": "tar cfz ../install.tar.gz -C ../install .",
+            "count": 1,
+            "repos": [
+                "github/ruby"
+            ]
+        },
+        {
+            "command": "./.github/actions/setup/directories",
+            "count": 1,
+            "repos": [
+                "github/ruby"
+            ]
+        }
+    ],
+    "Build and test with Rake": [
+        {
+            "command": "gem install bundler\nbundle install --jobs 4 --retry 3 --without guard\nbundle exec rspec spec\nbundle exec rubocop\n",
+            "count": 1,
+            "repos": [
+                "github/secure_headers"
+            ]
+        },
+        {
+            "command": "bundle exec rake",
+            "count": 1,
+            "repos": [
+                "github/training-kit"
+            ]
+        }
+    ],
+    "Run configure": [
+        {
+            "command": "../src/configure -C --enable-debug-env --disable-install-doc --with-ext=-test-/cxxanyargs,+ --without-valgrind --without-jemalloc --without-gmp --with-gcc=\"gcc-11 -fcf-protection -Wa,--generate-missing-build-notes=yes\" --enable-shared debugflags=-ggdb3 optflags=-O2 LDFLAGS=-Wl,-z,now\n",
+            "count": 1,
+            "repos": [
+                "github/ruby"
+            ]
+        },
+        {
+            "command": "./configure -C --disable-install-doc --disable-rubygems --with-gcc 'optflags=-O0' 'debugflags=-save-temps=obj -g'",
+            "count": 1,
+            "repos": [
+                "github/ruby"
+            ]
+        },
+        {
+            "command": "../src/configure -C ${default_configure} ${append_configure} --${{\n  matrix.entry.crosshost && 'host' || 'with-gcc'\n}}=${{\n  matrix.entry.crosshost || '\"${default_cc}${append_cc:+ $append_cc}\"'\n}} --${{ matrix.entry.shared || 'enable' }}-shared\n",
+            "count": 1,
+            "repos": [
+                "github/ruby"
+            ]
+        },
+        {
+            "command": "../src/configure -C --disable-install-doc ${ruby_configure_args}",
+            "count": 1,
+            "repos": [
+                "github/ruby"
+            ]
+        },
+        {
+            "command": "../src/configure -C --disable-install-doc cppflags=-DRUBY_DEBUG",
+            "count": 1,
+            "repos": [
+                "github/ruby"
+            ]
+        },
+        {
+            "command": "../src/configure -C --disable-install-doc --prefix=$(pwd)/install --enable-yjit=dev_nodebug",
+            "count": 1,
+            "repos": [
+                "github/ruby"
+            ]
+        },
+        {
+            "command": "$SETARCH ../src/configure -C --disable-install-doc cppflags=-DRUBY_DEBUG ${arch:+--target=$arch-$OSTYPE --host=$arch-$OSTYPE}",
+            "count": 1,
+            "repos": [
+                "github/ruby"
+            ]
+        },
+        {
+            "command": "$SETARCH ../src/configure -C --disable-install-doc ${configure:-cppflags=-DRUBY_DEBUG} ${arch:+--target=$arch-$OSTYPE --host=$arch-$OSTYPE}",
+            "count": 1,
+            "repos": [
+                "github/ruby"
+            ]
+        },
+        {
+            "command": "../src/configure \\\n  --host wasm32-unknown-wasi \\\n  --with-baseruby=$PWD/../baseruby/install/bin/ruby \\\n  --with-static-linked-ext \\\n  --with-ext=cgi/escape,continuation,coverage,date,digest/bubblebabble,digest,digest/md5,digest/rmd160,digest/sha1,digest/sha2,etc,fcntl,json,json/generator,json/parser,objspace,pathname,rbconfig/sizeof,ripper,stringio,strscan,monitor \\\n  LDFLAGS=\" \\\n    -Xlinker --stack-first \\\n    -Xlinker -z -Xlinker stack-size=16777216 \\\n  \" \\\n  optflags=\"${{ matrix.entry.optflags }}\" \\\n  debugflags=\"${{ matrix.entry.debugflags }}\" \\\n  wasmoptflags=\"${{ matrix.entry.wasmoptflags }} ${{ matrix.entry.debugflags }}\"\n",
+            "count": 1,
+            "repos": [
+                "github/ruby"
+            ]
+        },
+        {
+            "command": "../src/configure -C --disable-install-doc ${{ matrix.configure }}",
+            "count": 1,
+            "repos": [
+                "github/ruby"
+            ]
+        },
+        {
+            "command": "../src/configure -C --disable-install-doc --prefix=$(pwd)/install ${{ matrix.configure }}",
+            "count": 1,
+            "repos": [
+                "github/ruby"
+            ]
+        }
+    ],
+    "Step 6": [
+        {
+            "command": "make showflags",
+            "count": 1,
+            "repos": [
+                "github/ruby"
+            ]
+        },
+        {
+            "command": "make all",
+            "count": 1,
+            "repos": [
+                "github/ruby"
+            ]
+        },
+        {
+            "command": "make prepare-gems",
+            "count": 1,
+            "repos": [
+                "github/ruby"
+            ]
+        },
+        {
+            "command": "make",
+            "count": 2,
+            "repos": [
+                "github/ruby"
+            ]
+        },
+        {
+            "command": "$SETARCH make prepare-gems",
+            "count": 1,
+            "repos": [
+                "github/ruby"
+            ]
+        },
+        {
+            "command": "actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9",
+            "count": 1,
+            "repos": [
+                "github/ruby"
+            ]
+        }
+    ],
+    "Step 5": [
+        {
+            "command": "./configure --disable-install-doc",
+            "count": 1,
+            "repos": [
+                "github/ruby"
+            ]
+        },
+        {
+            "command": "ruby/setup-ruby@ff740bc00a01b3a50fffc55a1071b1060eeae9dc",
+            "count": 2,
+            "repos": [
+                "github/ruby"
+            ]
+        },
+        {
+            "command": "./.github/actions/setup/directories",
+            "count": 1,
+            "repos": [
+                "github/ruby"
+            ]
+        },
+        {
+            "command": "make",
+            "count": 1,
+            "repos": [
+                "github/ruby"
+            ]
+        },
+        {
+            "command": "$SETARCH make",
+            "count": 1,
+            "repos": [
+                "github/ruby"
+            ]
+        },
+        {
+            "command": "./.github/actions/slack",
+            "count": 1,
+            "repos": [
+                "github/ruby"
+            ]
+        },
+        {
+            "command": "actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9",
+            "count": 1,
+            "repos": [
+                "github/ruby"
+            ]
+        },
+        {
+            "command": "make prepare-gems",
+            "count": 1,
+            "repos": [
+                "github/ruby"
+            ]
+        }
+    ],
+    "Set ENV": [
+        {
+            "command": "echo \"TODAY=$(date +%F)\" >> $GITHUB_ENV\n",
+            "count": 1,
+            "repos": [
+                "github/ruby"
+            ]
+        },
+        {
+            "command": "echo \"WASI_SDK_PATH=/opt/wasi-sdk\" >> $GITHUB_ENV\n",
+            "count": 1,
+            "repos": [
+                "github/ruby"
+            ]
+        }
+    ],
+    "Download previous gems list": [
+        {
+            "command": "data=bundled_gems.json\nmkdir -p .downloaded-cache\nln -s .downloaded-cache/$data .\ncurl -O -R -z ./$data https://stdgems.org/$data\n",
+            "count": 1,
+            "repos": [
+                "github/ruby"
+            ]
+        },
+        {
+            "command": "data=default_gems.json\nmkdir -p .downloaded-cache\nln -s .downloaded-cache/$data .\ncurl -O -R -z ./$data https://stdgems.org/$data\n",
+            "count": 1,
+            "repos": [
+                "github/ruby"
+            ]
+        }
+    ],
+    "Maintain updated gems list in NEWS": [
+        {
+            "command": "ruby tool/update-NEWS-gemlist.rb bundled\n",
+            "count": 1,
+            "repos": [
+                "github/ruby"
+            ]
+        },
+        {
+            "command": "ruby tool/update-NEWS-gemlist.rb default\n",
+            "count": 1,
+            "repos": [
+                "github/ruby"
+            ]
+        }
+    ],
+    "Check diffs": [
+        {
+            "command": "news= gems=\ngit diff --color --no-ext-diff --ignore-submodules --exit-code -- NEWS.md ||\nnews=true\ngit diff --color --no-ext-diff --ignore-submodules --exit-code -- gems/bundled_gems ||\ngems=true\ngit add -- NEWS.md gems/bundled_gems\ngit add -- spec/bundler/support/builders.rb\necho news=$news >> $GITHUB_OUTPUT\necho gems=$gems >> $GITHUB_OUTPUT\necho update=${news:-$gems} >> $GITHUB_OUTPUT\n",
+            "count": 1,
+            "repos": [
+                "github/ruby"
+            ]
+        },
+        {
+            "command": "git diff --color --no-ext-diff --ignore-submodules --exit-code NEWS.md ||\necho update=true >> $GITHUB_OUTPUT\n",
+            "count": 1,
+            "repos": [
+                "github/ruby"
+            ]
+        }
+    ],
+    "Install libraries": [
+        {
+            "command": "./.github/actions/setup/ubuntu",
+            "count": 2,
+            "repos": [
+                "github/ruby"
+            ]
+        },
+        {
+            "command": "./.github/actions/setup/macos",
+            "count": 3,
+            "repos": [
+                "github/ruby"
+            ]
+        },
+        {
+            "command": "set -ex\nsudo apt-get update -q || :\nsudo apt-get install --no-install-recommends -q -y ruby make autoconf git wget\n\nwasi_sdk_deb=\"wasi-sdk_${WASI_SDK_VERSION_MAJOR}.${WASI_SDK_VERSION_MINOR}_amd64.deb\"\nwget \"https://github.com/WebAssembly/wasi-sdk/releases/download/wasi-sdk-${WASI_SDK_VERSION_MAJOR}/${wasi_sdk_deb}\"\nsudo dpkg -i \"$wasi_sdk_deb\"\nrm -f \"$wasi_sdk_deb\"\n\nmkdir build-sdk\npushd build-sdk\n\nwasmtime_url=\"https://github.com/bytecodealliance/wasmtime/releases/download/${WASMTIME_VERSION}/wasmtime-${WASMTIME_VERSION}-x86_64-linux.tar.xz\"\nwget -O - \"$wasmtime_url\" | tar xJf -\nsudo ln -fs \"$PWD/wasmtime-${WASMTIME_VERSION}-x86_64-linux/wasmtime\" /usr/local/bin/wasmtime\n\nbinaryen_tarball=\"binaryen-version_${BINARYEN_VERSION}-x86_64-linux.tar.gz\"\nbinaryen_url=\"https://github.com/WebAssembly/binaryen/releases/download/version_${BINARYEN_VERSION}/${binaryen_tarball}\"\nwget -O - \"$binaryen_url\" | tar xfz -\nsudo ln -fs \"$PWD/binaryen-version_${BINARYEN_VERSION}/bin/wasm-opt\" /usr/local/bin/wasm-opt\n",
+            "count": 1,
+            "repos": [
+                "github/ruby"
+            ]
+        }
+    ],
+    "Commit": [
+        {
+            "command": "git pull --ff-only origin ${GITHUB_REF#refs/heads/}\nmessage=\"Update bundled gems list\"\nif [ -z \"${gems}\" ]; then\n  git commit --message=\"${message} at ${GITHUB_SHA:0:30} [ci skip]\"\nelse\n  git commit --message=\"${message} as of ${TODAY}\"\nfi\ngit push origin ${GITHUB_REF#refs/heads/}\n",
+            "count": 1,
+            "repos": [
+                "github/ruby"
+            ]
+        },
+        {
+            "command": "git pull --ff-only origin ${GITHUB_REF#refs/heads/}\ngit commit --message=\"Update default gems list at ${GITHUB_SHA:0:30} [ci skip]\" NEWS.md\ngit push origin ${GITHUB_REF#refs/heads/}\n",
+            "count": 1,
+            "repos": [
+                "github/ruby"
+            ]
+        }
+    ],
+    "Step 13": [
+        {
+            "command": "./.github/actions/slack",
+            "count": 2,
+            "repos": [
+                "github/ruby"
+            ]
+        },
+        {
+            "command": "make test-spec",
+            "count": 1,
+            "repos": [
+                "github/ruby"
+            ]
+        }
+    ],
+    "Step 12": [
+        {
+            "command": "make test-all TESTS='-- ruby -ext-'",
+            "count": 1,
+            "repos": [
+                "github/ruby"
+            ]
+        },
+        {
+            "command": "./src/.github/actions/slack",
+            "count": 1,
+            "repos": [
+                "github/ruby"
+            ]
+        },
+        {
+            "command": "./.github/actions/slack",
+            "count": 2,
+            "repos": [
+                "github/ruby"
+            ]
+        }
+    ],
+    "make ${{ matrix.test_task }}": [
+        {
+            "command": "ulimit -c unlimited\nmake -s ${{ matrix.test_task }} ${TESTS:+TESTS=\"$TESTS\"}\n",
+            "count": 1,
+            "repos": [
+                "github/ruby"
+            ]
+        },
+        {
+            "command": "make -s ${{ matrix.test_task }} RUN_OPTS=\"$RUN_OPTS\" SPECOPTS=\"$SPECOPTS\"",
+            "count": 1,
+            "repos": [
+                "github/ruby"
+            ]
+        },
+        {
+            "command": "$SETARCH make -s ${{ matrix.test_task }} ${TESTS:+TESTS=\"$TESTS\"} ${{ !contains(matrix.test_task, 'bundle') && 'RUBYOPT=-w' || '' }}",
+            "count": 1,
+            "repos": [
+                "github/ruby"
+            ]
+        },
+        {
+            "command": "make -s ${{ matrix.test_task }} ${TESTS:+TESTS=\"$TESTS\"} RUN_OPTS=\"$RUN_OPTS\" SPECOPTS=\"$SPECOPTS\"",
+            "count": 1,
+            "repos": [
+                "github/ruby"
+            ]
+        },
+        {
+            "command": "make -s ${{ matrix.test_task }} ${TESTS:+TESTS=\"$TESTS\"} RUN_OPTS=\"$RUN_OPTS\" MSPECOPT=--debug SPECOPTS=\"$SPECOPTS\" YJIT_BENCH_OPTS=\"$YJIT_BENCH_OPTS\" YJIT_BINDGEN_DIFF_OPTS=\"$YJIT_BINDGEN_DIFF_OPTS\"",
+            "count": 1,
+            "repos": [
+                "github/ruby"
+            ]
+        }
+    ],
+    "make skipped tests": [
+        {
+            "command": "make -s test-all TESTS=\"${TESTS//-n!\\//-n/}\"\n",
+            "count": 2,
+            "repos": [
+                "github/ruby"
+            ]
+        },
+        {
+            "command": "$SETARCH make -s test-all TESTS=\"${TESTS//-n!\\//-n/}\"\n",
+            "count": 1,
+            "repos": [
+                "github/ruby"
+            ]
+        }
+    ],
+    "Step 17": [
+        {
+            "command": "actions/upload-artifact@65462800fd760344b1a7b4382951275a0abb4808",
+            "count": 1,
+            "repos": [
+                "github/ruby"
+            ]
+        },
+        {
+            "command": "nmake incs",
+            "count": 1,
+            "repos": [
+                "github/ruby"
+            ]
+        }
+    ],
+    "Checkout Repository": [
+        {
+            "command": "actions/checkout@v4",
+            "count": 1,
+            "repos": [
+                "github/pages-gem"
+            ]
+        },
+        {
+            "command": "actions/checkout@v3",
+            "count": 1,
+            "repos": [
+                "github/training-kit"
+            ]
+        }
+    ]
+}

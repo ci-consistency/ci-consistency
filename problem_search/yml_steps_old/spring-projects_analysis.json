@@ -1,0 +1,1574 @@
+{
+    "Set up JDK": [
+        {
+            "command": "actions/setup-java@v4",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-amqp"
+            ]
+        },
+        {
+            "command": "actions/setup-java@v1",
+            "count": 2,
+            "repos": [
+                "spring-projects/spring-session-bom"
+            ]
+        },
+        {
+            "command": "actions/setup-java@v3",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-security-samples"
+            ]
+        }
+    ],
+    "Step 4": [
+        {
+            "command": "jfrog/setup-jfrog-cli@v4",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-amqp"
+            ]
+        },
+        {
+            "command": "actions/setup-node@v2",
+            "count": 2,
+            "repos": [
+                "spring-projects/spring-shell",
+                "spring-projects/spring-cli"
+            ]
+        },
+        {
+            "command": "actions/upload-artifact@v3",
+            "count": 2,
+            "repos": [
+                "spring-projects/spring-shell",
+                "spring-projects/spring-cli"
+            ]
+        },
+        {
+            "command": "jfrog/setup-jfrog-cli@v3",
+            "count": 2,
+            "repos": [
+                "spring-projects/spring-shell"
+            ]
+        },
+        {
+            "command": "actions/upload-artifact@v2",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-cli"
+            ]
+        }
+    ],
+    "Configure JFrog Cli": [
+        {
+            "command": "jf mvnc --repo-resolve-releases=libs-release-staging --repo-resolve-snapshots=snapshot",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-amqp"
+            ]
+        },
+        {
+            "command": "jf rt gradlec \\\n  --use-wrapper \\\n  --uses-plugin \\\n  --deploy-ivy-desc=false \\\n  --server-id-resolve repo.spring.io \\\n  --server-id-deploy repo.spring.io \\\n  --repo-resolve snapshot \\\n  --repo-deploy snapshot\necho JFROG_CLI_BUILD_NAME=spring-shell-main >> $GITHUB_ENV\necho JFROG_CLI_BUILD_NUMBER=$GITHUB_RUN_NUMBER >> $GITHUB_ENV\n",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-shell"
+            ]
+        },
+        {
+            "command": "jf rt gradlec \\\n  --use-wrapper \\\n  --uses-plugin \\\n  --deploy-ivy-desc=false \\\n  --server-id-resolve repo.spring.io \\\n  --server-id-deploy repo.spring.io \\\n  --repo-resolve release \\\n  --repo-deploy libs-staging-local\necho JFROG_CLI_BUILD_NAME=spring-shell-main-release >> $GITHUB_ENV\necho JFROG_CLI_BUILD_NUMBER=$GITHUB_RUN_NUMBER >> $GITHUB_ENV\n",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-shell"
+            ]
+        },
+        {
+            "command": "echo JFROG_CLI_BUILD_NAME=spring-shell-main-release >> $GITHUB_ENV\necho JFROG_CLI_BUILD_NUMBER=$GITHUB_RUN_NUMBER >> $GITHUB_ENV\n",
+            "count": 2,
+            "repos": [
+                "spring-projects/spring-shell"
+            ]
+        },
+        {
+            "command": "jf rt gradlec \\\n  --use-wrapper \\\n  --uses-plugin \\\n  --deploy-ivy-desc=false \\\n  --server-id-resolve repo.spring.io \\\n  --server-id-deploy repo.spring.io \\\n  --repo-resolve milestone \\\n  --repo-deploy libs-staging-local\necho JFROG_CLI_BUILD_NAME=spring-shell-main-milestone >> $GITHUB_ENV\necho JFROG_CLI_BUILD_NUMBER=$GITHUB_RUN_NUMBER >> $GITHUB_ENV\n",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-shell"
+            ]
+        },
+        {
+            "command": "echo JFROG_CLI_BUILD_NAME=spring-shell-main-milestone >> $GITHUB_ENV\necho JFROG_CLI_BUILD_NUMBER=$GITHUB_RUN_NUMBER >> $GITHUB_ENV\n",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-shell"
+            ]
+        },
+        {
+            "command": "jf gradlec \\\n  --use-wrapper \\\n  --uses-plugin \\\n  --deploy-ivy-desc=false \\\n  --server-id-resolve=repo.spring.io \\\n  --server-id-deploy=repo.spring.io \\\n  --repo-resolve=snapshot \\\n  --repo-deploy=snapshot\necho JFROG_CLI_BUILD_NAME=spring-statemachine-main >> $GITHUB_ENV\necho JFROG_CLI_BUILD_NUMBER=$GITHUB_RUN_NUMBER >> $GITHUB_ENV\n",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-statemachine"
+            ]
+        },
+        {
+            "command": "jf gradlec \\\n  --use-wrapper \\\n  --deploy-ivy-desc=false \\\n  --server-id-resolve=repo.spring.io \\\n  --server-id-deploy=repo.spring.io \\\n  --repo-resolve=libs-release \\\n  --repo-deploy=libs-staging-local\necho JFROG_CLI_BUILD_NAME=spring-statemachine-main-release >> $GITHUB_ENV\necho JFROG_CLI_BUILD_NUMBER=$GITHUB_RUN_NUMBER >> $GITHUB_ENV\n",
+            "count": 2,
+            "repos": [
+                "spring-projects/spring-statemachine"
+            ]
+        },
+        {
+            "command": "echo JFROG_CLI_BUILD_NAME=spring-statemachine-main-release >> $GITHUB_ENV\necho JFROG_CLI_BUILD_NUMBER=$GITHUB_RUN_NUMBER >> $GITHUB_ENV\n",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-statemachine"
+            ]
+        },
+        {
+            "command": "jf gradlec \\\n  --use-wrapper \\\n  --deploy-ivy-desc=false \\\n  --server-id-resolve=repo.spring.io \\\n  --server-id-deploy=repo.spring.io \\\n  --repo-resolve=libs-milestone \\\n  --repo-deploy=libs-staging-local\necho JFROG_CLI_BUILD_NAME=spring-statemachine-main-milestone >> $GITHUB_ENV\necho JFROG_CLI_BUILD_NUMBER=$GITHUB_RUN_NUMBER >> $GITHUB_ENV\n",
+            "count": 2,
+            "repos": [
+                "spring-projects/spring-statemachine"
+            ]
+        }
+    ],
+    "Checkout source code": [
+        {
+            "command": "actions/checkout@v3",
+            "count": 11,
+            "repos": [
+                "spring-projects/spring-batch",
+                "spring-projects/spring-batch-extensions",
+                "spring-projects/spring-ai"
+            ]
+        },
+        {
+            "command": "actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-batch"
+            ]
+        },
+        {
+            "command": "actions/checkout@v2",
+            "count": 4,
+            "repos": [
+                "spring-projects/spring-batch-extensions"
+            ]
+        },
+        {
+            "command": "actions/checkout@v4",
+            "count": 2,
+            "repos": [
+                "spring-projects/spring-pulsar",
+                "spring-projects/spring-ai"
+            ]
+        }
+    ],
+    "Set up JDK 17": [
+        {
+            "command": "actions/setup-java@v3",
+            "count": 16,
+            "repos": [
+                "spring-projects/spring-batch",
+                "spring-projects/spring-retry",
+                "spring-projects/spring-data-couchbase",
+                "spring-projects/spring-batch-extensions",
+                "spring-projects/spring-data-relational",
+                "spring-projects/spring-ai"
+            ]
+        },
+        {
+            "command": "actions/setup-java@387ac29b308b003ca37ba93a6cab5eb57c8f5f93",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-batch"
+            ]
+        },
+        {
+            "command": "actions/setup-java@v4",
+            "count": 4,
+            "repos": [
+                "spring-projects/spring-framework",
+                "spring-projects/spring-security",
+                "spring-projects/spring-data-dev-tools",
+                "spring-projects/spring-ai"
+            ]
+        }
+    ],
+    "Build with Maven and deploy to Artifactory": [
+        {
+            "command": "mvn -s settings.xml --batch-mode --update-snapshots deploy",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-batch"
+            ]
+        },
+        {
+            "command": "mvn -s settings.xml -Pintegration-tests -Dfailsafe.rerunFailingTestsCount=3 --batch-mode --update-snapshots deploy",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-ai"
+            ]
+        }
+    ],
+    "Checkout": [
+        {
+            "command": "actions/checkout@v3",
+            "count": 9,
+            "repos": [
+                "spring-projects/spring-batch",
+                "spring-projects/spring-net",
+                "spring-projects/spring-shell",
+                "spring-projects/spring-ldap",
+                "spring-projects/spring-vault",
+                "spring-projects/spring-graphql",
+                "spring-projects/spring-cli",
+                "spring-projects/spring-ai"
+            ]
+        },
+        {
+            "command": "actions/checkout@v4",
+            "count": 22,
+            "repos": [
+                "spring-projects/spring-security",
+                "spring-projects/spring-security-kerberos",
+                "spring-projects/spring-ldap",
+                "spring-projects/spring-session",
+                "spring-projects/spring-data-dev-tools",
+                "spring-projects/spring-authorization-server",
+                "spring-projects/spring-security-samples",
+                "spring-projects/spring-pulsar",
+                "spring-projects/spring-modulith"
+            ]
+        }
+    ],
+    "Dispatch (partial build)": [
+        {
+            "command": "gh workflow run deploy-docs.yml -r $(git rev-parse --abbrev-ref HEAD) -f build-refname=${{ github.ref_name }}",
+            "count": 13,
+            "repos": [
+                "spring-projects/spring-batch",
+                "spring-projects/spring-framework",
+                "spring-projects/spring-security",
+                "spring-projects/spring-security-kerberos",
+                "spring-projects/spring-shell",
+                "spring-projects/spring-ldap",
+                "spring-projects/spring-session",
+                "spring-projects/spring-authorization-server",
+                "spring-projects/spring-graphql",
+                "spring-projects/spring-cli",
+                "spring-projects/spring-pulsar",
+                "spring-projects/spring-modulith",
+                "spring-projects/spring-ai"
+            ]
+        },
+        {
+            "command": "gh workflow run deploy-docs.yml -r docs-build -f build-refname=${{ github.ref_name }}",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-security-kerberos"
+            ]
+        },
+        {
+            "command": "gh workflow run docs-build.yml -r $(git rev-parse --abbrev-ref HEAD) -f build-refname=${{ github.ref_name }}",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-vault"
+            ]
+        }
+    ],
+    "Dispatch (full build)": [
+        {
+            "command": "gh workflow run deploy-docs.yml -r $(git rev-parse --abbrev-ref HEAD)",
+            "count": 13,
+            "repos": [
+                "spring-projects/spring-batch",
+                "spring-projects/spring-framework",
+                "spring-projects/spring-security",
+                "spring-projects/spring-security-kerberos",
+                "spring-projects/spring-shell",
+                "spring-projects/spring-ldap",
+                "spring-projects/spring-session",
+                "spring-projects/spring-authorization-server",
+                "spring-projects/spring-graphql",
+                "spring-projects/spring-cli",
+                "spring-projects/spring-pulsar",
+                "spring-projects/spring-modulith",
+                "spring-projects/spring-ai"
+            ]
+        },
+        {
+            "command": "gh workflow run docs-build.yml -r $(git rev-parse --abbrev-ref HEAD)",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-vault"
+            ]
+        }
+    ],
+    "Prepare directory structure": [
+        {
+            "command": "mkdir -p nexus/org/springframework/batch/spring-batch-bom/$RELEASE_VERSION\nmkdir -p nexus/org/springframework/batch/spring-batch-infrastructure/$RELEASE_VERSION\nmkdir -p nexus/org/springframework/batch/spring-batch-core/$RELEASE_VERSION\nmkdir -p nexus/org/springframework/batch/spring-batch-test/$RELEASE_VERSION\nmkdir -p nexus/org/springframework/batch/spring-batch-integration/$RELEASE_VERSION\n",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-batch"
+            ]
+        },
+        {
+            "command": "mkdir -p nexus/org/springframework/ai/spring-ai-core/$RELEASE_VERSION\nmkdir -p nexus/org/springframework/ai/spring-ai-openai/$RELEASE_VERSION\nmkdir -p nexus/org/springframework/ai/spring-ai-azure-openai/$RELEASE_VERSION\nmkdir -p nexus/org/springframework/ai/spring-ai-spring-boot-autoconfigure/$RELEASE_VERSION\n",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-ai"
+            ]
+        }
+    ],
+    "Download release files from Artifactory": [
+        {
+            "command": "echo \"Downloading BOM artifacts\"\ncd nexus/org/springframework/batch/spring-batch-bom/$RELEASE_VERSION\nwget --user=\"$ARTIFACTORY_USERNAME\" --password=\"$ARTIFACTORY_PASSWORD\" $ARTIFACTORY_URL/spring-batch-bom/$RELEASE_VERSION/spring-batch-bom-$RELEASE_VERSION.pom\n\necho \"Downloading infrastructure artifacts\"\ncd ../../../../../..\ncd nexus/org/springframework/batch/spring-batch-infrastructure/$RELEASE_VERSION\nwget --user=\"$ARTIFACTORY_USERNAME\" --password=\"$ARTIFACTORY_PASSWORD\" $ARTIFACTORY_URL/spring-batch-infrastructure/$RELEASE_VERSION/spring-batch-infrastructure-$RELEASE_VERSION.pom\nwget --user=\"$ARTIFACTORY_USERNAME\" --password=\"$ARTIFACTORY_PASSWORD\" $ARTIFACTORY_URL/spring-batch-infrastructure/$RELEASE_VERSION/spring-batch-infrastructure-$RELEASE_VERSION.jar\nwget --user=\"$ARTIFACTORY_USERNAME\" --password=\"$ARTIFACTORY_PASSWORD\" $ARTIFACTORY_URL/spring-batch-infrastructure/$RELEASE_VERSION/spring-batch-infrastructure-$RELEASE_VERSION-javadoc.jar\nwget --user=\"$ARTIFACTORY_USERNAME\" --password=\"$ARTIFACTORY_PASSWORD\" $ARTIFACTORY_URL/spring-batch-infrastructure/$RELEASE_VERSION/spring-batch-infrastructure-$RELEASE_VERSION-sources.jar\n\necho \"Downloading core artifacts\"\ncd ../../../../../..\ncd nexus/org/springframework/batch/spring-batch-core/$RELEASE_VERSION\nwget --user=\"$ARTIFACTORY_USERNAME\" --password=\"$ARTIFACTORY_PASSWORD\" $ARTIFACTORY_URL/spring-batch-core/$RELEASE_VERSION/spring-batch-core-$RELEASE_VERSION.pom\nwget --user=\"$ARTIFACTORY_USERNAME\" --password=\"$ARTIFACTORY_PASSWORD\" $ARTIFACTORY_URL/spring-batch-core/$RELEASE_VERSION/spring-batch-core-$RELEASE_VERSION.jar\nwget --user=\"$ARTIFACTORY_USERNAME\" --password=\"$ARTIFACTORY_PASSWORD\" $ARTIFACTORY_URL/spring-batch-core/$RELEASE_VERSION/spring-batch-core-$RELEASE_VERSION-javadoc.jar\nwget --user=\"$ARTIFACTORY_USERNAME\" --password=\"$ARTIFACTORY_PASSWORD\" $ARTIFACTORY_URL/spring-batch-core/$RELEASE_VERSION/spring-batch-core-$RELEASE_VERSION-sources.jar\n\necho \"Downloading test artifacts\"\ncd ../../../../../..\ncd nexus/org/springframework/batch/spring-batch-test/$RELEASE_VERSION\nwget --user=\"$ARTIFACTORY_USERNAME\" --password=\"$ARTIFACTORY_PASSWORD\" $ARTIFACTORY_URL/spring-batch-test/$RELEASE_VERSION/spring-batch-test-$RELEASE_VERSION.pom\nwget --user=\"$ARTIFACTORY_USERNAME\" --password=\"$ARTIFACTORY_PASSWORD\" $ARTIFACTORY_URL/spring-batch-test/$RELEASE_VERSION/spring-batch-test-$RELEASE_VERSION.jar\nwget --user=\"$ARTIFACTORY_USERNAME\" --password=\"$ARTIFACTORY_PASSWORD\" $ARTIFACTORY_URL/spring-batch-test/$RELEASE_VERSION/spring-batch-test-$RELEASE_VERSION-javadoc.jar\nwget --user=\"$ARTIFACTORY_USERNAME\" --password=\"$ARTIFACTORY_PASSWORD\" $ARTIFACTORY_URL/spring-batch-test/$RELEASE_VERSION/spring-batch-test-$RELEASE_VERSION-sources.jar\n\necho \"Downloading integration artifacts\"\ncd ../../../../../..\ncd nexus/org/springframework/batch/spring-batch-integration/$RELEASE_VERSION\nwget --user=\"$ARTIFACTORY_USERNAME\" --password=\"$ARTIFACTORY_PASSWORD\" $ARTIFACTORY_URL/spring-batch-integration/$RELEASE_VERSION/spring-batch-integration-$RELEASE_VERSION.pom\nwget --user=\"$ARTIFACTORY_USERNAME\" --password=\"$ARTIFACTORY_PASSWORD\" $ARTIFACTORY_URL/spring-batch-integration/$RELEASE_VERSION/spring-batch-integration-$RELEASE_VERSION.jar\nwget --user=\"$ARTIFACTORY_USERNAME\" --password=\"$ARTIFACTORY_PASSWORD\" $ARTIFACTORY_URL/spring-batch-integration/$RELEASE_VERSION/spring-batch-integration-$RELEASE_VERSION-javadoc.jar\nwget --user=\"$ARTIFACTORY_USERNAME\" --password=\"$ARTIFACTORY_PASSWORD\" $ARTIFACTORY_URL/spring-batch-integration/$RELEASE_VERSION/spring-batch-integration-$RELEASE_VERSION-sources.jar\n",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-batch"
+            ]
+        },
+        {
+            "command": "echo \"Downloading core artifacts\"\ncd ../../../../../..\ncd nexus/org/springframework/ai/spring-ai-core/$RELEASE_VERSION\nwget $ARTIFACTORY_URL/spring-ai-core/$RELEASE_VERSION/spring-ai-core-$RELEASE_VERSION.pom\nwget $ARTIFACTORY_URL/spring-ai-core/$RELEASE_VERSION/spring-ai-core-$RELEASE_VERSION.jar\nwget $ARTIFACTORY_URL/spring-ai-core/$RELEASE_VERSION/spring-ai-core-$RELEASE_VERSION-javadoc.jar\nwget $ARTIFACTORY_URL/spring-ai-core/$RELEASE_VERSION/spring-ai-core-$RELEASE_VERSION-sources.jar\n\necho \"Downloading openai artifacts\"\ncd ../../../../../..\ncd nexus/org/springframework/batch/spring-ai-openai/$RELEASE_VERSION\nwget $ARTIFACTORY_URL/spring-ai-openai/$RELEASE_VERSION/spring-ai-openai-$RELEASE_VERSION.pom\nwget $ARTIFACTORY_URL/spring-ai-openai/$RELEASE_VERSION/spring-ai-openai-$RELEASE_VERSION.jar\nwget $ARTIFACTORY_URL/spring-ai-openai/$RELEASE_VERSION/spring-ai-openai-$RELEASE_VERSION-javadoc.jar\nwget $ARTIFACTORY_URL/spring-ai-openai/$RELEASE_VERSION/spring-ai-openai-$RELEASE_VERSION-sources.jar\n\necho \"Downloading azure openai artifacts\"\ncd ../../../../../..\ncd nexus/org/springframework/batch/spring-ai-azure-openai/$RELEASE_VERSION\nwget $ARTIFACTORY_URL/spring-ai-azure-openai/$RELEASE_VERSION/spring-ai-azure-openai-$RELEASE_VERSION.pom\nwget $ARTIFACTORY_URL/spring-ai-azure-openai/$RELEASE_VERSION/spring-ai-azure-openai-$RELEASE_VERSION.jar\nwget $ARTIFACTORY_URL/spring-ai-azure-openai/$RELEASE_VERSION/spring-ai-azure-openai-$RELEASE_VERSION-javadoc.jar\nwget $ARTIFACTORY_URL/spring-ai-azure-openai/$RELEASE_VERSION/spring-ai-azure-openai-$RELEASE_VERSION-sources.jar\n\necho \"Downloading autoconfiguration artifacts\"\ncd ../../../../../..\ncd nexus/org/springframework/batch/spring-ai-spring-boot-autoconfigure/$RELEASE_VERSION\nwget $ARTIFACTORY_URL/spring-ai-spring-boot-autoconfigure/$RELEASE_VERSION/spring-ai-spring-boot-autoconfigure-$RELEASE_VERSION.pom\nwget $ARTIFACTORY_URL/spring-ai-spring-boot-autoconfigure/$RELEASE_VERSION/spring-ai-spring-boot-autoconfigure-$RELEASE_VERSION.jar\nwget $ARTIFACTORY_URL/spring-ai-spring-boot-autoconfigure/$RELEASE_VERSION/spring-ai-spring-boot-autoconfigure-$RELEASE_VERSION-javadoc.jar\nwget $ARTIFACTORY_URL/spring-ai-spring-boot-autoconfigure/$RELEASE_VERSION/spring-ai-spring-boot-autoconfigure-$RELEASE_VERSION-sources.jar\n",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-ai"
+            ]
+        }
+    ],
+    "Prepare configuration file": [
+        {
+            "command": "cat << EOF > application.yml\nchangelog:\n  repository: spring-projects/spring-batch\n  sections:\n    - title: \":star: New features\"\n      labels: [ \"type: feature\" ]\n    - title: \":rocket: Enhancements\"\n      labels: [ \"type: enhancement\" ]\n    - title: \":lady_beetle: Bug fixes\"\n      labels: [ \"type: bug\" ]\n    - title: \":notebook_with_decorative_cover: Documentation\"\n      labels: [ \"in: documentation\" ]\n    - title: \":hammer: Tasks\"\n      labels: [ \"type: task\" ]\nEOF\n",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-batch"
+            ]
+        },
+        {
+            "command": "cat << EOF > application.yml\nchangelog:\n  repository: spring-exprimental/spring-ai\n  sections:\n    - title: \":star: New features\"\n      labels: [ \"type: feature\" ]\n    - title: \":rocket: Enhancements\"\n      labels: [ \"type: enhancement\" ]\n    - title: \":lady_beetle: Bug fixes\"\n      labels: [ \"type: bug\" ]\n    - title: \":notebook_with_decorative_cover: Documentation\"\n      labels: [ \"in: documentation\" ]\n    - title: \":hammer: Tasks\"\n      labels: [ \"type: task\" ]\nEOF\n",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-ai"
+            ]
+        }
+    ],
+    "Check out code": [
+        {
+            "command": "actions/checkout@v4",
+            "count": 5,
+            "repos": [
+                "spring-projects/spring-framework"
+            ]
+        },
+        {
+            "command": "actions/checkout@v3",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-retry"
+            ]
+        },
+        {
+            "command": "actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-graphql"
+            ]
+        }
+    ],
+    "Set up Java": [
+        {
+            "command": "actions/setup-java@v4",
+            "count": 3,
+            "repos": [
+                "spring-projects/spring-framework"
+            ]
+        },
+        {
+            "command": "actions/setup-java@99b8673ff64fbf99d8d325f52d9a5bdedb8483e9",
+            "count": 2,
+            "repos": [
+                "spring-projects/spring-graphql",
+                "spring-projects/spring-aot-smoke-tests"
+            ]
+        }
+    ],
+    "Set up Gradle": [
+        {
+            "command": "gradle/actions/setup-gradle@417ae3ccd767c252f5661f1ace9f835f9654f2b5",
+            "count": 4,
+            "repos": [
+                "spring-projects/spring-framework",
+                "spring-projects/spring-graphql"
+            ]
+        },
+        {
+            "command": "spring-io/spring-gradle-build-action@v2",
+            "count": 4,
+            "repos": [
+                "spring-projects/spring-integration",
+                "spring-projects/spring-integration-samples",
+                "spring-projects/spring-kafka",
+                "spring-projects/spring-pulsar"
+            ]
+        },
+        {
+            "command": "gradle/gradle-build-action@v2",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-security"
+            ]
+        },
+        {
+            "command": "gradle/actions/setup-gradle@db19848a5fa7950289d3668fb053140cf3028d43",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-aot-smoke-tests"
+            ]
+        }
+    ],
+    "Configure Gradle properties": [
+        {
+            "command": "mkdir -p $HOME/.gradle\necho 'systemProp.user.name=spring-builds+github' >> $HOME/.gradle/gradle.properties\necho 'systemProp.org.gradle.internal.launcher.welcomeMessageEnabled=false' >> $HOME/.gradle/gradle.properties\necho 'org.gradle.daemon=false' >> $HOME/.gradle/gradle.properties\necho 'org.gradle.daemon=4' >> $HOME/.gradle/gradle.properties\n",
+            "count": 2,
+            "repos": [
+                "spring-projects/spring-framework"
+            ]
+        },
+        {
+            "command": "mkdir -p $HOME/.gradle\necho 'systemProp.user.name=spring-builds+github' >> $HOME/.gradle/gradle.properties\necho 'systemProp.org.gradle.internal.launcher.welcomeMessageEnabled=false' >> $HOME/.gradle/gradle.properties\necho 'org.gradle.daemon=false' >> $HOME/.gradle/gradle.properties\n",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-graphql"
+            ]
+        }
+    ],
+    "Deploy": [
+        {
+            "command": "spring-io/artifactory-deploy-action@v0.0.1",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-framework"
+            ]
+        },
+        {
+            "command": "spring-io/artifactory-deploy-action@26bbe925a75f4f863e1e529e85be2d0093cac116",
+            "count": 3,
+            "repos": [
+                "spring-projects/spring-boot",
+                "spring-projects/spring-restdocs",
+                "spring-projects/spring-graphql"
+            ]
+        }
+    ],
+    "Send notification": [
+        {
+            "command": "./.github/actions/send-notification",
+            "count": 3,
+            "repos": [
+                "spring-projects/spring-framework",
+                "spring-projects/spring-graphql"
+            ]
+        },
+        {
+            "command": "./ci/.github/actions/send-notification",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-aot-smoke-tests"
+            ]
+        }
+    ],
+    "Build": [
+        {
+            "command": "./gradlew -Dorg.gradle.internal.launcher.welcomeMessageEnabled=false --no-daemon --no-parallel --continue build",
+            "count": 2,
+            "repos": [
+                "spring-projects/spring-framework",
+                "spring-projects/spring-boot"
+            ]
+        },
+        {
+            "command": "./gradlew check antora",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-framework"
+            ]
+        },
+        {
+            "command": "./mvnw --batch-mode --update-snapshots verify",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-retry"
+            ]
+        },
+        {
+            "command": "./gradlew check",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-integration-samples"
+            ]
+        },
+        {
+            "command": "./build.sh website",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-net"
+            ]
+        },
+        {
+            "command": "./gradlew build",
+            "count": 3,
+            "repos": [
+                "spring-projects/spring-shell",
+                "spring-projects/spring-restdocs"
+            ]
+        },
+        {
+            "command": "./.github/actions/build",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-boot"
+            ]
+        },
+        {
+            "command": "./gradlew ${{ inputs.project }}:${{ inputs.task }}",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-aot-smoke-tests"
+            ]
+        }
+    ],
+    "Step 1": [
+        {
+            "command": "actions/checkout@v4",
+            "count": 41,
+            "repos": [
+                "spring-projects/spring-framework",
+                "spring-projects/spring-integration-samples",
+                "spring-projects/spring-security",
+                "spring-projects/spring-security-kerberos",
+                "spring-projects/spring-boot",
+                "spring-projects/spring-petclinic",
+                "spring-projects/spring-ldap",
+                "spring-projects/spring-session",
+                "spring-projects/spring-statemachine",
+                "spring-projects/spring-authorization-server",
+                "spring-projects/spring-cli",
+                "spring-projects/spring-pulsar",
+                "spring-projects/spring-aot-smoke-tests",
+                "spring-projects/spring-rewrite-commons"
+            ]
+        },
+        {
+            "command": "actions/checkout@v3",
+            "count": 23,
+            "repos": [
+                "spring-projects/spring-net",
+                "spring-projects/spring-shell",
+                "spring-projects/spring-graphql",
+                "spring-projects/spring-cli"
+            ]
+        },
+        {
+            "command": "spring-io/nexus-sync-action@main",
+            "count": 4,
+            "repos": [
+                "spring-projects/spring-shell",
+                "spring-projects/spring-statemachine"
+            ]
+        },
+        {
+            "command": "actions/checkout@v2",
+            "count": 21,
+            "repos": [
+                "spring-projects/spring-guice",
+                "spring-projects/spring-statemachine",
+                "spring-projects/spring-session-bom",
+                "spring-projects/spring-security-samples",
+                "spring-projects/spring-cli",
+                "spring-projects/spring-ai"
+            ]
+        },
+        {
+            "command": "jfrog/setup-jfrog-cli@v4",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-integration-aws"
+            ]
+        }
+    ],
+    "Step 2": [
+        {
+            "command": "gradle/wrapper-validation-action@v2",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-framework"
+            ]
+        },
+        {
+            "command": "actions/setup-java@v4",
+            "count": 5,
+            "repos": [
+                "spring-projects/spring-security",
+                "spring-projects/spring-session",
+                "spring-projects/spring-statemachine",
+                "spring-projects/spring-cli",
+                "spring-projects/spring-rewrite-commons"
+            ]
+        },
+        {
+            "command": "gh workflow run dependabot-auto-merge-forward.yml -r main",
+            "count": 2,
+            "repos": [
+                "spring-projects/spring-security",
+                "spring-projects/spring-session"
+            ]
+        },
+        {
+            "command": "actions/setup-java@v3",
+            "count": 10,
+            "repos": [
+                "spring-projects/spring-shell",
+                "spring-projects/spring-graphql",
+                "spring-projects/spring-cli"
+            ]
+        },
+        {
+            "command": "actions/checkout@v3",
+            "count": 2,
+            "repos": [
+                "spring-projects/spring-shell"
+            ]
+        },
+        {
+            "command": "graalvm/setup-graalvm@v1",
+            "count": 3,
+            "repos": [
+                "spring-projects/spring-shell",
+                "spring-projects/spring-cli"
+            ]
+        },
+        {
+            "command": "jfrog/setup-jfrog-cli@v3",
+            "count": 3,
+            "repos": [
+                "spring-projects/spring-shell"
+            ]
+        },
+        {
+            "command": "gradle/actions/wrapper-validation@dbbdc275be76ac10734476cc723d82dfe7ec6eda",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-boot"
+            ]
+        },
+        {
+            "command": "gradle/wrapper-validation-action@v3",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-session"
+            ]
+        },
+        {
+            "command": "jfrog/setup-jfrog-cli@v4",
+            "count": 4,
+            "repos": [
+                "spring-projects/spring-statemachine"
+            ]
+        },
+        {
+            "command": "actions/setup-java@v1",
+            "count": 2,
+            "repos": [
+                "spring-projects/spring-statemachine"
+            ]
+        },
+        {
+            "command": "echo \"prs_count=$(gh pr list --app dependabot --state open --json number --jq length)\" >> $GITHUB_OUTPUT",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-security-samples"
+            ]
+        },
+        {
+            "command": "gh workflow run auto-merge-forward.yml -r main",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-security-samples"
+            ]
+        },
+        {
+            "command": "actions/setup-java@v2",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-cli"
+            ]
+        },
+        {
+            "command": "snapshotVersion=$( awk -F '=' '$1 == \"version\" { print $2 }' gradle.properties )\nif [ \"${{ inputs.version }}\" != '' ]; then\n  plainVersion=${snapshotVersion%-SNAPSHOT}\n  releaseVersion=${{ inputs.version }}\n  sed -i \"s/version=$snapshotVersion/version=$releaseVersion/\" gradle.properties\n  echo \"ref=$releaseVersion\" >> $GITHUB_OUTPUT\n  echo \"version=$releaseVersion\" >> $GITHUB_OUTPUT\n  git config --global user.name github-actions[bot]\n  git config --global user.email 41898282+github-actions[bot]@users.noreply.github.com\n  git checkout -b $releaseVersion\n  git commit -a -m \"Release $releaseVersion\"\n  git tag \"v$releaseVersion\"\n  git push origin $releaseVersion --tags\nelse\n  echo \"ref=$(git rev-parse --abbrev-ref HEAD)\" >> $GITHUB_OUTPUT\n  echo \"version=$snapshotVersion\" >> $GITHUB_OUTPUT\nfi\n",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-cli"
+            ]
+        },
+        {
+            "command": "spring-io/spring-gradle-build-action@v2",
+            "count": 11,
+            "repos": [
+                "spring-projects/spring-pulsar"
+            ]
+        },
+        {
+            "command": "gradle/actions/wrapper-validation@db19848a5fa7950289d3668fb053140cf3028d43",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-aot-smoke-tests"
+            ]
+        },
+        {
+            "command": "jfrog/setup-jfrog-cli@v1",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-ai"
+            ]
+        },
+        {
+            "command": "jvalkeal/setup-maven@v1",
+            "count": 2,
+            "repos": [
+                "spring-projects/spring-rewrite-commons"
+            ]
+        }
+    ],
+    "Run './build.cmd ci'": [
+        {
+            "command": "./build.cmd ci",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-net"
+            ]
+        },
+        {
+            "command": "./build.sh ci",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-net"
+            ]
+        }
+    ],
+    "Publish": [
+        {
+            "command": "./build.cmd test publish",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-net"
+            ]
+        },
+        {
+            "command": "./.github/actions/publish-gradle-plugin",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-boot"
+            ]
+        }
+    ],
+    "Check samples project": [
+        {
+            "command": "# Extract version from gradle.properties\nversion=$(cat gradle.properties | grep \"version=\" | awk -F'=' '{print $2}')\n# Extract samplesBranch from gradle.properties\nsamples_branch=$(cat gradle.properties | grep \"samplesBranch=\" | awk -F'=' '{print $2}')\n./gradlew publishMavenJavaPublicationToLocalRepository\n./gradlew cloneRepository -PrepositoryName=\"spring-projects/spring-security-samples\" -Pref=\"$samples_branch\" -PcloneOutputDirectory=\"$SAMPLES_DIR\"\n./gradlew --project-dir \"$SAMPLES_DIR\" --init-script spring-security-ci.gradle -PlocalRepositoryPath=\"$LOCAL_REPOSITORY_PATH\" -PspringSecurityVersion=\"$version\" :runAllTests\n",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-security"
+            ]
+        },
+        {
+            "command": "./gradlew publishMavenJavaPublicationToLocalRepository\n./gradlew \\\n  --init-script ./spring-pulsar-sample-apps/sample-apps-check-ci.gradle \\\n  -PlocalRepositoryPath=\"$LOCAL_REPOSITORY_PATH\" \\\n  -PspringPulsarVersion=\"$VERSION\" \\\n  -PspringBootVersion=\"$BOOT_VERSION\" \\\n  -PtestToolchain=\"$JAVA_VERSION\" \\\n  -PsampleTests \\\n  ${{ matrix.samplesTarget }}\n",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-pulsar"
+            ]
+        }
+    ],
+    "Send Slack message": [
+        {
+            "command": "sjohnr/slack-workflow-status@v1-beta",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-security"
+            ]
+        },
+        {
+            "command": "Gamesight/slack-workflow-status@v1.3.0",
+            "count": 2,
+            "repos": [
+                "spring-projects/spring-security"
+            ]
+        },
+        {
+            "command": "Gamesight/slack-workflow-status@v1.0.1",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-session-bom"
+            ]
+        }
+    ],
+    "Build with Gradle": [
+        {
+            "command": "./gradlew clean build --continue",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-security"
+            ]
+        },
+        {
+            "command": "./gradlew clean build --no-daemon --stacktrace",
+            "count": 2,
+            "repos": [
+                "spring-projects/spring-ldap",
+                "spring-projects/spring-session"
+            ]
+        },
+        {
+            "command": "./gradlew clean build",
+            "count": 3,
+            "repos": [
+                "spring-projects/spring-statemachine",
+                "spring-projects/spring-authorization-server"
+            ]
+        },
+        {
+            "command": "./gradlew clean build -PstatemachineIncludeTags=mongodb",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-statemachine"
+            ]
+        },
+        {
+            "command": "./gradlew clean build -PstatemachineIncludeTags=redis",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-statemachine"
+            ]
+        },
+        {
+            "command": "./gradlew clean build -PstatemachineIncludeTags=smoke",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-statemachine"
+            ]
+        },
+        {
+            "command": "./gradlew clean build --continue --scan",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-session-bom"
+            ]
+        },
+        {
+            "command": "./gradlew check --continue",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-security-samples"
+            ]
+        }
+    ],
+    "Run Antora": [
+        {
+            "command": "./gradlew -PbuildSrc.skipTests=true :spring-security-docs:antora",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-security"
+            ]
+        },
+        {
+            "command": "./mvnw -B antora -Dspring-data.module=${{ github.event.inputs.module }}",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-data-dev-tools"
+            ]
+        },
+        {
+            "command": "./gradlew antora\n",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-pulsar"
+            ]
+        }
+    ],
+    "Dispatch": [
+        {
+            "command": "gh workflow run update-scheduled-release-version.yml -r ${{ matrix.branch }}",
+            "count": 5,
+            "repos": [
+                "spring-projects/spring-security",
+                "spring-projects/spring-security-kerberos",
+                "spring-projects/spring-ldap",
+                "spring-projects/spring-session",
+                "spring-projects/spring-authorization-server"
+            ]
+        },
+        {
+            "command": "gh workflow run e2e.yml -r ${{ matrix.branch }}",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-shell"
+            ]
+        },
+        {
+            "command": "gh workflow run rebuild-search-index.yml -r $(git rev-parse --abbrev-ref HEAD)",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-session"
+            ]
+        },
+        {
+            "command": "gh workflow run ci.yml -r ${{ matrix.branch }}",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-pulsar"
+            ]
+        }
+    ],
+    "Step 3": [
+        {
+            "command": "stefanzweifel/git-auto-commit-action@v5",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-security"
+            ]
+        },
+        {
+            "command": "jfrog/setup-jfrog-cli@v3",
+            "count": 2,
+            "repos": [
+                "spring-projects/spring-shell",
+                "spring-projects/spring-rewrite-commons"
+            ]
+        },
+        {
+            "command": "graalvm/setup-graalvm@v1",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-shell"
+            ]
+        },
+        {
+            "command": "actions/setup-java@v3",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-shell"
+            ]
+        },
+        {
+            "command": "./gradlew build nativeCompile -PspringShellSampleMusl=${{ matrix.musl }} -x test\n",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-shell"
+            ]
+        },
+        {
+            "command": "jvalkeal/setup-maven@v1",
+            "count": 2,
+            "repos": [
+                "spring-projects/spring-shell"
+            ]
+        },
+        {
+            "command": "jfrog/setup-jfrog-cli@v4",
+            "count": 3,
+            "repos": [
+                "spring-projects/spring-statemachine"
+            ]
+        },
+        {
+            "command": "./gradlew build --no-daemon",
+            "count": 2,
+            "repos": [
+                "spring-projects/spring-cli"
+            ]
+        },
+        {
+            "command": "./gradlew build nativeCompile -x test",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-cli"
+            ]
+        },
+        {
+            "command": "spring-io/spring-gradle-build-action@v2",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-pulsar"
+            ]
+        },
+        {
+            "command": "actions/setup-java@v4",
+            "count": 2,
+            "repos": [
+                "spring-projects/spring-rewrite-commons"
+            ]
+        }
+    ],
+    "Build and Publish": [
+        {
+            "command": "jf rt gradle build distZip artifactoryPublish\njf rt build-publish\n",
+            "count": 3,
+            "repos": [
+                "spring-projects/spring-shell"
+            ]
+        },
+        {
+            "command": "./.github/actions/build",
+            "count": 2,
+            "repos": [
+                "spring-projects/spring-boot"
+            ]
+        },
+        {
+            "command": "./gradlew -PdeploymentRepository=$(pwd)/distribution-repository build publishAllPublicationsToDeploymentRepository",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-restdocs"
+            ]
+        },
+        {
+            "command": "jf gradle clean build artifactoryPublish\njf rt build-publish\n",
+            "count": 2,
+            "repos": [
+                "spring-projects/spring-statemachine"
+            ]
+        }
+    ],
+    "Step 5": [
+        {
+            "command": "./gradlew clean build nativeCompile -PspringShellSampleMusl=${{ matrix.musl }} -PspringShellSampleNative=true -PspringShellSampleE2E=true\n",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-shell"
+            ]
+        },
+        {
+            "command": "actions/setup-node@v2",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-shell"
+            ]
+        },
+        {
+            "command": "spring-io/nexus-sync-action@main",
+            "count": 3,
+            "repos": [
+                "spring-projects/spring-shell",
+                "spring-projects/spring-statemachine"
+            ]
+        },
+        {
+            "command": "./gradlew clean build nativeBuild -x test\n",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-cli"
+            ]
+        },
+        {
+            "command": "actions/upload-artifact@v3",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-cli"
+            ]
+        },
+        {
+            "command": "jvalkeal/nexus-sync@v0",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-ai"
+            ]
+        }
+    ],
+    "Step 6": [
+        {
+            "command": "actions/upload-artifact@v3",
+            "count": 3,
+            "repos": [
+                "spring-projects/spring-shell",
+                "spring-projects/spring-cli"
+            ]
+        },
+        {
+            "command": "jvalkeal/build-zoo-handler@v0.0.4",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-statemachine"
+            ]
+        }
+    ],
+    "Upload Build Logs": [
+        {
+            "command": "actions/upload-artifact@v3",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-shell"
+            ]
+        },
+        {
+            "command": "actions/upload-artifact@v4",
+            "count": 4,
+            "repos": [
+                "spring-projects/spring-statemachine"
+            ]
+        },
+        {
+            "command": "actions/upload-artifact@v2",
+            "count": 2,
+            "repos": [
+                "spring-projects/spring-statemachine"
+            ]
+        }
+    ],
+    "run e2e tests": [
+        {
+            "command": "npm install\nnpm test\n",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-shell"
+            ]
+        },
+        {
+            "command": "npm install\nnpm run build-spring-shell-e2e\nnpm test\n",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-cli"
+            ]
+        }
+    ],
+    "Publish Test Results": [
+        {
+            "command": "EnricoMi/publish-unit-test-result-action/composite@v2",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-shell"
+            ]
+        },
+        {
+            "command": "EnricoMi/publish-unit-test-result-action/composite@v1",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-cli"
+            ]
+        }
+    ],
+    "Configure Release Version": [
+        {
+            "command": "snapshotVersion=$( awk -F '=' '$1 == \"version\" { print $2 }' gradle.properties )\nplainVersion=${snapshotVersion%-SNAPSHOT}\nsed -i \"s/version=$snapshotVersion/version=$plainVersion/\" gradle.properties\necho PROJECT_VERSION=$plainVersion >> $GITHUB_ENV\n",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-shell"
+            ]
+        },
+        {
+            "command": "jf gradle releaseVersion\necho PROJECT_VERSION=$(cat gradle.properties | grep \"version=\" | awk -F'=' '{print $2}') >> $GITHUB_ENV\n",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-statemachine"
+            ]
+        }
+    ],
+    "Tag Release": [
+        {
+            "command": "git config --global user.name github-actions[bot]\ngit config --global user.email 41898282+github-actions[bot]@users.noreply.github.com\ngit checkout -b $PROJECT_VERSION\ngit commit -a -m \"Release $PROJECT_VERSION\"\ngit tag \"v$PROJECT_VERSION\"\n",
+            "count": 2,
+            "repos": [
+                "spring-projects/spring-shell"
+            ]
+        },
+        {
+            "command": "jvalkeal/build-zoo-handler@v0.0.4",
+            "count": 2,
+            "repos": [
+                "spring-projects/spring-statemachine"
+            ]
+        }
+    ],
+    "Output": [
+        {
+            "command": "echo \"project-version=$PROJECT_VERSION\" >> $GITHUB_OUTPUT\n",
+            "count": 2,
+            "repos": [
+                "spring-projects/spring-shell"
+            ]
+        },
+        {
+            "command": "echo \"::set-output name=project-version::$PROJECT_VERSION\"\n",
+            "count": 2,
+            "repos": [
+                "spring-projects/spring-statemachine"
+            ]
+        }
+    ],
+    "Promote Build": [
+        {
+            "command": "jf rt build-promote libs-release-local\n",
+            "count": 2,
+            "repos": [
+                "spring-projects/spring-shell",
+                "spring-projects/spring-statemachine"
+            ]
+        },
+        {
+            "command": "jf rt build-promote libs-milestone-local\n",
+            "count": 2,
+            "repos": [
+                "spring-projects/spring-shell",
+                "spring-projects/spring-statemachine"
+            ]
+        }
+    ],
+    "GitHub Release": [
+        {
+            "command": "gh issue list \\\n  --repo spring-projects/spring-shell \\\n  --search milestone:$PROJECT_VERSION \\\n  --label automation/rlnotes-header  \\\n  --state all --json title,body \\\n  --jq '{headers:map(.),headerslength:(length)}' \\\n  > $RELEASE_NOTES_HEADERS\ngh issue list \\\n  --repo spring-projects/spring-shell \\\n  --search milestone:$PROJECT_VERSION \\\n  --label automation/rlnotes-footer  \\\n  --state all --json title,body \\\n  --jq '{footers:map(.),footerslength:(length)}' \\\n  > $RELEASE_NOTES_FOOTERS\ngh issue list \\\n  --repo spring-projects/spring-shell \\\n  --search milestone:$PROJECT_VERSION \\\n  --state all --json number,title,labels \\\n  --jq '{issues:map(select((.labels | length == 0) or (any(.labels[].name; startswith(\"automation/rlnotes\")|not))))}' \\\n  > $RELEASE_NOTES_ISSUES\ngh pr list \\\n  --repo spring-projects/spring-shell \\\n  --search milestone:$PROJECT_VERSION \\\n  --state all --json number,title,labels \\\n  --jq '{prs:map(.),prslength:(length)}' \\\n  > $RELEASE_NOTES_PRS\njq -s '{issues:(.[0].issues),prs:(.[1].prs),prslength:(.[1].prslength),headers:(.[2].headers),headerslength:(.[2].headerslength),footers:(.[3].footers), footerslength:(.[3].footerslength)}' \\\n  $RELEASE_NOTES_ISSUES \\\n  $RELEASE_NOTES_PRS \\\n  $RELEASE_NOTES_HEADERS \\\n  $RELEASE_NOTES_FOOTERS \\\n  > $RELEASE_NOTES_DATA\nmustache $RELEASE_NOTES_DATA .github/rlnotes.mustache > $RELEASE_NOTES_FILE\ngh release create v$PROJECT_VERSION \\\n  --draft \\\n  --title \"$PROJECT_VERSION\" \\\n  --notes-file $RELEASE_NOTES_FILE\n",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-shell"
+            ]
+        },
+        {
+            "command": "gh issue list \\\n  --repo spring-projects/spring-shell \\\n  --search milestone:$PROJECT_VERSION \\\n  --label automation/rlnotes-header  \\\n  --state all --json title,body \\\n  --jq '{headers:map(.),headerslength:(length)}' \\\n  > $RELEASE_NOTES_HEADERS\ngh issue list \\\n  --repo spring-projects/spring-shell \\\n  --search milestone:$PROJECT_VERSION \\\n  --label automation/rlnotes-footer  \\\n  --state all --json title,body \\\n  --jq '{footers:map(.),footerslength:(length)}' \\\n  > $RELEASE_NOTES_FOOTERS\ngh issue list \\\n  --repo spring-projects/spring-shell \\\n  --search milestone:$PROJECT_VERSION \\\n  --state all --json number,title,labels \\\n  --jq '{issues:map(select((.labels | length == 0) or (any(.labels[].name; startswith(\"automation/rlnotes\")|not))))}' \\\n  > $RELEASE_NOTES_ISSUES\ngh pr list \\\n  --repo spring-projects/spring-shell \\\n  --search milestone:$PROJECT_VERSION \\\n  --state all --json number,title,labels \\\n  --jq '{prs:map(.),prslength:(length)}' \\\n  > $RELEASE_NOTES_PRS\njq -s '{issues:(.[0].issues),prs:(.[1].prs),prslength:(.[1].prslength),headers:(.[2].headers),headerslength:(.[2].headerslength),footers:(.[3].footers), footerslength:(.[3].footerslength)}' \\\n  $RELEASE_NOTES_ISSUES \\\n  $RELEASE_NOTES_PRS \\\n  $RELEASE_NOTES_HEADERS \\\n  $RELEASE_NOTES_FOOTERS \\\n  > $RELEASE_NOTES_DATA\nmustache $RELEASE_NOTES_DATA .github/rlnotes.mustache > $RELEASE_NOTES_FILE\ngh release create v$PROJECT_VERSION \\\n  --draft \\\n  --prerelease \\\n  --title \"$PROJECT_VERSION\" \\\n  --notes-file $RELEASE_NOTES_FILE\n",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-shell"
+            ]
+        },
+        {
+            "command": "gh issue list \\\n  --repo spring-projects/spring-statemachine \\\n  --milestone $PROJECT_VERSION \\\n  --label automation/rlnotes-header  \\\n  --state all --json title,body \\\n  --jq '{headers:map(.),headerslength:(length)}' \\\n  > $RELEASE_NOTES_HEADERS\ngh issue list \\\n  --repo spring-projects/spring-statemachine \\\n  --milestone $PROJECT_VERSION \\\n  --label automation/rlnotes-footer  \\\n  --state all --json title,body \\\n  --jq '{footers:map(.),footerslength:(length)}' \\\n  > $RELEASE_NOTES_FOOTERS\ngh issue list \\\n  --repo spring-projects/spring-statemachine \\\n  --milestone $PROJECT_VERSION \\\n  --state all --json number,title,labels \\\n  --jq '{issues:map(select((.labels | length == 0) or (any(.labels[].name; startswith(\"automation/rlnotes\")|not))))}' \\\n  > $RELEASE_NOTES_ISSUES\njq -s '{issues:(.[0].issues),headers:(.[1].headers),headerslength:(.[1].headerslength),footers:(.[2].footers), footerslength:(.[2].footerslength)}' \\\n  $RELEASE_NOTES_ISSUES \\\n  $RELEASE_NOTES_HEADERS \\\n  $RELEASE_NOTES_FOOTERS \\\n  > $RELEASE_NOTES_DATA\nmustache $RELEASE_NOTES_DATA .github/rlnotes.mustache > $RELEASE_NOTES_FILE\ngh release create v$PROJECT_VERSION \\\n  --draft \\\n  --title \"$PROJECT_VERSION\" \\\n  --notes-file $RELEASE_NOTES_FILE\n",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-statemachine"
+            ]
+        },
+        {
+            "command": "gh issue list \\\n  --repo spring-projects/spring-statemachine \\\n  --milestone $PROJECT_VERSION \\\n  --label automation/rlnotes-header  \\\n  --state all --json title,body \\\n  --jq '{headers:map(.),headerslength:(length)}' \\\n  > $RELEASE_NOTES_HEADERS\ngh issue list \\\n  --repo spring-projects/spring-statemachine \\\n  --milestone $PROJECT_VERSION \\\n  --label automation/rlnotes-footer  \\\n  --state all --json title,body \\\n  --jq '{footers:map(.),footerslength:(length)}' \\\n  > $RELEASE_NOTES_FOOTERS\ngh issue list \\\n  --repo spring-projects/spring-statemachine \\\n  --milestone $PROJECT_VERSION \\\n  --state all --json number,title,labels \\\n  --jq '{issues:map(select((.labels | length == 0) or (any(.labels[].name; startswith(\"automation/rlnotes\")|not))))}' \\\n  > $RELEASE_NOTES_ISSUES\njq -s '{issues:(.[0].issues),headers:(.[1].headers),headerslength:(.[1].headerslength),footers:(.[2].footers), footerslength:(.[2].footerslength)}' \\\n  $RELEASE_NOTES_ISSUES \\\n  $RELEASE_NOTES_HEADERS \\\n  $RELEASE_NOTES_FOOTERS \\\n  > $RELEASE_NOTES_DATA\nmustache $RELEASE_NOTES_DATA .github/rlnotes.mustache > $RELEASE_NOTES_FILE\ngh release create v$PROJECT_VERSION \\\n  --draft \\\n  --prerelease \\\n  --title \"$PROJECT_VERSION\" \\\n  --notes-file $RELEASE_NOTES_FILE\n",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-statemachine"
+            ]
+        }
+    ],
+    "Download Release Files": [
+        {
+            "command": "jf rt download \\\n  --spec .github/release-files-spec.json \\\n  --spec-vars \"buildname=$JFROG_CLI_BUILD_NAME;buildnumber=$JFROG_CLI_BUILD_NUMBER\"\n",
+            "count": 3,
+            "repos": [
+                "spring-projects/spring-shell",
+                "spring-projects/spring-statemachine"
+            ]
+        },
+        {
+            "command": "jfrog rt download \\\n  --spec .github/release-files-spec.json \\\n  --spec-vars \"buildname=$JFROG_CLI_BUILD_NAME;buildnumber=$JFROG_CLI_BUILD_NUMBER\"\n",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-ai"
+            ]
+        }
+    ],
+    "Configure Milestone Version": [
+        {
+            "command": "snapshotVersion=$( awk -F '=' '$1 == \"version\" { print $2 }' gradle.properties )\nplainVersion=${snapshotVersion%-SNAPSHOT}\nmilestoneVersion=\"$plainVersion-${{ github.event.inputs.milestone }}\"\nsed -i \"s/version=$snapshotVersion/version=$milestoneVersion/\" gradle.properties\necho PROJECT_VERSION=$milestoneVersion >> $GITHUB_ENV\n",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-shell"
+            ]
+        },
+        {
+            "command": "jf gradle milestoneVersion -PstatemachineMilestone=${{ github.event.inputs.milestone }}\necho PROJECT_VERSION=$(cat gradle.properties | grep \"version=\" | awk -F'=' '{print $2}') >> $GITHUB_ENV\n",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-statemachine"
+            ]
+        }
+    ],
+    "Check Out Code": [
+        {
+            "command": "actions/checkout@v4",
+            "count": 4,
+            "repos": [
+                "spring-projects/spring-boot"
+            ]
+        },
+        {
+            "command": "actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11",
+            "count": 7,
+            "repos": [
+                "spring-projects/spring-boot",
+                "spring-projects/spring-restdocs"
+            ]
+        }
+    ],
+    "Send Notification": [
+        {
+            "command": "./.github/actions/send-notification",
+            "count": 3,
+            "repos": [
+                "spring-projects/spring-boot"
+            ]
+        },
+        {
+            "command": "./spring-boot/.github/actions/send-notification",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-boot"
+            ]
+        }
+    ],
+    "Set Up Gradle": [
+        {
+            "command": "gradle/actions/setup-gradle@dbbdc275be76ac10734476cc723d82dfe7ec6eda",
+            "count": 2,
+            "repos": [
+                "spring-projects/spring-boot"
+            ]
+        },
+        {
+            "command": "gradle/actions/setup-gradle@750cdda3edd6d51b7fdfc069d2e2818cf3c44f4c",
+            "count": 2,
+            "repos": [
+                "spring-projects/spring-restdocs"
+            ]
+        }
+    ],
+    "Set Up Java": [
+        {
+            "command": "actions/setup-java@v4",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-boot"
+            ]
+        },
+        {
+            "command": "actions/setup-java@99b8673ff64fbf99d8d325f52d9a5bdedb8483e9",
+            "count": 2,
+            "repos": [
+                "spring-projects/spring-restdocs"
+            ]
+        }
+    ],
+    "Configure Gradle Properties": [
+        {
+            "command": "mkdir -p $HOME/.gradle\necho 'org.gradle.daemon=false' >> $HOME/.gradle/gradle.properties\n",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-boot"
+            ]
+        },
+        {
+            "command": "mkdir -p $HOME/.gradle\necho 'systemProp.user.name=spring-builds+github' >> $HOME/.gradle/gradle.properties\necho 'systemProp.org.gradle.internal.launcher.welcomeMessageEnabled=false' >> $HOME/.gradle/gradle.properties\necho 'org.gradle.daemon=false' >> $HOME/.gradle/gradle.properties\n",
+            "count": 2,
+            "repos": [
+                "spring-projects/spring-restdocs"
+            ]
+        }
+    ],
+    "Checkout repository": [
+        {
+            "command": "actions/checkout@v3",
+            "count": 2,
+            "repos": [
+                "spring-projects/spring-data-couchbase",
+                "spring-projects/spring-data-relational"
+            ]
+        },
+        {
+            "command": "actions/checkout@v4",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-pulsar"
+            ]
+        }
+    ],
+    "Initialize CodeQL": [
+        {
+            "command": "github/codeql-action/init@v2",
+            "count": 2,
+            "repos": [
+                "spring-projects/spring-data-couchbase",
+                "spring-projects/spring-data-relational"
+            ]
+        },
+        {
+            "command": "github/codeql-action/init@v3",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-pulsar"
+            ]
+        }
+    ],
+    "Perform CodeQL Analysis": [
+        {
+            "command": "github/codeql-action/analyze@v2",
+            "count": 2,
+            "repos": [
+                "spring-projects/spring-data-couchbase",
+                "spring-projects/spring-data-relational"
+            ]
+        },
+        {
+            "command": "github/codeql-action/analyze@v3",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-pulsar"
+            ]
+        }
+    ],
+    "Set up JDK ${{ matrix.jdk }}": [
+        {
+            "command": "actions/setup-java@v4",
+            "count": 2,
+            "repos": [
+                "spring-projects/spring-ldap",
+                "spring-projects/spring-session"
+            ]
+        },
+        {
+            "command": "spring-io/spring-gradle-build-action@v2",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-authorization-server"
+            ]
+        }
+    ],
+    "Cache Gradle packages": [
+        {
+            "command": "actions/cache@v4",
+            "count": 2,
+            "repos": [
+                "spring-projects/spring-ldap",
+                "spring-projects/spring-session"
+            ]
+        },
+        {
+            "command": "actions/cache@v2",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-session-bom"
+            ]
+        }
+    ],
+    "Setup JDK": [
+        {
+            "command": "actions/setup-java@v4",
+            "count": 5,
+            "repos": [
+                "spring-projects/spring-statemachine"
+            ]
+        },
+        {
+            "command": "actions/setup-java@v1",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-statemachine"
+            ]
+        }
+    ],
+    "Tar Build Logs": [
+        {
+            "command": "mkdir -p build\ntar \\\n  -zc \\\n  --ignore-failed-read \\\n  --file build/buildlogs.tar.gz \\\n  */build/reports \\\n  */*/build/reports\n",
+            "count": 3,
+            "repos": [
+                "spring-projects/spring-statemachine"
+            ]
+        },
+        {
+            "command": "mkdir -p build\ntar -zc --ignore-failed-read --file build/buildlogs.tar.gz */build/reports */*/build/reports\n",
+            "count": 3,
+            "repos": [
+                "spring-projects/spring-statemachine"
+            ]
+        }
+    ],
+    "Determine if should continue": [
+        {
+            "command": "echo \"::set-output name=runjobs::true\"",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-session-bom"
+            ]
+        },
+        {
+            "command": "# Run jobs if in upstream repository\necho \"runjobs=true\" >>$GITHUB_OUTPUT\n# Extract version from gradle.properties\nversion=$(cat gradle.properties | grep \"version=\" | awk -F'=' '{print $2}')\necho \"project_version=$version\" >>$GITHUB_OUTPUT\nbootVersion=$(cat gradle/libs.versions.toml | grep \"spring-boot = \\\"\" | cut -d '\"' -f2)\necho \"boot_version=$bootVersion\" >>$GITHUB_OUTPUT\n",
+            "count": 3,
+            "repos": [
+                "spring-projects/spring-pulsar"
+            ]
+        }
+    ],
+    "Deploy artifacts": [
+        {
+            "command": "./gradlew publishArtifacts finalizeDeployArtifacts -PossrhUsername=\"$OSSRH_TOKEN_USERNAME\" -PossrhPassword=\"$OSSRH_TOKEN_PASSWORD\" -PartifactoryUsername=\"$ARTIFACTORY_USERNAME\" -PartifactoryPassword=\"$ARTIFACTORY_PASSWORD\" --stacktrace\n",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-session-bom"
+            ]
+        },
+        {
+            "command": "./gradlew publishArtifacts finalizeDeployArtifacts \\\n    --stacktrace \\\n    -PossrhUsername=\"$OSSRH_TOKEN_USERNAME\" -PossrhPassword=\"$OSSRH_TOKEN_PASSWORD\" \\\n    -PartifactoryUsername=\"$ARTIFACTORY_USERNAME\" -PartifactoryPassword=\"$ARTIFACTORY_PASSWORD\"\n",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-pulsar"
+            ]
+        }
+    ],
+    "Build and run unit tests": [
+        {
+            "command": "./gradlew clean build -x integrationTest --continue --scan\n",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-pulsar"
+            ]
+        },
+        {
+            "command": "./gradlew clean build -x integrationTest \\\n    --continue --scan \\\n    -PartifactoryUsername=\"$ARTIFACTORY_USERNAME\" -PartifactoryPassword=\"$ARTIFACTORY_PASSWORD\"\n",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-pulsar"
+            ]
+        },
+        {
+            "command": "./gradlew clean build -x test -x integrationTest\n",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-pulsar"
+            ]
+        }
+    ],
+    "Deploy docs": [
+        {
+            "command": "unzip spring-ai-$PROJECT_VERSION-docs.zip\nssh -i $HOME/.ssh/key $DOCS_USERNAME@$DOCS_HOST \"cd $DOCS_PATH && mkdir -p $PROJECT_VERSION/api\"\nscp -i $HOME/.ssh/key -r api $DOCS_USERNAME@$DOCS_HOST:$DOCS_PATH/$PROJECT_VERSION/api\n",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-ai"
+            ]
+        },
+        {
+            "command": "unzip spring-ai-$RELEASE_VERSION-docs.zip\nssh -i $HOME/.ssh/key $DOCS_USERNAME@$DOCS_HOST \"cd $DOCS_PATH && mkdir -p $RELEASE_VERSION/api\"\nscp -i $HOME/.ssh/key -r api $DOCS_USERNAME@$DOCS_HOST:$DOCS_PATH/$RELEASE_VERSION\n",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-ai"
+            ]
+        }
+    ],
+    "Build (Linux)": [
+        {
+            "command": "./mvnw -B -Pfunctional-tests,javadoc clean install",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-rewrite-commons"
+            ]
+        },
+        {
+            "command": "./mvnw -B -Pfunctional-tests clean install",
+            "count": 1,
+            "repos": [
+                "spring-projects/spring-rewrite-commons"
+            ]
+        }
+    ]
+}

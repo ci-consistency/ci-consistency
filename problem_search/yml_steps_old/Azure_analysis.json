@@ -1,0 +1,225 @@
+{
+    "Step 1": [
+        {
+            "command": "azure/azure-sdk-actions@main",
+            "count": 4,
+            "repos": [
+                "Azure/azure-sdk-for-net",
+                "Azure/azure-sdk-for-java",
+                "Azure/azure-sdk-for-python",
+                "Azure/azure-sdk-for-go"
+            ]
+        },
+        {
+            "command": "actions/checkout@v3",
+            "count": 3,
+            "repos": [
+                "Azure/WALinuxAgent",
+                "Azure/autorest"
+            ]
+        },
+        {
+            "command": "actions/checkout@v4",
+            "count": 1,
+            "repos": [
+                "Azure/azure-powershell"
+            ]
+        },
+        {
+            "command": "actions/checkout@v2",
+            "count": 3,
+            "repos": [
+                "Azure/Azure-DataFactory",
+                "Azure/go-ansiterm"
+            ]
+        }
+    ],
+    "Checkout repository": [
+        {
+            "command": "actions/checkout@v2",
+            "count": 1,
+            "repos": [
+                "Azure/azure-sdk-for-node"
+            ]
+        },
+        {
+            "command": "actions/checkout@v3",
+            "count": 1,
+            "repos": [
+                "Azure/autorest"
+            ]
+        }
+    ],
+    "Step 2": [
+        {
+            "command": "git checkout HEAD^2",
+            "count": 1,
+            "repos": [
+                "Azure/azure-sdk-for-node"
+            ]
+        },
+        {
+            "command": "actions/setup-go@v2",
+            "count": 2,
+            "repos": [
+                "Azure/go-ansiterm"
+            ]
+        }
+    ],
+    "Initialize CodeQL": [
+        {
+            "command": "github/codeql-action/init@v1",
+            "count": 1,
+            "repos": [
+                "Azure/azure-sdk-for-node"
+            ]
+        },
+        {
+            "command": "github/codeql-action/init@v2",
+            "count": 1,
+            "repos": [
+                "Azure/autorest"
+            ]
+        },
+        {
+            "command": "github/codeql-action/init@v3",
+            "count": 2,
+            "repos": [
+                "Azure/azure-resource-manager-schemas"
+            ]
+        }
+    ],
+    "Autobuild": [
+        {
+            "command": "github/codeql-action/autobuild@v1",
+            "count": 1,
+            "repos": [
+                "Azure/azure-sdk-for-node"
+            ]
+        },
+        {
+            "command": "github/codeql-action/autobuild@v2",
+            "count": 1,
+            "repos": [
+                "Azure/autorest"
+            ]
+        }
+    ],
+    "Perform CodeQL Analysis": [
+        {
+            "command": "github/codeql-action/analyze@v1",
+            "count": 1,
+            "repos": [
+                "Azure/azure-sdk-for-node"
+            ]
+        },
+        {
+            "command": "github/codeql-action/analyze@v2",
+            "count": 1,
+            "repos": [
+                "Azure/autorest"
+            ]
+        },
+        {
+            "command": "github/codeql-action/analyze@v3",
+            "count": 2,
+            "repos": [
+                "Azure/azure-resource-manager-schemas"
+            ]
+        }
+    ],
+    "Test with nosetests": [
+        {
+            "command": "if [[ ${{ matrix.python-version }} == 2.6 ]]; then\n  source /home/waagent/virtualenv/python2.6.9/bin/activate\nelse\n  source /home/waagent/virtualenv/python3.4.8/bin/activate\nfi\n./ci/nosetests.sh\nexit $?\n",
+            "count": 1,
+            "repos": [
+                "Azure/WALinuxAgent"
+            ]
+        },
+        {
+            "command": "source /home/waagent/virtualenv/python2.7.16/bin/activate\n./ci/nosetests.sh\nexit $?\n",
+            "count": 1,
+            "repos": [
+                "Azure/WALinuxAgent"
+            ]
+        },
+        {
+            "command": "./ci/nosetests.sh\nexit $?\n",
+            "count": 1,
+            "repos": [
+                "Azure/WALinuxAgent"
+            ]
+        }
+    ],
+    "Install dependencies": [
+        {
+            "command": "sudo env \"PATH=$PATH\" python -m pip install --upgrade pip\nsudo env \"PATH=$PATH\" pip install -r requirements.txt\nsudo env \"PATH=$PATH\" pip install -r test-requirements.txt\n",
+            "count": 1,
+            "repos": [
+                "Azure/WALinuxAgent"
+            ]
+        },
+        {
+            "command": "node common/scripts/install-run-rush.js install",
+            "count": 1,
+            "repos": [
+                "Azure/autorest"
+            ]
+        }
+    ],
+    "Step 3": [
+        {
+            "command": "LABEL_NAME=Publish\nLABEL_URL=https://api.github.com/repos/Azure/autorest/issues/$PR_NUMBER/labels\n\necho \"Getting labels using $LABEL_URL\"\nif curl -s \"$LABEL_URL\" | grep \"\\\"name\\\": \\\"$LABEL_NAME\\\"\"\nthen\n  echo \"Publish label was included in the PR, won't be checking for changelog.\"\nelse\n  npx @microsoft/rush change --verify || { echo 'If you run the rush publish command locally and meant to publish the changes, add the publish label to the pr.' ; exit 1; }\nfi\n",
+            "count": 1,
+            "repos": [
+                "Azure/autorest"
+            ]
+        },
+        {
+            "command": "go build ./...",
+            "count": 1,
+            "repos": [
+                "Azure/go-ansiterm"
+            ]
+        },
+        {
+            "command": "go test ./...",
+            "count": 1,
+            "repos": [
+                "Azure/go-ansiterm"
+            ]
+        }
+    ],
+    "Setup .NET Core": [
+        {
+            "command": "actions/setup-dotnet@v1.8.0",
+            "count": 1,
+            "repos": [
+                "Azure/azure-quickstart-templates"
+            ]
+        },
+        {
+            "command": "actions/setup-dotnet@v4",
+            "count": 1,
+            "repos": [
+                "Azure/azure-resource-manager-schemas"
+            ]
+        }
+    ],
+    "Run generator": [
+        {
+            "command": "rm -Rf \"$GITHUB_WORKSPACE/schemas\"\nrm -Rf \"$GITHUB_WORKSPACE/summary.log\"\nmkdir -p \"$GITHUB_WORKSPACE/schemas\"\n\nnpm run generate-all -- \\\n  --specs-dir \"$GITHUB_WORKSPACE/workflow-temp/azure-rest-api-specs\" \\\n  --batch-count ${{ env.BATCH_COUNT }} \\\n  --batch-index ${{ matrix.batch }} \\\n  --summary-log-path \"$GITHUB_WORKSPACE/summary.log\" \\\n  --combine-batch-mode true\n",
+            "count": 1,
+            "repos": [
+                "Azure/azure-resource-manager-schemas"
+            ]
+        },
+        {
+            "command": "npm run generate-single -- \\\n  --specs-dir \"$GITHUB_WORKSPACE/workflow-temp/azure-rest-api-specs\" \\\n  --base-path '${{ github.event.inputs.single_path }}'\n",
+            "count": 1,
+            "repos": [
+                "Azure/azure-resource-manager-schemas"
+            ]
+        }
+    ]
+}

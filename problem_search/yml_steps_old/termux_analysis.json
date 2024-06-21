@@ -1,0 +1,985 @@
+{
+    "Clone repository": [
+        {
+            "command": "actions/checkout@v4",
+            "count": 34,
+            "repos": [
+                "termux/termux-packages",
+                "termux/termux-api",
+                "termux/termux-app",
+                "termux/termux-widget",
+                "termux/termux-styling",
+                "termux/termux-create-package",
+                "termux/termux-tasker",
+                "termux/termux-boot",
+                "termux/termux-elf-cleaner",
+                "termux/termux-float",
+                "termux/termux-x11",
+                "termux/termux-docker",
+                "termux/repology-metadata",
+                "termux/termux-gui",
+                "termux/create-conventional-changelog",
+                "termux/termux.com",
+                "termux/termux-tools",
+                "termux/glibc-packages"
+            ]
+        },
+        {
+            "command": "actions/checkout@v2",
+            "count": 8,
+            "repos": [
+                "termux/termux-root-packages",
+                "termux/x11-packages",
+                "termux/game-packages",
+                "termux/science-packages"
+            ]
+        },
+        {
+            "command": "git clone https://github.com/termux/glibc-packages.git glibc-packages-mirror",
+            "count": 1,
+            "repos": [
+                "termux/glibc-packages"
+            ]
+        }
+    ],
+    "Build": [
+        {
+            "command": "cd ./scripts\ndocker build --tag termux/package-builder:latest .\ndocker tag termux/package-builder:latest ghcr.io/termux/package-builder:latest\ndocker build --tag termux/package-builder-cgct:latest --file Dockerfile.cgct .\ndocker tag termux/package-builder-cgct:latest ghcr.io/termux/package-builder-cgct:latest\n",
+            "count": 1,
+            "repos": [
+                "termux/termux-packages"
+            ]
+        },
+        {
+            "command": "exit_on_error() { echo \"$1\"; exit 1; }\n\nif [ -z \"$JAVA_HOME_17_X64\" ] || [ ! -f \"$JAVA_HOME_17_X64/bin/javac\" ] || [ ! -x \"$JAVA_HOME_17_X64/bin/javac\" ]; then\n    exit_on_error \"jdk-17 binary not found at path '$JAVA_HOME_17_X64/bin/javac' or is not executable.\"\nfi\n\necho \"Setting vars\"\n\nif [ \"$GITHUB_EVENT_NAME\" == \"pull_request\" ]; then\n    GITHUB_SHA=\"${{ github.event.pull_request.head.sha }}\" # Do not use last merge commit set in GITHUB_SHA\nfi\n\n# Set RELEASE_VERSION_NAME to \"<CURRENT_VERSION_NAME>+<last_commit_hash>\"\nCURRENT_VERSION_NAME_REGEX='\\s+versionName \"([^\"]+)\"$'\nCURRENT_VERSION_NAME=\"$(grep -m 1 -E \"$CURRENT_VERSION_NAME_REGEX\" ./app/build.gradle | sed -r \"s/$CURRENT_VERSION_NAME_REGEX/\\1/\")\"\nRELEASE_VERSION_NAME=\"v$CURRENT_VERSION_NAME+${GITHUB_SHA:0:7}\" # The \"+\" is necessary so that versioning precedence is not affected\nif ! printf \"%s\" \"${RELEASE_VERSION_NAME/v/}\" | grep -qP '^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?$'; then\n  exit_on_error \"The release version '${RELEASE_VERSION_NAME/v/}' generated from current version '$CURRENT_VERSION_NAME' is not a valid version as per semantic version '2.0.0' spec in the format 'major.minor.patch(-prerelease)(+buildmetadata)'. https://semver.org/spec/v2.0.0.html.\"\nfi\n\nAPK_DIR_PATH=\"./app/build/outputs/apk/debug\"\nAPK_VERSION_TAG=\"$RELEASE_VERSION_NAME.github.debug\" # Note the \".\", GITHUB_SHA will already have \"+\" before it\nAPK_BASENAME_PREFIX=\"termux-styling_$APK_VERSION_TAG\"\n\n# Used by upload step later\necho \"APK_DIR_PATH=$APK_DIR_PATH\" >> $GITHUB_ENV\necho \"APK_VERSION_TAG=$APK_VERSION_TAG\" >> $GITHUB_ENV\necho \"APK_BASENAME_PREFIX=$APK_BASENAME_PREFIX\" >> $GITHUB_ENV\n\necho \"Building APK file for '$RELEASE_VERSION_NAME' release with '$APK_VERSION_TAG' tag\"\nexport TERMUX_STYLING_APP_BUILD__APP_VERSION_NAME=\"${RELEASE_VERSION_NAME/v/}\" # Used by app/build.gradle\nexport TERMUX_STYLING_APP_BUILD__APK_VERSION_TAG=\"$APK_VERSION_TAG\" # Used by app/build.gradle\nexport GRADLE_OPTS=\"-Dorg.gradle.java.home=$JAVA_HOME_17_X64\"\nif ! ./gradlew assembleDebug; then\n  exit_on_error \"Build failed for '$RELEASE_VERSION_NAME' release with '$APK_VERSION_TAG' tag.\"\nfi\n\necho \"Validating APK file\"\nif ! test -f \"$APK_DIR_PATH/${APK_BASENAME_PREFIX}.apk\"; then\n  files_found=\"$(ls \"$APK_DIR_PATH\")\"\n  exit_on_error \"Failed to find built APK file at '$APK_DIR_PATH/${APK_BASENAME_PREFIX}.apk'. Files found: \"$'\\n'\"$files_found\"\nfi\n\necho \"Generating checksums-sha256.txt file\"\nif ! (cd \"$APK_DIR_PATH\"; sha256sum \"${APK_BASENAME_PREFIX}.apk\" > checksums-sha256.txt); then\n  exit_on_error \"Generate checksums-sha256.txt file failed for '$RELEASE_VERSION_NAME' release.\"\nfi\necho \"checksums-sha256.txt:\"$'\\n```\\n'\"$(cat \"$APK_DIR_PATH/checksums-sha256.txt\")\"$'\\n```'\n",
+            "count": 1,
+            "repos": [
+                "termux/termux-styling"
+            ]
+        },
+        {
+            "command": "exit_on_error() { echo \"$1\"; exit 1; }\n\nif [ -z \"$JAVA_HOME_17_X64\" ] || [ ! -f \"$JAVA_HOME_17_X64/bin/javac\" ] || [ ! -x \"$JAVA_HOME_17_X64/bin/javac\" ]; then\n    exit_on_error \"jdk-17 binary not found at path '$JAVA_HOME_17_X64/bin/javac' or is not executable.\"\nfi\n\necho \"Setting vars\"\n\nif [ \"$GITHUB_EVENT_NAME\" == \"pull_request\" ]; then\n    GITHUB_SHA=\"${{ github.event.pull_request.head.sha }}\" # Do not use last merge commit set in GITHUB_SHA\nfi\n\n# Set RELEASE_VERSION_NAME to \"<CURRENT_VERSION_NAME>+<last_commit_hash>\"\nCURRENT_VERSION_NAME_REGEX='\\s+versionName \"([^\"]+)\"$'\nCURRENT_VERSION_NAME=\"$(grep -m 1 -E \"$CURRENT_VERSION_NAME_REGEX\" ./app/build.gradle | sed -r \"s/$CURRENT_VERSION_NAME_REGEX/\\1/\")\"\nRELEASE_VERSION_NAME=\"v$CURRENT_VERSION_NAME+${GITHUB_SHA:0:7}\" # The \"+\" is necessary so that versioning precedence is not affected\nif ! printf \"%s\" \"${RELEASE_VERSION_NAME/v/}\" | grep -qP '^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?$'; then\n  exit_on_error \"The release version '${RELEASE_VERSION_NAME/v/}' generated from current version '$CURRENT_VERSION_NAME' is not a valid version as per semantic version '2.0.0' spec in the format 'major.minor.patch(-prerelease)(+buildmetadata)'. https://semver.org/spec/v2.0.0.html.\"\nfi\n\nAPK_DIR_PATH=\"./app/build/outputs/apk/debug\"\nAPK_VERSION_TAG=\"$RELEASE_VERSION_NAME.github.debug\" # Note the \".\", GITHUB_SHA will already have \"+\" before it\nAPK_BASENAME_PREFIX=\"termux-boot_$APK_VERSION_TAG\"\n\n# Used by upload step later\necho \"APK_DIR_PATH=$APK_DIR_PATH\" >> $GITHUB_ENV\necho \"APK_VERSION_TAG=$APK_VERSION_TAG\" >> $GITHUB_ENV\necho \"APK_BASENAME_PREFIX=$APK_BASENAME_PREFIX\" >> $GITHUB_ENV\n\necho \"Building APK file for '$RELEASE_VERSION_NAME' release with '$APK_VERSION_TAG' tag\"\nexport TERMUX_BOOT_APP_BUILD__APP_VERSION_NAME=\"${RELEASE_VERSION_NAME/v/}\" # Used by app/build.gradle\nexport TERMUX_BOOT_APP_BUILD__APK_VERSION_TAG=\"$APK_VERSION_TAG\" # Used by app/build.gradle\nexport GRADLE_OPTS=\"-Dorg.gradle.java.home=$JAVA_HOME_17_X64\"\nif ! ./gradlew assembleDebug; then\n  exit_on_error \"Build failed for '$RELEASE_VERSION_NAME' release with '$APK_VERSION_TAG' tag.\"\nfi\n\necho \"Validating APK file\"\nif ! test -f \"$APK_DIR_PATH/${APK_BASENAME_PREFIX}.apk\"; then\n  files_found=\"$(ls \"$APK_DIR_PATH\")\"\n  exit_on_error \"Failed to find built APK file at '$APK_DIR_PATH/${APK_BASENAME_PREFIX}.apk'. Files found: \"$'\\n'\"$files_found\"\nfi\n\necho \"Generating checksums-sha256.txt file\"\nif ! (cd \"$APK_DIR_PATH\"; sha256sum \"${APK_BASENAME_PREFIX}.apk\" > checksums-sha256.txt); then\n  exit_on_error \"Generate checksums-sha256.txt file failed for '$RELEASE_VERSION_NAME' release.\"\nfi\necho \"checksums-sha256.txt:\"$'\\n```\\n'\"$(cat \"$APK_DIR_PATH/checksums-sha256.txt\")\"$'\\n```'\n",
+            "count": 1,
+            "repos": [
+                "termux/termux-boot"
+            ]
+        },
+        {
+            "command": "cmake . -Bbuild -GNinja\nninja -C build/\n",
+            "count": 2,
+            "repos": [
+                "termux/termux-elf-cleaner"
+            ]
+        },
+        {
+            "command": "if [ \"${{ github.event_name }}\" != \"workflow_dispatch\" ]; then\n  BASE_COMMIT=$(jq --raw-output .pull_request.base.sha \"$GITHUB_EVENT_PATH\")\n  OLD_COMMIT=$(jq --raw-output .commits[0].id \"$GITHUB_EVENT_PATH\")\n  HEAD_COMMIT=$(jq --raw-output .commits[-1].id \"$GITHUB_EVENT_PATH\")\n  if [ \"$BASE_COMMIT\" = \"null\" ]; then\n    if [ \"$OLD_COMMIT\" = \"$HEAD_COMMIT\" ]; then\n      # Single-commit push.\n      echo \"Processing commit: ${HEAD_COMMIT}\"\n      CHANGED_FILES=$(git diff-tree --no-commit-id --name-only -r \"${HEAD_COMMIT}\")\n    else\n      # Multi-commit push.\n      OLD_COMMIT=\"${OLD_COMMIT}~1\"\n      echo \"Processing commit range: ${OLD_COMMIT}..${HEAD_COMMIT}\"\n      CHANGED_FILES=$(git diff-tree --no-commit-id --name-only -r \"${OLD_COMMIT}\" \"${HEAD_COMMIT}\")\n    fi\n  else\n    # Pull requests.\n    echo \"Processing pull request #$(jq --raw-output .pull_request.number \"$GITHUB_EVENT_PATH\"): ${BASE_COMMIT}..HEAD\"\n    CHANGED_FILES=$(git diff-tree --no-commit-id --name-only -r \"${BASE_COMMIT}\" \"HEAD\")\n  fi\nfi\nmkdir -p ./artifacts ./debs\ntouch ./debs/.placeholder\nif [ \"${{ github.event_name }}\" != \"workflow_dispatch\" ]; then\n  # Process tag '%ci:no-build' that may be added as line to commit message.\n  # Forces CI to cancel current build with status 'passed'.\n  if grep -qiP '^\\s*%ci:no-build\\s*$' <(git log --format=\"%B\" -n 1 \"HEAD\"); then\n    tar cf artifacts/debs-${{ matrix.target_arch }}.tar debs\n    echo \"[!] Force exiting as tag '%ci:no-build' was applied to HEAD commit message.\"\n    exit 0\n  fi\n  # Parse changed files and identify new packages and deleted packages.\n  # Create lists of those packages that will be passed to upload job for\n  # further processing.\n  while read -r file; do\n    if ! [[ $file == packages/* ]]; then\n      # This file does not belong to a package, so ignore it\n      continue\n    fi\n    if [[ $file =~ ^packages/([a-z0-9+-]*)/([a-z0-9+-]*).subpackage.sh$ ]]; then\n      # A subpackage was modified, check if it was deleted or just updated\n      pkg=${BASH_REMATCH[1]}\n      subpkg=${BASH_REMATCH[2]}\n      if [ ! -f \"packages/${pkg}/${subpkg}.subpackage.sh\" ]; then\n        echo \"$subpkg\" >> ./deleted_packages.txt\n      fi\n    elif [[ $file =~ ^packages/([a-z0-9+-]*)/.*$ ]]; then\n      # package, check if it was deleted or updated\n      pkg=${BASH_REMATCH[1]}\n      if [ ! -d \"packages/${pkg}\" ]; then\n        echo \"$pkg\" >> ./deleted_packages.txt\n      else\n        echo \"$pkg\" >> ./built_packages.txt\n        # If there are subpackages we want to create a list of those\n        # as well\n        for file in $(find \"packages/${pkg}/\" -maxdepth 1 -type f -name \\*.subpackage.sh | sort); do\n          echo \"$(basename \"${file%%.subpackage.sh}\")\" >> ./built_subpackages.txt\n        done\n      fi\n    fi\n  done<<<${CHANGED_FILES}\nelse\n  for pkg in ${{ github.event.inputs.packages }}; do\n    echo \"$pkg\" >> ./built_packages.txt\n    for subpkg in $(find \"packages/${pkg}/\" -maxdepth 1 -type f -name \\*.subpackage.sh | sort); do\n      echo \"$(basename \"${subpkg%%.subpackage.sh}\")\" >> ./built_subpackages.txt\n    done\n  done\nfi\n\n# Fix so that lists do not contain duplicates\nif [ -f ./built_packages.txt ]; then\n  uniq ./built_packages.txt > ./built_packages.txt.tmp\n  mv ./built_packages.txt.tmp ./built_packages.txt\nfi\nif [ -f ./built_subpackages.txt ]; then\n  uniq ./built_subpackages.txt > ./built_subpackages.txt.tmp\n  mv ./built_subpackages.txt.tmp ./built_subpackages.txt\nfi\nif [ -f ./deleted_packages.txt ]; then\n  uniq ./deleted_packages.txt > ./deleted_packages.txt.tmp\n  mv ./deleted_packages.txt.tmp ./deleted_packages.txt\nfi\n\nif [ -f ./built_packages.txt ]; then\n  ./scripts/lint-packages.sh $(cat ./built_packages.txt | awk '{print \"packages/\"$1\"/build.sh\"}')\n  ./start-builder.sh ./build-package.sh -o ./debs -I -a ${{ matrix.target_arch }} $(cat ./built_packages.txt)\nfi\n\ntest -d ./termux-packages/debs && find ./termux-packages/debs/ -mindepth 1 -maxdepth 1 ! -name \".*\" -exec mv \"{}\" ./debs/ \\;\n# Put package lists into directory with *.deb files so they will be transferred to\n# upload job.\ntest -f ./built_packages.txt && mv ./built_packages.txt ./debs/\ntest -f ./built_subpackages.txt && cat ./built_subpackages.txt >> ./debs/built_packages.txt \\\n  && rm ./built_subpackages.txt\ntest -f ./deleted_packages.txt && mv ./deleted_packages.txt ./debs/\n# Files containing certain symbols (e.g. \":\") will cause failure in actions/upload-artifact.\n# Archiving *.deb files in a tarball to avoid issues with uploading.\ntar cf artifacts/debs-${{ matrix.target_arch }}-${{ github.sha }}.tar debs\n",
+            "count": 1,
+            "repos": [
+                "termux/termux-root-packages"
+            ]
+        },
+        {
+            "command": "BASE_COMMIT=$(jq --raw-output .pull_request.base.sha \"$GITHUB_EVENT_PATH\")\nOLD_COMMIT=$(jq --raw-output .commits[0].id \"$GITHUB_EVENT_PATH\")\nHEAD_COMMIT=$(jq --raw-output .commits[-1].id \"$GITHUB_EVENT_PATH\")\nif [ \"$BASE_COMMIT\" = \"null\" ]; then\n  if [ \"$OLD_COMMIT\" = \"$HEAD_COMMIT\" ]; then\n    # Single-commit push.\n    echo \"Processing commit: ${HEAD_COMMIT}\"\n    CHANGED_FILES=$(git diff-tree --no-commit-id --name-only -r \"${HEAD_COMMIT}\")\n  else\n    # Multi-commit push.\n    OLD_COMMIT=\"${OLD_COMMIT}~1\"\n    echo \"Processing commit range: ${OLD_COMMIT}..${HEAD_COMMIT}\"\n    CHANGED_FILES=$(git diff-tree --no-commit-id --name-only -r \"${OLD_COMMIT}\" \"${HEAD_COMMIT}\")\n  fi\nelse\n  # Pull requests.\n  echo \"Processing pull request #$(jq --raw-output .pull_request.number \"$GITHUB_EVENT_PATH\"): ${BASE_COMMIT}..HEAD\"\n  CHANGED_FILES=$(git diff-tree --no-commit-id --name-only -r \"${BASE_COMMIT}\" \"HEAD\")\nfi\nmkdir -p ./artifacts ./debs\ntouch ./debs/.placeholder\n# Process tag '%ci:no-build' that may be added as line to commit message.\n# Forces CI to cancel current build with status 'passed'.\nif grep -qiP '^\\s*%ci:no-build\\s*$' <(git log --format=\"%B\" -n 1 \"HEAD\"); then\n  tar cf artifacts/debs-${{ matrix.target_arch }}.tar debs\n  echo \"[!] Force exiting as tag '%ci:no-build' was applied to HEAD commit message.\"\n  exit 0\nfi\n# Parse changed files and identify new packages and deleted packages.\n# Create lists of those packages that will be passed to upload job for\n# further processing.\nwhile read -r file; do\n  if ! [[ $file == packages/* ]]; then\n    # This file does not belong to a package, so ignore it\n    continue\n  fi\n  if [[ $file =~ ^packages/([a-z0-9-]*)/([a-z0-9-]*).subpackage.sh$ ]]; then\n    # A subpackage was modified, check if it was deleted or just updated\n    pkg=${BASH_REMATCH[1]}\n    subpkg=${BASH_REMATCH[2]}\n    if [ ! -f \"packages/${pkg}/${subpkg}.subpackage.sh\" ]; then\n      echo \"$subpkg\" >> ./deleted_packages.txt\n    fi\n  elif [[ $file =~ ^packages/([a-z0-9-]*)/.*$ ]]; then\n    # package, check if it was deleted or updated\n    pkg=${BASH_REMATCH[1]}\n    if [ ! -d \"packages/${pkg}\" ]; then\n      echo \"$pkg\" >> ./deleted_packages.txt\n    else\n      echo \"$pkg\" >> ./built_packages.txt\n      # If there are subpackages we want to create a list of those\n      # as well\n      for file in $(find \"packages/${pkg}/\" -maxdepth 1 -type f -name \\*.subpackage.sh | sort); do\n        echo \"$(basename \"${file%%.subpackage.sh}\")\" >> ./built_subpackages.txt\n      done\n    fi\n  fi\ndone<<<${CHANGED_FILES}\n\n# Fix so that lists do not contain duplicates\nif [ -f ./built_packages.txt ]; then\n  uniq ./built_packages.txt > ./built_packages.txt.tmp\n  mv ./built_packages.txt.tmp ./built_packages.txt\nfi\nif [ -f ./built_subpackages.txt ]; then\n  uniq ./built_subpackages.txt > ./built_subpackages.txt.tmp\n  mv ./built_subpackages.txt.tmp ./built_subpackages.txt\nfi\nif [ -f ./deleted_packages.txt ]; then\n  uniq ./deleted_packages.txt > ./deleted_packages.txt.tmp\n  mv ./deleted_packages.txt.tmp ./deleted_packages.txt\nfi\n\nif [ -f ./built_packages.txt ]; then\n  ./scripts/lint-packages.sh $(cat ./built_packages.txt | awk '{print \"packages/\"$1\"/build.sh\"}')\n  ./start-builder.sh ./build-package.sh -o ./debs -I -a ${{ matrix.target_arch }} $(cat ./built_packages.txt)\nfi\n\ntest -d ./termux-packages/debs && mv ./termux-packages/debs/* ./debs/\n# Put package lists into directory with *.deb files so they will be transferred to\n# upload job.\ntest -f ./built_packages.txt && mv ./built_packages.txt ./debs/\ntest -f ./built_subpackages.txt && cat ./built_subpackages.txt >> ./debs/built_packages.txt \\\n  && rm ./built_subpackages.txt\ntest -f ./deleted_packages.txt && mv ./deleted_packages.txt ./debs/\n# Files containing certain symbols (e.g. \":\") will cause failure in actions/upload-artifact.\n# Archiving *.deb files in a tarball to avoid issues with uploading.\ntar cf artifacts/debs-${{ matrix.target_arch }}-${{ github.sha }}.tar debs\n",
+            "count": 1,
+            "repos": [
+                "termux/game-packages"
+            ]
+        },
+        {
+            "command": "BASE_COMMIT=$(jq --raw-output .pull_request.base.sha \"$GITHUB_EVENT_PATH\")\nOLD_COMMIT=$(jq --raw-output .commits[0].id \"$GITHUB_EVENT_PATH\")\nHEAD_COMMIT=$(jq --raw-output .commits[-1].id \"$GITHUB_EVENT_PATH\")\nif [ \"$BASE_COMMIT\" = \"null\" ]; then\n  if [ \"$OLD_COMMIT\" = \"$HEAD_COMMIT\" ]; then\n    # Single-commit push.\n    echo \"Processing commit: ${HEAD_COMMIT}\"\n    CHANGED_FILES=$(git diff-tree --no-commit-id --name-only -r \"${HEAD_COMMIT}\")\n  else\n    # Multi-commit push.\n    OLD_COMMIT=\"${OLD_COMMIT}~1\"\n    echo \"Processing commit range: ${OLD_COMMIT}..${HEAD_COMMIT}\"\n    CHANGED_FILES=$(git diff-tree --no-commit-id --name-only -r \"${OLD_COMMIT}\" \"${HEAD_COMMIT}\")\n  fi\nelse\n  # Pull requests.\n  echo \"Processing pull request #$(jq --raw-output .pull_request.number \"$GITHUB_EVENT_PATH\"): ${BASE_COMMIT}..HEAD\"\n  CHANGED_FILES=$(git diff-tree --no-commit-id --name-only -r \"${BASE_COMMIT}\" \"HEAD\")\nfi\nmkdir -p ./artifacts ./debs\ntouch ./debs/.placeholder\n# Process tag '%ci:no-build' that may be added as line to commit message.\n# Forces CI to cancel current build with status 'passed'.\nif grep -qiP '^\\s*%ci:no-build\\s*$' <(git log --format=\"%B\" -n 1 \"HEAD\"); then\n  tar cf artifacts/debs-${{ matrix.target_arch }}.tar debs\n  echo \"[!] Force exiting as tag '%ci:no-build' was applied to HEAD commit message.\"\n  exit 0\nfi\n# Parse changed files and identify new packages and deleted packages.\n# Create lists of those packages that will be passed to upload job for\n# further processing.\nwhile read -r file; do\n  if ! [[ $file == packages/* ]]; then\n    # This file does not belong to a package, so ignore it\n    continue\n  fi\n  if [[ $file =~ ^packages/([a-z0-9-]*)/([a-z0-9-]*).subpackage.sh$ ]]; then\n    # A subpackage was modified, check if it was deleted or just updated\n    pkg=${BASH_REMATCH[1]}\n    subpkg=${BASH_REMATCH[2]}\n    if [ ! -f \"packages/${pkg}/${subpkg}.subpackage.sh\" ]; then\n      echo \"$subpkg\" >> ./deleted_packages.txt\n    fi\n  elif [[ $file =~ ^packages/([a-z0-9-]*)/.*$ ]]; then\n    # package, check if it was deleted or updated\n    pkg=${BASH_REMATCH[1]}\n    if [ ! -d \"packages/${pkg}\" ]; then\n      echo \"$pkg\" >> ./deleted_packages.txt\n    else\n      echo \"$pkg\" >> ./built_packages.txt\n      # If there are subpackages we want to create a list of those\n      # as well\n      for file in $(find \"packages/${pkg}/\" -maxdepth 1 -type f -name \\*.subpackage.sh | sort); do\n        echo \"$(basename \"${file%%.subpackage.sh}\")\" >> ./built_subpackages.txt\n      done\n    fi\n  fi\ndone<<<${CHANGED_FILES}\n\n# Fix so that lists do not contain duplicates\nif [ -f ./built_packages.txt ]; then\n  uniq ./built_packages.txt > ./built_packages.txt.tmp\n  mv ./built_packages.txt.tmp ./built_packages.txt\nfi\nif [ -f ./built_subpackages.txt ]; then\n  uniq ./built_subpackages.txt > ./built_subpackages.txt.tmp\n  mv ./built_subpackages.txt.tmp ./built_subpackages.txt\nfi\nif [ -f ./deleted_packages.txt ]; then\n  uniq ./deleted_packages.txt > ./deleted_packages.txt.tmp\n  mv ./deleted_packages.txt.tmp ./deleted_packages.txt\nfi\n\nif grep -qP '^texlive-full$' ./built_packages.txt || grep -qP '^openfoam$' ./built_packages.txt; then\n  echo \"Free additional disk space on host\"\n  sudo apt purge -yq $(dpkg -l | grep '^ii' | awk '{ print $2 }' | grep -P '(cabal-|dotnet-|ghc-|libmono|php)') \\\n    liblldb-6.0 libllvm6.0:amd64 mono-runtime-common monodoc-manual powershell ruby\n  sudo apt autoremove -yq\n  sudo rm -rf /opt/hostedtoolcache /usr/local /usr/share/dotnet /usr/share/swift\nfi\n\nif [ -f ./built_packages.txt ]; then\n  ./scripts/lint-packages.sh $(cat ./built_packages.txt | awk '{print \"packages/\"$1\"/build.sh\"}')\n  ./start-builder.sh ./build-package.sh -o ./debs -I -a ${{ matrix.target_arch }} $(cat ./built_packages.txt)\nfi\n\ntest -d ./termux-packages/debs && mv ./termux-packages/debs/* ./debs/\n# Put package lists into directory with *.deb files so they will be transferred to\n# upload job.\ntest -f ./built_packages.txt && mv ./built_packages.txt ./debs/\ntest -f ./built_subpackages.txt && cat ./built_subpackages.txt >> ./debs/built_packages.txt \\\n  && rm ./built_subpackages.txt\ntest -f ./deleted_packages.txt && mv ./deleted_packages.txt ./debs/\n# Files containing certain symbols (e.g. \":\") will cause failure in actions/upload-artifact.\n# Archiving *.deb files in a tarball to avoid issues with uploading.\ntar cf artifacts/debs-${{ matrix.target_arch }}-${{ github.sha }}.tar debs\n",
+            "count": 1,
+            "repos": [
+                "termux/science-packages"
+            ]
+        },
+        {
+            "command": "./gradlew assembleDebug",
+            "count": 1,
+            "repos": [
+                "termux/termux-x11"
+            ]
+        },
+        {
+            "command": "make CONF_NAME=linux-x64",
+            "count": 1,
+            "repos": [
+                "termux/openjdk-mobile-termux"
+            ]
+        },
+        {
+            "command": "make CONF_NAME=linux-${{ matrix.gnu-arch }}-hotspot",
+            "count": 1,
+            "repos": [
+                "termux/openjdk-mobile-termux"
+            ]
+        },
+        {
+            "command": "make CONF_NAME=linux-x86",
+            "count": 1,
+            "repos": [
+                "termux/openjdk-mobile-termux"
+            ]
+        },
+        {
+            "command": "$env:Path = \"$HOME\\cygwin\\cygwin64\\bin;$HOME\\cygwin\\cygwin64\\bin;$env:Path\" ;\n$env:Path = $env:Path -split \";\" -match \"C:\\\\Windows|PowerShell|cygwin\" -join \";\" ;\n& make CONF_NAME=windows-aarch64\n",
+            "count": 1,
+            "repos": [
+                "termux/openjdk-mobile-termux"
+            ]
+        },
+        {
+            "command": "$env:Path = \"$HOME\\cygwin\\cygwin64\\bin;$HOME\\cygwin\\cygwin64\\bin;$env:Path\" ;\n$env:Path = $env:Path -split \";\" -match \"C:\\\\Windows|PowerShell|cygwin\" -join \";\" ;\n& make CONF_NAME=windows-x64\n",
+            "count": 1,
+            "repos": [
+                "termux/openjdk-mobile-termux"
+            ]
+        },
+        {
+            "command": "make CONF_NAME=macos-x64",
+            "count": 1,
+            "repos": [
+                "termux/openjdk-mobile-termux"
+            ]
+        },
+        {
+            "command": "make CONF_NAME=macos-aarch64",
+            "count": 1,
+            "repos": [
+                "termux/openjdk-mobile-termux"
+            ]
+        },
+        {
+            "command": "./gradlew assembleDebugMinify",
+            "count": 1,
+            "repos": [
+                "termux/termux-gui"
+            ]
+        },
+        {
+            "command": "pyproject-build\n",
+            "count": 1,
+            "repos": [
+                "termux/termux-language-server"
+            ]
+        }
+    ],
+    "Gather build summary": [
+        {
+            "command": "BASE_COMMIT=$(jq --raw-output .pull_request.base.sha \"$GITHUB_EVENT_PATH\")\nOLD_COMMIT=$(jq --raw-output .commits[0].id \"$GITHUB_EVENT_PATH\")\nHEAD_COMMIT=$(jq --raw-output .commits[-1].id \"$GITHUB_EVENT_PATH\")\nif [ \"$BASE_COMMIT\" = \"null\" ]; then\n  if [ \"$OLD_COMMIT\" = \"$HEAD_COMMIT\" ]; then\n    # Single-commit push.\n    echo \"Processing commit: ${HEAD_COMMIT}\"\n    CHANGED_FILES=$(git diff-tree --no-commit-id --name-only -r \"${HEAD_COMMIT}\")\n  else\n    # Multi-commit push.\n    OLD_COMMIT=\"${OLD_COMMIT}~1\"\n    echo \"Processing commit range: ${OLD_COMMIT}..${HEAD_COMMIT}\"\n    CHANGED_FILES=$(git diff-tree --no-commit-id --name-only -r \"${OLD_COMMIT}\" \"${HEAD_COMMIT}\")\n  fi\nelse\n  # Pull requests.\n  echo \"Processing pull request #$(jq --raw-output .pull_request.number \"$GITHUB_EVENT_PATH\"): ${BASE_COMMIT}..HEAD\"\n  CHANGED_FILES=$(git diff-tree --no-commit-id --name-only -r \"${BASE_COMMIT}\" \"HEAD\")\nfi\nfor repo_path in $(jq --raw-output 'del(.pkg_format) | keys | .[]' repo.json); do\n  repo=$(jq --raw-output '.[\"'${repo_path}'\"].name' repo.json)\n  # Parse changed files and identify new packages and deleted packages.\n  # Create lists of those packages that will be passed to upload job for\n  # further processing.\n  while read -r file; do\n    if ! [[ $file == ${repo_path}/* ]]; then\n      # This file does not belong to a package, so ignore it\n      continue\n    fi\n    if [[ $file =~ ^${repo_path}/([.a-z0-9+-]*)/([.a-z0-9+-]*).subpackage.sh$ ]]; then\n      # A subpackage was modified, check if it was deleted or just updated\n      pkg=${BASH_REMATCH[1]}\n      subpkg=${BASH_REMATCH[2]}\n      if [ ! -f \"${repo_path}/${pkg}/${subpkg}.subpackage.sh\" ]; then\n        echo \"$subpkg\" >> ./deleted_${repo}_packages.txt\n      fi\n    elif [[ $file =~ ^${repo_path}/([.a-z0-9+-]*)/.*$ ]]; then\n      # package, check if it was deleted or updated\n      pkg=${BASH_REMATCH[1]}\n      if [ -d \"${repo_path}/${pkg}\" ]; then\n        echo \"$pkg\" >> ./built_${repo}_packages.txt\n        # If there are subpackages we want to create a list of those\n        # as well\n        for file in $(find \"${repo_path}/${pkg}/\" -maxdepth 1 -type f -name \\*.subpackage.sh | sort); do\n          echo \"$(basename \"${file%%.subpackage.sh}\")\" >> ./built_${repo}_subpackages.txt\n        done\n      else\n        echo \"$pkg\" >> ./deleted_${repo}_packages\n      fi\n    fi\n  done<<<${CHANGED_FILES}\ndone\nfor repo in $(jq --raw-output 'del(.pkg_format) | .[].name' repo.json); do\n  # Fix so that lists do not contain duplicates\n  if [ -f ./built_${repo}_packages.txt ]; then\n    sort ./built_${repo}_packages.txt | uniq > ./built_${repo}_packages.txt.tmp\n    mv ./built_${repo}_packages.txt.tmp ./built_${repo}_packages.txt\n  fi\n  if [ -f ./built_${repo}_subpackages.txt ]; then\n    sort ./built_${repo}_subpackages.txt | uniq > ./built_${repo}_subpackages.txt.tmp\n    mv ./built_${repo}_subpackages.txt.tmp ./built_${repo}_subpackages.txt\n  fi\n  if [ -f ./deleted_${repo}_packages.txt ]; then\n    sort ./deleted_${repo}_packages.txt | uniq > ./deleted_${repo}_packages.txt.tmp\n    mv ./deleted_${repo}_packages.txt.tmp ./deleted_${repo}_packages.txt\n  fi\ndone\n",
+            "count": 1,
+            "repos": [
+                "termux/termux-packages"
+            ]
+        },
+        {
+            "command": "if [ \"${{ github.event_name }}\" != \"workflow_dispatch\" ]; then\n  BASE_COMMIT=$(jq --raw-output .pull_request.base.sha \"$GITHUB_EVENT_PATH\")\n  OLD_COMMIT=$(jq --raw-output .commits[0].id \"$GITHUB_EVENT_PATH\")\n  HEAD_COMMIT=$(jq --raw-output .commits[-1].id \"$GITHUB_EVENT_PATH\")\n  if [ \"$BASE_COMMIT\" = \"null\" ]; then\n    if [ \"$OLD_COMMIT\" = \"$HEAD_COMMIT\" ]; then\n      # Single-commit push.\n      echo \"Processing commit: ${HEAD_COMMIT}\"\n      CHANGED_FILES=$(git diff-tree --no-commit-id --name-only -r \"${HEAD_COMMIT}\")\n    else\n      # Multi-commit push.\n      OLD_COMMIT=\"${OLD_COMMIT}~1\"\n      echo \"Processing commit range: ${OLD_COMMIT}..${HEAD_COMMIT}\"\n      CHANGED_FILES=$(git diff-tree --no-commit-id --name-only -r \"${OLD_COMMIT}\" \"${HEAD_COMMIT}\")\n    fi\n  else\n    # Pull requests.\n    echo \"Processing pull request #$(jq --raw-output .pull_request.number \"$GITHUB_EVENT_PATH\"): ${BASE_COMMIT}..HEAD\"\n    CHANGED_FILES=$(git diff-tree --no-commit-id --name-only -r \"${BASE_COMMIT}\" \"HEAD\")\n  fi\nfi\nmkdir -p ./artifacts ./debs\ntouch ./debs/.placeholder\n\nif [ \"${{ github.event_name }}\" != \"workflow_dispatch\" ]; then\n  # Process tag '%ci:no-build' that may be added as line to commit message.\n  # Forces CI to cancel current build with status 'passed'\n  if grep -qiP '^\\s*%ci:no-build\\s*$' <(git log --format=\"%B\" -n 1 \"HEAD\"); then\n    tar cf artifacts/debs-${{ matrix.target_arch }}.tar debs\n    echo \"[!] Force exiting as tag '%ci:no-build' was applied to HEAD commit message.\"\n    exit 0\n  fi\n\n  for repo_path in $(jq --raw-output 'del(.pkg_format) | keys | .[]' repo.json); do\n    repo=$(jq --raw-output '.[\"'${repo_path}'\"].name' repo.json)\n    # Parse changed files and identify new packages and deleted packages.\n    # Create lists of those packages that will be passed to upload job for\n    # further processing.\n    while read -r file; do\n      if ! [[ $file == ${repo_path}/* ]]; then\n        # This file does not belong to a package, so ignore it\n        continue\n      fi\n      if [[ $file =~ ^${repo_path}/([.a-z0-9+-]*)/([.a-z0-9+-]*).subpackage.sh$ ]]; then\n        # A subpackage was modified, check if it was deleted or just updated\n        pkg=${BASH_REMATCH[1]}\n        subpkg=${BASH_REMATCH[2]}\n        if [ ! -f \"${repo_path}/${pkg}/${subpkg}.subpackage.sh\" ]; then\n          echo \"$subpkg\" >> ./deleted_${repo}_packages.txt\n        fi\n      elif [[ $file =~ ^${repo_path}/([.a-z0-9+-]*)/.*$ ]]; then\n        # package, check if it was deleted or updated\n        pkg=${BASH_REMATCH[1]}\n        if [ -d \"${repo_path}/${pkg}\" ]; then\n          echo \"$pkg\" >> ./built_${repo}_packages.txt\n          # If there are subpackages we want to create a list of those\n          # as well\n          for file in $(find \"${repo_path}/${pkg}/\" -maxdepth 1 -type f -name \\*.subpackage.sh | sort); do\n            echo \"$(basename \"${file%%.subpackage.sh}\")\" >> ./built_${repo}_subpackages.txt\n          done\n        else\n          echo \"$pkg\" >> ./deleted_${repo}_packages\n        fi\n      fi\n    done<<<${CHANGED_FILES}\n  done\nelse\n  for pkg in ${{ github.event.inputs.packages }}; do\n    repo_paths=$(jq --raw-output 'del(.pkg_format) | keys | .[]' repo.json)\n    found=false\n    for repo_path in $repo_paths; do\n      repo=$(jq --raw-output '.[\"'${repo_path}'\"].name' repo.json)\n      if [ -d \"${repo_path}/${pkg}\" ]; then\n        found=true\n        echo \"$pkg\" >> ./built_${repo}_packages.txt\n        for subpkg in $(find \"${repo_path}/${pkg}/\" -maxdepth 1 -type f -name \\*.subpackage.sh | sort); do\n          echo \"$(basename \"${subpkg%%.subpackage.sh}\")\" >> ./built_${repo}_subpackages.txt\n        done\n      fi\n    done\n    if [ \"$found\" != true ]; then\n      echo \"Package '${pkg}' not found in any of the repo\"\n      exit 1\n    fi\n  done\nfi\n\nfor repo in $(jq --raw-output 'del(.pkg_format) | .[].name' repo.json); do\n  # Fix so that lists do not contain duplicates\n  if [ -f ./built_${repo}_packages.txt ]; then\n    sort ./built_${repo}_packages.txt | uniq > ./built_${repo}_packages.txt.tmp\n    mv ./built_${repo}_packages.txt.tmp ./built_${repo}_packages.txt\n  fi\n  if [ -f ./built_${repo}_subpackages.txt ]; then\n    sort ./built_${repo}_subpackages.txt | uniq > ./built_${repo}_subpackages.txt.tmp\n    mv ./built_${repo}_subpackages.txt.tmp ./built_${repo}_subpackages.txt\n  fi\n  if [ -f ./deleted_${repo}_packages.txt ]; then\n    sort ./deleted_${repo}_packages.txt | uniq > ./deleted_${repo}_packages.txt.tmp\n    mv ./deleted_${repo}_packages.txt.tmp ./deleted_${repo}_packages.txt\n  fi\ndone\n\ndeclare -a packages\nfor repo_path in $(jq --raw-output 'del(.pkg_format) | keys | .[]' repo.json); do\n  repo=$(jq --raw-output '.[\"'${repo_path}'\"].name' repo.json)\n  if [ -f ./built_${repo}_packages.txt ]; then\n    packages=\"$packages $(cat ./built_${repo}_packages.txt | tr '\\n' ' ')\"\n  fi\ndone\n\nif [ \"${{ github.event_name }}\" != \"workflow_dispatch\" ]; then\n  # Build local Docker image if setup scripts were changed.\n  # Useful for pull requests submitting changes for both build environment and packages.\n  if grep -qP '^scripts/(Dockerfile|properties\\.sh|setup-android-sdk\\.sh|setup-ubuntu\\.sh)$' <<< \"$CHANGED_FILES\"; then\n    echo \"Detected changes for environment setup scripts. Building custom Docker image now.\"\n    if [ -n \"$packages\" ]; then\n      if grep -qP \"(^|\\\\s)${packages// /($|\\\\s)|(^|\\\\s)}($|\\\\s)\" ./scripts/big-pkgs.list; then\n        echo \"Skipping due to building large packages.\"\n        exit 0\n      fi\n    fi\n    cd ./scripts\n    docker build -t ghcr.io/termux/package-builder:latest .\n    cd ..\n  fi\nfi\n",
+            "count": 1,
+            "repos": [
+                "termux/termux-packages"
+            ]
+        },
+        {
+            "command": "if [ \"${{ github.event_name }}\" != \"workflow_dispatch\" ]; then\n  BASE_COMMIT=$(jq --raw-output .pull_request.base.sha \"$GITHUB_EVENT_PATH\")\n  OLD_COMMIT=$(jq --raw-output .commits[0].id \"$GITHUB_EVENT_PATH\")\n  HEAD_COMMIT=$(jq --raw-output .commits[-1].id \"$GITHUB_EVENT_PATH\")\n  if [ \"$BASE_COMMIT\" = \"null\" ]; then\n    if [ \"$OLD_COMMIT\" = \"$HEAD_COMMIT\" ]; then\n      # Single-commit push.\n      echo \"Processing commit: ${HEAD_COMMIT}\"\n      CHANGED_FILES=$(git diff-tree --no-commit-id --name-only -r \"${HEAD_COMMIT}\")\n    else\n      # Multi-commit push.\n      OLD_COMMIT=\"${OLD_COMMIT}~1\"\n      echo \"Processing commit range: ${OLD_COMMIT}..${HEAD_COMMIT}\"\n      CHANGED_FILES=$(git diff-tree --no-commit-id --name-only -r \"${OLD_COMMIT}\" \"${HEAD_COMMIT}\")\n    fi\n  else\n    # Pull requests.\n    echo \"Processing pull request #$(jq --raw-output .pull_request.number \"$GITHUB_EVENT_PATH\"): ${BASE_COMMIT}..HEAD\"\n    CHANGED_FILES=$(git diff-tree --no-commit-id --name-only -r \"${BASE_COMMIT}\" \"HEAD\")\n  fi\nfi\nmkdir -p ./artifacts ./debs\ntouch ./debs/.placeholder\n\nif [ \"${{ github.event_name }}\" != \"workflow_dispatch\" ]; then\n  # Process tag '%ci:no-build' that may be added as line to commit message.\n  # Forces CI to cancel current build with status 'passed'\n  if grep -qiP '^\\s*%ci:no-build\\s*$' <(git log --format=\"%B\" -n 1 \"HEAD\"); then\n    tar cf artifacts/debs-${{ matrix.target_arch }}.tar debs\n    echo \"[!] Force exiting as tag '%ci:no-build' was applied to HEAD commit message.\"\n    exit 0\n  fi\n\n  # Build local Docker image if setup scripts were changed.\n  # Useful for pull requests submitting changes for both build environment and packages.\n  if grep -qP '^scripts/(Dockerfile|properties\\.sh|setup-android-sdk\\.sh|setup-cgct\\.sh|setup-ubuntu\\.sh)$' <<< \"$CHANGED_FILES\"; then\n    echo \"Detected changes for environment setup scripts. Building custom Docker image now.\"\n    docker build -t ghcr.io/termux/package-builder-cgct:latest .\n  fi\n\n  for repo_path in $(jq --raw-output 'del(.pkg_format) | keys | .[]' repo.json); do\n    repo=$(jq --raw-output '.[\"'${repo_path}'\"].name' repo.json)\n    # Parse changed files and identify new packages and deleted packages.\n    # Create lists of those packages that will be passed to upload job for\n    # further processing.\n    while read -r file; do\n      if ! [[ $file == ${repo_path}/* ]]; then\n        # This file does not belong to a package, so ignore it\n        continue\n      fi\n      if [[ $file =~ ^${repo_path}/([.a-z0-9+-]*)/([.a-z0-9+-]*).subpackage.sh$ ]]; then\n        # A subpackage was modified, check if it was deleted or just updated\n        pkg=${BASH_REMATCH[1]}\n        subpkg=${BASH_REMATCH[2]}\n        if [ ! -f \"${repo_path}/${pkg}/${subpkg}.subpackage.sh\" ]; then\n          echo \"$subpkg\" >> ./deleted_${repo}_packages.txt\n        fi\n      elif [[ $file =~ ^${repo_path}/([.a-z0-9+-]*)/.*$ ]]; then\n        # package, check if it was deleted or updated\n        pkg=${BASH_REMATCH[1]}\n        if [ -d \"${repo_path}/${pkg}\" ]; then\n          echo \"$pkg\" >> ./built_${repo}_packages.txt\n          # If there are subpackages we want to create a list of those\n          # as well\n          for file in $(find \"${repo_path}/${pkg}/\" -maxdepth 1 -type f -name \\*.subpackage.sh | sort); do\n            echo \"$(basename \"${file%%.subpackage.sh}\")\" >> ./built_${repo}_subpackages.txt\n          done\n        else\n          echo \"$pkg\" >> ./deleted_${repo}_packages\n        fi\n      fi\n    done<<<${CHANGED_FILES}\n  done\nelse\n  for pkg in ${{ github.event.inputs.packages }}; do\n    repo_paths=$(jq --raw-output 'del(.pkg_format) | keys | .[]' repo.json)\n    found=false\n    for repo_path in $repo_paths; do\n      repo=$(jq --raw-output '.[\"'${repo_path}'\"].name' repo.json)\n      if [ -d \"${repo_path}/${pkg}\" ]; then\n        found=true\n        echo \"$pkg\" >> ./built_${repo}_packages.txt\n        for subpkg in $(find \"${repo_path}/${pkg}/\" -maxdepth 1 -type f -name \\*.subpackage.sh | sort); do\n          echo \"$(basename \"${subpkg%%.subpackage.sh}\")\" >> ./built_${repo}_subpackages.txt\n        done\n      fi\n    done\n    if [ \"$found\" != true ]; then\n      echo \"Package '${pkg}' not found in any of the repo\"\n      exit 1\n    fi\n  done\nfi\n\nfor repo in $(jq --raw-output 'del(.pkg_format) | .[].name' repo.json); do\n  # Fix so that lists do not contain duplicates\n  if [ -f ./built_${repo}_packages.txt ]; then\n    sort ./built_${repo}_packages.txt | uniq > ./built_${repo}_packages.txt.tmp\n    mv ./built_${repo}_packages.txt.tmp ./built_${repo}_packages.txt\n  fi\n  if [ -f ./built_${repo}_subpackages.txt ]; then\n    sort ./built_${repo}_subpackages.txt | uniq > ./built_${repo}_subpackages.txt.tmp\n    mv ./built_${repo}_subpackages.txt.tmp ./built_${repo}_subpackages.txt\n  fi\n  if [ -f ./deleted_${repo}_packages.txt ]; then\n    sort ./deleted_${repo}_packages.txt | uniq > ./deleted_${repo}_packages.txt.tmp\n    mv ./deleted_${repo}_packages.txt.tmp ./deleted_${repo}_packages.txt\n  fi\ndone\n",
+            "count": 1,
+            "repos": [
+                "termux/glibc-packages"
+            ]
+        }
+    ],
+    "Process package updates": [
+        {
+            "command": "declare -a packages\nfor repo_path in $(jq --raw-output 'del(.pkg_format) | keys | .[]' repo.json); do\n  repo=$(jq --raw-output '.[\"'${repo_path}'\"].name' repo.json)\n  if [ -f ./built_${repo}_packages.txt ]; then\n    packages=\"$packages $(cat ./built_${repo}_packages.txt | tr '\\n' ' ')\"\n  fi\ndone\nif [ -n \"$packages\" ]; then\n  ./scripts/bin/update-packages $packages\nfi\n",
+            "count": 1,
+            "repos": [
+                "termux/termux-packages"
+            ]
+        },
+        {
+            "command": "git config --global user.name \"Termux Github Actions\"\ngit config --global user.email \"contact@termux.dev\"\n\nif [ \"${{ github.event_name }}\" == \"workflow_dispatch\" ]; then\n  ./scripts/bin/update-packages ${{ github.event.inputs.packages }}\nelse\n  ./scripts/bin/update-packages \"@all\"\nfi\n",
+            "count": 1,
+            "repos": [
+                "termux/termux-packages"
+            ]
+        }
+    ],
+    "Lint packages": [
+        {
+            "command": "declare -a package_recipes\nfor repo_path in $(jq --raw-output 'del(.pkg_format) | keys | .[]' repo.json); do\n  repo=$(jq --raw-output '.[\"'${repo_path}'\"].name' repo.json)\n  if [ -f ./built_${repo}_packages.txt ]; then\n    package_recipes=\"$package_recipes $(cat ./built_${repo}_packages.txt | repo_path=${repo_path} awk '{print ENVIRON[\"repo_path\"]\"/\"$1\"/build.sh\"}')\"\n  fi\ndone\n\nif [ -n \"$package_recipes\" ]; then\n  ./scripts/lint-packages.sh $package_recipes\nfi\n",
+            "count": 1,
+            "repos": [
+                "termux/termux-packages"
+            ]
+        },
+        {
+            "command": "declare -a package_recipes\nfor repo_path in $(jq --raw-output 'del(.pkg_format) | keys | .[]' repo.json); do\n  repo=$(jq --raw-output '.[\"'${repo_path}'\"].name' repo.json)\n  if [ -f ./built_${repo}_packages.txt ]; then\n    package_recipes=\"$package_recipes $(cat ./built_${repo}_packages.txt | repo_path=${repo_path} awk '{print ENVIRON[\"repo_path\"]\"/\"$1\"/build.sh\"}')\"\n  fi\ndone\n\nif [ ! -z \"$package_recipes\" ]; then\n  ./scripts/lint-packages.sh $package_recipes\nfi\n",
+            "count": 1,
+            "repos": [
+                "termux/glibc-packages"
+            ]
+        }
+    ],
+    "Build packages": [
+        {
+            "command": "declare -a packages\nfor repo_path in $(jq --raw-output 'del(.pkg_format) | keys | .[]' repo.json); do\n  repo=$(jq --raw-output '.[\"'${repo_path}'\"].name' repo.json)\n  if [ -f ./built_${repo}_packages.txt ]; then\n    packages=\"$packages $(cat ./built_${repo}_packages.txt | tr '\\n' ' ')\"\n  fi\ndone\n\nif [ -n \"$packages\" ]; then\n  if grep -qP \"(^|\\\\s)${packages// /($|\\\\s)|(^|\\\\s)}($|\\\\s)\" ./scripts/big-pkgs.list; then\n    NDK=$ANDROID_NDK_LATEST_HOME ANDROID_HOME=$ANDROID_SDK_ROOT ./build-package.sh -I -a ${{ matrix.target_arch }} $packages\n  else\n    ./scripts/run-docker.sh ./build-package.sh -I -a ${{ matrix.target_arch }} $packages\n  fi\nfi\n",
+            "count": 1,
+            "repos": [
+                "termux/termux-packages"
+            ]
+        },
+        {
+            "command": "if [ \"${{ github.event_name }}\" != \"workflow_dispatch\" ]; then\n  BASE_COMMIT=$(jq --raw-output .pull_request.base.sha \"$GITHUB_EVENT_PATH\")\n  OLD_COMMIT=$(jq --raw-output .commits[0].id \"$GITHUB_EVENT_PATH\")\n  HEAD_COMMIT=$(jq --raw-output .commits[-1].id \"$GITHUB_EVENT_PATH\")\n  if [ \"$BASE_COMMIT\" = \"null\" ]; then\n    if [ \"$OLD_COMMIT\" = \"$HEAD_COMMIT\" ]; then\n      # Single-commit push.\n      echo \"Processing commit: ${HEAD_COMMIT}\"\n      CHANGED_FILES=$(git diff-tree --no-commit-id --name-only -r \"${HEAD_COMMIT}\")\n    else\n      # Multi-commit push.\n      OLD_COMMIT=\"${OLD_COMMIT}~1\"\n      echo \"Processing commit range: ${OLD_COMMIT}..${HEAD_COMMIT}\"\n      CHANGED_FILES=$(git diff-tree --no-commit-id --name-only -r \"${OLD_COMMIT}\" \"${HEAD_COMMIT}\")\n    fi\n  else\n    # Pull requests.\n    echo \"Processing pull request #$(jq --raw-output .pull_request.number \"$GITHUB_EVENT_PATH\"): ${BASE_COMMIT}..HEAD\"\n    CHANGED_FILES=$(git diff-tree --no-commit-id --name-only -r \"${BASE_COMMIT}\" \"HEAD\")\n  fi\nfi\nmkdir -p ./artifacts ./debs\ntouch ./debs/.placeholder\nif [ \"${{ github.event_name }}\" != \"workflow_dispatch\" ]; then\n  # Process tag '%ci:no-build' that may be added as line to commit message.\n  # Forces CI to cancel current build with status 'passed'.\n  if grep -qiP '^\\s*%ci:no-build\\s*$' <(git log --format=\"%B\" -n 1 \"HEAD\"); then\n    tar cf artifacts/debs-${{ matrix.target_arch }}.tar debs\n    echo \"[!] Force exiting as tag '%ci:no-build' was applied to HEAD commit message.\"\n    exit 0\n  fi\n  # Parse changed files and identify new packages and deleted packages.\n  # Create lists of those packages that will be passed to upload job for\n  # further processing.\n  while read -r file; do\n    if ! [[ $file == packages/* ]]; then\n      # This file does not belong to a package, so ignore it\n      continue\n    fi\n    if [[ $file =~ ^packages/([a-z0-9+-]*)/([a-z0-9+-]*).subpackage.sh$ ]]; then\n      # A subpackage was modified, check if it was deleted or just updated\n      pkg=${BASH_REMATCH[1]}\n      subpkg=${BASH_REMATCH[2]}\n      if [ ! -f \"packages/${pkg}/${subpkg}.subpackage.sh\" ]; then\n        echo \"$subpkg\" >> ./deleted_packages.txt\n      fi\n    elif [[ $file =~ ^packages/([a-z0-9+-]*)/.*$ ]]; then\n      # package, check if it was deleted or updated\n      pkg=${BASH_REMATCH[1]}\n      if [ ! -d \"packages/${pkg}\" ]; then\n        echo \"$pkg\" >> ./deleted_packages.txt\n      else\n        echo \"$pkg\" >> ./built_packages.txt\n        # If there are subpackages we want to create a list of those\n        # as well\n        for file in $(find \"packages/${pkg}/\" -maxdepth 1 -type f -name \\*.subpackage.sh | sort); do\n          echo \"$(basename \"${file%%.subpackage.sh}\")\" >> ./built_subpackages.txt\n        done\n      fi\n    fi\n  done<<<${CHANGED_FILES}\nelse\n  for pkg in ${{ github.event.inputs.packages }}; do\n    echo \"$pkg\" >> ./built_packages.txt\n    for subpkg in $(find \"packages/${pkg}/\" -maxdepth 1 -type f -name \\*.subpackage.sh | sort); do\n      echo \"$(basename \"${subpkg%%.subpackage.sh}\")\" >> ./built_subpackages.txt\n    done\n  done\nfi\n\n# Fix so that lists do not contain duplicates\nif [ -f ./built_packages.txt ]; then\n  uniq ./built_packages.txt > ./built_packages.txt.tmp\n  mv ./built_packages.txt.tmp ./built_packages.txt\nfi\nif [ -f ./built_subpackages.txt ]; then\n  uniq ./built_subpackages.txt > ./built_subpackages.txt.tmp\n  mv ./built_subpackages.txt.tmp ./built_subpackages.txt\nfi\nif [ -f ./deleted_packages.txt ]; then\n  uniq ./deleted_packages.txt > ./deleted_packages.txt.tmp\n  mv ./deleted_packages.txt.tmp ./deleted_packages.txt\nfi\n\nif [ -f ./built_packages.txt ]; then\n  ./scripts/lint-packages.sh $(cat ./built_packages.txt | awk '{print \"packages/\"$1\"/build.sh\"}')\n  ./start-builder.sh ./build-package.sh -o ./debs -I -a ${{ matrix.target_arch }} $(cat ./built_packages.txt)\nfi\n\ntest -d ./termux-packages/debs && find ./termux-packages/debs/ -mindepth 1 -maxdepth 1 ! -name \".*\" -exec mv \"{}\" ./debs/ \\;\n# Put package lists into directory with *.deb files so they will be transferred to\n# upload job.\ntest -f ./built_packages.txt && mv ./built_packages.txt ./debs/\ntest -f ./built_subpackages.txt && cat ./built_subpackages.txt >> ./debs/built_packages.txt \\\n  && rm ./built_subpackages.txt\ntest -f ./deleted_packages.txt && mv ./deleted_packages.txt ./debs/\n# Files containing certain symbols (e.g. \":\") will cause failure in actions/upload-artifact.\n# Archiving *.deb files in a tarball to avoid issues with uploading.\ntar cf artifacts/debs-${{ matrix.target_arch }}-${{ github.sha }}.tar debs\n",
+            "count": 1,
+            "repos": [
+                "termux/x11-packages"
+            ]
+        },
+        {
+            "command": "declare -a packages\nfor repo_path in $(jq --raw-output 'del(.pkg_format) | keys | .[]' repo.json); do\n  repo=$(jq --raw-output '.[\"'${repo_path}'\"].name' repo.json)\n\n  if [ -f ./built_${repo}_packages.txt ]; then\n    packages=\"$packages $(cat ./built_${repo}_packages.txt)\"\n  fi\ndone\n\nif [ ! -z \"$packages\" ]; then\n  if grep -qP \"(^|\\s)${packages// /($|\\s)|(^|\\s)}($|\\s)\" ./big-pkgs.list; then\n    ./scripts/setup-ubuntu.sh\n    ./scripts/setup-cgct.sh\n    sudo apt install ninja-build\n    sudo apt purge -yq $(dpkg -l | grep '^ii' | awk '{ print $2 }' | grep -P '(aspnetcore|cabal-|dotnet-|ghc-|libmono|php)') \\\n      firefox google-chrome-stable microsoft-edge-stable mono-runtime-common monodoc-manual ruby\n    sudo apt autoremove -yq\n    sudo rm -fr /opt/hostedtoolcache /usr/share/dotnet /usr/share/swift\n    NDK=$ANDROID_NDK_LATEST_HOME ANDROID_HOME=$ANDROID_SDK_ROOT ./build-package.sh -I -a ${{ matrix.target_arch }} --library glibc $packages\n  else\n    TERMUX_BUILDER_IMAGE_NAME=\"ghcr.io/termux/package-builder-cgct\" ./scripts/run-docker.sh ./build-package.sh -I -a ${{ matrix.target_arch }} --library glibc $packages\n  fi\nfi\n",
+            "count": 1,
+            "repos": [
+                "termux/glibc-packages"
+            ]
+        }
+    ],
+    "Generate build artifacts": [
+        {
+            "command": "test -d termux-packages/output && mv termux-packages/output/* ./output/\n\nfor repo in $(jq --raw-output 'del(.pkg_format) | .[].name' repo.json); do\n  # Put package lists into directory with *.deb files so they will be transferred to\n  # upload job.\n  test -f ./built_${repo}_packages.txt && mv ./built_${repo}_packages.txt ./debs/\n  test -f ./built_${repo}_subpackages.txt && cat ./built_${repo}_subpackages.txt >> ./debs/built_${repo}_packages.txt \\\n    && rm ./built_${repo}_subpackages.txt\n  test -f ./deleted_${repo}_packages.txt && mv ./deleted_${repo}_packages.txt ./debs/\n\n  # Move only debs from built_packages into debs/ folder before\n  # creating an archive.\n  while read -r pkg; do\n    # Match both $pkg.deb and $pkg-static.deb.\n    find output \\( -name \"$pkg_*.deb\" -o -name \"$pkg-static_*.deb\" \\) -type f -print0 | xargs -0r mv -t debs/\n  done < <(cat ./debs/built_${repo}_packages.txt)\ndone\n\n# Files containing certain symbols (e.g. \":\") will cause failure in actions/upload-artifact.\n# Archiving *.deb files in a tarball to avoid issues with uploading.\ntar cf artifacts/debs-${{ matrix.target_arch }}-${{ github.sha }}.tar debs\n",
+            "count": 1,
+            "repos": [
+                "termux/termux-packages"
+            ]
+        },
+        {
+            "command": "for repo in $(jq --raw-output 'del(.pkg_format) | .[].name' repo.json); do\n  # Put package lists into directory with *.pkg.* files so they will be transferred to\n  # upload job.\n  test -f ./built_${repo}_packages.txt && mv ./built_${repo}_packages.txt ./debs/\n  test -f ./built_${repo}_subpackages.txt && cat ./built_${repo}_subpackages.txt >> ./debs/built_${repo}_packages.txt \\\n    && rm ./built_${repo}_subpackages.txt\n  test -f ./deleted_${repo}_packages.txt && mv ./deleted_${repo}_packages.txt ./debs/\n\n  # Move only pkgs from built_packages into pkgs/ folder before\n  # creating an archive.\n  while read -r pkg; do\n    # Match both $pkg.pkg.* and $pkg-static.pkg.*.\n    find output \\( -name \"$pkg_*.deb\" -o -name \"$pkg-static_*.deb\" \\) -type f -print0 | xargs -0r mv -t debs/\n  done < <(cat ./debs/built_${repo}_packages.txt)\ndone\n\n# Files containing certain symbols (e.g. \":\") will cause failure in actions/upload-artifact.\n# Archiving *.deb files in a tarball to avoid issues with uploading.\ntar cf artifacts/debs-${{ matrix.target_arch }}-${{ github.sha }}.tar debs\n",
+            "count": 1,
+            "repos": [
+                "termux/glibc-packages"
+            ]
+        }
+    ],
+    "Checksums for built *.deb files": [
+        {
+            "command": "find debs -type f -name \"*.deb\" -exec sha256sum \"{}\" \\; | sort -k2 | tee checksum-${{ matrix.target_arch }}-${{ github.sha }}.txt\n",
+            "count": 1,
+            "repos": [
+                "termux/termux-packages"
+            ]
+        },
+        {
+            "command": "find debs -type f -name \"*.deb\" -exec sha256sum \"{}\" \\; | sort -k2\n",
+            "count": 5,
+            "repos": [
+                "termux/termux-root-packages",
+                "termux/x11-packages",
+                "termux/game-packages",
+                "termux/science-packages",
+                "termux/glibc-packages"
+            ]
+        }
+    ],
+    "Store *.deb files": [
+        {
+            "command": "actions/upload-artifact@v4",
+            "count": 2,
+            "repos": [
+                "termux/termux-packages",
+                "termux/glibc-packages"
+            ]
+        },
+        {
+            "command": "actions/upload-artifact@v2",
+            "count": 4,
+            "repos": [
+                "termux/termux-root-packages",
+                "termux/x11-packages",
+                "termux/game-packages",
+                "termux/science-packages"
+            ]
+        }
+    ],
+    "Get *.deb files": [
+        {
+            "command": "actions/download-artifact@v4",
+            "count": 2,
+            "repos": [
+                "termux/termux-packages",
+                "termux/glibc-packages"
+            ]
+        },
+        {
+            "command": "actions/download-artifact@v2",
+            "count": 4,
+            "repos": [
+                "termux/termux-root-packages",
+                "termux/x11-packages",
+                "termux/game-packages",
+                "termux/science-packages"
+            ]
+        }
+    ],
+    "Upload to packages.termux.dev": [
+        {
+            "command": "GITHUB_SHA=${{ github.sha }}\nAPTLY_API_AUTH=${{ secrets.APTLY_API_AUTH }}\nGPG_PASSPHRASE=${{ secrets.GPG_PASSPHRASE }}\n\nsource scripts/aptly_api.sh\n\nfor archive in debs-*/debs-{aarch64,arm,i686,x86_64}-${{ github.sha }}.tar; do\n  tar xf \"$archive\"\ndone\n\nfor repo in $(jq --raw-output 'del(.pkg_format) | keys | .[]' repo.json); do\n  export REPOSITORY_NAME=$(jq --raw-output '.[\"'$repo'\"].name' repo.json)\n  export REPOSITORY_DISTRIBUTION=$(jq --raw-output '.[\"'$repo'\"].distribution' repo.json)\n\n  # Upload file to temporary directory.\n  uploaded_files=false\n  shopt -s nullglob\n\n  if [ -f debs/built_${REPOSITORY_NAME}_packages.txt ]; then\n    for filename in $(cat debs/built_${REPOSITORY_NAME}_packages.txt | sed -E 's/(..*)/debs\\/\\1_\\*.deb debs\\/\\1-static_\\*.deb/g'); do\n      if ! aptly_upload_file \"$filename\"; then\n        exit 1\n      fi\n\n      uploaded_files=true\n    done\n    shopt -u nullglob\n\n    # Publishing repository changes.\n    if [ \"$uploaded_files\" = \"true\" ]; then\n      if ! aptly_add_to_repo; then\n        exit 1\n      fi\n\n      # Usually temporary directory is deleted automatically, but in certain cases it is left.\n      aptly_delete_dir\n\n      # Final part to make changes appear in web root.\n      if ! aptly_publish_repo; then\n        exit 1\n      fi\n    fi\n  fi\ndone\n",
+            "count": 1,
+            "repos": [
+                "termux/termux-packages"
+            ]
+        },
+        {
+            "command": "GITHUB_SHA=${{ github.sha }}\nAPTLY_API_AUTH=${{ secrets.APTLY_API_AUTH }}\nGPG_PASSPHRASE=${{ secrets.GPG_PASSPHRASE }}\n\nsource scripts/aptly_api.sh\nsource scripts/utils/package/package.sh\n\nget_list_pkgs() {\n  for i in $(cat debs/built_${REPOSITORY_NAME}_packages.txt | sed -E 's/(..*)/\\1\\n\\1-static/g'); do\n    local pkgname=\"${i}\"\n    if ! package__is_package_name_have_glibc_prefix \"$pkgname\"; then\n      pkgname=$(package__add_prefix_glibc_to_package_name \"$pkgname\")\n    fi\n    ls debs/${pkgname}_*.deb 2>/dev/null\n  done\n}\n\nfor archive in debs-*/debs-{aarch64,arm,i686,x86_64}-${{ github.sha }}.tar; do\n  tar xf \"$archive\"\ndone\n\nfor repo in $(jq --raw-output 'del(.pkg_format) | keys | .[]' repo.json); do\n  export REPOSITORY_NAME=$(jq --raw-output '.[\"'$repo'\"].name' repo.json)\n  export REPOSITORY_DISTRIBUTION=$(jq --raw-output '.[\"'$repo'\"].distribution' repo.json)\n\n  # Upload file to temporary directory.\n  uploaded_files=false\n  shopt -s nullglob\n\n  if [ -f debs/built_${REPOSITORY_NAME}_packages.txt ]; then\n    for filename in $(get_list_pkgs); do\n      if ! aptly_upload_file \"$filename\"; then\n        continue\n      fi\n\n      uploaded_files=true\n    done\n    shopt -u nullglob\n\n    # Publishing repository changes.\n    if [ \"$uploaded_files\" = \"true\" ]; then\n      #if ! aptly_add_to_repo; then\n      #  exit 1\n      #fi\n      aptly_add_to_repo || true\n\n      # Usually temporary directory is deleted automatically, but in certain cases it is left.\n      aptly_delete_dir\n\n      # Final part to make changes appear in web root.\n      if ! aptly_publish_repo; then\n        exit 1\n      fi\n    fi\n  fi\ndone\n",
+            "count": 1,
+            "repos": [
+                "termux/glibc-packages"
+            ]
+        }
+    ],
+    "Build and attach APK to release": [
+        {
+            "command": "exit_on_error() {\n    echo \"$1\"\n    echo \"Deleting '$RELEASE_VERSION_NAME' release and '$GITHUB_REF' tag\"\n    hub release delete \"$RELEASE_VERSION_NAME\"\n    git push --delete origin \"$GITHUB_REF\"\n    exit 1\n}\n\necho \"Setting vars\"\nRELEASE_VERSION_NAME=\"${GITHUB_REF/refs\\/tags\\//}\"\nif ! printf \"%s\" \"${RELEASE_VERSION_NAME/v/}\" | grep -qP '^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?$'; then\n  exit_on_error \"The versionName '${RELEASE_VERSION_NAME/v/}' is not a valid version as per semantic version '2.0.0' spec in the format 'major.minor.patch(-prerelease)(+buildmetadata)'. https://semver.org/spec/v2.0.0.html.\"\nfi\n\nAPK_DIR_PATH=\"./app/build/outputs/apk/debug\"\nAPK_VERSION_TAG=\"$RELEASE_VERSION_NAME+github-debug\"\nAPK_BASENAME_PREFIX=\"termux-api_$APK_VERSION_TAG\"\n\necho \"Building APK for '$RELEASE_VERSION_NAME' release\"\nexport TERMUX_API_APK_VERSION_TAG=\"$APK_VERSION_TAG\" # Used by app/build.gradle\nif ! ./gradlew assembleDebug; then\n  exit_on_error \"Build failed for '$RELEASE_VERSION_NAME' release.\"\nfi\n\necho \"Validating APK\"\nif ! test -f \"$APK_DIR_PATH/${APK_BASENAME_PREFIX}.apk\"; then\n  files_found=\"$(ls \"$APK_DIR_PATH\")\"\n  exit_on_error \"Failed to find built APK at '$APK_DIR_PATH/${APK_BASENAME_PREFIX}.apk'. Files found: \"$'\\n'\"$files_found\"\nfi\n\necho \"Generating sha25sums file\"\nif ! (cd \"$APK_DIR_PATH\"; sha256sum \"${APK_BASENAME_PREFIX}.apk\" > sha256sums); then\n  exit_on_error \"Generate sha25sums failed for '$RELEASE_VERSION_NAME' release.\"\nfi\n\necho \"Attaching APK to github release\"\nif ! hub release edit \\\n-m \"\" \\\n-a \"$APK_DIR_PATH/${APK_BASENAME_PREFIX}.apk\" \\\n-a \"$APK_DIR_PATH/sha256sums\" \\\n\"$RELEASE_VERSION_NAME\"; then\n  exit_on_error \"Attach APK to release failed for '$RELEASE_VERSION_NAME' release.\"\nfi\n",
+            "count": 1,
+            "repos": [
+                "termux/termux-api"
+            ]
+        },
+        {
+            "command": "exit_on_error() {\n    echo \"$1\"\n    echo \"Deleting '$RELEASE_VERSION_NAME' release and '$GITHUB_REF' tag\"\n    hub release delete \"$RELEASE_VERSION_NAME\"\n    git push --delete origin \"$GITHUB_REF\"\n    exit 1\n}\n\necho \"Setting vars\"\nRELEASE_VERSION_NAME=\"${GITHUB_REF/refs\\/tags\\//}\"\nif ! printf \"%s\" \"${RELEASE_VERSION_NAME/v/}\" | grep -qP '^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?$'; then\n  exit_on_error \"The versionName '${RELEASE_VERSION_NAME/v/}' is not a valid version as per semantic version '2.0.0' spec in the format 'major.minor.patch(-prerelease)(+buildmetadata)'. https://semver.org/spec/v2.0.0.html.\"\nfi\n\nAPK_DIR_PATH=\"./app/build/outputs/apk/debug\"\nAPK_VERSION_TAG=\"$RELEASE_VERSION_NAME+github-debug\"\nAPK_BASENAME_PREFIX=\"termux-widget_$APK_VERSION_TAG\"\n\necho \"Building APK for '$RELEASE_VERSION_NAME' release\"\nexport TERMUX_WIDGET_APK_VERSION_TAG=\"$APK_VERSION_TAG\" # Used by app/build.gradle\nif ! ./gradlew assembleDebug; then\n  exit_on_error \"Build failed for '$RELEASE_VERSION_NAME' release.\"\nfi\n\necho \"Validating APK\"\nif ! test -f \"$APK_DIR_PATH/${APK_BASENAME_PREFIX}.apk\"; then\n  files_found=\"$(ls \"$APK_DIR_PATH\")\"\n  exit_on_error \"Failed to find built APK at '$APK_DIR_PATH/${APK_BASENAME_PREFIX}.apk'. Files found: \"$'\\n'\"$files_found\"\nfi\n\necho \"Generating sha25sums file\"\nif ! (cd \"$APK_DIR_PATH\"; sha256sum \"${APK_BASENAME_PREFIX}.apk\" > sha256sums); then\n  exit_on_error \"Generate sha25sums failed for '$RELEASE_VERSION_NAME' release.\"\nfi\n\necho \"Attaching APK to github release\"\nif ! hub release edit \\\n-m \"\" \\\n-a \"$APK_DIR_PATH/${APK_BASENAME_PREFIX}.apk\" \\\n-a \"$APK_DIR_PATH/sha256sums\" \\\n\"$RELEASE_VERSION_NAME\"; then\n  exit_on_error \"Attach APK to release failed for '$RELEASE_VERSION_NAME' release.\"\nfi\n",
+            "count": 1,
+            "repos": [
+                "termux/termux-widget"
+            ]
+        },
+        {
+            "command": "exit_on_error() {\n    echo \"$1\"\n    echo \"Deleting '$RELEASE_VERSION_NAME' release and '$GITHUB_REF' tag\"\n    hub release delete \"$RELEASE_VERSION_NAME\"\n    git push --delete origin \"$GITHUB_REF\"\n    exit 1\n}\n\necho \"Setting vars\"\nRELEASE_VERSION_NAME=\"${GITHUB_REF/refs\\/tags\\//}\"\nif ! printf \"%s\" \"${RELEASE_VERSION_NAME/v/}\" | grep -qP '^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?$'; then\n  exit_on_error \"The versionName '${RELEASE_VERSION_NAME/v/}' is not a valid version as per semantic version '2.0.0' spec in the format 'major.minor.patch(-prerelease)(+buildmetadata)'. https://semver.org/spec/v2.0.0.html.\"\nfi\n\nAPK_DIR_PATH=\"./app/build/outputs/apk/debug\"\nAPK_VERSION_TAG=\"$RELEASE_VERSION_NAME+github-debug\"\nAPK_BASENAME_PREFIX=\"termux-tasker_$APK_VERSION_TAG\"\n\necho \"Building APK for '$RELEASE_VERSION_NAME' release\"\nexport TERMUX_TASKER_APK_VERSION_TAG=\"$APK_VERSION_TAG\" # Used by app/build.gradle\nif ! ./gradlew assembleDebug; then\n  exit_on_error \"Build failed for '$RELEASE_VERSION_NAME' release.\"\nfi\n\necho \"Validating APK\"\nif ! test -f \"$APK_DIR_PATH/${APK_BASENAME_PREFIX}.apk\"; then\n  files_found=\"$(ls \"$APK_DIR_PATH\")\"\n  exit_on_error \"Failed to find built APK at '$APK_DIR_PATH/${APK_BASENAME_PREFIX}.apk'. Files found: \"$'\\n'\"$files_found\"\nfi\n\necho \"Generating sha25sums file\"\nif ! (cd \"$APK_DIR_PATH\"; sha256sum \"${APK_BASENAME_PREFIX}.apk\" > sha256sums); then\n  exit_on_error \"Generate sha25sums failed for '$RELEASE_VERSION_NAME' release.\"\nfi\n\necho \"Attaching APK to github release\"\nif ! hub release edit \\\n-m \"\" \\\n-a \"$APK_DIR_PATH/${APK_BASENAME_PREFIX}.apk\" \\\n-a \"$APK_DIR_PATH/sha256sums\" \\\n\"$RELEASE_VERSION_NAME\"; then\n  exit_on_error \"Attach APK to release failed for '$RELEASE_VERSION_NAME' release.\"\nfi\n",
+            "count": 1,
+            "repos": [
+                "termux/termux-tasker"
+            ]
+        },
+        {
+            "command": "exit_on_error() {\n    echo \"$1\"\n    echo \"Deleting '$RELEASE_VERSION_NAME' release and '$GITHUB_REF' tag\"\n    hub release delete \"$RELEASE_VERSION_NAME\"\n    git push --delete origin \"$GITHUB_REF\"\n    exit 1\n}\n\necho \"Setting vars\"\nRELEASE_VERSION_NAME=\"${GITHUB_REF/refs\\/tags\\//}\"\nif ! printf \"%s\" \"${RELEASE_VERSION_NAME/v/}\" | grep -qP '^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?$'; then\n  exit_on_error \"The versionName '${RELEASE_VERSION_NAME/v/}' is not a valid version as per semantic version '2.0.0' spec in the format 'major.minor.patch(-prerelease)(+buildmetadata)'. https://semver.org/spec/v2.0.0.html.\"\nfi\n\nAPK_DIR_PATH=\"./app/build/outputs/apk/debug\"\nAPK_VERSION_TAG=\"$RELEASE_VERSION_NAME+github-debug\"\nAPK_BASENAME_PREFIX=\"termux-float_$APK_VERSION_TAG\"\n\necho \"Building APK for '$RELEASE_VERSION_NAME' release\"\nexport TERMUX_FLOAT_APK_VERSION_TAG=\"$APK_VERSION_TAG\" # Used by app/build.gradle\nif ! ./gradlew assembleDebug; then\n  exit_on_error \"Build failed for '$RELEASE_VERSION_NAME' release.\"\nfi\n\necho \"Validating APK\"\nif ! test -f \"$APK_DIR_PATH/${APK_BASENAME_PREFIX}.apk\"; then\n  files_found=\"$(ls \"$APK_DIR_PATH\")\"\n  exit_on_error \"Failed to find built APK at '$APK_DIR_PATH/${APK_BASENAME_PREFIX}.apk'. Files found: \"$'\\n'\"$files_found\"\nfi\n\necho \"Generating sha25sums file\"\nif ! (cd \"$APK_DIR_PATH\"; sha256sum \"${APK_BASENAME_PREFIX}.apk\" > sha256sums); then\n  exit_on_error \"Generate sha25sums failed for '$RELEASE_VERSION_NAME' release.\"\nfi\n\necho \"Attaching APK to github release\"\nif ! hub release edit \\\n-m \"\" \\\n-a \"$APK_DIR_PATH/${APK_BASENAME_PREFIX}.apk\" \\\n-a \"$APK_DIR_PATH/sha256sums\" \\\n\"$RELEASE_VERSION_NAME\"; then\n  exit_on_error \"Attach APK to release failed for '$RELEASE_VERSION_NAME' release.\"\nfi\n",
+            "count": 1,
+            "repos": [
+                "termux/termux-float"
+            ]
+        }
+    ],
+    "Build APK": [
+        {
+            "command": "exit_on_error() { echo \"$1\"; exit 1; }\n\necho \"Setting vars\"\n# Set RELEASE_VERSION_NAME to \"<CURRENT_VERSION_NAME>+<last_commit_hash>\"\nCURRENT_VERSION_NAME_REGEX='\\s+versionName \"([^\"]+)\"$'\nCURRENT_VERSION_NAME=\"$(grep -m 1 -E \"$CURRENT_VERSION_NAME_REGEX\" ./app/build.gradle | sed -r \"s/$CURRENT_VERSION_NAME_REGEX/\\1/\")\"\nRELEASE_VERSION_NAME=\"v$CURRENT_VERSION_NAME+${GITHUB_SHA:0:7}\" # The \"+\" is necessary so that versioning precedence is not affected\nif ! printf \"%s\" \"${RELEASE_VERSION_NAME/v/}\" | grep -qP '^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?$'; then\n  exit_on_error \"The versionName '${RELEASE_VERSION_NAME/v/}' is not a valid version as per semantic version '2.0.0' spec in the format 'major.minor.patch(-prerelease)(+buildmetadata)'. https://semver.org/spec/v2.0.0.html.\"\nfi\n\nAPK_DIR_PATH=\"./app/build/outputs/apk/debug\"\nAPK_VERSION_TAG=\"$RELEASE_VERSION_NAME-github-debug\" # Note the \"-\", GITHUB_SHA will already have \"+\" before it\nAPK_BASENAME_PREFIX=\"termux-api_$APK_VERSION_TAG\"\n\n# Used by attachment steps later\necho \"APK_DIR_PATH=$APK_DIR_PATH\" >> $GITHUB_ENV\necho \"APK_VERSION_TAG=$APK_VERSION_TAG\" >> $GITHUB_ENV\necho \"APK_BASENAME_PREFIX=$APK_BASENAME_PREFIX\" >> $GITHUB_ENV\n\necho \"Building APK for '$RELEASE_VERSION_NAME' build\"\nexport TERMUX_API_APP_VERSION_NAME=\"${RELEASE_VERSION_NAME/v/}\" # Used by app/build.gradle\nexport TERMUX_API_APK_VERSION_TAG=\"$APK_VERSION_TAG\" # Used by app/build.gradle\nif ! ./gradlew assembleDebug; then\n  exit_on_error \"Build failed for '$RELEASE_VERSION_NAME' build.\"\nfi\n\necho \"Validating APK\"\nif ! test -f \"$APK_DIR_PATH/${APK_BASENAME_PREFIX}.apk\"; then\n  files_found=\"$(ls \"$APK_DIR_PATH\")\"\n  exit_on_error \"Failed to find built APK at '$APK_DIR_PATH/${APK_BASENAME_PREFIX}.apk'. Files found: \"$'\\n'\"$files_found\"\nfi\n\necho \"Generating sha25sums file\"\nif ! (cd \"$APK_DIR_PATH\"; sha256sum \"${APK_BASENAME_PREFIX}.apk\" > sha256sums); then\n  exit_on_error \"Generate sha25sums failed for '$RELEASE_VERSION_NAME' release.\"\nfi\n",
+            "count": 1,
+            "repos": [
+                "termux/termux-api"
+            ]
+        },
+        {
+            "command": "exit_on_error() { echo \"$1\"; exit 1; }\n\necho \"Setting vars\"\n# Set RELEASE_VERSION_NAME to \"<CURRENT_VERSION_NAME>+<last_commit_hash>\"\nCURRENT_VERSION_NAME_REGEX='\\s+versionName \"([^\"]+)\"$'\nCURRENT_VERSION_NAME=\"$(grep -m 1 -E \"$CURRENT_VERSION_NAME_REGEX\" ./app/build.gradle | sed -r \"s/$CURRENT_VERSION_NAME_REGEX/\\1/\")\"\nRELEASE_VERSION_NAME=\"v$CURRENT_VERSION_NAME+${GITHUB_SHA:0:7}\" # The \"+\" is necessary so that versioning precedence is not affected\nif ! printf \"%s\" \"${RELEASE_VERSION_NAME/v/}\" | grep -qP '^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?$'; then\n  exit_on_error \"The versionName '${RELEASE_VERSION_NAME/v/}' is not a valid version as per semantic version '2.0.0' spec in the format 'major.minor.patch(-prerelease)(+buildmetadata)'. https://semver.org/spec/v2.0.0.html.\"\nfi\n\nAPK_DIR_PATH=\"./app/build/outputs/apk/debug\"\nAPK_VERSION_TAG=\"$RELEASE_VERSION_NAME-github-debug\" # Note the \"-\", GITHUB_SHA will already have \"+\" before it\nAPK_BASENAME_PREFIX=\"termux-widget_$APK_VERSION_TAG\"\n\n# Used by attachment steps later\necho \"APK_DIR_PATH=$APK_DIR_PATH\" >> $GITHUB_ENV\necho \"APK_VERSION_TAG=$APK_VERSION_TAG\" >> $GITHUB_ENV\necho \"APK_BASENAME_PREFIX=$APK_BASENAME_PREFIX\" >> $GITHUB_ENV\n\necho \"Building APK for '$RELEASE_VERSION_NAME' build\"\nexport TERMUX_WIDGET_APP_VERSION_NAME=\"${RELEASE_VERSION_NAME/v/}\" # Used by app/build.gradle\nexport TERMUX_WIDGET_APK_VERSION_TAG=\"$APK_VERSION_TAG\" # Used by app/build.gradle\nif ! ./gradlew assembleDebug; then\n  exit_on_error \"Build failed for '$RELEASE_VERSION_NAME' build.\"\nfi\n\necho \"Validating APK\"\nif ! test -f \"$APK_DIR_PATH/${APK_BASENAME_PREFIX}.apk\"; then\n  files_found=\"$(ls \"$APK_DIR_PATH\")\"\n  exit_on_error \"Failed to find built APK at '$APK_DIR_PATH/${APK_BASENAME_PREFIX}.apk'. Files found: \"$'\\n'\"$files_found\"\nfi\n\necho \"Generating sha25sums file\"\nif ! (cd \"$APK_DIR_PATH\"; sha256sum \"${APK_BASENAME_PREFIX}.apk\" > sha256sums); then\n  exit_on_error \"Generate sha25sums failed for '$RELEASE_VERSION_NAME' release.\"\nfi\n",
+            "count": 1,
+            "repos": [
+                "termux/termux-widget"
+            ]
+        },
+        {
+            "command": "exit_on_error() { echo \"$1\"; exit 1; }\n\necho \"Setting vars\"\n# Set RELEASE_VERSION_NAME to \"<CURRENT_VERSION_NAME>+<last_commit_hash>\"\nCURRENT_VERSION_NAME_REGEX='\\s+versionName \"([^\"]+)\"$'\nCURRENT_VERSION_NAME=\"$(grep -m 1 -E \"$CURRENT_VERSION_NAME_REGEX\" ./app/build.gradle | sed -r \"s/$CURRENT_VERSION_NAME_REGEX/\\1/\")\"\nRELEASE_VERSION_NAME=\"v$CURRENT_VERSION_NAME+${GITHUB_SHA:0:7}\" # The \"+\" is necessary so that versioning precedence is not affected\nif ! printf \"%s\" \"${RELEASE_VERSION_NAME/v/}\" | grep -qP '^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?$'; then\n  exit_on_error \"The versionName '${RELEASE_VERSION_NAME/v/}' is not a valid version as per semantic version '2.0.0' spec in the format 'major.minor.patch(-prerelease)(+buildmetadata)'. https://semver.org/spec/v2.0.0.html.\"\nfi\n\nAPK_DIR_PATH=\"./app/build/outputs/apk/debug\"\nAPK_VERSION_TAG=\"$RELEASE_VERSION_NAME-github-debug\" # Note the \"-\", GITHUB_SHA will already have \"+\" before it\nAPK_BASENAME_PREFIX=\"termux-tasker_$APK_VERSION_TAG\"\n\n# Used by attachment steps later\necho \"APK_DIR_PATH=$APK_DIR_PATH\" >> $GITHUB_ENV\necho \"APK_VERSION_TAG=$APK_VERSION_TAG\" >> $GITHUB_ENV\necho \"APK_BASENAME_PREFIX=$APK_BASENAME_PREFIX\" >> $GITHUB_ENV\n\necho \"Building APK for '$RELEASE_VERSION_NAME' build\"\nexport TERMUX_TASKER_APP_VERSION_NAME=\"${RELEASE_VERSION_NAME/v/}\" # Used by app/build.gradle\nexport TERMUX_TASKER_APK_VERSION_TAG=\"$APK_VERSION_TAG\" # Used by app/build.gradle\nif ! ./gradlew assembleDebug; then\n  exit_on_error \"Build failed for '$RELEASE_VERSION_NAME' build.\"\nfi\n\necho \"Validating APK\"\nif ! test -f \"$APK_DIR_PATH/${APK_BASENAME_PREFIX}.apk\"; then\n  files_found=\"$(ls \"$APK_DIR_PATH\")\"\n  exit_on_error \"Failed to find built APK at '$APK_DIR_PATH/${APK_BASENAME_PREFIX}.apk'. Files found: \"$'\\n'\"$files_found\"\nfi\n\necho \"Generating sha25sums file\"\nif ! (cd \"$APK_DIR_PATH\"; sha256sum \"${APK_BASENAME_PREFIX}.apk\" > sha256sums); then\n  exit_on_error \"Generate sha25sums failed for '$RELEASE_VERSION_NAME' release.\"\nfi\n",
+            "count": 1,
+            "repos": [
+                "termux/termux-tasker"
+            ]
+        },
+        {
+            "command": "exit_on_error() { echo \"$1\"; exit 1; }\n\necho \"Setting vars\"\n# Set RELEASE_VERSION_NAME to \"<CURRENT_VERSION_NAME>+<last_commit_hash>\"\nCURRENT_VERSION_NAME_REGEX='\\s+versionName \"([^\"]+)\"$'\nCURRENT_VERSION_NAME=\"$(grep -m 1 -E \"$CURRENT_VERSION_NAME_REGEX\" ./app/build.gradle | sed -r \"s/$CURRENT_VERSION_NAME_REGEX/\\1/\")\"\nRELEASE_VERSION_NAME=\"v$CURRENT_VERSION_NAME+${GITHUB_SHA:0:7}\" # The \"+\" is necessary so that versioning precedence is not affected\nif ! printf \"%s\" \"${RELEASE_VERSION_NAME/v/}\" | grep -qP '^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?$'; then\n  exit_on_error \"The versionName '${RELEASE_VERSION_NAME/v/}' is not a valid version as per semantic version '2.0.0' spec in the format 'major.minor.patch(-prerelease)(+buildmetadata)'. https://semver.org/spec/v2.0.0.html.\"\nfi\n\nAPK_DIR_PATH=\"./app/build/outputs/apk/debug\"\nAPK_VERSION_TAG=\"$RELEASE_VERSION_NAME-github-debug\" # Note the \"-\", GITHUB_SHA will already have \"+\" before it\nAPK_BASENAME_PREFIX=\"termux-float_$APK_VERSION_TAG\"\n\n# Used by attachment steps later\necho \"APK_DIR_PATH=$APK_DIR_PATH\" >> $GITHUB_ENV\necho \"APK_VERSION_TAG=$APK_VERSION_TAG\" >> $GITHUB_ENV\necho \"APK_BASENAME_PREFIX=$APK_BASENAME_PREFIX\" >> $GITHUB_ENV\n\necho \"Building APK for '$RELEASE_VERSION_NAME' build\"\nexport TERMUX_FLOAT_APP_VERSION_NAME=\"${RELEASE_VERSION_NAME/v/}\" # Used by app/build.gradle\nexport TERMUX_FLOAT_APK_VERSION_TAG=\"$APK_VERSION_TAG\" # Used by app/build.gradle\nif ! ./gradlew assembleDebug; then\n  exit_on_error \"Build failed for '$RELEASE_VERSION_NAME' build.\"\nfi\n\necho \"Validating APK\"\nif ! test -f \"$APK_DIR_PATH/${APK_BASENAME_PREFIX}.apk\"; then\n  files_found=\"$(ls \"$APK_DIR_PATH\")\"\n  exit_on_error \"Failed to find built APK at '$APK_DIR_PATH/${APK_BASENAME_PREFIX}.apk'. Files found: \"$'\\n'\"$files_found\"\nfi\n\necho \"Generating sha25sums file\"\nif ! (cd \"$APK_DIR_PATH\"; sha256sum \"${APK_BASENAME_PREFIX}.apk\" > sha256sums); then\n  exit_on_error \"Generate sha25sums failed for '$RELEASE_VERSION_NAME' release.\"\nfi\n",
+            "count": 1,
+            "repos": [
+                "termux/termux-float"
+            ]
+        }
+    ],
+    "Step 1": [
+        {
+            "command": "actions/checkout@v4",
+            "count": 3,
+            "repos": [
+                "termux/termux-app",
+                "termux/termux-styling",
+                "termux/termux-gui"
+            ]
+        },
+        {
+            "command": "actions/checkout@v3",
+            "count": 3,
+            "repos": [
+                "termux/termux-packaging",
+                "termux/termux-language-server"
+            ]
+        },
+        {
+            "command": "actions/setup-java@v4",
+            "count": 1,
+            "repos": [
+                "termux/termux-x11"
+            ]
+        },
+        {
+            "command": "Freed-Wu/update-aur-package@v1.0.11",
+            "count": 1,
+            "repos": [
+                "termux/termux-language-server"
+            ]
+        }
+    ],
+    "Step 2": [
+        {
+            "command": "gradle/wrapper-validation-action@v3",
+            "count": 1,
+            "repos": [
+                "termux/termux-app"
+            ]
+        },
+        {
+            "command": "hecrj/setup-rust-action@v1",
+            "count": 1,
+            "repos": [
+                "termux/termux-packaging"
+            ]
+        },
+        {
+            "command": "actions/checkout@v4",
+            "count": 1,
+            "repos": [
+                "termux/termux-x11"
+            ]
+        },
+        {
+            "command": "gradle/wrapper-validation-action@v1",
+            "count": 1,
+            "repos": [
+                "termux/termux-gui"
+            ]
+        },
+        {
+            "command": "actions/setup-python@v4",
+            "count": 2,
+            "repos": [
+                "termux/termux-language-server"
+            ]
+        }
+    ],
+    "Set vars": [
+        {
+            "command": "echo \"TERMUX_LIB_VERSION=${GITHUB_REF/refs\\/tags\\/v/}\" >> $GITHUB_ENV",
+            "count": 1,
+            "repos": [
+                "termux/termux-app"
+            ]
+        },
+        {
+            "command": "echo ::set-output name=tag::${GITHUB_REF/refs\\/tags\\//}",
+            "count": 2,
+            "repos": [
+                "termux/termux-create-package",
+                "termux/create-conventional-changelog"
+            ]
+        }
+    ],
+    "Build and upload files to release": [
+        {
+            "command": "exit_on_error() {\n    echo \"$1\"\n    echo \"Deleting '$RELEASE_VERSION_NAME' release and '$GITHUB_REF' tag\"\n    hub release delete \"$RELEASE_VERSION_NAME\"\n    git push --delete origin \"$GITHUB_REF\"\n    exit 1\n}\n\nif [ -z \"$JAVA_HOME_17_X64\" ] || [ ! -f \"$JAVA_HOME_17_X64/bin/javac\" ] || [ ! -x \"$JAVA_HOME_17_X64/bin/javac\" ]; then\n    exit_on_error \"jdk-17 binary not found at path '$JAVA_HOME_17_X64/bin/javac' or is not executable.\"\nfi\n\necho \"Setting vars\"\nRELEASE_VERSION_NAME=\"${GITHUB_REF/refs\\/tags\\//}\"\nif ! printf \"%s\" \"${RELEASE_VERSION_NAME/v/}\" | grep -qP '^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?$'; then\n  exit_on_error \"The release version '${RELEASE_VERSION_NAME/v/}' is not a valid version as per semantic version '2.0.0' spec in the format 'major.minor.patch(-prerelease)(+buildmetadata)'. https://semver.org/spec/v2.0.0.html.\"\nfi\n\nAPK_DIR_PATH=\"./app/build/outputs/apk/debug\"\nAPK_VERSION_TAG=\"$RELEASE_VERSION_NAME+github.debug\"\nAPK_BASENAME_PREFIX=\"termux-styling_$APK_VERSION_TAG\"\n\necho \"Building APK file for '$RELEASE_VERSION_NAME' release with '$APK_VERSION_TAG' tag\"\nexport TERMUX_STYLING_APP_BUILD__APK_VERSION_TAG=\"$APK_VERSION_TAG\" # Used by app/build.gradle\nexport GRADLE_OPTS=\"-Dorg.gradle.java.home=$JAVA_HOME_17_X64\"\nif ! ./gradlew assembleDebug; then\n  exit_on_error \"Build failed for '$RELEASE_VERSION_NAME' release with '$APK_VERSION_TAG' tag.\"\nfi\n\necho \"Validating APK file\"\nif ! test -f \"$APK_DIR_PATH/${APK_BASENAME_PREFIX}.apk\"; then\n  files_found=\"$(ls \"$APK_DIR_PATH\")\"\n  exit_on_error \"Failed to find built APK file at '$APK_DIR_PATH/${APK_BASENAME_PREFIX}.apk'. Files found: \"$'\\n'\"$files_found\"\nfi\n\necho \"Generating checksums-sha256.txt file\"\nif ! (cd \"$APK_DIR_PATH\"; sha256sum \"${APK_BASENAME_PREFIX}.apk\" > checksums-sha256.txt); then\n  exit_on_error \"Generate checksums-sha256.txt file failed for '$RELEASE_VERSION_NAME' release.\"\nfi\necho \"checksums-sha256.txt:\"$'\\n```\\n'\"$(cat \"$APK_DIR_PATH/checksums-sha256.txt\")\"$'\\n```'\n\necho \"Uploading files to release\"\nif ! gh release upload \"$RELEASE_VERSION_NAME\" \\\n  \"$APK_DIR_PATH/${APK_BASENAME_PREFIX}.apk\" \\\n  \"$APK_DIR_PATH/checksums-sha256.txt\" \\\n; then\n  exit_on_error \"Upload files to release failed for '$RELEASE_VERSION_NAME' release.\"\nfi\n",
+            "count": 1,
+            "repos": [
+                "termux/termux-styling"
+            ]
+        },
+        {
+            "command": "exit_on_error() {\n    echo \"$1\"\n    echo \"Deleting '$RELEASE_VERSION_NAME' release and '$GITHUB_REF' tag\"\n    hub release delete \"$RELEASE_VERSION_NAME\"\n    git push --delete origin \"$GITHUB_REF\"\n    exit 1\n}\n\nif [ -z \"$JAVA_HOME_17_X64\" ] || [ ! -f \"$JAVA_HOME_17_X64/bin/javac\" ] || [ ! -x \"$JAVA_HOME_17_X64/bin/javac\" ]; then\n    exit_on_error \"jdk-17 binary not found at path '$JAVA_HOME_17_X64/bin/javac' or is not executable.\"\nfi\n\necho \"Setting vars\"\nRELEASE_VERSION_NAME=\"${GITHUB_REF/refs\\/tags\\//}\"\nif ! printf \"%s\" \"${RELEASE_VERSION_NAME/v/}\" | grep -qP '^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?$'; then\n  exit_on_error \"The release version '${RELEASE_VERSION_NAME/v/}' is not a valid version as per semantic version '2.0.0' spec in the format 'major.minor.patch(-prerelease)(+buildmetadata)'. https://semver.org/spec/v2.0.0.html.\"\nfi\n\nAPK_DIR_PATH=\"./app/build/outputs/apk/debug\"\nAPK_VERSION_TAG=\"$RELEASE_VERSION_NAME+github.debug\"\nAPK_BASENAME_PREFIX=\"termux-boot_$APK_VERSION_TAG\"\n\necho \"Building APK file for '$RELEASE_VERSION_NAME' release with '$APK_VERSION_TAG' tag\"\nexport TERMUX_BOOT_APP_BUILD__APK_VERSION_TAG=\"$APK_VERSION_TAG\" # Used by app/build.gradle\nexport GRADLE_OPTS=\"-Dorg.gradle.java.home=$JAVA_HOME_17_X64\"\nif ! ./gradlew assembleDebug; then\n  exit_on_error \"Build failed for '$RELEASE_VERSION_NAME' release with '$APK_VERSION_TAG' tag.\"\nfi\n\necho \"Validating APK file\"\nif ! test -f \"$APK_DIR_PATH/${APK_BASENAME_PREFIX}.apk\"; then\n  files_found=\"$(ls \"$APK_DIR_PATH\")\"\n  exit_on_error \"Failed to find built APK file at '$APK_DIR_PATH/${APK_BASENAME_PREFIX}.apk'. Files found: \"$'\\n'\"$files_found\"\nfi\n\necho \"Generating checksums-sha256.txt file\"\nif ! (cd \"$APK_DIR_PATH\"; sha256sum \"${APK_BASENAME_PREFIX}.apk\" > checksums-sha256.txt); then\n  exit_on_error \"Generate checksums-sha256.txt file failed for '$RELEASE_VERSION_NAME' release.\"\nfi\necho \"checksums-sha256.txt:\"$'\\n```\\n'\"$(cat \"$APK_DIR_PATH/checksums-sha256.txt\")\"$'\\n```'\n\necho \"Uploading files to release\"\nif ! gh release upload \"$RELEASE_VERSION_NAME\" \\\n  \"$APK_DIR_PATH/${APK_BASENAME_PREFIX}.apk\" \\\n  \"$APK_DIR_PATH/checksums-sha256.txt\" \\\n; then\n  exit_on_error \"Upload files to release failed for '$RELEASE_VERSION_NAME' release.\"\nfi\n",
+            "count": 1,
+            "repos": [
+                "termux/termux-boot"
+            ]
+        }
+    ],
+    "sha256sums": [
+        {
+            "command": "cd ./src\nsha256sum termux-create-package > sha256sums.txt\n",
+            "count": 1,
+            "repos": [
+                "termux/termux-create-package"
+            ]
+        },
+        {
+            "command": "sha256sum create-conventional-changelog > sha256sums.txt\n",
+            "count": 1,
+            "repos": [
+                "termux/create-conventional-changelog"
+            ]
+        }
+    ],
+    "Attach files to release": [
+        {
+            "command": "hub release edit -m \"\" -a ./src/termux-create-package -a ./src/sha256sums.txt $RELEASE_TAG",
+            "count": 1,
+            "repos": [
+                "termux/termux-create-package"
+            ]
+        },
+        {
+            "command": "hub release edit -m \"\" -a ./create-conventional-changelog -a ./sha256sums.txt $RELEASE_TAG",
+            "count": 1,
+            "repos": [
+                "termux/create-conventional-changelog"
+            ]
+        }
+    ],
+    "Test": [
+        {
+            "command": "ninja -C build/ test\n",
+            "count": 2,
+            "repos": [
+                "termux/termux-elf-cleaner"
+            ]
+        },
+        {
+            "command": "pytest --cov\n",
+            "count": 1,
+            "repos": [
+                "termux/termux-language-server"
+            ]
+        }
+    ],
+    "Upload to packages.termux.org": [
+        {
+            "command": "GITHUB_SHA=${{ github.sha }}\nAPTLY_API_AUTH=${{ secrets.APTLY_API_AUTH }}\nGPG_PASSPHRASE=${{ secrets.GPG_PASSPHRASE }}\n\ngit submodule update --init\nsource termux-packages/scripts/aptly_api.sh\n\nfor archive in termux-root-packages-*/*.tar; do\n  tar xf \"$archive\"\ndone\n\n# Upload file to temporary directory.\nuploaded_files=false\nshopt -s nullglob\nfor filename in $(cat debs/built_packages.txt | sed -E 's/(..*)/debs\\/\\1_\\*.deb debs\\/\\1-static_\\*.deb/g'); do\n  if ! aptly_upload_file \"$filename\"; then\n    exit 1\n  fi\n\n  uploaded_files=true\ndone\nshopt -u nullglob\n\n# Publishing repository changes.\nif [ \"$uploaded_files\" = \"true\" ]; then\n  if ! aptly_add_to_repo; then\n    exit 1\n  fi\n\n  # Usually temporary directory is deleted automatically, but in certain cases it is left.\n  aptly_delete_dir\n\n  # Final part to make changes appear in web root.\n  if ! aptly_publish_repo; then\n    exit 1\n  fi\nfi\n",
+            "count": 1,
+            "repos": [
+                "termux/termux-root-packages"
+            ]
+        },
+        {
+            "command": "GITHUB_SHA=${{ github.sha }}\nAPTLY_API_AUTH=${{ secrets.APTLY_API_AUTH }}\nGPG_PASSPHRASE=${{ secrets.GPG_PASSPHRASE }}\n\ngit submodule update --init\nsource termux-packages/scripts/aptly_api.sh\n\nfor archive in x11-packages-*/*.tar; do\n  tar xf \"$archive\"\ndone\n\n# Upload file to temporary directory.\nuploaded_files=false\nshopt -s nullglob\nfor filename in $(cat debs/built_packages.txt | sed -E 's/(..*)/debs\\/\\1_\\*.deb debs\\/\\1-static_\\*.deb/g'); do\n  if ! aptly_upload_file \"$filename\"; then\n    exit 1\n  fi\n\n  uploaded_files=true\ndone\nshopt -u nullglob\n\n# Publishing repository changes.\nif [ \"$uploaded_files\" = \"true\" ]; then\n  if ! aptly_add_to_repo; then\n    exit 1\n  fi\n\n  # Usually temporary directory is deleted automatically, but in certain cases it is left.\n  aptly_delete_dir\n\n  # Final part to make changes appear in web root.\n  if ! aptly_publish_repo; then\n    exit 1\n  fi\nfi\n",
+            "count": 1,
+            "repos": [
+                "termux/x11-packages"
+            ]
+        },
+        {
+            "command": "for archive in *.tar; do\n  tar xf \"$archive\"\ndone\n\n# Function for deleting temporary directory with uploaded files from\n# the server.\naptly_delete_dir() {\n  echo \"[*] Deleting uploads temporary directory.\"\n\n  curl_response=$(\n    curl \\\n      --silent \\\n      --user \"${{ secrets.APTLY_API_AUTH }}\" \\\n      --request DELETE \\\n      --write-out \"|%{http_code}\" \\\n      https://packages.termux.org/aptly-api/files/${REPOSITORY_NAME}-${{ github.sha }}\n  )\n\n  http_status_code=$(echo \"$curl_response\" | cut -d'|' -f2)\n\n  if [ \"$http_status_code\" != \"200\" ]; then\n    echo \"[!] Server returned $http_status_code code while deleting temporary directory.\"\n  fi\n}\n\n# Upload file to temporary directory.\nuploaded_files=false\nshopt -s nullglob\nfor filename in $(cat debs/built_packages.txt | sed -E 's/(..*)/debs\\/\\1_\\*.deb debs\\/\\1-static_\\*.deb/g'); do\n  curl_response=$(\n    curl \\\n      --silent \\\n      --user \"${{ secrets.APTLY_API_AUTH }}\" \\\n      --request POST \\\n      --form file=@${filename} \\\n      --write-out \"|%{http_code}\" \\\n      https://packages.termux.org/aptly-api/files/${REPOSITORY_NAME}-${{ github.sha }}\n  )\n\n  http_status_code=$(echo \"$curl_response\" | cut -d'|' -f2)\n\n  if [ \"$http_status_code\" = \"200\" ]; then\n    echo \"[*] Uploaded: $(echo \"$curl_response\" | cut -d'|' -f1 | jq -r '.[]' | cut -d'/' -f2)\"\n  else\n    # Manually cleaning up the temporary directory to reclaim disk space.\n    # Don't rely on scheduled server-side scripts.\n    echo \"[!] Failed to upload '$filename'. Server returned $http_status_code code.\"\n    echo \"[!] Aborting any further uploads.\"\n    aptly_delete_dir\n    exit 1\n  fi\n\n  uploaded_files=true\ndone\nshopt -u nullglob\n\n# Publishing repository changes.\nif [ \"$uploaded_files\" = \"true\" ]; then\n  echo \"[*] Adding packages to repository '$REPOSITORY_NAME'...\"\n\n  curl_response=$(\n    curl \\\n      --silent \\\n      --user \"${{ secrets.APTLY_API_AUTH }}\" \\\n      --request POST \\\n      --write-out \"|%{http_code}\" \\\n      https://packages.termux.org/aptly-api/repos/${REPOSITORY_NAME}/file/${REPOSITORY_NAME}-${{ github.sha }}\n  )\n\n  http_status_code=$(echo \"$curl_response\" | cut -d'|' -f2)\n\n  if [ \"$http_status_code\" = \"200\" ]; then\n    warnings=$(echo \"$curl_response\" | cut -d'|' -f1 | jq '.Report.Warnings' | jq -r '.[]')\n    if [ -n \"$warnings\" ]; then\n      echo \"[!] WARNINGS (NON-CRITICAL):\"\n      echo\n      echo \"$warnings\"\n      echo\n    fi\n\n    # Upload directory is usually deleted automatically once all deb\n    # files were added without issues. Attempting to do this manually\n    # in case it left for some reason (e.g. some debs not added due to\n    # conflicts).\n    aptly_delete_dir\n  else\n    echo \"[*] Server returned $http_status_code. Not publishing repository!\"\n    aptly_delete_dir\n    exit 1\n  fi\n\n  # Final part to make changes appear in web root.\n  echo \"[*] Publishing repository changes...\"\n  set +e\n  curl \\\n    --silent \\\n    --user \"${{ secrets.APTLY_API_AUTH }}\" \\\n    --header 'Content-Type: application/json' \\\n    --request PUT \\\n    --data '{\"Signing\": {\"Passphrase\": \"${{ secrets.GPG_PASSPHRASE }}\"}}' \\\n    https://packages.termux.org/aptly-api/publish/${REPOSITORY_NAME}/${REPOSITORY_DISTRIBUTION}\n  exit_code=$?\n  echo\n\n  if [ \"$exit_code\" = 0 ]; then\n    echo \"[*] Repository updated successfully.\"\n  elif [ \"$exit_code\" = 52 ]; then\n    echo \"[!] Repository update takes more time than expected, server returned empty response.\"\n    echo \"[!] This is expected if large amount of data has been submitted.\"\n  else\n    echo \"[!] curl exited with error code $exit_status.\"\n    exit \"$exit_code\"\n  fi\nfi\n",
+            "count": 1,
+            "repos": [
+                "termux/game-packages"
+            ]
+        },
+        {
+            "command": "for archive in *.tar; do\n  tar xf \"$archive\"\ndone\n\n# Function for deleting temporary directory with uploaded files from\n# the server.\naptly_delete_dir() {\n  echo \"[*] Deleting uploads temporary directory.\"\n\n  curl_response=$(\n    curl \\\n      --silent \\\n      --user \"${{ secrets.APTLY_API_AUTH }}\" \\\n      --request DELETE \\\n      --write-out \"|%{http_code}\" \\\n      https://packages.termux.org/aptly-api/files/${REPOSITORY_NAME}-${{ github.sha }}\n  )\n\n  http_status_code=$(echo \"$curl_response\" | cut -d'|' -f2)\n\n  if [ \"$http_status_code\" != \"200\" ]; then\n    echo \"[!] Server returned $http_status_code code while deleting temporary directory.\"\n  fi\n}\n\n# Upload file to temporary directory.\nuploaded_files=false\nshopt -s nullglob\nfor filename in $(cat debs/built_packages.txt | sed -E 's/(..*)/debs\\/\\1_\\*.deb debs\\/\\1-static_\\*.deb/g'); do\n  curl_response=$(\n    curl \\\n      --silent \\\n      --user \"${{ secrets.APTLY_API_AUTH }}\" \\\n      --request POST \\\n      --form file=@${filename} \\\n      --write-out \"|%{http_code}\" \\\n      https://packages.termux.org/aptly-api/files/${REPOSITORY_NAME}-${{ github.sha }}\n  )\n\n  http_status_code=$(echo \"$curl_response\" | cut -d'|' -f2)\n\n  if [ \"$http_status_code\" = \"200\" ]; then\n    echo \"[*] Uploaded: $(echo \"$curl_response\" | cut -d'|' -f1 | jq -r '.[]' | cut -d'/' -f2)\"\n  else\n    # Manually cleaning up the temporary directory to reclaim disk space.\n    # Don't rely on scheduled server-side scripts.\n    echo \"[!] Failed to upload '$filename'. Server returned $http_status_code code.\"\n    echo \"[!] Aborting any further uploads.\"\n    aptly_delete_dir\n    exit 1\n  fi\n\n  uploaded_files=true\ndone\nshopt -u nullglob\n\n# Publishing repository changes.\nif [ \"$uploaded_files\" = \"true\" ]; then\n  echo \"[*] Adding packages to repository '$REPOSITORY_NAME'...\"\n\n  curl_response=$(\n    curl \\\n      --silent \\\n      --user \"${{ secrets.APTLY_API_AUTH }}\" \\\n      --request POST \\\n      --write-out \"|%{http_code}\" \\\n      https://packages.termux.org/aptly-api/repos/${REPOSITORY_NAME}/file/${REPOSITORY_NAME}-${{ github.sha }} || true\n  )\n\n  http_status_code=$(echo \"$curl_response\" | cut -d'|' -f2)\n\n  if [ \"$http_status_code\" = \"200\" ]; then\n    warnings=$(echo \"$curl_response\" | cut -d'|' -f1 | jq '.Report.Warnings' | jq -r '.[]')\n    if [ -n \"$warnings\" ]; then\n      echo \"[!] WARNINGS (NON-CRITICAL):\"\n      echo\n      echo \"$warnings\"\n      echo\n    fi\n  fi\n  # Usually temporary directory is deleted automatically, but in certain cases it is left.\n  aptly_delete_dir\n\n  # Final part to make changes appear in web root.\n  echo \"[*] Publishing repository changes...\"\n  set +e\n  curl \\\n    --silent \\\n    --user \"${{ secrets.APTLY_API_AUTH }}\" \\\n    --header 'Content-Type: application/json' \\\n    --request PUT \\\n    --data '{\"Signing\": {\"Passphrase\": \"${{ secrets.GPG_PASSPHRASE }}\"}}' \\\n    https://packages.termux.org/aptly-api/publish/${REPOSITORY_NAME}/${REPOSITORY_DISTRIBUTION}\n  exit_code=$?\n  echo\n\n  if [ \"$exit_code\" = 0 ]; then\n    echo \"[*] Repository updated successfully.\"\n  elif [ \"$exit_code\" = 52 ]; then\n    echo \"[!] Repository update takes more time than expected, server returned empty response.\"\n    echo \"[!] This is expected if large amount of data has been submitted.\"\n  else\n    echo \"[!] curl exited with error code $exit_status.\"\n    exit \"$exit_code\"\n  fi\nfi\n",
+            "count": 1,
+            "repos": [
+                "termux/science-packages"
+            ]
+        }
+    ],
+    "Upload to grimler.se": [
+        {
+            "command": "GITHUB_SHA=${{ github.sha }}\nAPTLY_API_AUTH=${{ secrets.APTLY_API_AUTH }}\n\nsource termux-packages/scripts/aptly_api.sh\n\n# Upload file to temporary directory.\nuploaded_files=false\nshopt -s nullglob\nfor filename in $(cat debs/built_packages.txt | sed -E 's/(..*)/debs\\/\\1_\\*.deb debs\\/\\1-static_\\*.deb/g'); do\n  if ! aptly_upload_file \"$filename\"; then\n    exit 1\n  fi\n\n  uploaded_files=true\ndone\nshopt -u nullglob\n\n# Publishing repository changes.\nif [ \"$uploaded_files\" = \"true\" ]; then\n  if ! aptly_add_to_repo; then\n    exit 1\n  fi\n\n  # Usually temporary directory is deleted automatically, but in certain cases it is left.\n  aptly_delete_dir\n\n  # grimler.se mirror is signed manually, can't publish\n  # through CI\n  # if ! aptly_publish_repo; then\n  #   exit 1\n  # fi\nfi\n",
+            "count": 1,
+            "repos": [
+                "termux/termux-root-packages"
+            ]
+        },
+        {
+            "command": "GITHUB_SHA=${{ github.sha }}\nAPTLY_API_AUTH=${{ secrets.APTLY_API_AUTH }}\n\nsource termux-packages/scripts/aptly_api.sh\n\n# Upload file to temporary directory.\nuploaded_files=false\nshopt -s nullglob\nfor filename in $(cat debs/built_packages.txt | sed -E 's/(..*)/debs\\/\\1_\\*.deb debs\\/\\1-static_\\*.deb/g'); do\n  if ! aptly_upload_file \"$filename\"; then\n    exit 1\n  fi\n\n  uploaded_files=true\ndone\nshopt -u nullglob\n\n# Publishing repository changes.\nif [ \"$uploaded_files\" = \"true\" ]; then\n  if ! aptly_add_to_repo; then\n   exit 1\n  fi\n\n  # Usually temporary directory is deleted automatically, but in certain cases it is left.\n  aptly_delete_dir\n\n  # grimler.se mirror is signed manually, can't publish\n  # through CI\n  # if ! aptly_publish_repo; then\n  #   exit 1\n  # fi\nfi\n",
+            "count": 1,
+            "repos": [
+                "termux/x11-packages"
+            ]
+        }
+    ],
+    "Run tests": [
+        {
+            "command": "cargo test",
+            "count": 1,
+            "repos": [
+                "termux/termux-packaging"
+            ]
+        },
+        {
+            "command": "JDK_IMAGE_DIR=${{ env.imageroot }} TEST_IMAGE_DIR=${HOME}/jdk-linux-x64${{ matrix.artifact\u00a0}}/jdk-${{ env.JDK_VERSION }}-internal+0_linux-x64_bin-tests${{ matrix.artifact\u00a0}} BOOT_JDK=${HOME}/bootjdk/${BOOT_JDK_VERSION} JT_HOME=${HOME}/jtreg make test-prebuilt CONF_NAME=run-test-prebuilt LOG_CMDLINES=true JTREG_VERBOSE=fail,error,time TEST=\"${{ matrix.suites }}\" TEST_OPTS_JAVA_OPTIONS= JTREG_KEYWORDS=\"!headful\" JTREG=\"JAVA_OPTIONS=-XX:-CreateCoredumpOnCrash\"\n",
+            "count": 1,
+            "repos": [
+                "termux/openjdk-mobile-termux"
+            ]
+        },
+        {
+            "command": "JDK_IMAGE_DIR=${{ env.imageroot }} TEST_IMAGE_DIR=${HOME}/jdk-linux-x86${{ matrix.artifact\u00a0}}/jdk-${{ env.JDK_VERSION }}-internal+0_linux-x86_bin-tests${{ matrix.artifact\u00a0}} BOOT_JDK=${HOME}/bootjdk/${BOOT_JDK_VERSION} JT_HOME=${HOME}/jtreg make test-prebuilt CONF_NAME=run-test-prebuilt LOG_CMDLINES=true JTREG_VERBOSE=fail,error,time TEST=\"${{ matrix.suites }}\" TEST_OPTS_JAVA_OPTIONS= JTREG_KEYWORDS=\"!headful\" JTREG=\"JAVA_OPTIONS=-XX:-CreateCoredumpOnCrash\"\n",
+            "count": 1,
+            "repos": [
+                "termux/openjdk-mobile-termux"
+            ]
+        },
+        {
+            "command": "$env:Path = \"$HOME\\cygwin\\cygwin64\\bin;$HOME\\cygwin\\cygwin64\\bin;$env:Path\" ; $env:Path = $env:Path -split \";\" -match \"C:\\\\Windows|PowerShell|cygwin\" -join \";\" ; $env:JDK_IMAGE_DIR = cygpath \"${{ env.imageroot }}\" ; $env:SYMBOLS_IMAGE_DIR = cygpath \"${{ env.imageroot }}\" ; $env:TEST_IMAGE_DIR = cygpath \"$HOME/jdk-windows-x64${{ matrix.artifact\u00a0}}/jdk-${{ env.JDK_VERSION }}-internal+0_windows-x64_bin-tests${{ matrix.artifact\u00a0}}\" ; $env:BOOT_JDK = cygpath \"$HOME/bootjdk/$env:BOOT_JDK_VERSION\" ; $env:JT_HOME = cygpath \"$HOME/jtreg\" ; & make test-prebuilt CONF_NAME=run-test-prebuilt LOG_CMDLINES=true JTREG_VERBOSE=fail,error,time TEST=${{ matrix.suites }} TEST_OPTS_JAVA_OPTIONS= JTREG_KEYWORDS=\"!headful\" JTREG=\"JAVA_OPTIONS=-XX:-CreateCoredumpOnCrash\"\n",
+            "count": 1,
+            "repos": [
+                "termux/openjdk-mobile-termux"
+            ]
+        },
+        {
+            "command": "JDK_IMAGE_DIR=${{ env.imageroot }} TEST_IMAGE_DIR=${HOME}/jdk-macos-x64${{ matrix.artifact\u00a0}}/jdk-${{ env.JDK_VERSION }}-internal+0_macos-x64_bin-tests${{ matrix.artifact\u00a0}} BOOT_JDK=${HOME}/bootjdk/${BOOT_JDK_VERSION}/Contents/Home JT_HOME=${HOME}/jtreg gmake test-prebuilt CONF_NAME=run-test-prebuilt LOG_CMDLINES=true JTREG_VERBOSE=fail,error,time TEST=${{ matrix.suites }} TEST_OPTS_JAVA_OPTIONS= JTREG_KEYWORDS=\"!headful\" JTREG=\"JAVA_OPTIONS=-XX:-CreateCoredumpOnCrash\"\n",
+            "count": 1,
+            "repos": [
+                "termux/openjdk-mobile-termux"
+            ]
+        }
+    ],
+    "Install dependencies": [
+        {
+            "command": "sudo apt update && sudo apt install -y libarchive-tools\n",
+            "count": 1,
+            "repos": [
+                "termux/termux-x11"
+            ]
+        },
+        {
+            "command": "sudo apt-get update\nsudo apt-get install gcc-10=10.2.0-5ubuntu1~20.04 g++-10=10.2.0-5ubuntu1~20.04 libxrandr-dev libxtst-dev libcups2-dev libasound2-dev\nsudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-10 100 --slave /usr/bin/g++ g++ /usr/bin/g++-10\n",
+            "count": 1,
+            "repos": [
+                "termux/openjdk-mobile-termux"
+            ]
+        },
+        {
+            "command": "sudo dpkg --add-architecture i386\nsudo apt-get update\nsudo apt-get install --only-upgrade apt\nsudo apt-get install gcc-10-multilib g++-10-multilib libfreetype6-dev:i386 libxrandr-dev:i386 libxtst-dev:i386 libtiff-dev:i386 libcupsimage2-dev:i386 libcups2-dev:i386 libasound2-dev:i386\nsudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-10 100 --slave /usr/bin/g++ g++ /usr/bin/g++-10\n",
+            "count": 1,
+            "repos": [
+                "termux/openjdk-mobile-termux"
+            ]
+        },
+        {
+            "command": "brew install make",
+            "count": 3,
+            "repos": [
+                "termux/openjdk-mobile-termux"
+            ]
+        },
+        {
+            "command": "pip install -e '.[dev]'\n",
+            "count": 1,
+            "repos": [
+                "termux/termux-language-server"
+            ]
+        },
+        {
+            "command": "pip install build\n",
+            "count": 1,
+            "repos": [
+                "termux/termux-language-server"
+            ]
+        }
+    ],
+    "Download boot JDK": [
+        {
+            "command": "mkdir -p \"${HOME}/bootjdk/${BOOT_JDK_VERSION}\"\nwget -O \"${HOME}/bootjdk/${BOOT_JDK_FILENAME}\" \"${BOOT_JDK_URL}\"\necho \"${BOOT_JDK_SHA256} ${HOME}/bootjdk/${BOOT_JDK_FILENAME}\" | sha256sum -c >/dev/null -\ntar -xf \"${HOME}/bootjdk/${BOOT_JDK_FILENAME}\" -C \"${HOME}/bootjdk/${BOOT_JDK_VERSION}\"\nmv \"${HOME}/bootjdk/${BOOT_JDK_VERSION}/\"*/* \"${HOME}/bootjdk/${BOOT_JDK_VERSION}/\"\n",
+            "count": 5,
+            "repos": [
+                "termux/openjdk-mobile-termux"
+            ]
+        },
+        {
+            "command": "mkdir -p \"$HOME\\bootjdk\\$env:BOOT_JDK_VERSION\"\n& curl -L \"$env:BOOT_JDK_URL\" -o \"$HOME/bootjdk/$env:BOOT_JDK_FILENAME\"\n$FileHash = Get-FileHash -Algorithm SHA256 \"$HOME/bootjdk/$env:BOOT_JDK_FILENAME\"\n$FileHash.Hash -eq $env:BOOT_JDK_SHA256\n& tar -xf \"$HOME/bootjdk/$env:BOOT_JDK_FILENAME\" -C \"$HOME/bootjdk/$env:BOOT_JDK_VERSION\"\nGet-ChildItem \"$HOME\\bootjdk\\$env:BOOT_JDK_VERSION\\*\\*\" | Move-Item -Destination \"$HOME\\bootjdk\\$env:BOOT_JDK_VERSION\"\n",
+            "count": 3,
+            "repos": [
+                "termux/openjdk-mobile-termux"
+            ]
+        },
+        {
+            "command": "mkdir -p ${HOME}/bootjdk/${BOOT_JDK_VERSION} || true\nwget -O \"${HOME}/bootjdk/${BOOT_JDK_FILENAME}\" \"${BOOT_JDK_URL}\"\necho \"${BOOT_JDK_SHA256}  ${HOME}/bootjdk/${BOOT_JDK_FILENAME}\" | shasum -a 256 -c >/dev/null -\ntar -xf \"${HOME}/bootjdk/${BOOT_JDK_FILENAME}\" -C \"${HOME}/bootjdk/${BOOT_JDK_VERSION}\"\nmv \"${HOME}/bootjdk/${BOOT_JDK_VERSION}/\"*/* \"${HOME}/bootjdk/${BOOT_JDK_VERSION}/\"\n",
+            "count": 3,
+            "repos": [
+                "termux/openjdk-mobile-termux"
+            ]
+        }
+    ],
+    "Configure": [
+        {
+            "command": "bash configure --with-conf-name=linux-x64 ${{ matrix.flags }} --with-version-opt=${GITHUB_ACTOR}-${GITHUB_SHA} --with-version-build=0 --with-boot-jdk=${HOME}/bootjdk/${BOOT_JDK_VERSION} --with-jtreg=${HOME}/jtreg --with-gtest=${GITHUB_WORKSPACE}/gtest --with-default-make-target=\"product-bundles test-bundles\" --with-zlib=system --enable-jtreg-failure-handler\n",
+            "count": 1,
+            "repos": [
+                "termux/openjdk-mobile-termux"
+            ]
+        },
+        {
+            "command": "bash configure --with-conf-name=linux-${{ matrix.gnu-arch }}-hotspot ${{ matrix.flags }} ${{ env.cross_flags }} --with-version-opt=${GITHUB_ACTOR}-${GITHUB_SHA} --with-version-build=0 --with-boot-jdk=${HOME}/bootjdk/${BOOT_JDK_VERSION} --with-build-jdk=${{ env.build_jdk_root }} --with-default-make-target=\"hotspot\" --with-zlib=system\n",
+            "count": 1,
+            "repos": [
+                "termux/openjdk-mobile-termux"
+            ]
+        },
+        {
+            "command": "bash configure --with-conf-name=linux-x86 --with-target-bits=32 ${{ matrix.flags }} --with-version-opt=${GITHUB_ACTOR}-${GITHUB_SHA} --with-version-build=0 --with-boot-jdk=${HOME}/bootjdk/${BOOT_JDK_VERSION} --with-jtreg=${HOME}/jtreg --with-gtest=${GITHUB_WORKSPACE}/gtest --with-default-make-target=\"product-bundles test-bundles\" --with-zlib=system --enable-jtreg-failure-handler\n",
+            "count": 1,
+            "repos": [
+                "termux/openjdk-mobile-termux"
+            ]
+        },
+        {
+            "command": "$env:Path = \"$HOME\\cygwin\\cygwin64\\bin;$HOME\\cygwin\\cygwin64\\bin;$env:Path\" ; $env:Path = $env:Path -split \";\" -match \"C:\\\\Windows|PowerShell|cygwin\" -join \";\" ; $env:BOOT_JDK = cygpath \"$HOME/bootjdk/$env:BOOT_JDK_VERSION\" ; & bash configure --with-conf-name=windows-aarch64 --with-msvc-toolset-version=14.28 --openjdk-target=aarch64-unknown-cygwin ${{ matrix.flags }} --with-version-opt=\"$env:GITHUB_ACTOR-$env:GITHUB_SHA\" --with-version-build=0 --with-boot-jdk=\"$env:BOOT_JDK\" --with-default-make-target=\"hotspot\"\n",
+            "count": 1,
+            "repos": [
+                "termux/openjdk-mobile-termux"
+            ]
+        },
+        {
+            "command": "$env:Path = \"$HOME\\cygwin\\cygwin64\\bin;$HOME\\cygwin\\cygwin64\\bin;$env:Path\" ; $env:Path = $env:Path -split \";\" -match \"C:\\\\Windows|PowerShell|cygwin\" -join \";\" ; $env:BOOT_JDK = cygpath \"$HOME/bootjdk/$env:BOOT_JDK_VERSION\" ; $env:JT_HOME = cygpath \"$HOME/jtreg\" ; $env:GTEST = cygpath \"$env:GITHUB_WORKSPACE/gtest\" ; & bash configure --with-conf-name=windows-x64 --with-msvc-toolset-version=14.28 ${{ matrix.flags }} --with-version-opt=\"$env:GITHUB_ACTOR-$env:GITHUB_SHA\" --with-version-build=0 --with-boot-jdk=\"$env:BOOT_JDK\" --with-jtreg=\"$env:JT_HOME\" --with-gtest=\"$env:GTEST\" --with-default-make-target=\"product-bundles test-bundles\" --enable-jtreg-failure-handler\n",
+            "count": 1,
+            "repos": [
+                "termux/openjdk-mobile-termux"
+            ]
+        },
+        {
+            "command": "bash configure --with-conf-name=macos-x64 ${{ matrix.flags }} --with-version-opt=${GITHUB_ACTOR}-${GITHUB_SHA} --with-version-build=0 --with-boot-jdk=${HOME}/bootjdk/${BOOT_JDK_VERSION}/Contents/Home --with-jtreg=${HOME}/jtreg --with-gtest=${GITHUB_WORKSPACE}/gtest --with-default-make-target=\"product-bundles test-bundles\" --with-zlib=system --enable-jtreg-failure-handler\n",
+            "count": 1,
+            "repos": [
+                "termux/openjdk-mobile-termux"
+            ]
+        },
+        {
+            "command": "bash configure --with-conf-name=macos-aarch64 --openjdk-target=aarch64-apple-darwin ${{ matrix.flags }} --with-version-opt=${GITHUB_ACTOR}-${GITHUB_SHA} --with-version-build=0 --with-boot-jdk=${HOME}/bootjdk/${BOOT_JDK_VERSION}/Contents/Home --with-jtreg=${HOME}/jtreg --with-gtest=${GITHUB_WORKSPACE}/gtest --with-default-make-target=\"product-bundles test-bundles\" --with-zlib=system --enable-jtreg-failure-handler\n",
+            "count": 1,
+            "repos": [
+                "termux/openjdk-mobile-termux"
+            ]
+        },
+        {
+            "command": "cd build\n../configure --prefix $(pwd)/prefix\n",
+            "count": 1,
+            "repos": [
+                "termux/termux-tools"
+            ]
+        }
+    ],
+    "Unpack jdk": [
+        {
+            "command": "mkdir -p \"${HOME}/jdk-linux-x64${{ matrix.artifact\u00a0}}/jdk-${{ env.JDK_VERSION }}-internal+0_linux-x64_bin${{ matrix.artifact\u00a0}}\"\ntar -xf \"${HOME}/jdk-linux-x64${{ matrix.artifact\u00a0}}/jdk-${{ env.JDK_VERSION }}-internal+0_linux-x64_bin${{ matrix.artifact\u00a0}}.tar.gz\" -C \"${HOME}/jdk-linux-x64${{ matrix.artifact\u00a0}}/jdk-${{ env.JDK_VERSION }}-internal+0_linux-x64_bin${{ matrix.artifact\u00a0}}\"\n",
+            "count": 1,
+            "repos": [
+                "termux/openjdk-mobile-termux"
+            ]
+        },
+        {
+            "command": "mkdir -p \"${HOME}/jdk-linux-x86${{ matrix.artifact\u00a0}}/jdk-${{ env.JDK_VERSION }}-internal+0_linux-x86_bin${{ matrix.artifact\u00a0}}\"\ntar -xf \"${HOME}/jdk-linux-x86${{ matrix.artifact\u00a0}}/jdk-${{ env.JDK_VERSION }}-internal+0_linux-x86_bin${{ matrix.artifact\u00a0}}.tar.gz\" -C \"${HOME}/jdk-linux-x86${{ matrix.artifact\u00a0}}/jdk-${{ env.JDK_VERSION }}-internal+0_linux-x86_bin${{ matrix.artifact\u00a0}}\"\n",
+            "count": 1,
+            "repos": [
+                "termux/openjdk-mobile-termux"
+            ]
+        },
+        {
+            "command": "mkdir -p \"${HOME}/jdk-windows-x64${{ matrix.artifact\u00a0}}/jdk-${{ env.JDK_VERSION }}-internal+0_windows-x64_bin${{ matrix.artifact\u00a0}}\"\ntar -xf \"${HOME}/jdk-windows-x64${{ matrix.artifact\u00a0}}/jdk-${{ env.JDK_VERSION }}-internal+0_windows-x64_bin${{ matrix.artifact\u00a0}}.zip\" -C \"${HOME}/jdk-windows-x64${{ matrix.artifact\u00a0}}/jdk-${{ env.JDK_VERSION }}-internal+0_windows-x64_bin${{ matrix.artifact\u00a0}}\"\n",
+            "count": 1,
+            "repos": [
+                "termux/openjdk-mobile-termux"
+            ]
+        },
+        {
+            "command": "mkdir -p \"${HOME}/jdk-macos-x64${{ matrix.artifact\u00a0}}/jdk-${{ env.JDK_VERSION }}-internal+0_macos-x64_bin${{ matrix.artifact\u00a0}}\"\ntar -xf \"${HOME}/jdk-macos-x64${{ matrix.artifact\u00a0}}/jdk-${{ env.JDK_VERSION }}-internal+0_macos-x64_bin${{ matrix.artifact\u00a0}}.tar.gz\" -C \"${HOME}/jdk-macos-x64${{ matrix.artifact\u00a0}}/jdk-${{ env.JDK_VERSION }}-internal+0_macos-x64_bin${{ matrix.artifact\u00a0}}\"\n",
+            "count": 1,
+            "repos": [
+                "termux/openjdk-mobile-termux"
+            ]
+        }
+    ],
+    "Unpack tests": [
+        {
+            "command": "mkdir -p \"${HOME}/jdk-linux-x64${{ matrix.artifact\u00a0}}/jdk-${{ env.JDK_VERSION }}-internal+0_linux-x64_bin-tests${{ matrix.artifact\u00a0}}\"\ntar -xf \"${HOME}/jdk-linux-x64${{ matrix.artifact\u00a0}}/jdk-${{ env.JDK_VERSION }}-internal+0_linux-x64_bin-tests${{ matrix.artifact\u00a0}}.tar.gz\" -C \"${HOME}/jdk-linux-x64${{ matrix.artifact\u00a0}}/jdk-${{ env.JDK_VERSION }}-internal+0_linux-x64_bin-tests${{ matrix.artifact\u00a0}}\"\n",
+            "count": 1,
+            "repos": [
+                "termux/openjdk-mobile-termux"
+            ]
+        },
+        {
+            "command": "mkdir -p \"${HOME}/jdk-linux-x86${{ matrix.artifact\u00a0}}/jdk-${{ env.JDK_VERSION }}-internal+0_linux-x86_bin-tests${{ matrix.artifact\u00a0}}\"\ntar -xf \"${HOME}/jdk-linux-x86${{ matrix.artifact\u00a0}}/jdk-${{ env.JDK_VERSION }}-internal+0_linux-x86_bin-tests${{ matrix.artifact\u00a0}}.tar.gz\" -C \"${HOME}/jdk-linux-x86${{ matrix.artifact\u00a0}}/jdk-${{ env.JDK_VERSION }}-internal+0_linux-x86_bin-tests${{ matrix.artifact\u00a0}}\"\n",
+            "count": 1,
+            "repos": [
+                "termux/openjdk-mobile-termux"
+            ]
+        },
+        {
+            "command": "mkdir -p \"${HOME}/jdk-windows-x64${{ matrix.artifact\u00a0}}/jdk-${{ env.JDK_VERSION }}-internal+0_windows-x64_bin-tests${{ matrix.artifact\u00a0}}\"\ntar -xf \"${HOME}/jdk-windows-x64${{ matrix.artifact\u00a0}}/jdk-${{ env.JDK_VERSION }}-internal+0_windows-x64_bin-tests${{ matrix.artifact\u00a0}}.tar.gz\" -C \"${HOME}/jdk-windows-x64${{ matrix.artifact\u00a0}}/jdk-${{ env.JDK_VERSION }}-internal+0_windows-x64_bin-tests${{ matrix.artifact\u00a0}}\"\n",
+            "count": 1,
+            "repos": [
+                "termux/openjdk-mobile-termux"
+            ]
+        },
+        {
+            "command": "mkdir -p \"${HOME}/jdk-macos-x64${{ matrix.artifact\u00a0}}/jdk-${{ env.JDK_VERSION }}-internal+0_macos-x64_bin-tests${{ matrix.artifact\u00a0}}\"\ntar -xf \"${HOME}/jdk-macos-x64${{ matrix.artifact\u00a0}}/jdk-${{ env.JDK_VERSION }}-internal+0_macos-x64_bin-tests${{ matrix.artifact\u00a0}}.tar.gz\" -C \"${HOME}/jdk-macos-x64${{ matrix.artifact\u00a0}}/jdk-${{ env.JDK_VERSION }}-internal+0_macos-x64_bin-tests${{ matrix.artifact\u00a0}}\"\n",
+            "count": 1,
+            "repos": [
+                "termux/openjdk-mobile-termux"
+            ]
+        }
+    ],
+    "Find root of jdk image dir": [
+        {
+            "command": "imageroot=`find ${HOME}/jdk-linux-x64${{ matrix.artifact\u00a0}}/jdk-${{ env.JDK_VERSION }}-internal+0_linux-x64_bin${{ matrix.artifact\u00a0}} -name release -type f`\necho \"imageroot=`dirname ${imageroot}`\" >> $GITHUB_ENV\n",
+            "count": 1,
+            "repos": [
+                "termux/openjdk-mobile-termux"
+            ]
+        },
+        {
+            "command": "imageroot=`find ${HOME}/jdk-linux-x86${{ matrix.artifact\u00a0}}/jdk-${{ env.JDK_VERSION }}-internal+0_linux-x86_bin${{ matrix.artifact\u00a0}} -name release -type f`\necho \"imageroot=`dirname ${imageroot}`\" >> $GITHUB_ENV\n",
+            "count": 1,
+            "repos": [
+                "termux/openjdk-mobile-termux"
+            ]
+        },
+        {
+            "command": "echo (\"imageroot=\" + (Get-ChildItem -Path $HOME/jdk-windows-x64${{ matrix.artifact\u00a0}}/jdk-${{ env.JDK_VERSION }}-internal+0_windows-x64_bin${{ matrix.artifact\u00a0}} -Filter release -Recurse -ErrorAction SilentlyContinue -Force).DirectoryName) | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8",
+            "count": 1,
+            "repos": [
+                "termux/openjdk-mobile-termux"
+            ]
+        },
+        {
+            "command": "imageroot=`find ${HOME}/jdk-macos-x64${{ matrix.artifact\u00a0}}/jdk-${{ env.JDK_VERSION }}-internal+0_macos-x64_bin${{ matrix.artifact\u00a0}} -name release -type f`\necho \"imageroot=`dirname ${imageroot}`\" >> $GITHUB_ENV\n",
+            "count": 1,
+            "repos": [
+                "termux/openjdk-mobile-termux"
+            ]
+        }
+    ],
+    "Check that all tests executed successfully": [
+        {
+            "command": "if ! grep --include=test-summary.txt -lqr build/*/test-results -e \"TEST SUCCESS\" ; then\n  cat build/*/test-results/*/text/newfailures.txt ;\n  exit 1 ;\nfi\n",
+            "count": 3,
+            "repos": [
+                "termux/openjdk-mobile-termux"
+            ]
+        },
+        {
+            "command": "if ((Get-ChildItem -Path build\\*\\test-results\\test-summary.txt -Recurse | Select-String -Pattern \"TEST SUCCESS\" ).Count -eq 0) {\n  Get-Content -Path build\\*\\test-results\\*\\*\\newfailures.txt ;\n  exit 1\n}\n",
+            "count": 1,
+            "repos": [
+                "termux/openjdk-mobile-termux"
+            ]
+        }
+    ],
+    "Create suitable test log artifact name": [
+        {
+            "command": "echo \"logsuffix=`echo ${{ matrix.test }} | sed -e 's!/!_!'g -e 's! !_!'g`\" >> $GITHUB_ENV",
+            "count": 3,
+            "repos": [
+                "termux/openjdk-mobile-termux"
+            ]
+        },
+        {
+            "command": "echo (\"logsuffix=\" + (\"${{ matrix.test }}\" -replace \"/\", \"_\" -replace \" \", \"_\")) | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8",
+            "count": 1,
+            "repos": [
+                "termux/openjdk-mobile-termux"
+            ]
+        }
+    ],
+    "Package test results": [
+        {
+            "command": "zip -r9 \"$HOME/linux-x64${{ matrix.artifact\u00a0}}_testresults_${{ env.logsuffix }}.zip\" .\n",
+            "count": 1,
+            "repos": [
+                "termux/openjdk-mobile-termux"
+            ]
+        },
+        {
+            "command": "zip -r9 \"$HOME/linux-x86${{ matrix.artifact\u00a0}}_testresults_${{ env.logsuffix }}.zip\" .\n",
+            "count": 1,
+            "repos": [
+                "termux/openjdk-mobile-termux"
+            ]
+        },
+        {
+            "command": "$env:Path = \"$HOME\\cygwin\\cygwin64\\bin;$env:Path\" ; zip -r9 \"$HOME/windows-x64${{ matrix.artifact\u00a0}}_testresults_${{ env.logsuffix }}.zip\" .\n",
+            "count": 1,
+            "repos": [
+                "termux/openjdk-mobile-termux"
+            ]
+        },
+        {
+            "command": "zip -r9 \"$HOME/macos-x64${{ matrix.artifact\u00a0}}_testresults_${{ env.logsuffix }}.zip\" .\n",
+            "count": 1,
+            "repos": [
+                "termux/openjdk-mobile-termux"
+            ]
+        }
+    ],
+    "Package test support": [
+        {
+            "command": "zip -r9 \"$HOME/linux-x64${{ matrix.artifact\u00a0}}_testsupport_${{ env.logsuffix }}.zip\" . -i *.jtr -i */hs_err*.log -i */replay*.log\n",
+            "count": 1,
+            "repos": [
+                "termux/openjdk-mobile-termux"
+            ]
+        },
+        {
+            "command": "zip -r9 \"$HOME/linux-x86${{ matrix.artifact\u00a0}}_testsupport_${{ env.logsuffix }}.zip\" . -i *.jtr -i */hs_err*.log -i */replay*.log\n",
+            "count": 1,
+            "repos": [
+                "termux/openjdk-mobile-termux"
+            ]
+        },
+        {
+            "command": "$env:Path = \"$HOME\\cygwin\\cygwin64\\bin;$env:Path\" ; zip -r9 \"$HOME/windows-x64${{ matrix.artifact\u00a0}}_testsupport_${{ env.logsuffix }}.zip\" . -i *.jtr -i */hs_err*.log -i */replay*.log\n",
+            "count": 1,
+            "repos": [
+                "termux/openjdk-mobile-termux"
+            ]
+        },
+        {
+            "command": "zip -r9 \"$HOME/macos-x64${{ matrix.artifact\u00a0}}_testsupport_${{ env.logsuffix }}.zip\" . -i *.jtr -i */hs_err*.log -i */replay*.log\n",
+            "count": 1,
+            "repos": [
+                "termux/openjdk-mobile-termux"
+            ]
+        }
+    ],
+    "Ensure a specific version of MSVC is installed": [
+        {
+            "command": "Start-Process -FilePath 'C:\\Program Files (x86)\\Microsoft Visual Studio\\Installer\\vs_installer.exe' -Wait -NoNewWindow -ArgumentList 'modify --installPath \"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Enterprise\" --quiet --add Microsoft.VisualStudio.Component.VC.14.28.arm64'\n",
+            "count": 1,
+            "repos": [
+                "termux/openjdk-mobile-termux"
+            ]
+        },
+        {
+            "command": "Start-Process -FilePath 'C:\\Program Files (x86)\\Microsoft Visual Studio\\Installer\\vs_installer.exe' -Wait -NoNewWindow -ArgumentList 'modify --installPath \"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Enterprise\" --quiet --add Microsoft.VisualStudio.Component.VC.14.28.x86.x64'\n",
+            "count": 1,
+            "repos": [
+                "termux/openjdk-mobile-termux"
+            ]
+        }
+    ],
+    "Select Xcode version": [
+        {
+            "command": "sudo xcode-select --switch /Applications/Xcode_11.3.1.app/Contents/Developer",
+            "count": 2,
+            "repos": [
+                "termux/openjdk-mobile-termux"
+            ]
+        },
+        {
+            "command": "sudo xcode-select --switch /Applications/Xcode_12.4.app/Contents/Developer",
+            "count": 1,
+            "repos": [
+                "termux/openjdk-mobile-termux"
+            ]
+        }
+    ],
+    "Step 5": [
+        {
+            "command": "codecov/codecov-action@v3",
+            "count": 1,
+            "repos": [
+                "termux/termux-language-server"
+            ]
+        },
+        {
+            "command": "pypa/gh-action-pypi-publish@release/v1",
+            "count": 1,
+            "repos": [
+                "termux/termux-language-server"
+            ]
+        }
+    ]
+}

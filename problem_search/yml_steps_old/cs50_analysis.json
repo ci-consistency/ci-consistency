@@ -1,0 +1,409 @@
+{
+    "Step 1": [
+        {
+            "command": "actions/checkout@v4",
+            "count": 13,
+            "repos": [
+                "cs50/libcs50",
+                "cs50/php-cs50",
+                "cs50/render50",
+                "cs50/libcs50-java",
+                "cs50/submit50",
+                "cs50/python-cs50",
+                "cs50/cli50",
+                "cs50/check50",
+                "cs50/help.cs50.net",
+                "cs50/compare50",
+                "cs50/style50",
+                "cs50/lib50",
+                "cs50/draw.cs50.io"
+            ]
+        },
+        {
+            "command": "actions/checkout@v3",
+            "count": 2,
+            "repos": [
+                "cs50/sandbox",
+                "cs50/publish50-electron"
+            ]
+        }
+    ],
+    "Deploy": [
+        {
+            "command": "PACKAGECLOUD_REPO=\"cs50/repo\"\n\n# Deploy deb to ubuntu repos\nUBUNTU_REPOS=( xenial yakkety zesty artful bionic cosmic disco eoan focal groovy hirsute impish jammy kinetic lunar )\nfor repo in \"${UBUNTU_REPOS[@]}\"; do\n  package_cloud push \"$PACKAGECLOUD_REPO\"/ubuntu/\"$repo\" ${PWD}/artifacts/*.deb\ndone\n\n# Deploy rpm to fedora repos\nfor repo in $(seq 28 38); do\n  package_cloud push \"$PACKAGECLOUD_REPO\"/fedora/\"$repo\" ${PWD}/artifacts/*.rpm\ndone\n",
+            "count": 1,
+            "repos": [
+                "cs50/libcs50"
+            ]
+        },
+        {
+            "command": "PACKAGECLOUD_REPO=\"cs50/repo\"\n\n# Deploy deb to ubuntu repos\nUBUNTU_REPOS=( xenial yakkety zesty artful bionic disco eoan focal groovy )\nfor repo in \"${UBUNTU_REPOS[@]}\"; do\n  package_cloud push \"$PACKAGECLOUD_REPO\"/ubuntu/\"$repo\" build/deb/*.deb\ndone\n\n# Deploy rpm to fedora repos\nfor repo in $(seq 28 32); do\n  package_cloud push \"$PACKAGECLOUD_REPO\"/fedora/\"$repo\" build/rpm/*.rpm\ndone\n",
+            "count": 1,
+            "repos": [
+                "cs50/php-cs50"
+            ]
+        },
+        {
+            "command": "PACKAGECLOUD_REPO=\"cs50/repo\"\n\n# Deploy deb to ubuntu repos\nUBUNTU_REPOS=( xenial yakkety zesty artful bionic cosmic disco eoan focal groovy hirsute impish jammy )\nfor repo in \"${UBUNTU_REPOS[@]}\"; do\n  package_cloud push \"$PACKAGECLOUD_REPO\"/ubuntu/\"$repo\" build/deb/*.deb\ndone\n\n# Deploy rpm to fedora repos\nfor repo in $(seq 28 36); do\n  package_cloud push \"$PACKAGECLOUD_REPO\"/fedora/\"$repo\" build/rpm/*.rpm\ndone\n",
+            "count": 1,
+            "repos": [
+                "cs50/libcs50-java"
+            ]
+        },
+        {
+            "command": "peaceiris/actions-gh-pages@v3",
+            "count": 1,
+            "repos": [
+                "cs50/sandbox"
+            ]
+        }
+    ],
+    "Create Release": [
+        {
+            "command": "actions/github-script@v7",
+            "count": 9,
+            "repos": [
+                "cs50/libcs50",
+                "cs50/php-cs50",
+                "cs50/render50",
+                "cs50/libcs50-java",
+                "cs50/submit50",
+                "cs50/python-cs50",
+                "cs50/cli50",
+                "cs50/check50",
+                "cs50/compare50"
+            ]
+        },
+        {
+            "command": "actions/github-script@7",
+            "count": 1,
+            "repos": [
+                "cs50/style50"
+            ]
+        }
+    ],
+    "Build": [
+        {
+            "command": "make deb\nmake rpm\n",
+            "count": 2,
+            "repos": [
+                "cs50/php-cs50",
+                "cs50/libcs50-java"
+            ]
+        },
+        {
+            "command": "rm -rf gh-pages && mkdir gh-pages && cp next.css scripts.js styles.css gh-pages",
+            "count": 1,
+            "repos": [
+                "cs50/sandbox"
+            ]
+        }
+    ],
+    "Step 2": [
+        {
+            "command": "actions/setup-python@v5",
+            "count": 8,
+            "repos": [
+                "cs50/render50",
+                "cs50/submit50",
+                "cs50/python-cs50",
+                "cs50/cli50",
+                "cs50/check50",
+                "cs50/compare50",
+                "cs50/style50",
+                "cs50/lib50"
+            ]
+        },
+        {
+            "command": "cs50/deploy-to-eb@main",
+            "count": 1,
+            "repos": [
+                "cs50/draw.cs50.io"
+            ]
+        },
+        {
+            "command": "actions/setup-node@v3",
+            "count": 1,
+            "repos": [
+                "cs50/publish50-electron"
+            ]
+        }
+    ],
+    "Run tests": [
+        {
+            "command": "pip install .\nrender50 -h\ntouch foo.c && render50 -o foo.pdf foo.c && test -f foo.pdf\n",
+            "count": 1,
+            "repos": [
+                "cs50/render50"
+            ]
+        },
+        {
+            "command": "pip install babel\npip install .\nsubmit50 --help\npython setup.py compile_catalog\n",
+            "count": 1,
+            "repos": [
+                "cs50/submit50"
+            ]
+        },
+        {
+            "command": "python tests/sql.py",
+            "count": 1,
+            "repos": [
+                "cs50/python-cs50"
+            ]
+        },
+        {
+            "command": "pip install babel flask\npip install .\npython -m tests\n",
+            "count": 1,
+            "repos": [
+                "cs50/check50"
+            ]
+        },
+        {
+            "command": "pip install .\npython -m tests\n",
+            "count": 1,
+            "repos": [
+                "cs50/compare50"
+            ]
+        },
+        {
+            "command": "pip install .\nstyle50 --help\n",
+            "count": 1,
+            "repos": [
+                "cs50/style50"
+            ]
+        },
+        {
+            "command": "pip install babel\npip install .\npython setup.py compile_catalog\npython -m tests\n",
+            "count": 1,
+            "repos": [
+                "cs50/lib50"
+            ]
+        }
+    ],
+    "Install pypa/build": [
+        {
+            "command": "python -m pip install build --user",
+            "count": 7,
+            "repos": [
+                "cs50/render50",
+                "cs50/submit50",
+                "cs50/python-cs50",
+                "cs50/check50",
+                "cs50/compare50",
+                "cs50/style50",
+                "cs50/lib50"
+            ]
+        },
+        {
+            "command": "python -m pip install build --user\n",
+            "count": 1,
+            "repos": [
+                "cs50/cli50"
+            ]
+        }
+    ],
+    "Build a binary wheel and a source tarball": [
+        {
+            "command": "python -m build --sdist --wheel --outdir dist/ .",
+            "count": 7,
+            "repos": [
+                "cs50/render50",
+                "cs50/submit50",
+                "cs50/python-cs50",
+                "cs50/check50",
+                "cs50/compare50",
+                "cs50/style50",
+                "cs50/lib50"
+            ]
+        },
+        {
+            "command": "python -m build --sdist --wheel --outdir dist/ .\n",
+            "count": 1,
+            "repos": [
+                "cs50/cli50"
+            ]
+        }
+    ],
+    "Extract program version": [
+        {
+            "command": "echo ::set-output name=version::$(render50 --version | cut --delimiter ' ' --fields 2)\n",
+            "count": 1,
+            "repos": [
+                "cs50/render50"
+            ]
+        },
+        {
+            "command": "echo ::set-output name=version::$(submit50 --version | cut --delimiter ' ' --fields 2)\n",
+            "count": 1,
+            "repos": [
+                "cs50/submit50"
+            ]
+        },
+        {
+            "command": "pip install .\necho ::set-output name=version::$(cli50 --version | cut --delimiter ' ' --fields 2)\n",
+            "count": 1,
+            "repos": [
+                "cs50/cli50"
+            ]
+        },
+        {
+            "command": "echo ::set-output name=version::$(check50 --version | cut --delimiter ' ' --fields 2)\n",
+            "count": 1,
+            "repos": [
+                "cs50/check50"
+            ]
+        },
+        {
+            "command": "echo ::set-output name=version::$(compare50 --version | cut --delimiter ' ' --fields 2)\n",
+            "count": 1,
+            "repos": [
+                "cs50/compare50"
+            ]
+        },
+        {
+            "command": "echo ::set-output name=version::$(style50 --version | cut --delimiter ' ' --fields 2)\n",
+            "count": 1,
+            "repos": [
+                "cs50/style50"
+            ]
+        }
+    ],
+    "Set up Docker Buildx": [
+        {
+            "command": "docker/setup-buildx-action@v2",
+            "count": 2,
+            "repos": [
+                "cs50/server",
+                "cs50/mysql"
+            ]
+        },
+        {
+            "command": "docker/setup-buildx-action@v3",
+            "count": 3,
+            "repos": [
+                "cs50/cli",
+                "cs50/check"
+            ]
+        }
+    ],
+    "Log into Docker Hub": [
+        {
+            "command": "docker/login-action@v2",
+            "count": 2,
+            "repos": [
+                "cs50/server",
+                "cs50/mysql"
+            ]
+        },
+        {
+            "command": "docker/login-action@v3",
+            "count": 3,
+            "repos": [
+                "cs50/cli"
+            ]
+        }
+    ],
+    "Build for linux/amd64": [
+        {
+            "command": "docker/build-push-action@v3",
+            "count": 2,
+            "repos": [
+                "cs50/server",
+                "cs50/mysql"
+            ]
+        },
+        {
+            "command": "docker/build-push-action@v5",
+            "count": 1,
+            "repos": [
+                "cs50/cli"
+            ]
+        }
+    ],
+    "Push linux/amd64 build to Docker Hub": [
+        {
+            "command": "docker push cs50/server:amd64\n",
+            "count": 1,
+            "repos": [
+                "cs50/server"
+            ]
+        },
+        {
+            "command": "docker push cs50/cli:amd64\n",
+            "count": 1,
+            "repos": [
+                "cs50/cli"
+            ]
+        },
+        {
+            "command": "docker push cs50/mysql:amd64\n",
+            "count": 1,
+            "repos": [
+                "cs50/mysql"
+            ]
+        }
+    ],
+    "Build for linux/arm64": [
+        {
+            "command": "docker/build-push-action@v3",
+            "count": 2,
+            "repos": [
+                "cs50/server",
+                "cs50/mysql"
+            ]
+        },
+        {
+            "command": "docker/build-push-action@v5",
+            "count": 1,
+            "repos": [
+                "cs50/cli"
+            ]
+        }
+    ],
+    "Push linux/arm64 build to Docker Hub": [
+        {
+            "command": "docker push cs50/server:arm64\n",
+            "count": 1,
+            "repos": [
+                "cs50/server"
+            ]
+        },
+        {
+            "command": "docker push cs50/cli:arm64\n",
+            "count": 1,
+            "repos": [
+                "cs50/cli"
+            ]
+        },
+        {
+            "command": "docker push cs50/mysql:arm64\n",
+            "count": 1,
+            "repos": [
+                "cs50/mysql"
+            ]
+        }
+    ],
+    "Create multi-arch manifest and push to Docker Hub": [
+        {
+            "command": "docker manifest create cs50/server:latest \\\n--amend cs50/server:amd64 \\\n--amend cs50/server:arm64\ndocker manifest push cs50/server:latest\n",
+            "count": 1,
+            "repos": [
+                "cs50/server"
+            ]
+        },
+        {
+            "command": "docker manifest create cs50/cli:latest \\\n--amend cs50/cli:amd64 \\\n--amend cs50/cli:arm64\ndocker manifest push cs50/cli:latest\n",
+            "count": 1,
+            "repos": [
+                "cs50/cli"
+            ]
+        },
+        {
+            "command": "docker manifest create cs50/mysql:latest \\\n--amend cs50/mysql:amd64 \\\n--amend cs50/mysql:arm64\ndocker manifest create cs50/mysql:8 \\\n--amend cs50/mysql:amd64 \\\n--amend cs50/mysql:arm64\ndocker manifest push cs50/mysql:latest\ndocker manifest push cs50/mysql:8\n",
+            "count": 1,
+            "repos": [
+                "cs50/mysql"
+            ]
+        }
+    ]
+}

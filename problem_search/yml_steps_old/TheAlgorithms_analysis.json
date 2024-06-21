@@ -1,0 +1,1082 @@
+{
+    "Step 1": [
+        {
+            "command": "actions/checkout@v4",
+            "count": 42,
+            "repos": [
+                "TheAlgorithms/Python",
+                "TheAlgorithms/C-Plus-Plus",
+                "TheAlgorithms/Java",
+                "TheAlgorithms/Ruby",
+                "TheAlgorithms/Go",
+                "TheAlgorithms/JavaScript",
+                "TheAlgorithms/Rust",
+                "TheAlgorithms/PHP",
+                "TheAlgorithms/website",
+                "TheAlgorithms/scripts",
+                "TheAlgorithms/Julia",
+                "TheAlgorithms/Lua",
+                "TheAlgorithms/TypeScript",
+                "TheAlgorithms/Nim",
+                "TheAlgorithms/Jule"
+            ]
+        },
+        {
+            "command": "actions/checkout@v3",
+            "count": 17,
+            "repos": [
+                "TheAlgorithms/C",
+                "TheAlgorithms/C-Sharp",
+                "TheAlgorithms/Go",
+                "TheAlgorithms/R",
+                "TheAlgorithms/algorithms-keeper",
+                "TheAlgorithms/scripts",
+                "TheAlgorithms/TypeScript",
+                "TheAlgorithms/Zig"
+            ]
+        },
+        {
+            "command": "actions/labeler@v4",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/C"
+            ]
+        },
+        {
+            "command": "actions/stale@v4",
+            "count": 5,
+            "repos": [
+                "TheAlgorithms/C",
+                "TheAlgorithms/C-Plus-Plus",
+                "TheAlgorithms/C-Sharp",
+                "TheAlgorithms/Go",
+                "TheAlgorithms/Algorithms-Explanation"
+            ]
+        },
+        {
+            "command": "actions/checkout@v1",
+            "count": 11,
+            "repos": [
+                "TheAlgorithms/Scala",
+                "TheAlgorithms/MATLAB-Octave",
+                "TheAlgorithms/Kotlin",
+                "TheAlgorithms/Dart",
+                "TheAlgorithms/Elm",
+                "TheAlgorithms/Jupyter",
+                "TheAlgorithms/Haskell",
+                "TheAlgorithms/Swift",
+                "TheAlgorithms/OCaml",
+                "TheAlgorithms/F-Sharp",
+                "TheAlgorithms/AArch64_Assembly"
+            ]
+        },
+        {
+            "command": "actions/stale@v9",
+            "count": 2,
+            "repos": [
+                "TheAlgorithms/Java",
+                "TheAlgorithms/Rust"
+            ]
+        },
+        {
+            "command": "actions/checkout@master",
+            "count": 2,
+            "repos": [
+                "TheAlgorithms/Java",
+                "TheAlgorithms/Ruby"
+            ]
+        },
+        {
+            "command": "actions/checkout@v2",
+            "count": 5,
+            "repos": [
+                "TheAlgorithms/Algorithms-Explanation",
+                "TheAlgorithms/Kotlin",
+                "TheAlgorithms/Dart",
+                "TheAlgorithms/Haskell",
+                "TheAlgorithms/Solidity"
+            ]
+        },
+        {
+            "command": "JuliaRegistries/TagBot@v1",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/Julia"
+            ]
+        },
+        {
+            "command": "julia-actions/setup-julia@v1",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/Julia"
+            ]
+        },
+        {
+            "command": "actions/checkout@main",
+            "count": 2,
+            "repos": [
+                "TheAlgorithms/TypeScript",
+                "TheAlgorithms/Zig"
+            ]
+        }
+    ],
+    "Step 2": [
+        {
+            "command": "actions/setup-python@v5",
+            "count": 7,
+            "repos": [
+                "TheAlgorithms/Python",
+                "TheAlgorithms/Java",
+                "TheAlgorithms/Rust",
+                "TheAlgorithms/PHP"
+            ]
+        },
+        {
+            "command": "pip install --user ruff",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/Python"
+            ]
+        },
+        {
+            "command": "actions/setup-python@v4",
+            "count": 4,
+            "repos": [
+                "TheAlgorithms/C",
+                "TheAlgorithms/C-Plus-Plus",
+                "TheAlgorithms/algorithms-keeper"
+            ]
+        },
+        {
+            "command": "cmake -B ./build -S .\ncmake --build build --config Release\n",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/C"
+            ]
+        },
+        {
+            "command": "cmake -B ./build -S .\ncmake --build build\n",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/C-Plus-Plus"
+            ]
+        },
+        {
+            "command": "actions/setup-python@v2",
+            "count": 10,
+            "repos": [
+                "TheAlgorithms/Scala",
+                "TheAlgorithms/MATLAB-Octave",
+                "TheAlgorithms/Kotlin",
+                "TheAlgorithms/Dart",
+                "TheAlgorithms/Elm",
+                "TheAlgorithms/Haskell",
+                "TheAlgorithms/Swift",
+                "TheAlgorithms/OCaml",
+                "TheAlgorithms/F-Sharp",
+                "TheAlgorithms/AArch64_Assembly"
+            ]
+        },
+        {
+            "command": "DoozyX/clang-format-lint-action@v0.17",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/Java"
+            ]
+        },
+        {
+            "command": "ruby/setup-ruby@v1",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/Ruby"
+            ]
+        },
+        {
+            "command": "actions/setup-python@master",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/Ruby"
+            ]
+        },
+        {
+            "command": "codespell-project/actions-codespell@master",
+            "count": 2,
+            "repos": [
+                "TheAlgorithms/Go",
+                "TheAlgorithms/JavaScript"
+            ]
+        },
+        {
+            "command": "actions/setup-go@v5",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/Go"
+            ]
+        },
+        {
+            "command": "actions/setup-node@v4",
+            "count": 4,
+            "repos": [
+                "TheAlgorithms/JavaScript",
+                "TheAlgorithms/TypeScript"
+            ]
+        },
+        {
+            "command": "python3 -m pip install codespell",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/Algorithms-Explanation"
+            ]
+        },
+        {
+            "command": "taiki-e/install-action@cargo-llvm-cov",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/Rust"
+            ]
+        },
+        {
+            "command": "dart pub get",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/Dart"
+            ]
+        },
+        {
+            "command": "actions/setup-python@v3",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/Jupyter"
+            ]
+        },
+        {
+            "command": "actions/setup-haskell@v1.1.3",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/Haskell"
+            ]
+        },
+        {
+            "command": "actions/setup-node@v3",
+            "count": 2,
+            "repos": [
+                "TheAlgorithms/website",
+                "TheAlgorithms/TypeScript"
+            ]
+        },
+        {
+            "command": "./directory_md",
+            "count": 2,
+            "repos": [
+                "TheAlgorithms/scripts"
+            ]
+        },
+        {
+            "command": "./formatter",
+            "count": 2,
+            "repos": [
+                "TheAlgorithms/scripts"
+            ]
+        },
+        {
+            "command": "./license-copyright",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/scripts"
+            ]
+        },
+        {
+            "command": "julia-actions/setup-julia@v1",
+            "count": 2,
+            "repos": [
+                "TheAlgorithms/Julia"
+            ]
+        },
+        {
+            "command": "actions/checkout@v4",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/Julia"
+            ]
+        },
+        {
+            "command": "JohnnyMorganz/stylua-action@v4",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/Lua"
+            ]
+        },
+        {
+            "command": "leafo/gh-actions-lua@v10",
+            "count": 2,
+            "repos": [
+                "TheAlgorithms/Lua"
+            ]
+        },
+        {
+            "command": "actions/setup-node@v2",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/Solidity"
+            ]
+        },
+        {
+            "command": "goto-bus-stop/setup-zig@v2",
+            "count": 2,
+            "repos": [
+                "TheAlgorithms/Zig"
+            ]
+        },
+        {
+            "command": "jiro4989/setup-nim-action@v1",
+            "count": 4,
+            "repos": [
+                "TheAlgorithms/Nim"
+            ]
+        },
+        {
+            "command": "Panquesito7/setup-jule@v1.1.3",
+            "count": 2,
+            "repos": [
+                "TheAlgorithms/Jule"
+            ]
+        }
+    ],
+    "Step 3": [
+        {
+            "command": "actions/cache@v4",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/Python"
+            ]
+        },
+        {
+            "command": "ruff check --output-format=github .",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/Python"
+            ]
+        },
+        {
+            "command": "codespell ./en/",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/Algorithms-Explanation"
+            ]
+        },
+        {
+            "command": "dart format --set-exit-if-changed .",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/Dart"
+            ]
+        },
+        {
+            "command": "actions/cache@v3",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/algorithms-keeper"
+            ]
+        },
+        {
+            "command": "actions/cache@v1",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/Julia"
+            ]
+        },
+        {
+            "command": "julia --project=docs -e '\n  using Pkg\n  Pkg.develop(PackageSpec(path=pwd()))\n  Pkg.instantiate()'\n",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/Julia"
+            ]
+        },
+        {
+            "command": "leafo/gh-actions-luarocks@v4",
+            "count": 2,
+            "repos": [
+                "TheAlgorithms/Lua"
+            ]
+        },
+        {
+            "command": "npm ci",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/TypeScript"
+            ]
+        },
+        {
+            "command": "zig fmt --check --ast-check */*.zig",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/Zig"
+            ]
+        }
+    ],
+    "Install dependencies": [
+        {
+            "command": "python -m pip install --upgrade pip setuptools six wheel\npython -m pip install pytest-cov -r requirements.txt\n",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/Python"
+            ]
+        },
+        {
+            "command": "npm ci",
+            "count": 2,
+            "repos": [
+                "TheAlgorithms/JavaScript",
+                "TheAlgorithms/TypeScript"
+            ]
+        },
+        {
+            "command": "echo \"Installing R package dependencies. Scripts might have additional dependencies installed.\"\nRscript -e 'if (!require(knitr)) install.packages(\"knitr\")'\nRscript -e 'if (!require(markdown)) install.packages(\"markdown\")'\n",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/R"
+            ]
+        },
+        {
+            "command": "stack update\nstack build --system-ghc --only-dependencies --test --bench --no-run-tests --no-run-benchmarks\n",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/Haskell"
+            ]
+        },
+        {
+            "command": "composer install --prefer-dist --no-progress --no-suggest",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/PHP"
+            ]
+        },
+        {
+            "command": "composer update --prefer-dist --no-progress --no-suggest",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/PHP"
+            ]
+        },
+        {
+            "command": "python -m pip install --upgrade pip\npython -m pip install pre-commit mypy\npython -m pip install -r requirements-dev.txt\n",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/algorithms-keeper"
+            ]
+        },
+        {
+            "command": "yarn",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/website"
+            ]
+        }
+    ],
+    "Run tests": [
+        {
+            "command": "pytest --ignore=quantum/q_fourier_transform.py --ignore=project_euler/ --ignore=scripts/validate_solutions.py --cov-report=term-missing:skip-covered --cov=. .",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/Python"
+            ]
+        },
+        {
+            "command": "rake test",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/Ruby"
+            ]
+        },
+        {
+            "command": "go test ./...",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/Go"
+            ]
+        },
+        {
+            "command": "stack test",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/Haskell"
+            ]
+        },
+        {
+            "command": "dotnet test",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/F-Sharp"
+            ]
+        },
+        {
+            "command": "pytest",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/algorithms-keeper"
+            ]
+        },
+        {
+            "command": "clojure -X:test\n",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/Clojure"
+            ]
+        },
+        {
+            "command": "clojure -X:coverage\n",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/Clojure"
+            ]
+        }
+    ],
+    "Step 6": [
+        {
+            "command": "scripts/build_directory_md.py 2>&1 | tee DIRECTORY.md",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/Python"
+            ]
+        },
+        {
+            "command": "dart analyze",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/Dart"
+            ]
+        },
+        {
+            "command": "julia-actions/julia-processcoverage@v1",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/Julia"
+            ]
+        }
+    ],
+    "Update DIRECTORY.md": [
+        {
+            "command": "git add DIRECTORY.md\ngit commit -am \"updating DIRECTORY.md\" ||  true\ngit push --force origin HEAD:$GITHUB_REF || true\n",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/Python"
+            ]
+        },
+        {
+            "command": "import os\nfrom typing import Iterator\nURL_BASE = \"https://github.com/TheAlgorithms/Scala/blob/master\"\ng_output = []\ndef good_filepaths(top_dir: str = \".\") -> Iterator[str]:\n    fs_exts = tuple(\".scala\".split())\n    for dirpath, dirnames, filenames in os.walk(top_dir):\n        dirnames[:] = [d for d in dirnames if d[0] not in \"._\"]\n        for filename in filenames:\n            if os.path.splitext(filename)[1].lower() in fs_exts:\n                yield os.path.join(dirpath, filename).lstrip(\"./\")\ndef md_prefix(i):\n    return f\"{i * '  '}*\" if i else \"\\n##\"\ndef print_path(old_path: str, new_path: str) -> str:\n    global g_output\n    old_parts = old_path.split(os.sep)\n    for i, new_part in enumerate(new_path.split(os.sep)):\n        if i + 1 > len(old_parts) or old_parts[i] != new_part:\n            if new_part:\n                g_output.append(f\"{md_prefix(i)} {new_part.replace('_', ' ').title()}\")\n    return new_path\ndef build_directory_md(top_dir: str = \".\") -> str:\n    global g_output\n    old_path = \"\"\n    for filepath in sorted(good_filepaths(), key=str.lower):\n        filepath, filename = os.path.split(filepath)\n        if filepath != old_path:\n            old_path = print_path(old_path, filepath)\n        indent = (filepath.count(os.sep) + 1) if filepath else 0\n        url = \"/\".join((URL_BASE, filepath, filename)).replace(\" \", \"%20\")\n        filename = os.path.splitext(filename.replace(\"_\", \" \").title())[0]\n        g_output.append(f\"{md_prefix(indent)} [{filename}]({url})\")\n    return \"# List of all files\\n\" + \"\\n\".join(g_output)\nwith open(\"DIRECTORY.md\", \"w\") as out_file:\n    out_file.write(build_directory_md(\".\") + \"\\n\")\n",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/Scala"
+            ]
+        },
+        {
+            "command": "cat DIRECTORY.md\ngit config --global user.name \"$GITHUB_ACTOR\"\ngit config --global user.email \"$GITHUB_ACTOR@users.noreply.github.com\"\ngit remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY\ngit add DIRECTORY.md\ngit commit -am \"Update directory\" ||  true\ngit push --force origin HEAD:$GITHUB_REF || true\n",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/Java"
+            ]
+        },
+        {
+            "command": "cat DIRECTORY.md\ngit config --global user.name \"$GITHUB_ACTOR\"\ngit config --global user.email \"$GITHUB_ACTOR@users.noreply.github.com\"\ngit remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY\ngit add DIRECTORY.md\ngit commit -am \"updating DIRECTORY.md\" ||  true\ngit push --force origin HEAD:$GITHUB_REF || true\n",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/Ruby"
+            ]
+        },
+        {
+            "command": "import os\nfrom typing import Iterator\nURL_BASE = \"https://github.com/TheAlgorithms/MATLAB-Octave/blob/master\"\ng_output = []\ndef good_filepaths(top_dir: str = \".\") -> Iterator[str]:\n    fs_exts = tuple(\".m\".split())\n    for dirpath, dirnames, filenames in os.walk(top_dir):\n        dirnames[:] = [d for d in dirnames if d[0] not in \"._\"]\n        for filename in filenames:\n            if os.path.splitext(filename)[1].lower() in fs_exts:\n                yield os.path.join(dirpath, filename).lstrip(\"./\")\ndef md_prefix(i):\n    return f\"{i * '  '}*\" if i else \"\\n##\"\ndef print_path(old_path: str, new_path: str) -> str:\n    global g_output\n    old_parts = old_path.split(os.sep)\n    for i, new_part in enumerate(new_path.split(os.sep)):\n        if i + 1 > len(old_parts) or old_parts[i] != new_part:\n            if new_part:\n                g_output.append(f\"{md_prefix(i)} {new_part.replace('_', ' ').title()}\")\n    return new_path\ndef build_directory_md(top_dir: str = \".\") -> str:\n    global g_output\n    old_path = \"\"\n    for filepath in sorted(good_filepaths(), key=str.lower):\n        filepath, filename = os.path.split(filepath)\n        if filepath != old_path:\n            old_path = print_path(old_path, filepath)\n        indent = (filepath.count(os.sep) + 1) if filepath else 0\n        url = \"/\".join((URL_BASE, filepath, filename)).replace(\" \", \"%20\")\n        filename = os.path.splitext(filename.replace(\"_\", \" \").title())[0]\n        g_output.append(f\"{md_prefix(indent)} [{filename}]({url})\")\n    return \"# List of all files\\n\" + \"\\n\".join(g_output)\nwith open(\"DIRECTORY.md\", \"w\") as out_file:\n    out_file.write(build_directory_md(\".\") + \"\\n\")\n",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/MATLAB-Octave"
+            ]
+        },
+        {
+            "command": "cargo run --manifest-path=.github/workflows/scripts/build_directory/Cargo.toml\n",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/Rust"
+            ]
+        },
+        {
+            "command": "wget https://raw.githubusercontent.com/TheAlgorithms/scripts/main/build_directory_md.py\npython3 build_directory_md.py R . .R,.r > DIRECTORY.md\ngit diff\ngit commit -m \"Update DIRECTORY.md\" DIRECTORY.md || true\ngit push --force origin HEAD:$GITHUB_REF || true\n",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/R"
+            ]
+        },
+        {
+            "command": "import os\nfrom typing import Iterator\nURL_BASE = \"https://github.com/TheAlgorithms/Kotlin/blob/master\"\ng_output = []\ndef good_filepaths(top_dir: str = \".\") -> Iterator[str]:\n    fs_exts = tuple(\".kt\".split())\n    for dirpath, dirnames, filenames in os.walk(top_dir):\n        dirnames[:] = [d for d in dirnames if d[0] not in \"._\"]\n        for filename in filenames:\n            if os.path.splitext(filename)[1].lower() in fs_exts:\n                yield os.path.join(dirpath, filename).lstrip(\"./\")\ndef md_prefix(i):\n    return f\"{i * '  '}*\" if i else \"\\n##\"\ndef print_path(old_path: str, new_path: str) -> str:\n    global g_output\n    old_parts = old_path.split(os.sep)\n    for i, new_part in enumerate(new_path.split(os.sep)):\n        if i + 1 > len(old_parts) or old_parts[i] != new_part:\n            if new_part:\n                g_output.append(f\"{md_prefix(i)} {new_part.replace('_', ' ').title()}\")\n    return new_path\ndef build_directory_md(top_dir: str = \".\") -> str:\n    global g_output\n    old_path = \"\"\n    for filepath in sorted(good_filepaths(), key=str.lower):\n        filepath, filename = os.path.split(filepath)\n        if filepath != old_path:\n            old_path = print_path(old_path, filepath)\n        indent = (filepath.count(os.sep) + 1) if filepath else 0\n        url = \"/\".join((URL_BASE, filepath, filename)).replace(\" \", \"%20\")\n        filename = os.path.splitext(filename.replace(\"_\", \" \").title())[0]\n        g_output.append(f\"{md_prefix(indent)} [{filename}]({url})\")\n    return \"# List of all files\\n\" + \"\\n\".join(g_output)\nwith open(\"DIRECTORY.md\", \"w\") as out_file:\n    out_file.write(build_directory_md(\".\") + \"\\n\")\n",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/Kotlin"
+            ]
+        },
+        {
+            "command": "cat DIRECTORY.md\ngit config --global user.name github-actions\ngit config --global user.email '${GITHUB_ACTOR}@users.noreply.github.com'\ngit remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY\ngit add DIRECTORY.md\ngit commit -am \"updating DIRECTORY.md\" ||  true\ngit push --force origin HEAD:$GITHUB_REF || true\n",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/Dart"
+            ]
+        },
+        {
+            "command": "import os\nfrom typing import Iterator\nURL_BASE = \"https://github.com/TheAlgorithms/Elm/blob/master\"\ng_output = []\ndef good_filepaths(top_dir: str = \".\") -> Iterator[str]:\n    fs_exts = tuple(\".elm\".split())\n    for dirpath, dirnames, filenames in os.walk(top_dir):\n        dirnames[:] = [d for d in dirnames if d[0] not in \"._\"]\n        for filename in filenames:\n            if os.path.splitext(filename)[1].lower() in fs_exts:\n                yield os.path.join(dirpath, filename).lstrip(\"./\")\ndef md_prefix(i):\n    return f\"{i * '  '}*\" if i else \"\\n##\"\ndef print_path(old_path: str, new_path: str) -> str:\n    global g_output\n    old_parts = old_path.split(os.sep)\n    for i, new_part in enumerate(new_path.split(os.sep)):\n        if i + 1 > len(old_parts) or old_parts[i] != new_part:\n            if new_part:\n                g_output.append(f\"{md_prefix(i)} {new_part.replace('_', ' ').title()}\")\n    return new_path\ndef build_directory_md(top_dir: str = \".\") -> str:\n    global g_output\n    old_path = \"\"\n    for filepath in sorted(good_filepaths(), key=str.lower):\n        filepath, filename = os.path.split(filepath)\n        if filepath != old_path:\n            old_path = print_path(old_path, filepath)\n        indent = (filepath.count(os.sep) + 1) if filepath else 0\n        url = \"/\".join((URL_BASE, filepath, filename)).replace(\" \", \"%20\")\n        filename = os.path.splitext(filename.replace(\"_\", \" \").title())[0]\n        g_output.append(f\"{md_prefix(indent)} [{filename}]({url})\")\n    return \"# List of all files\\n\" + \"\\n\".join(g_output)\nwith open(\"DIRECTORY.md\", \"w\") as out_file:\n    out_file.write(build_directory_md(\".\") + \"\\n\")\n",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/Elm"
+            ]
+        },
+        {
+            "command": "import os\nfrom typing import Iterator\nURL_BASE = \"https://github.com/TheAlgorithms/Jupyter/blob/master\"\ng_output = []\ndef good_filepaths(top_dir: str = \".\") -> Iterator[str]:\n    fs_exts = tuple(\".ipynb .py\".split())\n    for dirpath, dirnames, filenames in os.walk(top_dir):\n        dirnames[:] = [d for d in dirnames if d[0] not in \"._\"]\n        for filename in filenames:\n            if os.path.splitext(filename)[1].lower() in fs_exts:\n                yield os.path.join(dirpath, filename).lstrip(\"./\")\ndef md_prefix(i):\n    return f\"{i * '  '}*\" if i else \"\\n##\"\ndef print_path(old_path: str, new_path: str) -> str:\n    global g_output\n    old_parts = old_path.split(os.sep)\n    for i, new_part in enumerate(new_path.split(os.sep)):\n        if i + 1 > len(old_parts) or old_parts[i] != new_part:\n            if new_part:\n                g_output.append(f\"{md_prefix(i)} {new_part.replace('_', ' ').title()}\")\n    return new_path\ndef build_directory_md(top_dir: str = \".\") -> str:\n    global g_output\n    old_path = \"\"\n    for filepath in sorted(good_filepaths(), key=str.lower):\n        filepath, filename = os.path.split(filepath)\n        if filepath != old_path:\n            old_path = print_path(old_path, filepath)\n        indent = (filepath.count(os.sep) + 1) if filepath else 0\n        url = \"/\".join((URL_BASE, filepath, filename)).replace(\" \", \"%20\")\n        filename = os.path.splitext(filename.replace(\"_\", \" \").title())[0]\n        g_output.append(f\"{md_prefix(indent)} [{filename}]({url})\")\n    return \"# List of all files\\n\" + \"\\n\".join(g_output)\nwith open(\"DIRECTORY.md\", \"w\") as out_file:\n    out_file.write(build_directory_md(\".\") + \"\\n\")\n",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/Jupyter"
+            ]
+        },
+        {
+            "command": "import os\nfrom typing import Iterator\nURL_BASE = \"https://github.com/TheAlgorithms/Haskell/blob/master\"\ng_output = []\ndef good_filepaths(top_dir: str = \".\") -> Iterator[str]:\n    fs_exts = tuple(\".hs\".split())\n    for dirpath, dirnames, filenames in os.walk(top_dir):\n        dirnames[:] = [d for d in dirnames if d[0] not in \"._\"]\n        for filename in filenames:\n            if os.path.splitext(filename)[1].lower() in fs_exts:\n                yield os.path.join(dirpath, filename).lstrip(\"./\")\ndef md_prefix(i):\n    return f\"{i * '  '}*\" if i else \"\\n##\"\ndef print_path(old_path: str, new_path: str) -> str:\n    global g_output\n    old_parts = old_path.split(os.sep)\n    for i, new_part in enumerate(new_path.split(os.sep)):\n        if i + 1 > len(old_parts) or old_parts[i] != new_part:\n            if new_part:\n                g_output.append(f\"{md_prefix(i)} {new_part.replace('_', ' ').title()}\")\n    return new_path\ndef build_directory_md(top_dir: str = \".\") -> str:\n    global g_output\n    old_path = \"\"\n    for filepath in sorted(good_filepaths(), key=str.lower):\n        filepath, filename = os.path.split(filepath)\n        if filepath != old_path:\n            old_path = print_path(old_path, filepath)\n        indent = (filepath.count(os.sep) + 1) if filepath else 0\n        url = \"/\".join((URL_BASE, filepath, filename)).replace(\" \", \"%20\")\n        filename = os.path.splitext(filename.replace(\"_\", \" \").title())[0]\n        g_output.append(f\"{md_prefix(indent)} [{filename}]({url})\")\n    return \"# List of all files\\n\" + \"\\n\".join(g_output)\nwith open(\"DIRECTORY.md\", \"w\") as out_file:\n    out_file.write(build_directory_md(\".\") + \"\\n\")\n",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/Haskell"
+            ]
+        },
+        {
+            "command": "import os\nfrom typing import Iterator\nURL_BASE = \"https://github.com/TheAlgorithms/Swift/blob/master\"\ng_output = []\ndef good_filepaths(top_dir: str = \".\") -> Iterator[str]:\n    fs_exts = tuple(\".swift\".split())\n    for dirpath, dirnames, filenames in os.walk(top_dir):\n        dirnames[:] = [d for d in dirnames if d[0] not in \"._\"]\n        for filename in filenames:\n            if os.path.splitext(filename)[1].lower() in fs_exts:\n                yield os.path.join(dirpath, filename).lstrip(\"./\")\ndef md_prefix(i):\n    return f\"{i * '  '}*\" if i else \"\\n##\"\ndef print_path(old_path: str, new_path: str) -> str:\n    global g_output\n    old_parts = old_path.split(os.sep)\n    for i, new_part in enumerate(new_path.split(os.sep)):\n        if i + 1 > len(old_parts) or old_parts[i] != new_part:\n            if new_part:\n                g_output.append(f\"{md_prefix(i)} {new_part.replace('_', ' ').title()}\")\n    return new_path\ndef build_directory_md(top_dir: str = \".\") -> str:\n    global g_output\n    old_path = \"\"\n    for filepath in sorted(good_filepaths(), key=str.lower):\n        filepath, filename = os.path.split(filepath)\n        if filepath != old_path:\n            old_path = print_path(old_path, filepath)\n        indent = (filepath.count(os.sep) + 1) if filepath else 0\n        url = \"/\".join((URL_BASE, filepath, filename)).replace(\" \", \"%20\")\n        filename = os.path.splitext(filename.replace(\"_\", \" \").title())[0]\n        g_output.append(f\"{md_prefix(indent)} [{filename}]({url})\")\n    return \"# List of all files\\n\" + \"\\n\".join(g_output)\nwith open(\"DIRECTORY.md\", \"w\") as out_file:\n    out_file.write(build_directory_md(\".\") + \"\\n\")\n",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/Swift"
+            ]
+        },
+        {
+            "command": "import os\nfrom typing import Iterator\ng_output = []\ndef good_filepaths(top_dir: str = \".\") -> Iterator[str]:\n    fs_exts = tuple(\".php\".split())\n    for dirpath, dirnames, filenames in os.walk(top_dir):\n        dirnames[:] = [d for d in dirnames if d[0] not in \"._\"]\n        for filename in filenames:\n            if os.path.splitext(filename)[1].lower() in fs_exts:\n                yield os.path.join(dirpath, filename).lstrip(\"./\")\ndef md_prefix(i):\n    return f\"{i * '  '}*\" if i else \"\\n##\"\ndef print_path(old_path: str, new_path: str) -> str:\n    global g_output\n    old_parts = old_path.split(os.sep)\n    for i, new_part in enumerate(new_path.split(os.sep)):\n        if i + 1 > len(old_parts) or old_parts[i] != new_part:\n            if new_part:\n                g_output.append(f\"{md_prefix(i)} {new_part.replace('_', ' ').title()}\")\n    return new_path\ndef build_directory_md(top_dir: str = \".\") -> str:\n    global g_output\n    old_path = \"\"\n    for filepath in sorted(good_filepaths(), key=str.lower):\n        filepath, filename = os.path.split(filepath)\n        if filepath != old_path:\n            old_path = print_path(old_path, filepath)\n        indent = (filepath.count(os.sep) + 1) if filepath else 0\n        url = \"/\".join((\".\", filepath, filename)).replace(\" \", \"%20\")\n        filename = os.path.splitext(filename.replace(\"_\", \" \").title())[0]\n        g_output.append(f\"{md_prefix(indent)} [{filename}]({url})\")\n    return \"# List of all files\\n\" + \"\\n\".join(g_output)\nwith open(\"DIRECTORY.md\", \"w\") as out_file:\n    out_file.write(build_directory_md(\".\") + \"\\n\")\n",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/PHP"
+            ]
+        },
+        {
+            "command": "import os\nfrom typing import Iterator\nURL_BASE = \"https://github.com/TheAlgorithms/OCaml/blob/master\"\ng_output = []\ndef good_filepaths(top_dir: str = \".\") -> Iterator[str]:\n    fs_exts = tuple(\".ml\".split())\n    for dirpath, dirnames, filenames in os.walk(top_dir):\n        dirnames[:] = [d for d in dirnames if d[0] not in \"._\"]\n        for filename in filenames:\n            if os.path.splitext(filename)[1].lower() in fs_exts:\n                yield os.path.join(dirpath, filename).lstrip(\"./\")\ndef md_prefix(i):\n    return f\"{i * '  '}*\" if i else \"\\n##\"\ndef print_path(old_path: str, new_path: str) -> str:\n    global g_output\n    old_parts = old_path.split(os.sep)\n    for i, new_part in enumerate(new_path.split(os.sep)):\n        if i + 1 > len(old_parts) or old_parts[i] != new_part:\n            if new_part:\n                g_output.append(f\"{md_prefix(i)} {new_part.replace('_', ' ').title()}\")\n    return new_path\ndef build_directory_md(top_dir: str = \".\") -> str:\n    global g_output\n    old_path = \"\"\n    for filepath in sorted(good_filepaths(), key=str.lower):\n        filepath, filename = os.path.split(filepath)\n        if filepath != old_path:\n            old_path = print_path(old_path, filepath)\n        indent = (filepath.count(os.sep) + 1) if filepath else 0\n        url = \"/\".join((URL_BASE, filepath, filename)).replace(\" \", \"%20\")\n        filename = os.path.splitext(filename.replace(\"_\", \" \").title())[0]\n        g_output.append(f\"{md_prefix(indent)} [{filename}]({url})\")\n    return \"# List of all files\\n\" + \"\\n\".join(g_output)\nwith open(\"DIRECTORY.md\", \"w\") as out_file:\n    out_file.write(build_directory_md(\".\") + \"\\n\")\n",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/OCaml"
+            ]
+        },
+        {
+            "command": "import os\nfrom typing import Iterator\nURL_BASE = \"https://github.com/TheAlgorithms/F-Sharp/blob/main\"\ng_output = []\ndef good_filepaths(top_dir: str = \".\") -> Iterator[str]:\n    fs_exts = tuple(\".fs\".split())\n    for dirpath, dirnames, filenames in os.walk(top_dir):\n        dirnames[:] = [d for d in dirnames if d[0] not in \"._\"]\n        for filename in filenames:\n            if os.path.splitext(filename)[1].lower() in fs_exts:\n                yield os.path.join(dirpath, filename).lstrip(\"./\")\ndef md_prefix(i):\n    return f\"{i * '  '}*\" if i else \"\\n##\"\ndef print_path(old_path: str, new_path: str) -> str:\n    global g_output\n    old_parts = old_path.split(os.sep)\n    for i, new_part in enumerate(new_path.split(os.sep)):\n        if i + 1 > len(old_parts) or old_parts[i] != new_part:\n            if new_part:\n                g_output.append(f\"{md_prefix(i)} {new_part.replace('_', ' ').title()}\")\n    return new_path\ndef build_directory_md(top_dir: str = \".\") -> str:\n    global g_output\n    old_path = \"\"\n    for filepath in sorted(good_filepaths(), key=str.lower):\n        filepath, filename = os.path.split(filepath)\n        if filepath != old_path:\n            old_path = print_path(old_path, filepath)\n        indent = (filepath.count(os.sep) + 1) if filepath else 0\n        url = \"/\".join((URL_BASE, filepath, filename)).replace(\" \", \"%20\")\n        filename = os.path.splitext(filename.replace(\"_\", \" \").title())[0]\n        g_output.append(f\"{md_prefix(indent)} [{filename}]({url})\")\n    return \"# List of all files\\n\" + \"\\n\".join(g_output)\nwith open(\"DIRECTORY.md\", \"w\") as out_file:\n    out_file.write(build_directory_md(\".\") + \"\\n\")\n",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/F-Sharp"
+            ]
+        },
+        {
+            "command": "import os\nfrom typing import Iterator\nURL_BASE = \"https://github.com/TheAlgorithms/AArch64_Assembly/blob/main\"\ng_output = []\ndef good_filepaths(top_dir: str = \".\") -> Iterator[str]:\n    fs_exts = tuple(\".asm .s\".split())\n    for dirpath, dirnames, filenames in os.walk(top_dir):\n        dirnames[:] = [d for d in dirnames if d[0] not in \"._\"]\n        for filename in filenames:\n            if os.path.splitext(filename)[1].lower() in fs_exts:\n                yield os.path.join(dirpath, filename).lstrip(\"./\")\ndef md_prefix(i):\n    return f\"{i * '  '}*\" if i else \"\\n##\"\ndef print_path(old_path: str, new_path: str) -> str:\n    global g_output\n    old_parts = old_path.split(os.sep)\n    for i, new_part in enumerate(new_path.split(os.sep)):\n        if i + 1 > len(old_parts) or old_parts[i] != new_part:\n            if new_part:\n                g_output.append(f\"{md_prefix(i)} {new_part.replace('_', ' ').title()}\")\n    return new_path\ndef build_directory_md(top_dir: str = \".\") -> str:\n    global g_output\n    old_path = \"\"\n    for filepath in sorted(good_filepaths(), key=str.lower):\n        filepath, filename = os.path.split(filepath)\n        if filepath != old_path:\n            old_path = print_path(old_path, filepath)\n        indent = (filepath.count(os.sep) + 1) if filepath else 0\n        url = \"/\".join((URL_BASE, filepath, filename)).replace(\" \", \"%20\")\n        filename = os.path.splitext(filename.replace(\"_\", \" \").title())[0]\n        g_output.append(f\"{md_prefix(indent)} [{filename}]({url})\")\n    return \"# List of all files\\n\" + \"\\n\".join(g_output)\nwith open(\"DIRECTORY.md\", \"w\") as out_file:\n    out_file.write(build_directory_md(\".\") + \"\\n\")\n",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/AArch64_Assembly"
+            ]
+        },
+        {
+            "command": "wget https://raw.githubusercontent.com/TheAlgorithms/scripts/main/build_directory_md.py\npython3 build_directory_md.py TypeScript . .ts jest.config.ts,sorts/test,search/test,maths/test,dynamic_programming/test,data_structures/test,ciphers/test > DIRECTORY.md\n\ngit diff\ngit commit -m \"Update DIRECTORY.md\" DIRECTORY.md || true\ngit push --force origin HEAD:$GITHUB_REF || true\n",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/TypeScript"
+            ]
+        }
+    ],
+    "Step 4": [
+        {
+            "command": "pytest --doctest-modules --cov-report=term-missing:skip-covered --cov=project_euler/ project_euler/",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/Python"
+            ]
+        },
+        {
+            "command": "pytest scripts/validate_solutions.py",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/Python"
+            ]
+        },
+        {
+            "command": "dart test --coverage .",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/Dart"
+            ]
+        },
+        {
+            "command": "julia-actions/julia-buildpkg@v1",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/Julia"
+            ]
+        },
+        {
+            "command": "julia --project=docs -e '\n  using Documenter: DocMeta\n  using TheAlgorithms\n  DocMeta.setdocmeta!(TheAlgorithms, :DocTestSetup, :(using TheAlgorithms); recursive=true)'\n",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/Julia"
+            ]
+        },
+        {
+            "command": "npm test",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/TypeScript"
+            ]
+        }
+    ],
+    "Setup Git Specs": [
+        {
+            "command": "git config --global user.name github-actions[bot]\ngit config --global user.email 'github-actions@users.noreply.github.com'\n",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/C"
+            ]
+        },
+        {
+            "command": "git config --global user.name github-actions[bot]\ngit config --global user.email 'github-actions[bot]@users.noreply.github.com'\n",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/C-Plus-Plus"
+            ]
+        },
+        {
+            "command": "git config --global user.name \"$GITHUB_ACTOR\"\ngit config --global user.email \"$GITHUB_ACTOR@users.noreply.github.com\"\ngit remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY\n",
+            "count": 4,
+            "repos": [
+                "TheAlgorithms/Scala",
+                "TheAlgorithms/Rust",
+                "TheAlgorithms/PHP",
+                "TheAlgorithms/F-Sharp"
+            ]
+        },
+        {
+            "command": "git config --global user.name github-actions\ngit config --global user.email '${GITHUB_ACTOR}@users.noreply.github.com'\ngit remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY\n",
+            "count": 8,
+            "repos": [
+                "TheAlgorithms/MATLAB-Octave",
+                "TheAlgorithms/Kotlin",
+                "TheAlgorithms/Elm",
+                "TheAlgorithms/Jupyter",
+                "TheAlgorithms/Haskell",
+                "TheAlgorithms/Swift",
+                "TheAlgorithms/OCaml",
+                "TheAlgorithms/AArch64_Assembly"
+            ]
+        }
+    ],
+    "Filename Formatter": [
+        {
+            "command": "TheAlgorithms/scripts/formatter@main",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/C"
+            ]
+        },
+        {
+            "command": "wget https://raw.githubusercontent.com/TheAlgorithms/scripts/main/filename_formatter.sh\nchmod +x filename_formatter.sh\n./filename_formatter.sh . .cpp,.hpp\n",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/C-Plus-Plus"
+            ]
+        },
+        {
+            "command": "IFS=$'\\n'\nfor fname in `find . -type f -name '*.R' -o -name '*.R'`\ndo\n  echo \"${fname}\"\n  new_fname=`echo ${fname} | tr ' ' '_'`\n  echo \"      ${new_fname}\"\n  new_fname=`echo ${new_fname} | tr 'A-Z' 'a-z'`\n  echo \"      ${new_fname}\"\n  new_fname=`echo ${new_fname} | tr '-' '_'`\n  echo \"      ${new_fname}\"\n  if [ ${fname} != ${new_fname} ]\n  then\n    echo \"      ${fname} --> ${new_fname}\"\n    git \"mv\" \"${fname}\" ${new_fname}\n  fi\ndone\ngit commit -am \"Formatting filenames ${GITHUB_SHA::8}\" || true\n",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/R"
+            ]
+        },
+        {
+            "command": "IFS=$'\\n'\nfor fname in `find . -type f -name '*.ts' -o -name '*.ts'`\ndo\n  echo \"${fname}\"\n  new_fname=`echo ${fname} | tr ' ' '_'`\n  echo \"      ${new_fname}\"\n  new_fname=`echo ${new_fname} | tr 'A-Z' 'a-z'`\n  echo \"      ${new_fname}\"\n  new_fname=`echo ${new_fname} | tr '-' '_'`\n  echo \"      ${new_fname}\"\n  if [ ${fname} != ${new_fname} ]\n  then\n    echo \"      ${fname} --> ${new_fname}\"\n    git \"mv\" \"${fname}\" ${new_fname}\n  fi\ndone\ngit commit -am \"Formatting filenames ${GITHUB_SHA::8}\" || true\n",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/TypeScript"
+            ]
+        }
+    ],
+    "Commit and push changes": [
+        {
+            "command": "git diff DIRECTORY.md\ngit commit -am \"clang-format and clang-tidy fixes for ${GITHUB_SHA::8}\" || true\ngit push origin HEAD:$GITHUB_REF || true\n",
+            "count": 2,
+            "repos": [
+                "TheAlgorithms/C",
+                "TheAlgorithms/C-Plus-Plus"
+            ]
+        },
+        {
+            "command": "git checkout -b directory_update-${{ github.sha }}\ngit add .\n\ngit commit -m \"docs: update DIRECTORY.md\"\ngit push origin directory_update-${{ github.sha }}:directory_update-${{ github.sha }}\n",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/Nim"
+            ]
+        },
+        {
+            "command": "if [[ `git status --porcelain` ]];\nthen\n  git checkout -b directory_update-${{ github.sha }}\n  git add .\n\n  git commit -m 'Update `DIRECTORY.md`' || true\n  git push origin directory_update-${{ github.sha }}:directory_update-${{ github.sha }} || true\n\n  gh pr create --base ${GITHUB_REF##*/} --head directory_update-${{ github.sha }} --title 'Update `DIRECTORY.md`' --body 'Updated the `DIRECTORY.md` file (see the diff. for changes).' || true\nfi\n",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/Jule"
+            ]
+        }
+    ],
+    "Checkout repository": [
+        {
+            "command": "actions/checkout@v3",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/C"
+            ]
+        },
+        {
+            "command": "actions/checkout@v4",
+            "count": 2,
+            "repos": [
+                "TheAlgorithms/C-Plus-Plus",
+                "TheAlgorithms/Java"
+            ]
+        }
+    ],
+    "Initialize CodeQL": [
+        {
+            "command": "github/codeql-action/init@v2",
+            "count": 2,
+            "repos": [
+                "TheAlgorithms/C",
+                "TheAlgorithms/C-Plus-Plus"
+            ]
+        },
+        {
+            "command": "github/codeql-action/init@v3",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/Java"
+            ]
+        }
+    ],
+    "Perform CodeQL Analysis": [
+        {
+            "command": "github/codeql-action/analyze@v2",
+            "count": 2,
+            "repos": [
+                "TheAlgorithms/C",
+                "TheAlgorithms/C-Plus-Plus"
+            ]
+        },
+        {
+            "command": "github/codeql-action/analyze@v3",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/Java"
+            ]
+        }
+    ],
+    "gh-pages": [
+        {
+            "command": "actions/checkout@v3",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/C"
+            ]
+        },
+        {
+            "command": "actions/checkout@v4",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/C-Plus-Plus"
+            ]
+        }
+    ],
+    "Setup Git configurations": [
+        {
+            "command": "git config --global user.name github-actions[bot]\ngit config --global user.email 'github-actions@users.noreply.github.com'\n",
+            "count": 2,
+            "repos": [
+                "TheAlgorithms/C",
+                "TheAlgorithms/Nim"
+            ]
+        },
+        {
+            "command": "git config --global user.name github-actions[bot]\ngit config --global user.email 'github-actions[bot]@users.noreply.github.com'\n",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/Jule"
+            ]
+        }
+    ],
+    "Commit DIRECTORY.md": [
+        {
+            "command": "git commit -m \"updating DIRECTORY.md\" DIRECTORY.md ||  true\ngit diff DIRECTORY.md\ngit push --force origin HEAD:$GITHUB_REF || true\n",
+            "count": 11,
+            "repos": [
+                "TheAlgorithms/Scala",
+                "TheAlgorithms/MATLAB-Octave",
+                "TheAlgorithms/Kotlin",
+                "TheAlgorithms/Elm",
+                "TheAlgorithms/Jupyter",
+                "TheAlgorithms/Haskell",
+                "TheAlgorithms/Swift",
+                "TheAlgorithms/PHP",
+                "TheAlgorithms/OCaml",
+                "TheAlgorithms/F-Sharp",
+                "TheAlgorithms/AArch64_Assembly"
+            ]
+        },
+        {
+            "command": "git add DIRECTORY.md\ngit commit -m \"Update DIRECTORY.md [skip actions]\" ||  true\ngit push origin HEAD:$GITHUB_REF || true\n",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/Rust"
+            ]
+        }
+    ],
+    "Build": [
+        {
+            "command": "mvn --batch-mode --update-snapshots verify",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/Java"
+            ]
+        },
+        {
+            "command": "dotnet build --no-restore",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/C-Sharp"
+            ]
+        },
+        {
+            "command": "stack build --system-ghc --test --bench --no-run-tests --no-run-benchmarks",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/Haskell"
+            ]
+        }
+    ],
+    "update_directory_md": [
+        {
+            "command": "import os\nfrom typing import Iterator\nURL_BASE = \"https://github.com/TheAlgorithms/Ruby/blob/master\"\ng_output = []\n\ndef good_filepaths(top_dir: str = \".\") -> Iterator[str]:\n    for dirpath, dirnames, filenames in os.walk(top_dir):\n        dirnames[:] = [d for d in dirnames if d[0] not in \"._\"]\n        for filename in filenames:\n            if os.path.splitext(filename)[1].lower() == \".rb\":\n                yield os.path.join(dirpath, filename).lstrip(\"./\")\n\ndef md_prefix(i):\n    return f\"{i * '  '}*\" if i else \"\\n##\"\n\ndef print_path(old_path: str, new_path: str) -> str:\n    global g_output\n    old_parts = old_path.split(os.sep)\n    for i, new_part in enumerate(new_path.split(os.sep)):\n        if i + 1 > len(old_parts) or old_parts[i] != new_part:\n            if new_part:\n                g_output.append(f\"{md_prefix(i)} {new_part.replace('_', ' ').title()}\")\n    return new_path\n\ndef build_directory_md(top_dir: str = \".\") -> str:\n    global g_output\n    old_path = \"\"\n    for filepath in sorted(good_filepaths(), key=str.lower):\n        filepath, filename = os.path.split(filepath)\n        if filepath != old_path:\n            old_path = print_path(old_path, filepath)\n        indent = (filepath.count(os.sep) + 1) if filepath else 0\n        url = \"/\".join((URL_BASE, filepath, filename)).replace(\" \", \"%20\")\n        filename = os.path.splitext(filename.replace(\"_\", \" \").title())[0]\n        g_output.append(f\"{md_prefix(indent)} [{filename}]({url})\")\n    return \"\\n\".join(g_output)\nwith open(\"DIRECTORY.md\", \"w\") as out_file:\n    out_file.write(build_directory_md(\".\") + \"\\n\")\n",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/Ruby"
+            ]
+        },
+        {
+            "command": "import os\nfrom typing import Iterator\nURL_BASE = \"https://github.com/TheAlgorithms/Dart/blob/master\"\ng_output = []\n\ndef good_filepaths(top_dir: str = \".\") -> Iterator[str]:\n    for dirpath, dirnames, filenames in os.walk(top_dir):\n        dirnames[:] = [d for d in dirnames if d[0] not in \"._\"]\n        for filename in filenames:\n            if os.path.splitext(filename)[1].lower() == \".dart\":\n                yield os.path.join(dirpath, filename).lstrip(\"./\")\n                \ndef md_prefix(i):\n    return f\"{i * '  '}*\" if i else \"\\n##\"\n    \ndef print_path(old_path: str, new_path: str) -> str:\n    global g_output\n    old_parts = old_path.split(os.sep)\n    for i, new_part in enumerate(new_path.split(os.sep)):\n        if i + 1 > len(old_parts) or old_parts[i] != new_part:\n            if new_part:\n                g_output.append(f\"{md_prefix(i)} {new_part.replace('_', ' ').title()}\")\n    return new_path\n    \ndef build_directory_md(top_dir: str = \".\") -> str:\n    global g_output\n    old_path = \"\"\n    for filepath in sorted(good_filepaths(), key=str.lower):\n        filepath, filename = os.path.split(filepath)\n        if filepath != old_path:\n            old_path = print_path(old_path, filepath)\n        indent = (filepath.count(os.sep) + 1) if filepath else 0\n        url = \"/\".join((URL_BASE, filepath, filename)).replace(\" \", \"%20\")\n        filename = os.path.splitext(filename.replace(\"_\", \" \").title())[0]\n        g_output.append(f\"{md_prefix(indent)} [{filename}]({url})\")\n    return \"\\n\".join(g_output)\nwith open(\"DIRECTORY.md\", \"w\") as out_file:\n    out_file.write(build_directory_md(\".\") + \"\\n\")\n",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/Dart"
+            ]
+        }
+    ],
+    "Setup Go": [
+        {
+            "command": "actions/setup-go@v5",
+            "count": 2,
+            "repos": [
+                "TheAlgorithms/Go"
+            ]
+        },
+        {
+            "command": "actions/setup-go@v3",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/Go"
+            ]
+        }
+    ],
+    "Generate code coverage": [
+        {
+            "command": "go test -coverprofile=\"${{ env.REPORT_NAME }}\" ./...\n",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/Go"
+            ]
+        },
+        {
+            "command": "cargo llvm-cov --all-features --workspace --lcov --output-path \"${{ env.REPORT_NAME }}\"\n",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/Rust"
+            ]
+        }
+    ],
+    "Step 5": [
+        {
+            "command": "dart pub run coverage:format_coverage -i . -l > coverage.lcov",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/Dart"
+            ]
+        },
+        {
+            "command": "julia-actions/julia-runtest@v1",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/Julia"
+            ]
+        },
+        {
+            "command": "julia --project=docs docs/make.jl",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/Julia"
+            ]
+        },
+        {
+            "command": "npm run check-style",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/TypeScript"
+            ]
+        }
+    ],
+    "Format code": [
+        {
+            "command": "git clean -f -x -d\njulia  -e 'using JuliaFormatter; format(\".\", verbose=true)'\n",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/Julia"
+            ]
+        },
+        {
+            "command": "git clean -f -x -d\nnim prettyfy\n",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/Nim"
+            ]
+        }
+    ],
+    "Fail if needs reformatting": [
+        {
+            "command": "if [[ $(git status --porcelain) ]]; then\n    echo \"please reformat these files:\"\n    git status --porcelain=v1\n    exit 1\nfi\n",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/Julia"
+            ]
+        },
+        {
+            "command": "if [[ $(git status --porcelain) ]]; then\n   echo \"please reformat/prettyfy these files:\"\n   git status --porcelain=v1\n   exit 1\nfi\n",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/Nim"
+            ]
+        }
+    ],
+    "setup": [
+        {
+            "command": "luarocks install luacheck\n",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/Lua"
+            ]
+        },
+        {
+            "command": "luarocks install busted\n",
+            "count": 1,
+            "repos": [
+                "TheAlgorithms/Lua"
+            ]
+        }
+    ]
+}

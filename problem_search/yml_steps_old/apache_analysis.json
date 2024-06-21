@@ -1,0 +1,1243 @@
+{
+    "Install prerequisites": [
+        {
+            "command": "sudo apt-get install libtool libtool-bin ${{ matrix.packages }}",
+            "count": 1,
+            "repos": [
+                "apache/apr"
+            ]
+        },
+        {
+            "command": "sudo apt-get install -o Acquire::Retries=5 cpanminus libtool-bin libapr1-dev libaprutil1-dev liblua5.3-dev libbrotli-dev libcurl4-openssl-dev libnghttp2-dev libjansson-dev libpcre2-dev gdb perl-doc ${{ matrix.pkgs }}",
+            "count": 1,
+            "repos": [
+                "apache/httpd"
+            ]
+        }
+    ],
+    "Step 2": [
+        {
+            "command": "actions/checkout@v4",
+            "count": 3,
+            "repos": [
+                "apache/apr",
+                "apache/camel"
+            ]
+        },
+        {
+            "command": "./.github/actions/install-mvnd",
+            "count": 2,
+            "repos": [
+                "apache/camel"
+            ]
+        },
+        {
+            "command": "./.github/actions/install-packages",
+            "count": 3,
+            "repos": [
+                "apache/camel"
+            ]
+        },
+        {
+            "command": "actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9",
+            "count": 16,
+            "repos": [
+                "apache/commons-collections",
+                "apache/commons-codec",
+                "apache/commons-lang",
+                "apache/commons-io",
+                "apache/commons-logging",
+                "apache/commons-cli"
+            ]
+        },
+        {
+            "command": "actions/cache@v4",
+            "count": 2,
+            "repos": [
+                "apache/httpcomponents-core",
+                "apache/httpcomponents-client"
+            ]
+        },
+        {
+            "command": "shogo82148/actions-setup-perl@v1",
+            "count": 4,
+            "repos": [
+                "apache/avro"
+            ]
+        },
+        {
+            "command": "ruby/setup-ruby@v1",
+            "count": 2,
+            "repos": [
+                "apache/avro"
+            ]
+        },
+        {
+            "command": "dtolnay/rust-toolchain@nightly",
+            "count": 1,
+            "repos": [
+                "apache/avro"
+            ]
+        },
+        {
+            "command": "actions/setup-java@v4",
+            "count": 2,
+            "repos": [
+                "apache/maven"
+            ]
+        }
+    ],
+    "configure": [
+        {
+            "command": "./configure --prefix=/tmp/apr ${{ matrix.config }}",
+            "count": 1,
+            "repos": [
+                "apache/apr"
+            ]
+        },
+        {
+            "command": "./configure",
+            "count": 1,
+            "repos": [
+                "apache/apr"
+            ]
+        }
+    ],
+    "Step 1": [
+        {
+            "command": "actions/checkout@v4",
+            "count": 41,
+            "repos": [
+                "apache/apr",
+                "apache/camel",
+                "apache/xmlgraphics-fop",
+                "apache/poi",
+                "apache/xmlgraphics-commons",
+                "apache/httpcomponents-core",
+                "apache/httpcomponents-client",
+                "apache/wicket",
+                "apache/xmlgraphics-batik",
+                "apache/avro",
+                "apache/maven"
+            ]
+        },
+        {
+            "command": "actions/checkout@v3",
+            "count": 4,
+            "repos": [
+                "apache/spamassassin",
+                "apache/openjpa",
+                "apache/xmlgraphics-commons",
+                "apache/servicemix-maven-plugins"
+            ]
+        },
+        {
+            "command": "actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11",
+            "count": 5,
+            "repos": [
+                "apache/directory-studio",
+                "apache/avro"
+            ]
+        },
+        {
+            "command": "release-drafter/release-drafter@v6",
+            "count": 2,
+            "repos": [
+                "apache/maven-release",
+                "apache/maven-doxia-sitetools"
+            ]
+        },
+        {
+            "command": "actions/checkout@v2",
+            "count": 2,
+            "repos": [
+                "apache/synapse",
+                "apache/hive"
+            ]
+        },
+        {
+            "command": "actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332",
+            "count": 11,
+            "repos": [
+                "apache/commons-collections",
+                "apache/commons-codec",
+                "apache/commons-lang",
+                "apache/commons-io",
+                "apache/commons-logging",
+                "apache/commons-cli"
+            ]
+        },
+        {
+            "command": "actions/checkout@v4.1.4",
+            "count": 3,
+            "repos": [
+                "apache/nutch"
+            ]
+        },
+        {
+            "command": "shufo/auto-assign-reviewer-by-files@v1.1.1",
+            "count": 1,
+            "repos": [
+                "apache/hive"
+            ]
+        },
+        {
+            "command": "actions/stale@v3",
+            "count": 1,
+            "repos": [
+                "apache/hive"
+            ]
+        },
+        {
+            "command": "actions/labeler@v5",
+            "count": 1,
+            "repos": [
+                "apache/avro"
+            ]
+        }
+    ],
+    "Build": [
+        {
+            "command": "cmake --build ${{github.workspace}}/build --config ${{ matrix.build-type }}",
+            "count": 1,
+            "repos": [
+                "apache/apr"
+            ]
+        },
+        {
+            "command": "set -x\n./build.sh clean test\n",
+            "count": 5,
+            "repos": [
+                "apache/avro"
+            ]
+        },
+        {
+            "command": "set -x\nexport PATH=$HOME/.dotnet:$PATH\ndotnet --list-sdks\n./build.sh clean test\n",
+            "count": 1,
+            "repos": [
+                "apache/avro"
+            ]
+        },
+        {
+            "command": "./build.sh clean test",
+            "count": 1,
+            "repos": [
+                "apache/avro"
+            ]
+        },
+        {
+            "command": "set -x\ncomposer --version\n./build.sh clean test\n",
+            "count": 1,
+            "repos": [
+                "apache/avro"
+            ]
+        },
+        {
+            "command": "set -x\n./build.sh test\n",
+            "count": 1,
+            "repos": [
+                "apache/avro"
+            ]
+        }
+    ],
+    "Test": [
+        {
+            "command": "ctest -C ${{ matrix.build-type }} --output-on-failure",
+            "count": 1,
+            "repos": [
+                "apache/apr"
+            ]
+        },
+        {
+            "command": "ant clean test -buildfile build.xml",
+            "count": 1,
+            "repos": [
+                "apache/nutch"
+            ]
+        },
+        {
+            "command": "mvn clean verify",
+            "count": 1,
+            "repos": [
+                "apache/avro"
+            ]
+        },
+        {
+            "command": "./build.sh test",
+            "count": 8,
+            "repos": [
+                "apache/avro"
+            ]
+        },
+        {
+            "command": "python3 -m tox -e py",
+            "count": 1,
+            "repos": [
+                "apache/avro"
+            ]
+        },
+        {
+            "command": "PATH=$PWD/.gem/bin:$PATH\n./build.sh test\n",
+            "count": 1,
+            "repos": [
+                "apache/avro"
+            ]
+        }
+    ],
+    "Set version from tag": [
+        {
+            "command": "# initialize to SHA\necho (\"CURRENT_TAG=\" + $Env:GITHUB_SHA) >> $env:GITHUB_ENV\n$ref = $Env:GITHUB_REF\n\nif ($ref.StartsWith(\"refs/tags/\")) {\n  $tag = $ref.Substring(10)\n  echo \"extracted tag name from refs/tags as $tag\"\n}\nelse {\n  echo \"Get the latest Lucene.Net_ tag\"\n  $tag = & git --git-dir \"$Env:GIT_MAIN_REPO\" tag --list --sort=-version:refname 'Lucene.Net_[0-9]_[0-9]_[0-9]*' | select -first 1\n}\n\nif ($tag -eq $null) {\n  echo \"::error::Could not determine current version tag\"\n  exit 1\n}\n\n# write the environment var\necho (\"CURRENT_TAG=\" + $tag) >> $env:GITHUB_ENV\n\n$parts = $tag.Split(\"_\")\n$version = '';\nFor ($i=1; $i -le $parts.Length; $i++) {\n  $version += $parts[$i]\n  if ($i -eq ($parts.Length - 2)) {\n    $version += \"-\"\n  }\n  elseif ($i -lt ($parts.Length - 1)) {\n    $version += \".\"\n  }\n}\n\nif ($version -ne '') {\n  # the tag parsed to the correct version format, write the environment var\n  echo (\"RELEASE_VERSION=\" + $version) >> $env:GITHUB_ENV\n}\nelse {\n  echo \"::error::Could not parse current version tag\"\n  exit 1\n}\n",
+            "count": 1,
+            "repos": [
+                "apache/lucenenet"
+            ]
+        },
+        {
+            "command": "$ref = $Env:GITHUB_REF\n\nif ($ref.StartsWith(\"refs/tags/\")) {\n  $tag = $ref.Substring(10)\n  echo \"extracted tag name from refs/tags as $tag\"\n}\nelse {\n  echo \"Get the latest Lucene.Net_ tag\"\n  $tag = & git --git-dir \"$Env:GIT_MAIN_REPO\" tag --list --sort=-version:refname 'Lucene.Net_[0-9]_[0-9]_[0-9]*' | select -first 1\n}\n\nif ($tag -eq $null) {\n  echo \"::error::Could not determine current version tag\"\n  exit 1\n}\n\n$parts = $tag.Split(\"_\")\n$version = '';\nFor ($i=1; $i -le $parts.Length; $i++) {\n  $version += $parts[$i]\n  if ($i -eq ($parts.Length - 2)) {\n    $version += \"-\"\n  }\n  elseif ($i -lt ($parts.Length - 1)) {\n    $version += \".\"\n  }\n}\n\nif ($version -ne '') {\n  # the tag parsed to the correct version format, write the environment var\n  echo \"parsed version is $version\"\n  echo (\"RELEASE_VERSION=\" + $version) >> $env:GITHUB_ENV\n}\nelse {\n  echo \"::error::Could not parse current version tag\"\n  exit 1\n}\n",
+            "count": 1,
+            "repos": [
+                "apache/lucenenet"
+            ]
+        }
+    ],
+    "Verify environment variables": [
+        {
+            "command": "echo \"CURRENT_TAG=$Env:CURRENT_TAG\"\necho \"RELEASE_VERSION=$Env:RELEASE_VERSION\"\n",
+            "count": 1,
+            "repos": [
+                "apache/lucenenet"
+            ]
+        },
+        {
+            "command": "echo \"RELEASE_VERSION=$Env:RELEASE_VERSION\"\n",
+            "count": 1,
+            "repos": [
+                "apache/lucenenet"
+            ]
+        }
+    ],
+    "Create Pull Request": [
+        {
+            "command": "peter-evans/create-pull-request@v5",
+            "count": 2,
+            "repos": [
+                "apache/lucenenet"
+            ]
+        },
+        {
+            "command": "peter-evans/create-pull-request@v6",
+            "count": 1,
+            "repos": [
+                "apache/camel"
+            ]
+        }
+    ],
+    "Step 7": [
+        {
+            "command": "dotnet build ${{env.project_path}} --configuration ${{matrix.configuration}} --framework ${{matrix.framework}} /p:TestFrameworks=true",
+            "count": 34,
+            "repos": [
+                "apache/lucenenet"
+            ]
+        },
+        {
+            "command": "dotnet pack ${{env.project_under_test_path}} --configuration ${{matrix.configuration}} /p:TestFrameworks=true /p:PortableDebugTypeOnly=true",
+            "count": 1,
+            "repos": [
+                "apache/lucenenet"
+            ]
+        }
+    ],
+    "Step 8": [
+        {
+            "command": "dotnet test ${{env.project_path}} --configuration ${{matrix.configuration}} --framework ${{matrix.framework}} --no-build --no-restore --blame-hang --blame-hang-dump-type mini --blame-hang-timeout 20minutes --logger:\"console;verbosity=normal\" --logger:\"trx;LogFileName=${{env.trx_file_name}}\" --logger:\"liquid.md;LogFileName=${{env.md_file_name}};Title=${{env.title}};\" --results-directory:\"${{github.workspace}}/${{env.test_results_artifact_name}}/${{env.project_name}}\" -- RunConfiguration.TargetPlatform=${{matrix.platform}} TestRunParameters.Parameter\\(name=\\\"tests:slow\\\",\\ value=\\\"\\${{env.run_slow_tests}}\\\"\\)",
+            "count": 34,
+            "repos": [
+                "apache/lucenenet"
+            ]
+        },
+        {
+            "command": "dotnet build ${{env.project_path}} --configuration ${{matrix.configuration}} --framework ${{matrix.framework}} /p:TestFrameworks=true",
+            "count": 1,
+            "repos": [
+                "apache/lucenenet"
+            ]
+        }
+    ],
+    "Step 9": [
+        {
+            "command": "dotnet test ${{env.project_path}} --configuration ${{matrix.configuration}} --framework ${{matrix.framework}} --no-build --no-restore --blame-hang --blame-hang-dump-type mini --blame-hang-timeout 20minutes --logger:\"console;verbosity=normal\" --logger:\"trx;LogFileName=${{env.trx_file_name}}\" --logger:\"liquid.md;LogFileName=${{env.md_file_name}};Title=${{env.title}};\" --results-directory:\"${{github.workspace}}/${{env.test_results_artifact_name}}/${{env.project_name}}\" -- RunConfiguration.TargetPlatform=${{matrix.platform}} TestRunParameters.Parameter\\(name=\\\"tests:slow\\\",\\ value=\\\"\\${{env.run_slow_tests}}\\\"\\)",
+            "count": 1,
+            "repos": [
+                "apache/lucenenet"
+            ]
+        },
+        {
+            "command": "actions/upload-artifact@v4",
+            "count": 1,
+            "repos": [
+                "apache/httpd"
+            ]
+        },
+        {
+            "command": "actions/checkout@v4",
+            "count": 1,
+            "repos": [
+                "apache/avro"
+            ]
+        }
+    ],
+    "Step 4": [
+        {
+            "command": "actions/checkout@v3",
+            "count": 1,
+            "repos": [
+                "apache/lucenenet"
+            ]
+        },
+        {
+            "command": "./.github/actions/install-packages",
+            "count": 1,
+            "repos": [
+                "apache/camel"
+            ]
+        },
+        {
+            "command": "actions/cache@v4",
+            "count": 5,
+            "repos": [
+                "apache/avro"
+            ]
+        },
+        {
+            "command": "actions/checkout@v4",
+            "count": 1,
+            "repos": [
+                "apache/maven"
+            ]
+        }
+    ],
+    "Checkout repository": [
+        {
+            "command": "actions/checkout@v4.1.1",
+            "count": 1,
+            "repos": [
+                "apache/directory-studio"
+            ]
+        },
+        {
+            "command": "actions/checkout@v4",
+            "count": 9,
+            "repos": [
+                "apache/cayenne",
+                "apache/httpcomponents-core",
+                "apache/httpcomponents-client",
+                "apache/avro"
+            ]
+        },
+        {
+            "command": "actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332",
+            "count": 8,
+            "repos": [
+                "apache/commons-collections",
+                "apache/commons-codec",
+                "apache/commons-lang",
+                "apache/commons-io",
+                "apache/directory-server",
+                "apache/commons-logging",
+                "apache/commons-cli"
+            ]
+        },
+        {
+            "command": "actions/checkout@v3",
+            "count": 1,
+            "repos": [
+                "apache/xmlgraphics-commons"
+            ]
+        }
+    ],
+    "Initialize CodeQL": [
+        {
+            "command": "github/codeql-action/init@v3",
+            "count": 7,
+            "repos": [
+                "apache/directory-studio",
+                "apache/httpcomponents-core",
+                "apache/httpcomponents-client",
+                "apache/avro"
+            ]
+        },
+        {
+            "command": "github/codeql-action/init@23acc5c183826b7a8a97bce3cecc52db901f8251",
+            "count": 7,
+            "repos": [
+                "apache/commons-collections",
+                "apache/commons-codec",
+                "apache/commons-lang",
+                "apache/commons-io",
+                "apache/directory-server",
+                "apache/commons-logging",
+                "apache/commons-cli"
+            ]
+        },
+        {
+            "command": "github/codeql-action/init@v2",
+            "count": 2,
+            "repos": [
+                "apache/xmlgraphics-commons",
+                "apache/roller"
+            ]
+        }
+    ],
+    "Step 3": [
+        {
+            "command": "mvn -f pom-first.xml clean install\nmvn clean install\n",
+            "count": 1,
+            "repos": [
+                "apache/directory-studio"
+            ]
+        },
+        {
+            "command": "./.github/actions/install-mvnd",
+            "count": 3,
+            "repos": [
+                "apache/camel"
+            ]
+        },
+        {
+            "command": "./.github/actions/create-or-update-comment",
+            "count": 1,
+            "repos": [
+                "apache/camel"
+            ]
+        },
+        {
+            "command": "mvn clean package -DskipTests -Drat.skip=true -Dcheckstyle.skip",
+            "count": 2,
+            "repos": [
+                "apache/httpcomponents-core",
+                "apache/httpcomponents-client"
+            ]
+        },
+        {
+            "command": "actions/cache@v4",
+            "count": 2,
+            "repos": [
+                "apache/avro"
+            ]
+        },
+        {
+            "command": "cargo clippy --all-features --all-targets -- -Dclippy::all -Dunused_imports",
+            "count": 1,
+            "repos": [
+                "apache/avro"
+            ]
+        }
+    ],
+    "Perform CodeQL Analysis": [
+        {
+            "command": "github/codeql-action/analyze@v3",
+            "count": 7,
+            "repos": [
+                "apache/directory-studio",
+                "apache/httpcomponents-core",
+                "apache/httpcomponents-client",
+                "apache/avro"
+            ]
+        },
+        {
+            "command": "github/codeql-action/analyze@23acc5c183826b7a8a97bce3cecc52db901f8251",
+            "count": 7,
+            "repos": [
+                "apache/commons-collections",
+                "apache/commons-codec",
+                "apache/commons-lang",
+                "apache/commons-io",
+                "apache/directory-server",
+                "apache/commons-logging",
+                "apache/commons-cli"
+            ]
+        },
+        {
+            "command": "github/codeql-action/analyze@v2",
+            "count": 2,
+            "repos": [
+                "apache/xmlgraphics-commons",
+                "apache/roller"
+            ]
+        }
+    ],
+    "Set up JDK 11": [
+        {
+            "command": "actions/setup-java@99b8673ff64fbf99d8d325f52d9a5bdedb8483e9",
+            "count": 2,
+            "repos": [
+                "apache/directory-studio"
+            ]
+        },
+        {
+            "command": "actions/setup-java@v3",
+            "count": 1,
+            "repos": [
+                "apache/servicemix-maven-plugins"
+            ]
+        }
+    ],
+    "Checkout code": [
+        {
+            "command": "actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11",
+            "count": 1,
+            "repos": [
+                "apache/directory-studio"
+            ]
+        },
+        {
+            "command": "actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332",
+            "count": 7,
+            "repos": [
+                "apache/commons-collections",
+                "apache/commons-codec",
+                "apache/commons-lang",
+                "apache/commons-io",
+                "apache/directory-server",
+                "apache/commons-logging",
+                "apache/commons-cli"
+            ]
+        }
+    ],
+    "Run analysis": [
+        {
+            "command": "ossf/scorecard-action@0864cf19026789058feabb7e87baa5f140aac736",
+            "count": 1,
+            "repos": [
+                "apache/directory-studio"
+            ]
+        },
+        {
+            "command": "ossf/scorecard-action@dc50aa9510b46c811795eb24b2f1ba02a914e534",
+            "count": 7,
+            "repos": [
+                "apache/commons-collections",
+                "apache/commons-codec",
+                "apache/commons-lang",
+                "apache/commons-io",
+                "apache/directory-server",
+                "apache/commons-logging",
+                "apache/commons-cli"
+            ]
+        }
+    ],
+    "Upload artifact": [
+        {
+            "command": "actions/upload-artifact@5d5d22a31266ced268874388b861e4b58bb5c2f3",
+            "count": 1,
+            "repos": [
+                "apache/directory-studio"
+            ]
+        },
+        {
+            "command": "actions/upload-artifact@65462800fd760344b1a7b4382951275a0abb4808",
+            "count": 7,
+            "repos": [
+                "apache/commons-collections",
+                "apache/commons-codec",
+                "apache/commons-lang",
+                "apache/commons-io",
+                "apache/directory-server",
+                "apache/commons-logging",
+                "apache/commons-cli"
+            ]
+        }
+    ],
+    "Upload to code-scanning": [
+        {
+            "command": "github/codeql-action/upload-sarif@cdcdbb579706841c47f7063dda365e292e5cad7a",
+            "count": 1,
+            "repos": [
+                "apache/directory-studio"
+            ]
+        },
+        {
+            "command": "github/codeql-action/upload-sarif@23acc5c183826b7a8a97bce3cecc52db901f8251",
+            "count": 7,
+            "repos": [
+                "apache/commons-collections",
+                "apache/commons-codec",
+                "apache/commons-lang",
+                "apache/commons-io",
+                "apache/directory-server",
+                "apache/commons-logging",
+                "apache/commons-cli"
+            ]
+        }
+    ],
+    "Step 11": [
+        {
+            "command": "actions/upload-artifact@v4",
+            "count": 1,
+            "repos": [
+                "apache/httpd"
+            ]
+        },
+        {
+            "command": "actions/checkout@v4",
+            "count": 1,
+            "repos": [
+                "apache/avro"
+            ]
+        }
+    ],
+    "Set up JDK ${{ matrix.java }}": [
+        {
+            "command": "actions/setup-java@v4",
+            "count": 8,
+            "repos": [
+                "apache/camel",
+                "apache/httpcomponents-core",
+                "apache/httpcomponents-client",
+                "apache/roller"
+            ]
+        },
+        {
+            "command": "actions/setup-java@99b8673ff64fbf99d8d325f52d9a5bdedb8483e9",
+            "count": 12,
+            "repos": [
+                "apache/commons-collections",
+                "apache/commons-codec",
+                "apache/commons-lang",
+                "apache/commons-io",
+                "apache/commons-logging",
+                "apache/commons-cli"
+            ]
+        },
+        {
+            "command": "actions/setup-java@v4.2.1",
+            "count": 3,
+            "repos": [
+                "apache/nutch"
+            ]
+        }
+    ],
+    "maven build": [
+        {
+            "command": "${{ steps.install-mvnd.outputs.mvnd-dir }}/mvnd -l build.log $MVND_OPTS -Pfastinstall -DskipTests install",
+            "count": 1,
+            "repos": [
+                "apache/camel"
+            ]
+        },
+        {
+            "command": "./mvnw -l build.log -Dquickly install",
+            "count": 1,
+            "repos": [
+                "apache/camel"
+            ]
+        },
+        {
+            "command": "./etc/scripts/regen.sh",
+            "count": 1,
+            "repos": [
+                "apache/camel"
+            ]
+        }
+    ],
+    "Build with Maven": [
+        {
+            "command": "mvn -B package checkstyle:check spotbugs:check --file pom.xml",
+            "count": 2,
+            "repos": [
+                "apache/xmlgraphics-fop",
+                "apache/xmlgraphics-commons"
+            ]
+        },
+        {
+            "command": "mvn --show-version --batch-mode --no-transfer-progress test jacoco:report",
+            "count": 5,
+            "repos": [
+                "apache/commons-collections",
+                "apache/commons-codec",
+                "apache/commons-lang",
+                "apache/commons-io",
+                "apache/commons-cli"
+            ]
+        },
+        {
+            "command": "mvn --errors --show-version --batch-mode --no-transfer-progress",
+            "count": 3,
+            "repos": [
+                "apache/commons-collections",
+                "apache/commons-codec",
+                "apache/commons-cli"
+            ]
+        },
+        {
+            "command": "mvn -B install --file pom.xml",
+            "count": 1,
+            "repos": [
+                "apache/openjpa"
+            ]
+        },
+        {
+            "command": "mvn --errors --show-version --batch-mode --no-transfer-progress -Ddoclint=all",
+            "count": 1,
+            "repos": [
+                "apache/commons-lang"
+            ]
+        },
+        {
+            "command": "mvn --errors --show-version --batch-mode --no-transfer-progress -DtrimStackTrace=false",
+            "count": 1,
+            "repos": [
+                "apache/commons-io"
+            ]
+        },
+        {
+            "command": "mvn -V --file pom.xml --no-transfer-progress -DtrimStackTrace=false -P-use-toolchains",
+            "count": 2,
+            "repos": [
+                "apache/httpcomponents-core",
+                "apache/httpcomponents-client"
+            ]
+        },
+        {
+            "command": "java -version \n./apache-maven-${MAVEN_VERSION}/bin/mvn --show-version clean verify -Pjs-test\n",
+            "count": 1,
+            "repos": [
+                "apache/wicket"
+            ]
+        },
+        {
+            "command": "mvn -B package checkstyle:check --file pom.xml",
+            "count": 1,
+            "repos": [
+                "apache/xmlgraphics-batik"
+            ]
+        },
+        {
+            "command": "mvn -DskipTests=true -V -ntp install",
+            "count": 1,
+            "repos": [
+                "apache/roller"
+            ]
+        },
+        {
+            "command": "./mvnw verify -e -B -V -DdistributionFileName=apache-maven",
+            "count": 1,
+            "repos": [
+                "apache/maven"
+            ]
+        },
+        {
+            "command": "./mvnw install -e -B -V -DdistributionFileName=apache-maven",
+            "count": 1,
+            "repos": [
+                "apache/maven"
+            ]
+        },
+        {
+            "command": "mvn --show-version --batch-mode --no-transfer-progress verify jacoco:report",
+            "count": 1,
+            "repos": [
+                "apache/commons-logging"
+            ]
+        },
+        {
+            "command": "mvn --errors --show-version --batch-mode --no-transfer-progress -Ddoclint=none",
+            "count": 1,
+            "repos": [
+                "apache/commons-logging"
+            ]
+        },
+        {
+            "command": "mvn -B package --file pom.xml",
+            "count": 1,
+            "repos": [
+                "apache/servicemix-maven-plugins"
+            ]
+        }
+    ],
+    "Setup java": [
+        {
+            "command": "actions/setup-java@v1",
+            "count": 1,
+            "repos": [
+                "apache/synapse"
+            ]
+        },
+        {
+            "command": "actions/setup-java@v4",
+            "count": 3,
+            "repos": [
+                "apache/cayenne"
+            ]
+        }
+    ],
+    "Autobuild": [
+        {
+            "command": "github/codeql-action/autobuild@23acc5c183826b7a8a97bce3cecc52db901f8251",
+            "count": 7,
+            "repos": [
+                "apache/commons-collections",
+                "apache/commons-codec",
+                "apache/commons-lang",
+                "apache/commons-io",
+                "apache/directory-server",
+                "apache/commons-logging",
+                "apache/commons-cli"
+            ]
+        },
+        {
+            "command": "github/codeql-action/autobuild@v2",
+            "count": 1,
+            "repos": [
+                "apache/xmlgraphics-commons"
+            ]
+        },
+        {
+            "command": "github/codeql-action/autobuild@v3",
+            "count": 3,
+            "repos": [
+                "apache/avro"
+            ]
+        }
+    ],
+    "Cache Maven packages": [
+        {
+            "command": "actions/cache@v3",
+            "count": 2,
+            "repos": [
+                "apache/openjpa",
+                "apache/xmlgraphics-commons"
+            ]
+        },
+        {
+            "command": "actions/cache@v4",
+            "count": 1,
+            "repos": [
+                "apache/wicket"
+            ]
+        }
+    ],
+    "Set up JDK 17": [
+        {
+            "command": "actions/setup-java@v3",
+            "count": 1,
+            "repos": [
+                "apache/xmlgraphics-commons"
+            ]
+        },
+        {
+            "command": "actions/setup-java@v4",
+            "count": 1,
+            "repos": [
+                "apache/roller"
+            ]
+        }
+    ],
+    "Build project": [
+        {
+            "command": "mvn clean install -DskipTests -Pitests\n",
+            "count": 1,
+            "repos": [
+                "apache/hive"
+            ]
+        },
+        {
+            "command": "mvn clean package -DskipTests -Pitests,iceberg -Pdist",
+            "count": 1,
+            "repos": [
+                "apache/hive"
+            ]
+        }
+    ],
+    "Checkout": [
+        {
+            "command": "actions/checkout@v3",
+            "count": 2,
+            "repos": [
+                "apache/hive"
+            ]
+        },
+        {
+            "command": "actions/checkout@v4",
+            "count": 13,
+            "repos": [
+                "apache/avro"
+            ]
+        }
+    ],
+    "Hive version": [
+        {
+            "command": "echo \"HIVE_VERSION=${{ github.event.inputs.hiveVersion }}\"  >> $GITHUB_ENV",
+            "count": 1,
+            "repos": [
+                "apache/hive"
+            ]
+        },
+        {
+            "command": "echo \"HIVE_VERSION=$(mvn -f \"pom.xml\" -q help:evaluate -Dexpression=project.version -DforceStdout)\" >> $GITHUB_ENV",
+            "count": 1,
+            "repos": [
+                "apache/hive"
+            ]
+        }
+    ],
+    "Hadoop version": [
+        {
+            "command": "echo \"HADOOP_VERSION=${{ github.event.inputs.hadoopVersion }}\" >> $GITHUB_ENV",
+            "count": 1,
+            "repos": [
+                "apache/hive"
+            ]
+        },
+        {
+            "command": "echo \"HADOOP_VERSION=$(mvn -f \"pom.xml\" -q help:evaluate -Dexpression=hadoop.version -DforceStdout)\" >> $GITHUB_ENV",
+            "count": 1,
+            "repos": [
+                "apache/hive"
+            ]
+        }
+    ],
+    "Tez version": [
+        {
+            "command": "echo \"TEZ_VERSION=${{ github.event.inputs.tezVersion }}\" >> $GITHUB_ENV",
+            "count": 1,
+            "repos": [
+                "apache/hive"
+            ]
+        },
+        {
+            "command": "echo \"TEZ_VERSION=$(mvn -f \"pom.xml\" -q help:evaluate -Dexpression=tez.version -DforceStdout)\" >> $GITHUB_ENV",
+            "count": 1,
+            "repos": [
+                "apache/hive"
+            ]
+        }
+    ],
+    "Java Test": [
+        {
+            "command": "mvn clean test",
+            "count": 1,
+            "repos": [
+                "apache/avro"
+            ]
+        },
+        {
+            "command": "./build.sh test",
+            "count": 1,
+            "repos": [
+                "apache/avro"
+            ]
+        }
+    ],
+    "Cache Local Maven Repository": [
+        {
+            "command": "actions/cache@v4",
+            "count": 15,
+            "repos": [
+                "apache/avro"
+            ]
+        },
+        {
+            "command": "actions/cache@13aacd865c20de90d75de3b17ebe84f7a17d57d2",
+            "count": 2,
+            "repos": [
+                "apache/avro"
+            ]
+        }
+    ],
+    "Install dependencies": [
+        {
+            "command": "sudo apt-get update -q\nsudo apt-get install -q -y gcc g++ libboost-all-dev libfmt-dev cmake\n",
+            "count": 1,
+            "repos": [
+                "apache/avro"
+            ]
+        },
+        {
+            "command": "sudo apt-get update -q\nsudo apt-get install -q -y cmake liblzma-dev libsnappy-dev libjansson-dev zlib1g-dev pkg-config\n",
+            "count": 1,
+            "repos": [
+                "apache/avro"
+            ]
+        },
+        {
+            "command": "sudo apt-get update -q\nsudo apt-get install -q -y wget libzstd-dev libicu-dev\nwget https://dot.net/v1/dotnet-install.sh\nbash ./dotnet-install.sh --channel \"3.1\" --install-dir \"$HOME/.dotnet\" # 3.1\nbash ./dotnet-install.sh --channel \"5.0\" --install-dir \"$HOME/.dotnet\" # 5.0\nbash ./dotnet-install.sh --channel \"6.0\" --install-dir \"$HOME/.dotnet\" # 6.0\nbash ./dotnet-install.sh --channel \"7.0\" --install-dir \"$HOME/.dotnet\" # 7.0\nbash ./dotnet-install.sh --channel \"8.0\" --install-dir \"$HOME/.dotnet\" # 8.0\n",
+            "count": 1,
+            "repos": [
+                "apache/avro"
+            ]
+        },
+        {
+            "command": "sudo apt-get update -q\nsudo apt-get install -q -y wget tar xz-utils\n",
+            "count": 1,
+            "repos": [
+                "apache/avro"
+            ]
+        },
+        {
+            "command": "sudo apt-get update -q\nsudo apt-get install -q -y wget php php-xml php-mbstring php-curl php-gmp php-bz2 unzip libtidy-dev libpq5\nphp -r \"copy('https://getcomposer.org/installer', 'composer-setup.php');\"\nphp -r \"if (hash_file('sha384', 'composer-setup.php') === file_get_contents('https://composer.github.io/installer.sig')) { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;\"\nphp composer-setup.php --version=2.2.5\nphp -r \"unlink('composer-setup.php');\"\nsudo mv composer.phar /usr/local/bin/composer\n",
+            "count": 1,
+            "repos": [
+                "apache/avro"
+            ]
+        },
+        {
+            "command": "sudo apt-get update -q\nsudo apt-get install -q -y python3 python3-dev python3-pip git libbz2-dev libjansson-dev liblzma-dev libsnappy-dev libzstd-dev\npython3 -m pip install --upgrade pip setuptools tox\n",
+            "count": 1,
+            "repos": [
+                "apache/avro"
+            ]
+        },
+        {
+            "command": "sudo apt-get update -q\nsudo apt-get install -q -y ruby-dev bundler libsnappy-dev libyaml-dev\n",
+            "count": 1,
+            "repos": [
+                "apache/avro"
+            ]
+        }
+    ],
+    "Install Dependencies": [
+        {
+            "command": "sudo apt update && sudo apt-get install -qqy cppcheck libboost-all-dev libsnappy-dev libfmt-dev cmake",
+            "count": 1,
+            "repos": [
+                "apache/avro"
+            ]
+        },
+        {
+            "command": "sudo apt-get install -qqy libjansson-dev libsnappy-dev",
+            "count": 1,
+            "repos": [
+                "apache/avro"
+            ]
+        },
+        {
+            "command": "sudo apt-get install -qqy --no-install-recommends libbz2-dev \\\n                                                  libjansson-dev \\\n                                                  liblzma-dev \\\n                                                  libsnappy-dev \\\n                                                  libzstd-dev\n",
+            "count": 1,
+            "repos": [
+                "apache/avro"
+            ]
+        },
+        {
+            "command": "sudo apt-get -qqy install --no-install-recommends libjansson-dev \\\n                                                  libcompress-raw-zlib-perl \\\n                                                  libcpan-uploader-perl \\\n                                                  libencode-perl \\\n                                                  libio-string-perl \\\n                                                  libjson-xs-perl \\\n                                                  libmodule-install-perl \\\n                                                  libmodule-install-readmefrompod-perl \\\n                                                  libobject-tiny-perl \\\n                                                  libperl-critic-perl \\\n                                                  libsnappy-dev \\\n                                                  libtest-exception-perl \\\n                                                  libtest-pod-perl\ncpanm --mirror https://www.cpan.org/ install Compress::Zstd \\\n                                             Error::Simple \\\n                                             Module::Install::Repository \\\n                                             Regexp::Common \\\n                                             Try::Tiny \\\n                                             inc::Module::Install \\\n                                             Module::Install::ReadmeFromPod \\\n                                             Test::Exception \\\n                                             IO::String \\\n                                             Object::Tiny\n",
+            "count": 2,
+            "repos": [
+                "apache/avro"
+            ]
+        },
+        {
+            "command": "sudo apt-get -qqy install --no-install-recommends libcompress-raw-zlib-perl \\\n                                                  libcpan-uploader-perl \\\n                                                  libencode-perl \\\n                                                  libio-string-perl \\\n                                                  libjansson-dev \\\n                                                  libjson-xs-perl \\\n                                                  libmodule-install-perl \\\n                                                  libmodule-install-readmefrompod-perl \\\n                                                  libobject-tiny-perl \\\n                                                  libsnappy-dev \\\n                                                  libtest-exception-perl \\\n                                                  libtest-pod-perl\ncpanm --mirror https://www.cpan.org/ install Compress::Zstd \\\n                                             Error::Simple \\\n                                             Module::Install::Repository \\\n                                             Object::Tiny \\\n                                             Regexp::Common \\\n                                             Try::Tiny \\\n                                             inc::Module::Install\n",
+            "count": 3,
+            "repos": [
+                "apache/avro"
+            ]
+        },
+        {
+            "command": "python3 -m pip install --upgrade pip setuptools tox\n",
+            "count": 1,
+            "repos": [
+                "apache/avro"
+            ]
+        },
+        {
+            "command": "python3 -m pip install --upgrade pip setuptools tox\npython3 -m pip install python-snappy zstandard\n",
+            "count": 1,
+            "repos": [
+                "apache/avro"
+            ]
+        },
+        {
+            "command": "sudo apt-get install -qqy libsnappy-dev",
+            "count": 2,
+            "repos": [
+                "apache/avro"
+            ]
+        }
+    ],
+    "Lint": [
+        {
+            "command": "./build.sh lint",
+            "count": 8,
+            "repos": [
+                "apache/avro"
+            ]
+        },
+        {
+            "command": "python3 -m tox -e lint",
+            "count": 1,
+            "repos": [
+                "apache/avro"
+            ]
+        },
+        {
+            "command": "PATH=$PWD/.gem/bin:$PATH\n./build.sh lint\n",
+            "count": 1,
+            "repos": [
+                "apache/avro"
+            ]
+        }
+    ],
+    "Generate Interop Data": [
+        {
+            "command": "./build.sh interop-data-generate",
+            "count": 9,
+            "repos": [
+                "apache/avro"
+            ]
+        },
+        {
+            "command": "export GEM_HOME=\"$PWD/.gem/\"\nexport PATH=\"$GEM_HOME/bin:$PATH\"\nbundle exec rake --trace generate_interop\n",
+            "count": 1,
+            "repos": [
+                "apache/avro"
+            ]
+        }
+    ],
+    "Run Interop Tests": [
+        {
+            "command": "./build.sh interop-data-test",
+            "count": 7,
+            "repos": [
+                "apache/avro"
+            ]
+        },
+        {
+            "command": "npm install && ./build.sh interop-data-test",
+            "count": 1,
+            "repos": [
+                "apache/avro"
+            ]
+        },
+        {
+            "command": "./build.sh test-interop",
+            "count": 1,
+            "repos": [
+                "apache/avro"
+            ]
+        },
+        {
+            "command": "export GEM_HOME=\"$PWD/.gem/\"\nexport PATH=\"$GEM_HOME/bin:$PATH\"\nbundle exec rake --trace interop\n",
+            "count": 1,
+            "repos": [
+                "apache/avro"
+            ]
+        }
+    ],
+    "Setup Python for Generating Input Data": [
+        {
+            "command": "actions/setup-python@0a5c61591373683505ea898e09a3ea4f39ef2b9c",
+            "count": 1,
+            "repos": [
+                "apache/avro"
+            ]
+        },
+        {
+            "command": "actions/setup-python@v5",
+            "count": 1,
+            "repos": [
+                "apache/avro"
+            ]
+        }
+    ]
+}
