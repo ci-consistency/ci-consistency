@@ -1,4 +1,9 @@
-# pip install requests pandas pyyaml
+# How to run: 
+# 1. Get your Github PAT and update the script, replace <YOUR_TOKEN> with your PAT
+# 2. Run the script without and args
+
+# Output: 
+# several json files inside problem_search/yml_steps directory
 
 import requests
 import pandas as pd
